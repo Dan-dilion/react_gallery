@@ -4,10 +4,10 @@ import { BrowserRouter as Router,
 	Switch
 } from "react-router-dom";
 
-import { Header } from "./components/Header.js";
-import { Home } from "./components/Home.js";
-import { Gallery } from "./components/Gallery.js";
-import { SingleImage } from "./components/SingleImage.js";
+import { Header } from "./Header.js";
+import { Home } from "./Home.js";
+import { Gallery } from "./Gallery.js";
+import { SingleImage } from "./SingleImage.js";
 
 // const path = require('path');
 

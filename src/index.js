@@ -6,7 +6,7 @@ import './css/App.css';
 import './css/Gallery.css';
 import './css/SingleImage.css';
 
-import App from './App';
+import App from './components/App';
 //import * as serviceWorker from './serviceWorker';
 
 render(
