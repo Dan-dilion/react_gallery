@@ -1,0 +1,39 @@
+.images {
+	max-height: 10vmax;
+	margin: 1vmin;
+}
+
+.phcontainer {
+	color: #fed;
+    max-width: 95%;
+    margin-left: 2vmin;
+    margin-right: 2vmin;
+    padding: 2vmin;
+    border: 2px solid #f8f4ff;
+    border-radius: 2vmin;
+    justify-content: center;
+    display: grid;
+    grid-gap: 2vmin;
+    grid-template-columns: repeat(auto-fit, minmax(20vmin, 1fr));
+    grid-auto-rows: 100px;
+
+}
+
+.phcontainer > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.phcontainer > div > a > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image:hover {
+   display: inline-grid;
+   min-width: 200%;
+   min-height: 200%;
+   transition: 800ms;
+}
