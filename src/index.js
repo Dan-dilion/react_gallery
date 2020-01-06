@@ -1,16 +1,46 @@
 import React from 'react';
 import { render } from "react-dom";
+import { Provider } from "react-redux";
+
+import { serverRequest } from './utils/serverRequest.js';
+import store from './store.js';
+
+import App from './pages/App.js';
 
 import './css/index.css';
 import './css/App.css';
 import './css/Gallery.css';
 import './css/SingleImage.css';
 
-import App from './components/App';
+
 //import * as serviceWorker from './serviceWorker';
 
+//store.subscribe(() => {
+//	console.log("Action Called ", store.getState());
+//});
+
+
+
+console.log('0 - envoking request')
+serverRequest('http://localhost:8987/api/getjpegs')			// Make server request
+	.then( response => {									// Error Handeling (if there is an error it will be text)
+		if (response.ok) return response.json()				// If no error: converts the data streem into json object
+		else return response.text()							// If Error: converts data stream in to text object
+	})
+	.then( responseData => {
+		store.dispatch({
+			type: "SET_JPEGS",
+			payload: responseData
+		});
+
+	})
+
+
+
 render(
-	<App />,
+	<Provider store={store}>
+		<App />
+	</Provider>,
 	document.getElementById('root')
 );
 
