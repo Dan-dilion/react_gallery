@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const Gallery = (props) => {
 	const imageSuccess = (files) => {
@@ -7,26 +8,21 @@ export const Gallery = (props) => {
 				{files.map((file, i) => {
 					return (
 						<div key={i}>
-							<a
-								href={
-									process.env.PUBLIC_URL
-									+ 'single/'
-									+ '?fileName='
+							<Link
+								to={'/single/'
+								+ '?fileName='
+								+ file
+								+ '&index='
+								+ i}
+							><img
+								alt={"Resizing Image... " + file}
+								className="images"
+								key={i}
+								src={process.env.PUBLIC_URL
+									+ "images/resize300/"
 									+ file
-									+ '&index='
-									+ i
 								}
-							>
-								<img
-									alt={"Resizing Image... " + file}
-									className="images"
-									key={i}
-									src={process.env.PUBLIC_URL
-										+ "images/resize300/"
-										+ file
-									}
-								/>
-							</a>
+							/></Link>
 						</div>
 					);
 				})}

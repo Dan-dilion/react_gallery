@@ -27,31 +27,27 @@ export const SingleImage = (props) => {
 					}
 				/>
 
-				<a
+				<Link
 					className="prev-image"
-					href={
+					to={
 						process.env.PUBLIC_URL
 							+ '?fileName='
 							+ prev.file
 							+ '&index='
 							+ prev.index
 					}
+				>Prev</Link>
 
-
-				>Prev</a>
-
-				<a
+				<Link
 					className="next-image"
-					href={
+					to={
 						process.env.PUBLIC_URL
 							+ '?fileName='
 							+ next.file
 							+ '&index='
 							+ next.index
 					}
-
-				>Next</a>
-
+				>Next</Link>
 			</div>
 		</div>
 
