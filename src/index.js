@@ -22,7 +22,7 @@ import './css/SingleImage.css';
 
 
 console.log('0 - envoking request')
-serverRequest('http://localhost:8987/api/getjpegs')			// Make server request
+serverRequest('http://www.waxworlds.org:8987/api/getjpegs')	// Make server request
 	.then( response => {									// Error Handeling (if there is an error it will be text)
 		if (response.ok) return response.json()				// If no error: converts the data streem into json object
 		else return response.text()							// If Error: converts data stream in to text object
