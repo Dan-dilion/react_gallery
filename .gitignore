@@ -24,3 +24,4 @@ yarn-error.log*
 
 #Site Specific
 /public/images
+/Temp
