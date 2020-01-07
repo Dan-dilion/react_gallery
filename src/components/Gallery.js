@@ -10,9 +10,8 @@ export const Gallery = (props) => {
 						<div key={i}>
 							<Link
 								to={'/single/'
-								+ '?fileName='
 								+ file
-								+ '&index='
+								+ '?index='
 								+ i}
 							><img
 								alt={"Resizing Image... " + file}

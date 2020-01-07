@@ -23,26 +23,27 @@ export const SingleImage = (props) => {
 		prev.index --;
 	}
 
+	console.log('FILE NAME: ', urlParams.get('fileName'))
+
 	return(
 		<div className="single-container">
 			<div>
 				<img
-					alt={"File Not Found " + JSON.stringify(urlParams.get('fileName'))}
+					alt={"File Not Found " + props.getJpegs[(parseInt(urlParams.get('index')))]}
 					className="single-image"
-					src={path.join(
-						process.env.PUBLIC_URL,
-						'../images/resize1024/',
-						urlParams.get('fileName')
-					)}
+					src={
+						process.env.PUBLIC_URL
+						+ '../images/resize1024/'
+						+ props.getJpegs[parseInt(urlParams.get('index'))]
+					}
 				/>
 
 				<Link
 					className="prev-image"
 					to={
 						process.env.PUBLIC_URL
-							+ '?fileName='
 							+ prev.file
-							+ '&index='
+							+ '?index='
 							+ prev.index
 					}
 				>Prev</Link>
@@ -51,9 +52,8 @@ export const SingleImage = (props) => {
 					className="next-image"
 					to={
 						process.env.PUBLIC_URL
-							+ '?fileName='
 							+ next.file
-							+ '&index='
+							+ '?index='
 							+ next.index
 					}
 				>Next</Link>
