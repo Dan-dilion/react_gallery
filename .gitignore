@@ -24,5 +24,7 @@ yarn-error.log*
 
 #Site Specific
 /public/images
+/public/resources/video
 /src/images
+/src/resources/video
 /Temp
