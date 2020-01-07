@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import path from 'path';
 
 export const SingleImage = (props) => {
 	const urlParams = new URLSearchParams(window.location.search);	// Make an object out of the URL perameters
