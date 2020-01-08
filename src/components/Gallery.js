@@ -9,7 +9,7 @@ export const Gallery = (props) => {
 					return (
 						<div key={i}>
 							<Link
-								to={'/single/'
+								to={'./single/'
 								+ file
 								+ '?index='
 								+ i}
@@ -17,8 +17,7 @@ export const Gallery = (props) => {
 								alt={"Resizing Image... " + file}
 								className="images"
 								key={i}
-								src={process.env.PUBLIC_URL
-									+ "images/resize300/"
+								src={"./images/resize300/"
 									+ file
 								}
 							/></Link>
