@@ -31,8 +31,7 @@ export const SingleImage = (props) => {
 					alt={"File Not Found " + props.getJpegs[(parseInt(urlParams.get('index')))]}
 					className="single-image"
 					src={
-						process.env.PUBLIC_URL
-						+ '../images/resize1024/'
+						'./images/resize1024/'
 						+ props.getJpegs[parseInt(urlParams.get('index'))]
 					}
 				/>
@@ -40,20 +39,20 @@ export const SingleImage = (props) => {
 				<Link
 					className="prev-image"
 					to={
-						process.env.PUBLIC_URL
-							+ prev.file
-							+ '?index='
-							+ prev.index
+						'./'
+						+ prev.file
+						+ '?index='
+						+ prev.index
 					}
 				>Prev</Link>
 
 				<Link
 					className="next-image"
 					to={
-						process.env.PUBLIC_URL
-							+ next.file
-							+ '?index='
-							+ next.index
+						'./'
+						+ next.file
+						+ '?index='
+						+ next.index
 					}
 				>Next</Link>
 			</div>

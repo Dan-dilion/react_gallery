@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from "react-dom";
 import { Provider } from "react-redux";
+import { createBrowserHistory } from 'history';
 
 import { serverRequest } from './utils/serverRequest.js';
 import store from './store.js';
@@ -19,10 +20,14 @@ import './css/SingleImage.css';
 //	console.log("Action Called ", store.getState());
 //});
 
+export const history = createBrowserHistory({
+    basename: process.env.PUBLIC_URL
+});
 
+console.log('Base URL:', + history.basename + ' -- ' + window.location.hostname)
 
 console.log('0 - envoking request')
-serverRequest('http://www.waxworlds.org:8987/api/getjpegs')	// Make server request
+serverRequest('getjpegs')	// Make server request
 	.then( response => {									// Error Handeling (if there is an error it will be text)
 		if (response.ok) return response.json()				// If no error: converts the data streem into json object
 		else return response.text()							// If Error: converts data stream in to text object

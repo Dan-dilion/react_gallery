@@ -5,7 +5,7 @@ const sharp = require('sharp');
 
 const imgDir = path.join(			// joins two paths together (adds "/" between).
 	path.dirname(__filename), 		// separates the path from the file name.
-	'../../public/images'				// will be joined on to this path.
+	'../images'						// will be joined on to this path.
 )
 
 const resizeMedDir = path.join(imgDir, 'resize1024');

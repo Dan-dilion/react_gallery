@@ -1,8 +1,8 @@
 
 
-export async function serverRequest(url) {
+export async function serverRequest(requestObj = '', url = 'http://' + window.location.hostname + ':8987/api/') {
 	console.log('1 - Fetching')
-	let fetchPromise = await fetch(url)
+	let fetchPromise = await fetch(url + requestObj)
 		.then(response => {
 				console.log('XHR Response', response);
 				return response;
