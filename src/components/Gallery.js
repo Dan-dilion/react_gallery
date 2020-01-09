@@ -14,7 +14,7 @@ export const Gallery = (props) => {
 								+ '?index='
 								+ i}
 							><img
-								alt={"Resizing Image... " + file}
+								alt={"File not found: " + file}
 								className="images"
 								key={i}
 								src={"./images/resize300/"
