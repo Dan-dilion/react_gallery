@@ -1,5 +1,5 @@
 const fileReducer = (state = {
-	jpegs: ['nothing1', 'nothing2']
+	jpegs: ['Server Not Responding!!!']
 },
 action) => {
 	console.log('REDUCER HERE')
