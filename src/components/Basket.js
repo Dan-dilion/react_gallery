@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Gallery = (props) => {
-	console.log('PROPS', props)
+export const Basket = (props) => {
 	const imageSuccess = (files) => {
 		return (
 			<div className="phcontainer">
@@ -22,7 +21,6 @@ export const Gallery = (props) => {
 									+ file
 								}
 							/></Link>
-							<button className="add-basket" onClick={() => props.addBasket(file)}>Add To Basket</button>
 						</div>
 					);
 				})}
@@ -57,10 +55,9 @@ export const Gallery = (props) => {
 
 	return(
 		<div>
-			<h3> Gallery Title Here </h3>
-				{imageComponent(props.getJpegs)}
-			<p>JPEGS: {props.getJpegs}</p>
-			<p>BASKET: {props.getBasket}</p>
+			<h3> Download Basket </h3>
+				{imageComponent(props.getBasket)}
+			<p>{props.getBasket}</p>
 		</div>
 	);
 }
