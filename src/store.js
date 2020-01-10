@@ -3,8 +3,9 @@ import { createLogger } from "redux-logger";
 import thunk from "redux-thunk";
 
 import fileReducer from './reducers/fileReducer.js';
+import basketReducer from './reducers/basketReducer.js';
 
 export default createStore(
-	fileReducer,
+	combineReducers({fileReducer, basketReducer}),
 	applyMiddleware(createLogger())
 );
