@@ -23,7 +23,7 @@ const readdir = (dir) => {								// I have wrapped the readdir method in a prom
 
 async function forEachAsync(array, callback) {		// Asyncronous version of array.forEach
   for (let i = 0; i < array.length; i++) {			// each itteration will be passed over to
-    await callback(array[i]);						// the event handelers, feeing up the call stack
+    await callback(array[i]);						// the event handelers, freeing up the call stack
   }
 }
 
@@ -47,7 +47,7 @@ async function getJpegs(dir) {						// This is an async function which allows us
 }
 
 async function resizeImages(jpegs) {
-	console.log('4 - resize Images here')
+	console.log('4 - resize Images Function')
 	if (!fs.existsSync(resizeSmlDir)) {							//
     	fs.mkdirSync(resizeSmlDir);								//
 		console.log('Creating Directory... ', resizeSmlDir);	//

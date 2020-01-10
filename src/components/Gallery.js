@@ -55,7 +55,7 @@ export const Gallery = (props) => {
 
 	return(
 		<div>
-			<h3>This is going to be my gallery</h3>
+			<h3> Gallery Title Here </h3>
 				{imageComponent(props.getJpegs)}
 			<p>{props.getJpegs}</p>
 		</div>
