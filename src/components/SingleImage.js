@@ -25,39 +25,47 @@ export const SingleImage = (props) => {
 	console.log('FILE NAME: ', urlParams.get('fileName'))
 
 	return(
-		<div className="single-container">
-			<div>
-				<img
-					alt={"File Not Found " + props.getJpegs[(parseInt(urlParams.get('index')))]}
-					className="single-image"
-					src={
-						'./images/resize1024/'
+		<div>
+			<h3>{props.getJpegs[parseInt(urlParams.get('index'))]}</h3>
+			<div className="single-container">
+				<div>
+					<a href={
+						'./images/'
 						+ props.getJpegs[parseInt(urlParams.get('index'))]
-					}
-				/>
+					}>
+						<img
+							alt={"File Not Found " + props.getJpegs[(parseInt(urlParams.get('index')))]}
+							className="single-image"
+							src={
+								'./images/resize1024/'
+								+ props.getJpegs[parseInt(urlParams.get('index'))]
+							}
+						/>
+					</a>
 
-				<Link
-					className="prev-image"
-					to={
-						'./'
-						+ prev.file
-						+ '?index='
-						+ prev.index
-					}
-				>Prev</Link>
 
-				<Link
-					className="next-image"
-					to={
-						'./'
-						+ next.file
-						+ '?index='
-						+ next.index
-					}
-				>Next</Link>
+					<Link
+						className="prev-image"
+						to={
+							'./'
+							+ prev.file
+							+ '?index='
+							+ prev.index
+						}
+					>Prev</Link>
+
+					<Link
+						className="next-image"
+						to={
+							'./'
+							+ next.file
+							+ '?index='
+							+ next.index
+						}
+					>Next</Link>
+				</div>
 			</div>
 		</div>
-
 
 
 	)
