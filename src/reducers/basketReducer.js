@@ -14,10 +14,12 @@ action) => {
 
 		case "REMOVE_BASKET":
 			console.log('Removing item from basket', action.payload);
-			state = {
-				...state,
-				basketJpegs: [...state.basketJpegs.splice(action.payload, 1)]
+			let pegs = [...state.basketJpegs];
+			pegs.splice(action.payload, 1);
+			return {
+				...state, basketJpegs: pegs
 			}
+			break;
 
 		default:
 			console.log('No action specified');

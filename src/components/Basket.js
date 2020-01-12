@@ -21,6 +21,7 @@ export const Basket = (props) => {
 									+ file
 								}
 							/></Link>
+							<button className="Remove-Basket" onClick={() => props.removeBasket(i)}>Remove</button>
 						</div>
 					);
 				})}
