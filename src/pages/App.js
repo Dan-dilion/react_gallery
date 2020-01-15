@@ -10,6 +10,8 @@ import { Home } from '../components/Home.js';
 import { Gallery } from '../components/Gallery.js';
 import { SingleImage } from '../components/SingleImage.js';
 import { Basket } from '../components/Basket.js';
+import { FullZize } from '../components/FullZize.js';
+
 
 import { setJpegs } from '../actions/fileActions.js';
 import {
@@ -25,14 +27,17 @@ class App extends React.Component {
 			<div className="container">
 			<Router basename={process.env.PUBLIC_URL}>
 		    	<div className="app">
-		      		<Header basketQuantity={this.props.basket.length} />
 					<Switch>
-						<Route exact path={"/"} component={Home} />
+						<Route exact path={"/"} component={Home}>
+							<Header basketQuantity={this.props.basket.length} />
+						</Route>
 
 						<Route
 							path={"/home"}
 							component={Home}
-						/>
+						>
+							<Header basketQuantity={this.props.basket.length} />
+						</Route>
 
 						<Route
 							path={"/gallery"}
@@ -42,7 +47,9 @@ class App extends React.Component {
 								addBasket={(jpeg) => this.props.ADD_BASKET(jpeg)}
 								removeBasket={(index) => this.props.REMOVE_BASKET(index)}
 							/>}
-						/>
+						>
+							<Header basketQuantity={this.props.basket.length} />
+						</Route>
 
 						<Route
 							path={"/basket"}
@@ -50,7 +57,9 @@ class App extends React.Component {
 								getBasket={this.props.basket}
 								removeBasket={(index) => this.props.REMOVE_BASKET(index)}
 							/>}
-						/>
+						>
+							<Header basketQuantity={this.props.basket.length} />
+						</Route>
 
 						<Route
 							path={"/single"}
@@ -60,7 +69,15 @@ class App extends React.Component {
 								addBasket={(jpeg) => this.props.ADD_BASKET(jpeg)}
 								removeBasket={(index) => this.props.REMOVE_BASKET(index)}
 							/>}
+						>
+							<Header basketQuantity={this.props.basket.length} />
+						</Route>
+
+						<Route
+							path={"/images/"}
+							component={FullZize}
 						/>
+
 					</Switch>
 		    	</div>
 			</Router>
