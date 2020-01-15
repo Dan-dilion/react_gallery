@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { Header } from './Header.js';
+
+
 export const Basket = (props) => {
 	const imageSuccess = (files) => {
 		return (
@@ -57,6 +60,7 @@ export const Basket = (props) => {
 
 	return(
 		<div>
+			<Header basketQuantity={props.getBasket.length} />
 			<h3> Download Basket </h3>
 				{imageComponent(props.getBasket)}
 			<p>{props.getBasket}</p>

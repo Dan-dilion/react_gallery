@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { Header } from './Header.js';
+
 export const SingleImage = (props) => {
 	const urlParams = new URLSearchParams(window.location.search);	// Make an object out of the URL perameters
 
@@ -54,11 +56,12 @@ export const SingleImage = (props) => {
 
 	return(
 		<div>
+			<Header basketQuantity={props.getBasket.length} />
 			<h3>{jpegsOrigin[parseInt(urlParams.get('index'))]}</h3>
 			<div className="single-container">
 				<div>
 					<Link to={
-						'./images/'
+						'/images/'
 						+ jpegsOrigin[parseInt(urlParams.get('index'))]
 					}>
 						<img
@@ -69,7 +72,7 @@ export const SingleImage = (props) => {
 								+ jpegsOrigin[parseInt(urlParams.get('index'))]
 							}
 						/>
-					</a>
+					</Link>
 
 					{basketButton(jpegsOrigin[parseInt(urlParams.get('index'))])}
 
