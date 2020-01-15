@@ -12,7 +12,7 @@ export const Basket = (props) => {
 								to={'./single/'
 								+ file
 								+ '?origin=basket'
-								+ '?index='
+								+ '&index='
 								+ i}
 							><img
 								alt={"File not found: " + file}

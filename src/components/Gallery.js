@@ -27,7 +27,7 @@ export const Gallery = (props) => {
 	const basketButton = (file) => {
 		if (props.getBasket.length >0 && props.getBasket.includes(file)) {
 			return removeButton(file)
-		} else { return addButton(file) }
+		} else return addButton(file)
 	}
 
 	const imageSuccess = (files) => {
@@ -40,7 +40,7 @@ export const Gallery = (props) => {
 								to={'./single/'
 								+ file
 								+ '?origin=gallery'
-								+ '?index='
+								+ '&index='
 								+ i}
 							><img
 								alt={"File not found: " + file}
