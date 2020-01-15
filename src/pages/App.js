@@ -57,6 +57,8 @@ class App extends React.Component {
 							render={(props) => <SingleImage
 								getJpegs={this.props.jpegs}
 								getBasket={this.props.basket}
+								addBasket={(jpeg) => this.props.ADD_BASKET(jpeg)}
+								removeBasket={(index) => this.props.REMOVE_BASKET(index)}
 							/>}
 						/>
 					</Switch>

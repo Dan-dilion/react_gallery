@@ -7,18 +7,13 @@ export const SingleImage = (props) => {
 	let jpegsOrigin = props.getJpegs;
 	if (urlParams.get('origin') == 'basket') { jpegsOrigin = props.getBasket }
 
-	console.log('PROPS.GETJPEGS', props.getJpegs)
-	console.log('JPEGS ORIGIN', jpegsOrigin)
-
-
-
-	let currentFile = {
+	const currentFile = {
 		file: jpegsOrigin[parseInt(urlParams.get('index'))],
 		index: parseInt(urlParams.get('index'))
 	}
 
-	let next = {...currentFile}
-	let prev = {...currentFile}
+	const next = {...currentFile}
+	const prev = {...currentFile}
 
 	if (parseInt(urlParams.get('index')) < parseInt(jpegsOrigin.length) - 1) {
 		next.file = jpegsOrigin[parseInt(urlParams.get('index')) + 1];
@@ -30,7 +25,32 @@ export const SingleImage = (props) => {
 		prev.index --;
 	}
 
-	console.log('FILE NAME: ', urlParams.get('origin'))
+	const addButton = (file) => {
+		return(
+			<button
+				className="add-basket"
+				onClick={ () => props.addBasket(file) }
+			>Add To Basket</button>
+		)
+	}
+
+	const removeButton = (file) => {
+		return(
+			<button
+				className="remove-basket"
+				onClick={() => props.removeBasket(
+					props.getBasket.indexOf(file)
+				)}
+			>Remove From Basket</button>
+		)
+	}
+
+	const basketButton = (file) => {
+		if (props.getBasket.length >0 && props.getBasket.includes(file)) {
+			return removeButton(file)
+		} else return addButton(file)
+	}
+
 
 	return(
 		<div>
@@ -50,6 +70,8 @@ export const SingleImage = (props) => {
 							}
 						/>
 					</a>
+
+					{basketButton(jpegsOrigin[parseInt(urlParams.get('index'))])}
 
 
 					<Link
