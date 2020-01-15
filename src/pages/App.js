@@ -56,6 +56,7 @@ class App extends React.Component {
 							path={"/single"}
 							render={(props) => <SingleImage
 								getJpegs={this.props.jpegs}
+								getBasket={this.props.basket}
 							/>}
 						/>
 					</Switch>
