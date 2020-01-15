@@ -25,7 +25,7 @@ class App extends React.Component {
 			<div className="container">
 			<Router basename={process.env.PUBLIC_URL}>
 		    	<div className="app">
-		      		<Header />
+		      		<Header basketQuantity={this.props.basket.length} />
 					<Switch>
 						<Route exact path={"/"} component={Home} />
 
@@ -40,6 +40,7 @@ class App extends React.Component {
 								getJpegs={this.props.jpegs}
 								getBasket={this.props.basket}
 								addBasket={(jpeg) => this.props.ADD_BASKET(jpeg)}
+								removeBasket={(index) => this.props.REMOVE_BASKET(index)}
 							/>}
 						/>
 

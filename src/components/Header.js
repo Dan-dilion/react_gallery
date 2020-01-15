@@ -11,7 +11,7 @@ export const Header = (props) => {
 						<ul>
 							<li className="navbar-items"><Link to={'/home'}>Home</Link></li>
 							<li className="navbar-items"><Link to={'/gallery'}>Gallery</Link></li>
-							<li className="navbar-items"><Link to={'/basket'}>Basket</Link></li>
+							<li className="navbar-items" id="basket-button"><Link to={'/basket'}>Basket ({props.basketQuantity})</Link></li>
 						</ul>
 					</div>
 				</nav>

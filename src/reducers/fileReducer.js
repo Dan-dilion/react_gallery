@@ -1,7 +1,8 @@
-const fileReducer = (state = {
+const initialState = {
 	jpegs: ['Server Not Responding!!!']
-},
-action) => {
+};
+
+const fileReducer = (state = initialState, action) => {
 	console.log('REDUCER HERE')
 	switch (action.type) {
 		case "SET_JPEGS":

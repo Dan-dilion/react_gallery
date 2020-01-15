@@ -57,6 +57,11 @@ li {
 	box-shadow: .4vw .4vh 5px 0px rgba(0, 0, 0, .5);
 }
 
+#basket-button {
+	float: right;
+	margin-right: 4vw;
+}
+
 .app-link {
   color: #09d3ac;
 }
