@@ -3,8 +3,8 @@ import React from "react";
 export const FullSize = (props) => {
 	return(
 		<img
-			alt={"File not found: " + file}
 			className="full-size"
+			alt={'File not found: ', window.location.pathname}
 			src={'./', window.location.pathname}
 		/>
 	)

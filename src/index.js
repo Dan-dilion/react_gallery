@@ -12,6 +12,7 @@ import './css/index.css';
 import './css/App.css';
 import './css/Gallery.css';
 import './css/SingleImage.css';
+import './css/FullSize.css';
 
 
 //import * as serviceWorker from './serviceWorker';

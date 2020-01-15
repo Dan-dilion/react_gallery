@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { Header } from './Header.js';
+
 export const Gallery = (props) => {
 	console.log('PROPS', props)
 
@@ -85,6 +87,7 @@ export const Gallery = (props) => {
 
 	return(
 		<div>
+			<Header basketQuantity={props.getBasket.length} />
 			<h3> Gallery Title Here </h3>
 				{imageComponent(props.getJpegs)}
 			<p>JPEGS: {props.getJpegs}</p>
