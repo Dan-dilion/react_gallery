@@ -57,7 +57,7 @@ export const SingleImage = (props) => {
 			<h3>{jpegsOrigin[parseInt(urlParams.get('index'))]}</h3>
 			<div className="single-container">
 				<div>
-					<a href={
+					<Link to={
 						'./images/'
 						+ jpegsOrigin[parseInt(urlParams.get('index'))]
 					}>
