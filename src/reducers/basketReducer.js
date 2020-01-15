@@ -1,7 +1,8 @@
-const basketReducer = (state = {
+const initialState = {
 	basketJpegs: []
-},
-action) => {
+};
+
+const basketReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case "ADD_BASKET":
 			console.log('Adding file to basket: ', action.payload);

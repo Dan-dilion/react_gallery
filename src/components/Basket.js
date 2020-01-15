@@ -11,6 +11,7 @@ export const Basket = (props) => {
 							<Link
 								to={'./single/'
 								+ file
+								+ '?origin=basket'
 								+ '?index='
 								+ i}
 							><img

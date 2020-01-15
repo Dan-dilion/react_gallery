@@ -3,6 +3,33 @@ import { Link } from "react-router-dom";
 
 export const Gallery = (props) => {
 	console.log('PROPS', props)
+
+	const addButton = (file) => {
+		return(
+			<button
+				className="add-basket"
+				onClick={ () => props.addBasket(file) }
+			>Add To Basket</button>
+		)
+	}
+
+	const removeButton = (file) => {
+		return(
+			<button
+				className="remove-basket"
+				onClick={() => props.removeBasket(
+					props.getBasket.indexOf(file)
+				)}
+			>Remove From Basket</button>
+		)
+	}
+
+	const basketButton = (file) => {
+		if (props.getBasket.length >0 && props.getBasket.includes(file)) {
+			return removeButton(file)
+		} else { return addButton(file) }
+	}
+
 	const imageSuccess = (files) => {
 		return (
 			<div className="phcontainer">
@@ -12,6 +39,7 @@ export const Gallery = (props) => {
 							<Link
 								to={'./single/'
 								+ file
+								+ '?origin=gallery'
 								+ '?index='
 								+ i}
 							><img
@@ -22,7 +50,7 @@ export const Gallery = (props) => {
 									+ file
 								}
 							/></Link>
-							<button className="add-basket" onClick={() => props.addBasket(file)}>Add To Basket</button>
+							{basketButton(file)}
 						</div>
 					);
 				})}
