@@ -64,8 +64,9 @@
 	transition: color 200ms;
 }
 
-button .add-basket {
+.add-remove-basket {
+	text-decoration: none;
 	display: block;
 	float: left;
-
+	margin-left: 45%
 }
