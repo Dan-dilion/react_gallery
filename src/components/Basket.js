@@ -5,7 +5,7 @@ import { Header } from './Header.js';
 
 
 export const Basket = (props) => {
-	const imageSuccess = (files) => {
+	const fullBasket = (files) => {
 		return (
 			<div className="phcontainer">
 				{files.map((file, i) => {
@@ -37,11 +37,11 @@ export const Basket = (props) => {
 	// The imageFail function will be called in the case that
 	// getJpegs() returns anything other that an array signifying
 	// that there was an error.
-	const imageFail = (files) => {
+	const emptyBasket = (files) => {
 		return(
 			<div className="phcontainer">
 				<div>
-					<p>System Message: {files}</p>
+					<p>Your basket is empty!</p>
 				</div>
 			</div>
 		)
@@ -49,11 +49,11 @@ export const Basket = (props) => {
 
 
 	let imageComponent = (files) => {
-		if (Array.isArray(files)) {
-			return imageSuccess(files);
+		if (files.length >= 1) {
+			return fullBasket(files);
 		}
 		else {
-			return imageFail(files);
+			return emptyBasket(files);
 		}
 	}
 
