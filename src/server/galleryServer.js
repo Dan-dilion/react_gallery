@@ -25,11 +25,10 @@ const server = http.createServer((request, response) => {			// instantiate serve
 
 
 
-	if (request.url === "/" || request.url === "/home") {           // if url is / or /home
+	if (request.url === '/' || request.url === '/home') {           // if url is / or /home
 		response.writeHead(204, {'Content-Type' : 'text/html'});	// status 204 (successful but no content) type html
 		console.log('ROUTING FAILURE: No params in URL.');			//
-	}
-	else if (request.url == "/api/getjpegs"){						//
+	} else if (request.url == '/api/getjpegs'){						//
 		console.log('SERVER: fetching jpegs');						//
 
 		async function waitJpegs(dir) {									// getJpegs() async function wait for output
@@ -58,6 +57,9 @@ const server = http.createServer((request, response) => {			// instantiate serve
 			}
 		}
 		waitJpegs(imgDir)
+	} else if (request.url == '/api/zipjpegs') {
+		console.log('SERVER: Receiving Jpegs');						//
+
 	}
 });
 
