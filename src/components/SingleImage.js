@@ -128,16 +128,15 @@ export const SingleImage = (props) => {
 					<Link to={
 						'/images/'
 						+ jpegsOrigin[parseInt(urlParams.get('index'))]
-					}>
-						<img
-							alt={"File Not Found " + jpegsOrigin[(parseInt(urlParams.get('index')))]}
-							className="single-image"
-							src={
-								'./images/resize1024/'
-								+ jpegsOrigin[parseInt(urlParams.get('index'))]
-							}
-						/>
-					</Link>
+					} target='_blank'
+					><img
+						alt={"File Not Found " + jpegsOrigin[(parseInt(urlParams.get('index')))]}
+						className="single-image"
+						src={
+							'./images/resize1024/'
+							+ jpegsOrigin[parseInt(urlParams.get('index'))]
+						}
+					/></Link>
 
 					{basketButton(jpegsOrigin[parseInt(urlParams.get('index'))])}
 
