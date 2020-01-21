@@ -41,7 +41,12 @@ export const SingleImage = (props) => {
 					}
 				>Next</Link>
 			)
-		} else { return ( <a className="next-image">End!</a> )}
+		} else { return ( <a
+			className={
+				"next-image " +
+				"disable-selection"
+			}
+		>End!</a> )}
 	}
 
 	const prevButton = () => {
@@ -59,7 +64,12 @@ export const SingleImage = (props) => {
 					}
 				>Prev</Link>
 			)
-		} else { return <a className="prev-image">Start!</a>  }
+		} else { return <a
+			className={
+				"prev-image " +
+				"disable-selection"
+			}
+		>Start!</a>  }
 
 	}
 

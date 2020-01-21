@@ -18,6 +18,14 @@ li {
   text-align: center;
 }
 
+.disable-selection {
+     -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer */
+   -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+  -webkit-user-select: none; /* Chrome, Safari, and Opera */
+  -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+}
+
 .container {
 	display: block;
 	max-width: 80%;
@@ -58,6 +66,11 @@ li {
 }
 
 #basket-button {
+	float: right;
+	margin-right: 4vw;
+}
+
+#download-button {
 	float: right;
 	margin-right: 4vw;
 }
