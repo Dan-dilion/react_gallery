@@ -62,8 +62,7 @@ export const Basket = (props) => {
 		<div>
 			<Header basketQuantity={props.getBasket.length} />
 			<h3> Download Basket </h3>
-				{imageComponent(props.getBasket)}
-			<p>{props.getBasket}</p>
+			{imageComponent(props.getBasket)}
 		</div>
 	);
 }
