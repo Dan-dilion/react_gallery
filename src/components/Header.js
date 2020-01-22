@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { zipJpegs } from '../utils/serverRequest.js'
+
 export const Header = (props) => {
 
 	const basketButton = () => {
@@ -21,13 +23,14 @@ export const Header = (props) => {
 				id="download-button"
 			><Link
 				to={'/basket'}
+				onClick={() => {return zipJpegs(props.getBasket)}}
 			>Download ({props.basketQuantity})</Link></li>
 		)
 	}
 
 	const buttonPicker = () => {
 		console.log('buttonDecider: ', window.location.pathname)
-		if (window.location.pathname == '/basket') return downloadButton();
+		if (window.location.pathname === '/basket') return downloadButton();
 		else return basketButton();
 	}
 
