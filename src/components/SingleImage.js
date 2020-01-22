@@ -7,7 +7,7 @@ export const SingleImage = (props) => {
 	const urlParams = new URLSearchParams(window.location.search);	// Make an object out of the URL perameters
 
 	let jpegsOrigin = props.getJpegs;
-	if (urlParams.get('origin') == 'basket') { jpegsOrigin = props.getBasket }
+	if (urlParams.get('origin') === 'basket') { jpegsOrigin = props.getBasket }
 
 	const currentFile = {
 		file: jpegsOrigin[parseInt(urlParams.get('index'))],
@@ -41,12 +41,13 @@ export const SingleImage = (props) => {
 					}
 				>Next</Link>
 			)
-		} else { return ( <a
+		} else { return ( <div
+
 			className={
 				"next-image " +
 				"disable-selection"
 			}
-		>End!</a> )}
+		>End!</div> )}
 	}
 
 	const prevButton = () => {
@@ -64,12 +65,12 @@ export const SingleImage = (props) => {
 					}
 				>Prev</Link>
 			)
-		} else { return <a
+		} else { return <div
 			className={
 				"prev-image " +
 				"disable-selection"
 			}
-		>Start!</a>  }
+		>Start!</div>  }
 
 	}
 
@@ -93,7 +94,7 @@ export const SingleImage = (props) => {
 					<Link to={ '/basket' }>Remove From Basket</Link>
 				</button>
 			)
-		} else if (urlParams.get('origin') == 'basket') {
+		} else if (urlParams.get('origin') === 'basket') {
 			return(
 				<button className="add-remove-basket"
 				onClick={() => props.removeBasket(
