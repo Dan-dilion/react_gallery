@@ -1,5 +1,6 @@
 //Node Router
 const http = require('http');
+const express = require('express');
 const url = require('url');
 
 const {
@@ -10,58 +11,54 @@ const {
 	getJpegs
 } = require('./fileServices.js');
 
-const server = http.createServer((request, response) => {			// instantiate server object
+let app = express();
 
-	const returnError = (err) => {
-		console.log('SERVER RESPONSE: ERROR RECIEVED')		// had returned from the event handeler
-		console.log('Passing error to client...')
-		response.writeHead(500, {							// status 500 (Internal Server Error)
-			'Content-Type' : 'text/html',					//
-			'Access-Control-Allow-origin' : '*'				// CORS Permission
-		});
-		data = JSON.stringify(err.message);					// stringify error message
-		response.end(data);									// send message in server response
-	}
+app.get('/' || '/home', (request, response) => {
+	response.set({'Content-Type' : 'text/html'});
+	console.log('ROUTING FAILURE: No params in URL.');
+	response.sendStatus(204);		// status 204 (successful but no content) type html
+})
 
+app.get('/api/getjpegs', (request, response) => {
+	console.log('SERVER: fetching jpegs');
+	async function waitJpegs(dir) {								// getJpegs() async function wait for output
+		console.log('0 - fetching Jpegs')
+		try {
+			let jpegs = await getJpegs(dir)
+			console.log('3.1 - Get Jpegs Finnished, starting resize')
+			await resizeImages(jpegs)
+			console.log('6.1 - Resize finnished')
 
-
-	if (request.url === '/' || request.url === '/home') {           // if url is / or /home
-		response.writeHead(204, {'Content-Type' : 'text/html'});	// status 204 (successful but no content) type html
-		console.log('ROUTING FAILURE: No params in URL.');			//
-	} else if (request.url == '/api/getjpegs'){						//
-		console.log('SERVER: fetching jpegs');						//
-
-		async function waitJpegs(dir) {									// getJpegs() async function wait for output
-			console.log('0 - fetching Jpegs')
-			try {
-				let jpegs = await getJpegs(dir)
-				console.log('3.1 - Get Jpegs Finnished, starting resize')
-				await resizeImages(jpegs)
-				console.log('6.1 - Resize finnished')
-
-																	// send the server response after the result
-				console.log('7 - Sending Response')
-				response.writeHead(200, {							// status 200 (Ok! successfull HTTP Request)
-					'Content-Type' : 'application/json',			// content type JSON
-					'Access-Control-Allow-origin' : '*'				// CORS Permission
-				});
-				data = JSON.stringify(jpegs);						// stringify jpegs array
-				console.log(data);									// send jpegs array in server response
-				response.end(data);									// send jpegs array in server response
-
-
-			} catch(err) {
-																		// if there was a reject promise returned
-				returnError(err);									// send the error in the response
-
-			}
+																// send the server response after the result
+			console.log('7 - Sending Response')
+			response.set({
+				'Content-Type' : 'application/json',			// content type JSON
+				'Access-Control-Allow-origin' : '*'				// CORS Permission
+			});
+			data = JSON.stringify(jpegs);						// stringify jpegs array
+			console.log(data);									// send jpegs array in server response
+			response.send(data);									// send jpegs array in server response
+		} catch(err) {
+			returnError(err);									// send the error in the response
 		}
-		waitJpegs(imgDir)
-	} else if (request.url == '/api/zipjpegs') {
-		console.log('SERVER: Receiving Jpegs');						//
-
 	}
-});
+	waitJpegs(imgDir)
+})
 
-server.listen(8987);
+app.post('/api/zipjpegs', (request, response) => {
+	console.log('SERVER: Zip-Jpegs ' + JSON.stringify(request.headers));
+	response.set({
+		'Content-Type' : 'application/json',			// content type JSON
+		'Access-Control-Allow-origin' : '*'				// CORS Permission
+	});
+	data = JSON.stringify('FileNameHere.zip');
+	response.send(data);
+})
+
+app.get('/api/removezip', (request, response) => {
+	console.log('SERVER: Removing Zip File');
+	response.send(JSON.stringify('Removig Zipfile'))
+})
+
+app.listen(8987);
 console.log("server initialised - port: 8987\n");
