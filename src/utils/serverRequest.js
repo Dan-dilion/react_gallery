@@ -35,13 +35,15 @@ export const zipJpegs = (files = []) => {
 		method: 'POST',
 		body: JSON.stringify(files),
 		headers: {
-			'content-type' : 'application/json'
-//			'Accept': 'application/json'				// require response to be JSON
+			'Content-Type' : 'application/json'
 		}
 	})
 	.then( response => {
 		if (response.ok) return response.json()
 		else return response.text()
+	})
+	.then( responseObject => {
+		console.log(responseObject)
 	})
 
 }

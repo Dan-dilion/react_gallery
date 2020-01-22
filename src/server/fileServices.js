@@ -130,8 +130,6 @@ async function processImages(jpegs, size) {
 
 module.exports = {
 	imgDir: imgDir,
-	resizeMedDir: resizeMedDir,
-	resizeSmlDir: resizeSmlDir,
 	resizeImages: resizeImages,
 	getJpegs: getJpegs
 }
