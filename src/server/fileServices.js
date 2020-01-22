@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
+const admZip = require ('adm-zip');
+
 
 
 const imgDir = path.join(			// joins two paths together (adds "/" between).
@@ -10,6 +12,7 @@ const imgDir = path.join(			// joins two paths together (adds "/" between).
 
 const resizeMedDir = path.join(imgDir, 'resize1024');
 const resizeSmlDir = path.join(imgDir, 'resize300');
+const zipFile = (path.join('./src/images', 'downloaded-images.zip'))
 
 
 const readdir = (dir) => {								// I have wrapped the readdir method in a promise
@@ -127,9 +130,28 @@ async function processImages(jpegs, size) {
 	console.log('6 - Images Processed!')
 }
 
+async function zipJpegs(files) {
+	const zip = new admZip();
+	await forEachAsync(files, (file) => {
+		console.log('Zipping File: ', file)
+		zip.addLocalFile(path.join(imgDir, file))
+		console.log('saving file')
+		zip.writeZip(zipFile)
+	})
+	.then(response => {
+		return JSON.stringify(zipFile);
+	})
+	.catch(error => {										// Catch the reject promise object from readdir
+		console.log('zipJpegs ERROR: ', error.message)		// Log error
+		throw new Error(error.message)						// throw error (this will be collected by .catch
+	})
+}
+
 
 module.exports = {
 	imgDir: imgDir,
+	zipFile: zipFile,
 	resizeImages: resizeImages,
-	getJpegs: getJpegs
+	getJpegs: getJpegs,
+	zipJpegs: zipJpegs
 }
