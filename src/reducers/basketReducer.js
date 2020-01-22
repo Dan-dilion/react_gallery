@@ -20,7 +20,6 @@ const basketReducer = (state = initialState, action) => {
 			return {
 				...state, basketJpegs: pegs
 			}
-			break;
 
 		default:
 			console.log('No action specified');
