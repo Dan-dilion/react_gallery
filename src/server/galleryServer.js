@@ -1,17 +1,20 @@
 //Node Router
-const http = require('http');
 const express = require('express');
 const url = require('url');
 
 const {
 	imgDir,
-	resizeSmlDir,
-	resizeMedDir,
 	resizeImages,
 	getJpegs
 } = require('./fileServices.js');
 
 let app = express();
+
+app.use(express.json(), (request, response, next) => {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.get('/' || '/home', (request, response) => {
 	response.set({'Content-Type' : 'text/html'});
@@ -33,7 +36,6 @@ app.get('/api/getjpegs', (request, response) => {
 			console.log('7 - Sending Response')
 			response.set({
 				'Content-Type' : 'application/json',			// content type JSON
-				'Access-Control-Allow-origin' : '*'				// CORS Permission
 			});
 			data = JSON.stringify(jpegs);						// stringify jpegs array
 			console.log(data);									// send jpegs array in server response
@@ -46,13 +48,12 @@ app.get('/api/getjpegs', (request, response) => {
 })
 
 app.post('/api/zipjpegs', (request, response) => {
-	console.log('SERVER: Zip-Jpegs ' + JSON.stringify(request.headers));
+	console.log('SERVER: Zip-Jpegs ' + JSON.stringify(request.body));
 	response.set({
-		'Content-Type' : 'application/json',			// content type JSON
-		'Access-Control-Allow-origin' : '*'				// CORS Permission
+		'Content-Type' : 'application/json'					 		// content type JSON
 	});
-	data = JSON.stringify('FileNameHere.zip');
-	response.send(data);
+	data = 'FileNameHere.zip';
+	response.send(JSON.stringify(request.body));
 })
 
 app.get('/api/removezip', (request, response) => {
