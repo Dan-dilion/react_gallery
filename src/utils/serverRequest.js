@@ -1,22 +1,7 @@
+const apiUrl = 'http://' + window.location.hostname + ':8987/api/'
 
-
-export async function serverRequest(
-	requestObj = '',
-	options = {method: 'GET'},
-	url = 'http://' + window.location.hostname + ':8987/api/'
-) {
-	console.log('1 - Fetching')
-	let fetchPromise = await fetch(url + requestObj, options)
-		.then(response => {
-				console.log('XHR Response', response);
-				return response;
-		})
-		console.log('2 - Fetched')
-	return fetchPromise;
-}
-
-export const getJpegs = (store) => {
-	serverRequest('getjpegs')	// Make server request
+export const getJpegs = async (store) => {
+	await fetch(apiUrl + 'getjpegs')	// Make server request
 		.then( response => {									// Error Handeling (if there is an error it will be text)
 			if (response.ok) return response.json()				// If no error: converts the data streem into json object
 			else return response.text()							// If Error: converts data stream in to text object
@@ -27,23 +12,25 @@ export const getJpegs = (store) => {
 				payload: responseData
 			});
 		})
-	}
+}
 
 export const zipJpegs = (files = []) => {
 	console.log('Server Request Body: ' + files)
-	serverRequest('zipjpegs', {
-		method: 'POST',
-		body: JSON.stringify(files),
-		headers: {
-			'Content-Type' : 'application/json'
-		}
+	let url = new URL(apiUrl + 'zipjpegs')
+	files.map((file, i) => {url.searchParams.append(i, file)})
+	console.log('GET URL: ', url)
+
+	fetch(url, {
+		method: 'GET',
+		responseType: 'arraybuffer',
 	})
-	.then( response => {
-		if (response.ok) return response.json()
-		else return response.text()
-	})
-	.then( responseObject => {
-		console.log(responseObject)
-	})
+		.then( response => {
+			response.responseType = 'arraybuffer';
+			if (response.ok) return //response.download()
+			else return response.text()
+		})
+		.then( responseObject => {
+			console.log(responseObject)
+		})
 
 }
