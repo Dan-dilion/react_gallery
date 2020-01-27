@@ -1,6 +1,8 @@
 //Node Router
 const express = require('express');
 const url = require('url');
+const path = require ('path');
+const fs = require ('fs');
 
 const {
 	imgDir,
@@ -12,7 +14,8 @@ const {
 
 let app = express();
 
-app.use(express.json(), (request, response, next) => {
+
+app.use((request, response, next) => {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -49,20 +52,15 @@ app.get('/api/getjpegs', (request, response) => {
 	waitJpegs(imgDir)
 })
 
-app.post('/api/zipjpegs', async (request, response) => {
-	console.log('SERVER: Zip-Jpegs ' + JSON.stringify(request.body));
-	await zipJpegs(request.body)
-//	.then( output => {
-		response.set({
-			'Content-Type' : 'text/html'					 		// content type JSON
-		})
-		response.send(JSON.stringify(zipFile));
-	})
-//})
+app.get('/api/zipjpegs', (request, response) => {
+	response.attachment('downloaded-images.zip');
 
-app.get('/api/removezip', (request, response) => {
-	console.log('SERVER: Removing Zip File');
-	response.send(JSON.stringify('Removig Zipfile'))
+	let urlPerameters = JSON.parse(request.query.basketContents)
+	let zip = zipJpegs(urlPerameters, response)
+
+	zip.pipe(response);
+	zip.finalize();
+	console.log('Finalizing Zipfile Structure: ')
 })
 
 app.listen(8987);

@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
-const admZip = require ('adm-zip');
+const archiver = require('archiver');
+
 
 
 
@@ -130,21 +131,20 @@ async function processImages(jpegs, size) {
 	console.log('6 - Images Processed!')
 }
 
-async function zipJpegs(files) {
-	const zip = new admZip();
-	await forEachAsync(files, (file) => {
-		console.log('Zipping File: ', file)
-		zip.addLocalFile(path.join(imgDir, file))
-		console.log('saving file')
-		zip.writeZip(zipFile)
+const zipJpegs = (files, response) => {
+	console.log('\nSERVER: Zip-Jpegs ' + files);
+	let zip = archiver('zip', {
+		comment: 'This zipFile was created by React-Gallery',
+		zlib: { level: 1 }
 	})
-	.then(response => {
-		return JSON.stringify(zipFile);
+
+	files.map( (file) =>{
+		zip.file(path.join(imgDir, file), {
+			name: path.join('Downloaded-images/', file)
+		});
 	})
-	.catch(error => {										// Catch the reject promise object from readdir
-		console.log('zipJpegs ERROR: ', error.message)		// Log error
-		throw new Error(error.message)						// throw error (this will be collected by .catch
-	})
+
+	return zip;
 }
 
 
