@@ -56,6 +56,7 @@ class App extends React.Component {
 								path={"/basket"}
 								render={(props) => <Basket
 									getBasket={this.props.basket}
+									getJpegs={this.props.jpegs}
 									removeBasket={(index) => this.props.REMOVE_BASKET(index)}
 								/>}
 							/>
@@ -72,7 +73,7 @@ class App extends React.Component {
 
 							<Route
 								path={"/images/"}
-								component={FullSize}
+								component={ FullSize }
 							/>
 
 						</Switch>

@@ -86,7 +86,10 @@ export const Gallery = (props) => {
 
 	return(
 		<div>
-			<Header basketQuantity={props.getBasket.length} />
+			<Header
+				basketQuantity={props.getBasket.length}
+				getJpegs={props.getJpegs}
+			/>
 			<h3> Gallery Title Here </h3>
 			{imageComponent(props.getJpegs)}
 		</div>

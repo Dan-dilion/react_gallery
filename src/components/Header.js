@@ -26,19 +26,41 @@ export const Header = (props) => {
 			>Download ({props.basketQuantity})</a></li>
 		)
 	}
+
+	const galleryButton = () => {
+		return(
+			<li
+				className="navbar-items"
 			><Link
-				to={'/basket'}
-				onClick={() => {return zipJpegs(props.getBasket)}}
-			>Download ({props.basketQuantity})</Link></li>
+				to={'/gallery'}
+			>Gallery</Link></li>
 		)
 	}
 
-	const buttonPicker = () => {
-		console.log('buttonDecider: ', window.location.pathname)
-		if (window.location.pathname === '/basket') return downloadButton();
-		else return basketButton();
+	const downloadAllButton = () => {
+		return(
+			<li
+				className="navbar-items"
+			><a
+				href={zipJpegs(props.getJpegs)}
+			>Download All ({props.getJpegs.length})</a></li>
+		)
 	}
 
+	const buttonPicker = (button) => {
+		switch (button) {
+			case 'basket':
+				console.log('basketButtonDecider: ', window.location.pathname)
+				if (window.location.pathname === '/basket' && props.basketQuantity) return downloadButton();
+				else return basketButton();
+				break;
+			case 'gallery':
+				console.log('galleryButtonDecider: ', window.location.pathname)
+				if (window.location.pathname === '/gallery') return downloadAllButton();
+				else return galleryButton();
+				break;
+		}
+	}
 	return(
 		<div>
 			<div className="app-header">
@@ -47,8 +69,8 @@ export const Header = (props) => {
 					<div>
 						<ul>
 							<li className="navbar-items"><Link to={'/home'}>Home</Link></li>
-							<li className="navbar-items"><Link to={'/gallery'}>Gallery</Link></li>
-							{ buttonPicker() }
+							{ buttonPicker('gallery') }
+							{ buttonPicker('basket') }
 						</ul>
 					</div>
 				</nav>
