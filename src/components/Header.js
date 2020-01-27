@@ -48,15 +48,22 @@ export const Header = (props) => {
 	}
 
 	const buttonPicker = (button) => {
+
+		const urlRoute = () => {
+			let pathNames = window.location.pathname.split('/')
+			console.log('pathNames: ', pathNames)
+			return '/' + pathNames[pathNames.length - 1];
+		}
+
 		switch (button) {
 			case 'basket':
-				console.log('basketButtonDecider: ', window.location.pathname)
-				if (window.location.pathname === '/basket' && props.basketQuantity) return downloadButton();
+				console.log('buttonPicker: ', urlRoute())
+				if (urlRoute() == '/basket' && props.basketQuantity) return downloadButton();
 				else return basketButton();
 				break;
 			case 'gallery':
-				console.log('galleryButtonDecider: ', window.location.pathname)
-				if (window.location.pathname === '/gallery') return downloadAllButton();
+				console.log('galleryButtonDecider: ', urlRoute())
+				if (urlRoute() == '/gallery') return downloadAllButton();
 				else return galleryButton();
 				break;
 		}
