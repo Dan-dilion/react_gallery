@@ -21,6 +21,11 @@ export const Header = (props) => {
 			<li
 				className="navbar-items"
 				id="download-button"
+			><a
+				href={zipJpegs(props.getBasket)}
+			>Download ({props.basketQuantity})</a></li>
+		)
+	}
 			><Link
 				to={'/basket'}
 				onClick={() => {return zipJpegs(props.getBasket)}}
