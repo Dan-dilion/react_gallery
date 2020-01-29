@@ -1,6 +1,6 @@
 import React from "react";
 
-export const FullSize = (props) => {
+export const FullSize = () => {
 	return(
 		<img
 			className="full-size"
