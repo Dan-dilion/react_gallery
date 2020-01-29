@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Thumbnail = (props, file, i) => {
+export const Thumbnail = (props, origin, file, i) => {
 
 	const addButton = (file) => {
 		return(
@@ -35,7 +35,8 @@ export const Thumbnail = (props, file, i) => {
 				<Link
 					to={'./single/'
 					+ file
-					+ '?origin=gallery'
+					+ '?origin='
+					+ origin
 					+ '&index='
 					+ i}
 				><img
