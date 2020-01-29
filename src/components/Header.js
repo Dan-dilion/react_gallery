@@ -48,7 +48,6 @@ export const Header = (props) => {
 	}
 
 	const buttonPicker = (button) => {
-
 		const urlRoute = () => {
 			let pathNames = window.location.pathname.split('/')
 			console.log('pathNames: ', pathNames)
@@ -68,6 +67,7 @@ export const Header = (props) => {
 				break;
 		}
 	}
+
 	return(
 		<div>
 			<div className="app-header">
