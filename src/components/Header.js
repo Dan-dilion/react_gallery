@@ -41,9 +41,10 @@ export const Header = (props) => {
 		return(
 			<li
 				className="navbar-items"
-			><a
-				href={zipJpegs(props.getJpegs)}
-			>Download All ({props.getJpegs.length})</a></li>
+			><Link
+				to={'/gallery'}
+				onClick={() => { props.getJpegs.forEach(file => props.addBasket(file))} }
+			>All To Basket ({props.getJpegs.length})</Link></li>
 		)
 	}
 
