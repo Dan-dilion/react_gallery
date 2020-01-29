@@ -2,35 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { Header } from './Header.js';
+import { Thumbnail } from './Thumbnail.js';
 
 
 export const Basket = (props) => {
 	const fullBasket = (files) => {
-		return (
-			<div className="phcontainer">
-				{files.map((file, i) => {
-					return (
-						<div key={i}>
-							<Link
-								to={'./single/'
-								+ file
-								+ '?origin=basket'
-								+ '&index='
-								+ i}
-							><img
-								alt={"File not found: " + file}
-								className="images"
-								key={i}
-								src={"./images/resize300/"
-									+ file
-								}
-							/></Link>
-							<button className="Remove-Basket" onClick={() => props.removeBasket(i)}>Remove</button>
-						</div>
-					);
-				})}
-			</div>
-		)
+		return files.map((file, i) => {
+			return( Thumbnail(props, file, i) )
+		})
 	}
 
 
