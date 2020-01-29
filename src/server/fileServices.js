@@ -61,13 +61,11 @@ async function resizeImages(jpegs) {
 		console.log('Creating Directory... ', resizeMedDir);	//
 	}
 
-	console.log('B4')
 	await Promise.all([
 		processImages(jpegs, 'm'),
 		processImages(jpegs, 's')
 	])
 	.catch((err) => { throw new Error(err); })
-	console.log('AFTER')
 }
 
 

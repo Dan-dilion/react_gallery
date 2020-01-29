@@ -27,7 +27,7 @@ const basketReducer = (state = initialState, action) => {
 			}
 
 		default:
-			console.log('No action specified');
+			console.log('BASKET REDUCER: No action specified!!!');
 			break;
 	}
 	return state;

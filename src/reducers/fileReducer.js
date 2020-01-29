@@ -3,7 +3,7 @@ const initialState = {
 };
 
 const fileReducer = (state = initialState, action) => {
-	console.log('REDUCER HERE')
+	console.log('FILE REDUCER HERE')
 	switch (action.type) {
 		case "SET_JPEGS":
 			console.log('Setting Jpegs: ', action.payload);
@@ -15,7 +15,7 @@ const fileReducer = (state = initialState, action) => {
 			break;
 
 		default:
-			console.log('No action specified');
+			console.log('FILE REDUCER: No action specified!!!');
 			break;
 	}
 	return state;

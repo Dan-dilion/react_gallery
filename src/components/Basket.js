@@ -60,9 +60,13 @@ export const Basket = (props) => {
 
 	return(
 		<div>
-			<Header basketQuantity={props.getBasket.length} getBasket={props.getBasket} />
+			<Header
+				getBasket={props.getBasket}
+			/>
 			<h3> Download Basket </h3>
-			{imageComponent(props.getBasket)}
+			<div className="phcontainer">
+				{imageComponent(props.getBasket)}
+			</div>
 		</div>
 	);
 }

@@ -41,13 +41,14 @@ export const SingleImage = (props) => {
 					}
 				>Next</Link>
 			)
-		} else { return ( <div
-
-			className={
-				"next-image " +
-				"disable-selection"
-			}
-		>End!</div> )}
+		} else { return(
+			<div
+				className={
+					"next-image " +
+					"disable-selection"
+				}
+			>End!</div>
+		)}
 	}
 
 	const prevButton = () => {
@@ -132,7 +133,7 @@ export const SingleImage = (props) => {
 
 	return(
 		<div>
-			<Header basketQuantity={props.getBasket.length} />
+			<Header getBasket={props.getBasket} />
 			<h3>{jpegsOrigin[parseInt(urlParams.get('index'))]}</h3>
 			<div className="single-container">
 				<div>
@@ -148,9 +149,7 @@ export const SingleImage = (props) => {
 							+ jpegsOrigin[parseInt(urlParams.get('index'))]
 						}
 					/></Link>
-
 					{basketButton(jpegsOrigin[parseInt(urlParams.get('index'))])}
-
 					{ prevButton() }
 					{ nextButton() }
 				</div>
