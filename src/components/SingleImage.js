@@ -135,8 +135,8 @@ export const SingleImage = (props) => {
 		<div>
 			<Header getBasket={props.getBasket} />
 			<h3>{jpegsOrigin[parseInt(urlParams.get('index'))]}</h3>
-			<div className="single-container">
-				<div>
+			<div className="single-wrapper">
+				<div className={'image-container'}>
 					<Link to={
 						'/images/'
 						+ jpegsOrigin[parseInt(urlParams.get('index'))]
@@ -150,6 +150,8 @@ export const SingleImage = (props) => {
 						}
 					/></Link>
 					{basketButton(jpegsOrigin[parseInt(urlParams.get('index'))])}
+				</div>
+				<div className={'next-prev-container'}>
 					{ prevButton() }
 					{ nextButton() }
 				</div>
