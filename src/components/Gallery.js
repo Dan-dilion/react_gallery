@@ -37,11 +37,11 @@ export const Gallery = (props) => {
 	return(
 		<div>
 			<Header
-				basketQuantity={props.getBasket.length}
+				getBasket={props.getBasket}
 				getJpegs={props.getJpegs}
 				addBasket={props.addBasket}
 			/>
-			<h3> Photography Gallery </h3>
+			<h3> Dan's Photography Gallery </h3>
 			<div className="phcontainer">
 				{imageComponent(props.getJpegs)}
 			</div>

@@ -19,7 +19,7 @@ export const Thumbnail = (props, file, i) => {
 				onClick={() => props.removeBasket(
 					props.getBasket.indexOf(file)
 				)}
-			>Remove From Basket</button>
+			>Remove</button>
 		)
 	}
 

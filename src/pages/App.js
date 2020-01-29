@@ -47,8 +47,8 @@ class App extends React.Component {
 								render={(props) => <Gallery
 									getJpegs={this.props.jpegs}
 									getBasket={this.props.basket}
-									addBasket={(jpeg) => this.props.ADD_BASKET(jpeg)}
-									removeBasket={(index) => this.props.REMOVE_BASKET(index)}
+									addBasket={this.props.ADD_BASKET}
+									removeBasket={this.props.REMOVE_BASKET}
 								/>}
 							/>
 
@@ -57,7 +57,7 @@ class App extends React.Component {
 								render={(props) => <Basket
 									getBasket={this.props.basket}
 									getJpegs={this.props.jpegs}
-									removeBasket={(index) => this.props.REMOVE_BASKET(index)}
+									removeBasket={this.props.REMOVE_BASKET}
 								/>}
 							/>
 
@@ -66,8 +66,8 @@ class App extends React.Component {
 								render={(props) => <SingleImage
 									getJpegs={this.props.jpegs}
 									getBasket={this.props.basket}
-									addBasket={(jpeg) => this.props.ADD_BASKET(jpeg)}
-									removeBasket={(index) => this.props.REMOVE_BASKET(index)}
+									addBasket={this.props.ADD_BASKET}
+									removeBasket={this.props.REMOVE_BASKET}
 								/>}
 							/>
 

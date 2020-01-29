@@ -12,7 +12,7 @@ export const Header = (props) => {
 				id="basket-button"
 			><Link
 				to={'/basket'}
-			>Basket ({props.basketQuantity})</Link></li>
+			>Basket ({props.getBasket.length})</Link></li>
 		)
 	}
 
@@ -23,7 +23,7 @@ export const Header = (props) => {
 				id="download-button"
 			><a
 				href={zipJpegs(props.getBasket)}
-			>Download ({props.basketQuantity})</a></li>
+			>Download ({props.getBasket.length})</a></li>
 		)
 	}
 
@@ -51,19 +51,16 @@ export const Header = (props) => {
 	const buttonPicker = (button) => {
 		const urlRoute = () => {
 			let pathNames = window.location.pathname.split('/')
-			console.log('pathNames: ', pathNames)
 			return '/' + pathNames[pathNames.length - 1];
 		}
 
 		switch (button) {
 			case 'basket':
-				console.log('buttonPicker: ', urlRoute())
-				if (urlRoute() == '/basket' && props.basketQuantity) return downloadButton();
+				if (urlRoute() === '/basket' && props.getBasket.length) return downloadButton();
 				else return basketButton();
 				break;
 			case 'gallery':
-				console.log('galleryButtonDecider: ', urlRoute())
-				if (urlRoute() == '/gallery') return downloadAllButton();
+				if (urlRoute() === '/gallery') return downloadAllButton();
 				else return galleryButton();
 				break;
 		}

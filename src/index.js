@@ -3,10 +3,7 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { createBrowserHistory } from 'history';
 
-import {
-	serverRequest,
- 	getJpegs
-} from './utils/serverRequest.js';
+import { getJpegs } from './utils/serverRequest.js';
 
 import store from './store.js';
 
@@ -17,6 +14,7 @@ import './css/App.css';
 import './css/Gallery.css';
 import './css/SingleImage.css';
 import './css/FullSize.css';
+import './css/Thumbnail.css';
 
 
 //import * as serviceWorker from './serviceWorker';
