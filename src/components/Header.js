@@ -58,10 +58,10 @@ export const Header = (props) => {
 			case 'basket':
 				if (urlRoute() === '/basket' && props.getBasket.length) return downloadButton();
 				else return basketButton();
-				break;
 			case 'gallery':
 				if (urlRoute() === '/gallery') return downloadAllButton();
 				else return galleryButton();
+			default:
 				break;
 		}
 	}
