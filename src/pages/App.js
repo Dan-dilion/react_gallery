@@ -5,7 +5,6 @@ import { BrowserRouter as Router,
 } from "react-router-dom";
 import { connect } from 'react-redux';
 
-import { Header } from '../components/Header.js';
 import { Home } from '../components/Home.js';
 import { Gallery } from '../components/Gallery.js';
 import { SingleImage } from '../components/SingleImage.js';
@@ -13,7 +12,6 @@ import { Basket } from '../components/Basket.js';
 import { FullSize } from '../components/FullSize.js';
 
 
-import { setJpegs } from '../actions/fileActions.js';
 import {
 	addBasket,
 	removeBasket
