@@ -1,1 +1,42 @@
 
+.images{
+	align-content: center;
+	z-index: -1;
+	display: inline;
+	float: left;
+	max-height: 9vmax;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.remove-basket {
+	display: inline;
+    max-width: 100%;
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
+.add-basket{
+  display: inline;
+  max-width: 100%;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.thumbnail{
+	border: 2px solid #000000;
+	padding: auto;
+}
+
+.thumbnail:hover {
+	z-index: 1;
+	border: 2px solid #f8f4ff;
+	border-radius: 1em;
+	transition-property: all;
+	transition-duration:   800ms;
+}
+
+.thumbnail-inner-container {
+	padding: 5%;
+	margin: 5%;
+}

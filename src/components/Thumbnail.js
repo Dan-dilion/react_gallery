@@ -30,22 +30,24 @@ export const Thumbnail = (props, file, i) => {
 	}
 
 	return (
-		<div key={i}>
-			<Link
-				to={'./single/'
-				+ file
-				+ '?origin=gallery'
-				+ '&index='
-				+ i}
-			><img
-				alt={"File not found: " + file}
-				className="images"
-				key={i}
-				src={"./images/resize300/"
+		<div className={'thumbnail'} key={i}>
+			<div className={'thumbnail-inner-container'} key={i}>
+				<Link
+					to={'./single/'
 					+ file
-				}
-			/></Link>
-			{ basketButtonPicker(file) }
+					+ '?origin=gallery'
+					+ '&index='
+					+ i}
+				><img
+					alt={"File not found: " + file}
+					className="images"
+					key={i}
+					src={"./images/resize300/"
+						+ file
+					}
+				/></Link>
+				{ basketButtonPicker(file) }
+			</div>
 		</div>
 	);
 }
