@@ -8,7 +8,7 @@ export const Thumbnail = (props, file, i) => {
 			<button
 				className="add-basket"
 				onClick={ () => props.addBasket(file) }
-			>Add To Basket</button>
+			>Add</button>
 		)
 	}
 
