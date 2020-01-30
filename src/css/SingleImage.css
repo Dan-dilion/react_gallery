@@ -81,8 +81,8 @@
 }
 
 .add-remove-basket {
-	text-decoration: none;
 	display: block;
-	float: left;
-	margin-left: 45%
+	margin: auto;
+	width: 80%;
+	height: 4em;
 }

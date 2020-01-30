@@ -13,10 +13,22 @@ code {
 }
 
 html, body {
-    background-color: black;
+    background-color: #000;
     margin: 10px;
 }
 
+a{
+	color: black;
+	text-decoration: none;
+}
+
+a:hover{
+	text-decoration: underline;
+}
+a:active{
+	color: black;
+}
+
 h1 {
-    color: #fed;
+
 }

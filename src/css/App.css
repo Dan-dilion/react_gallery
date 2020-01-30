@@ -1,5 +1,4 @@
 h1 {
-	text-shadow: 0px 0px 5vmin #FFFFFFff, .5vmin .5vmin .5vmin #000000FF;
 }
 
 h3 {
@@ -11,7 +10,7 @@ li {
 }
 
 .home-container {
-	color: #fed;
+	color: #fed5;
 }
 
 .app {
@@ -30,40 +29,80 @@ li {
 	display: block;
 	max-width: 80%;
 	margin: auto;
-	color: #fed;
+	color: #fed5;
 	position: relative;
 }
 
 .app-header {
-  background-color: #282c34;
-  border-radius: 2vmin;
+  text-shadow: .2em .2em .2em #000f, 0em 0em 2em #fedf;
+  background-color: #3335;
+  border-radius: 2vw;
   min-height: 10vh;
   align-items: center;
   justify-content: left;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 2vw);
   color: #fed;
+  transition: color 800ms, background-color 800ms;
+  box-shadow: 0em -5em 5em 5em #ffeedd20;
+}
+
+.standard-button, button{
+	transition: border-radius 200ms, background-color 200ms, box-shadow 200ms;
+	text-decoration: none;
+	border: none;
+	border-radius: .3vh 1vw;
+	background-color: #feda;
+	text-shadow: .2vw .1vh .15vw rgba(0, 0, 0, .6);
+
+	box-shadow:
+		inset .3em .3em .4em .1em #fffa,
+		inset -.3em -.3em .4em .1em #000a,
+		.4vw .4vh 5px 0px rgba(0, 0, 0, .5);
+}
+.standard-button:hover, button:hover{
+	transition: border-radius 200ms, background-color 200ms, box-shadow 200ms;
+	border-radius: 1vh .3vw;
+	background-color: #fed7;
+
+	box-shadow:
+		inset .3em .3em .4em .1em #fff7,
+		inset -.3em -.3em .4em .1em #0007,
+		.4vw .4vh 5px 0px #000a;
+}
+.standard-button:active, button:active{
+	box-shadow:
+		inset .-3em .-3em .4em .1em #ffff,
+		inset .3em .3em .4em .1em #000f,
+		.4vw .4vh 5px 0px #000f;
 }
 
 .navbar {
-	height: calc(0px + 5vh);
+	height: 2em;
 	width: 100%;
-	background: purple;
+	background: #635;
 	border-radius: 0px 0px 2vmin 2vmin;
 }
 
 .navbar-items {
-	font-size: 2vmin;
+	font-size: 2vw;
 	color: black;
-	text-shadow: .2vw .1vh .15vmin rgba(0, 0, 0, .6);
 	list-style-type: none;
 	width: auto;
 	max-width: 10em;
 	max-height: 1em;
 	padding: 0vh .5vw 1vh .5vw;
-	border-radius: .3vh 1vh;
 	margin: 1vh 1vw;
-	background-color: rgba(256, 256, 256, 1);
-	box-shadow: .4vw .4vh 5px 0px rgba(0, 0, 0, .5);
+
+	box-shadow:
+		inset .2em .2em .3em .05em #fffa,
+		inset -.2em -.2em .3em .05em #000a,
+		.4vw .4vh 5px 0px rgba(0, 0, 0, .5);
+}
+
+.sticky{
+	display: block;
+	position: fixed;
+	top: 0px;
 }
 
 #basket-button {
@@ -77,5 +116,5 @@ li {
 }
 
 .app-link {
-  color: #09d3ac;
+  color: #fed5;
 }

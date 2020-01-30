@@ -4,23 +4,27 @@
     margin-left: 2vmin;
     margin-right: 2vmin;
     padding: 2vmin;
-    border: 2px solid #f8f4ff;
     border-radius: 2vmin;
     justify-content: center;
     display: grid;
-    grid-gap: 2vmin;
-    grid-template-columns: repeat(auto-fit, minmax(15vw, 1fr));
-    grid-auto-rows: 3em, 5vh;
+	grid-template-columns: repeat(auto-fill, minmax(15vw, 1fr));
+    grid-auto-rows: 1fr;
+	box-shadow: 0em 5em 5em 5em #ffeedd1a;
 }
 
 .phcontainer > div {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .phcontainer > div > a > img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+}
+
+.gallery-title{
+	z-index: 2;
+	text-shadow: .2em .2em .1em #000f;
+	background-color: #0000;
 }
