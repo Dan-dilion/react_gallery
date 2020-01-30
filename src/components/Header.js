@@ -8,7 +8,7 @@ export const Header = (props) => {
 	const basketButton = () => {
 		return(
 			<li
-				className="navbar-items"
+				className="navbar-items standard-button"
 				id="basket-button"
 			><Link
 				to={'/basket'}
@@ -19,7 +19,7 @@ export const Header = (props) => {
 	const downloadButton = () => {
 		return (
 			<li
-				className="navbar-items"
+				className="navbar-items standard-button"
 				id="download-button"
 			><a
 				href={zipJpegs(props.getBasket)}
@@ -30,7 +30,7 @@ export const Header = (props) => {
 	const galleryButton = () => {
 		return(
 			<li
-				className="navbar-items"
+				className="navbar-items standard-button"
 			><Link
 				to={'/gallery'}
 			>Gallery</Link></li>
@@ -40,7 +40,7 @@ export const Header = (props) => {
 	const downloadAllButton = () => {
 		return(
 			<li
-				className="navbar-items"
+				className="navbar-items standard-button"
 			><Link
 				to={'/gallery'}
 				onClick={() => { props.getJpegs.forEach(file => props.addBasket(file))} }
@@ -73,7 +73,7 @@ export const Header = (props) => {
 				<nav className="navbar">
 					<div>
 						<ul>
-							<li className="navbar-items"><Link to={'/home'}>Home</Link></li>
+							<li className="navbar-items standard-button"><Link to={'/home'}>Home</Link></li>
 							{ buttonPicker('gallery') }
 							{ buttonPicker('basket') }
 						</ul>

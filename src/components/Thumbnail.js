@@ -6,7 +6,7 @@ export const Thumbnail = (props, origin, file, i) => {
 	const addButton = (file) => {
 		return(
 			<button
-				className="add-basket"
+				className="add-basket standard-button"
 				onClick={ () => props.addBasket(file) }
 			>Add</button>
 		)
@@ -15,7 +15,7 @@ export const Thumbnail = (props, origin, file, i) => {
 	const removeButton = (file) => {
 		return(
 			<button
-				className="remove-basket"
+				className="remove-basket standard-button"
 				onClick={() => props.removeBasket(
 					props.getBasket.indexOf(file)
 				)}
@@ -47,8 +47,9 @@ export const Thumbnail = (props, origin, file, i) => {
 						+ file
 					}
 				/></Link>
-				{ basketButtonPicker(file) }
+
 			</div>
+			{ basketButtonPicker(file) }
 		</div>
 	);
 }
