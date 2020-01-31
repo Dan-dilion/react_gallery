@@ -50,7 +50,7 @@ li {
 	transition: border-radius 200ms, background-color 200ms, box-shadow 200ms;
 	text-decoration: none;
 	border: none;
-	border-radius: .3vh 1vw;
+	border-radius: .3vh .8vw;
 	background-color: #feda;
 	text-shadow: .2vw .1vh .15vw rgba(0, 0, 0, .6);
 
@@ -61,7 +61,7 @@ li {
 }
 .standard-button:hover, button:hover{
 	transition: border-radius 200ms, background-color 200ms, box-shadow 200ms;
-	border-radius: 1vh .3vw;
+	border-radius: .8vh .3vw;
 	background-color: #fed7;
 
 	box-shadow:
