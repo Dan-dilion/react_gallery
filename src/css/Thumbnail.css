@@ -4,14 +4,14 @@
 	z-index: -1;
 	display: block;
 	max-height: 10vw;
-	transition: box-shadow 8000ms, border-radius 8000ms;
+	transition: box-shadow 1000ms, border-radius 1000ms;
 	padding: 0vw;
 	margin-bottom: 1em;
-	border-radius: .3em 1.5em;
+	border-radius: 2vw .5vw;
 }
 .images:hover{
-	transition: box-shadow 2000ms, border-radius 2000ms;
-	border-radius: 1.5em .3em;
+	transition: box-shadow 200ms, border-radius 200ms;
+	border-radius: .5vw 2vw;
 	box-shadow: .5vw .5vw 1vw .5vw #fec3, 0px 0px 2vw 3vw #fec1;
 }
 
