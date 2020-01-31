@@ -7,44 +7,44 @@ export const Header = (props) => {
 
 	const basketButton = () => {
 		return(
-			<li
-				className="navbar-items standard-button"
-				id="basket-button"
-			><Link
+			<Link
 				to={'/basket'}
-			>Basket ({props.getBasket.length})</Link></li>
+			><li
+				className="navbar-items standard-button disable-selection"
+				id="basket-button"
+			>Basket ({props.getBasket.length})</li></Link>
 		)
 	}
 
 	const downloadButton = () => {
 		return (
-			<li
-				className="navbar-items standard-button"
-				id="download-button"
-			><a
+			<a
 				href={zipJpegs(props.getBasket)}
-			>Download ({props.getBasket.length})</a></li>
+			><li
+				className="navbar-items standard-button disable-selection"
+				id="download-button"
+			>Download ({props.getBasket.length})</li></a>
 		)
 	}
 
 	const galleryButton = () => {
 		return(
-			<li
-				className="navbar-items standard-button"
-			><Link
+			<Link
 				to={'/gallery'}
-			>Gallery</Link></li>
+			><li
+				className="navbar-items standard-button disable-selection"
+			>Gallery</li></Link>
 		)
 	}
 
 	const downloadAllButton = () => {
 		return(
-			<li
-				className="navbar-items standard-button"
-			><Link
+			<Link
 				to={'/gallery'}
 				onClick={() => { props.getJpegs.forEach(file => props.addBasket(file))} }
-			>All To Basket ({props.getJpegs.length})</Link></li>
+			><li
+				className="navbar-items standard-button disable-selection"
+			>All To Basket ({props.getJpegs.length})</li></Link>
 		)
 	}
 
@@ -73,7 +73,7 @@ export const Header = (props) => {
 				<nav className="navbar">
 					<div>
 						<ul>
-							<li className="navbar-items standard-button"><Link to={'/home'}>Home</Link></li>
+							<Link to={'/home'}><li className="navbar-items standard-button disable-selection">Home</li></Link>
 							{ buttonPicker('gallery') }
 							{ buttonPicker('basket') }
 						</ul>

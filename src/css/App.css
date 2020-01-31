@@ -53,16 +53,17 @@ li {
 	border: none;
 	border-radius: .3vh .8vw;
 	background-color: #feda;
-	text-shadow: .2vw .1vh .15vw rgba(0, 0, 0, .6);
+	text-shadow: .1vw .05vh .1vw rgba(0, 0, 0, .6);
 
 	box-shadow:
 		inset .3em .3em .4em .1em #fffa,
 		inset -.3em -.3em .4em .1em #000a,
 		.4vw .4vh 5px 0px rgba(0, 0, 0, .5);
 }
-.standard-button:hover, button:hover{
+.standard-button:hover, a:hover, button:hover{
+	text-decoration: none;
 	transition: border-radius 200ms, background-color 200ms, box-shadow 200ms;
-	border-radius: .8vh .3vw;
+	border-radius: .8vw .3vh;
 	background-color: #fed7;
 
 	box-shadow:
@@ -70,11 +71,13 @@ li {
 		inset -.3em -.3em .4em .1em #0007,
 		.4vw .4vh 5px 0px #000a;
 }
-.standard-button:active, button:active{
+.standard-button:active, a:active, button:active{
+	transition:  box-shadow 50ms ease-in-out;
+	color: #feda;
 	box-shadow:
-		inset .-3em .-3em .4em .1em #ffff,
-		inset .3em .3em .4em .1em #000f,
-		.4vw .4vh 5px 0px #000f;
+		inset .15em .15em .2em .05em #fff7,
+		inset -.15em -.15em .2em .05em #0007,
+		.4vw .4vh 5px 0px #000a;
 }
 
 .navbar {
