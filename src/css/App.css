@@ -47,7 +47,8 @@ li {
 }
 
 .standard-button, button{
-	transition: border-radius 200ms, background-color 200ms, box-shadow 200ms;
+	transition-property: border-radius, background-color, box-shadow ;
+	transition-duration: 1500ms;
 	text-decoration: none;
 	border: none;
 	border-radius: .3vh .8vw;
