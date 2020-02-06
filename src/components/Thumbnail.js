@@ -34,11 +34,11 @@ export const Thumbnail = (props, origin, file, i) => {
 			<div className={'thumbnail-inner-container'} key={i}>
 				<Link
 					to={'./single/'
-					+ props.setOrigin(origin)
-					+ '/'
 					+ file
-					}
-
+					+ '?origin='
+					+ origin
+					+ '&index='
+					+ i}
 				><img
 					alt={"File not found: " + file}
 					className="images"
