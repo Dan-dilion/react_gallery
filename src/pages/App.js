@@ -20,7 +20,15 @@ import {
 // const path = require('path');
 
 class App extends React.Component {
+
+
+
 	render() {
+
+		const setOrigin = (origin = 'gallery') => {
+			return origin;
+		}
+
 		return (
 			<div className="container">
 				<Router basename={process.env.PUBLIC_URL}>
@@ -47,6 +55,7 @@ class App extends React.Component {
 									getBasket={this.props.basket}
 									addBasket={this.props.ADD_BASKET}
 									removeBasket={this.props.REMOVE_BASKET}
+									setOrigin={(origin) => setOrigin(origin)}
 								/>}
 							/>
 
@@ -56,6 +65,7 @@ class App extends React.Component {
 									getBasket={this.props.basket}
 									getJpegs={this.props.jpegs}
 									removeBasket={this.props.REMOVE_BASKET}
+									setOrigin={(origin) => setOrigin(origin)}
 								/>}
 							/>
 
@@ -66,6 +76,7 @@ class App extends React.Component {
 									getBasket={this.props.basket}
 									addBasket={this.props.ADD_BASKET}
 									removeBasket={this.props.REMOVE_BASKET}
+									origin={setOrigin()}
 								/>}
 							/>
 
