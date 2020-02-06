@@ -7,9 +7,10 @@
     border-radius: 2vmin;
     justify-content: center;
     display: grid;
-	grid-template-columns:  repeat(auto-fill, minmax(16vw, 1fr));
+	grid-template-columns:  repeat(auto-fill, 20vw);
     grid-auto-rows: 1fr;
-	grid-column-gap: 20px;
+	grid-column-gap: 4px;
+	grid-row-gap: 1em;
 	box-shadow: 0em 5em 5em 5em #ffeedd1a;
 }
 

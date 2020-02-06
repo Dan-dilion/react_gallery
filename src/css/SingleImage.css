@@ -41,7 +41,7 @@
 	width: 20%;
 	float: right;
 	position: absolute;
-	top: 10%;
+	top: 25%;
   	right: 5%;
 	transition-property: all;
 	transition-duration: 2000ms;
@@ -60,7 +60,7 @@
 	width: 20%;
 	float: right;
 	position: absolute;
-	top: 10%;
+	top: 25%;
   	right: 75%;
 	transition-property: all;
 	transition-duration: 2000ms;
