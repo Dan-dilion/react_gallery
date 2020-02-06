@@ -11,19 +11,19 @@ export const SingleImage = (props) => {
 	if (urlParams.get('origin') === 'basket') { jpegsOrigin = props.getBasket }
 
 	const currentFile = {
-		file: jpegsOrigin[parseInt(urlParams.get('index'))],
+		file: jpegsOrigin[parseInt(urlParams.get('index'))].file,
 		index: parseInt(urlParams.get('index'))
 	}
 
 	const next = {...currentFile}
 	if (parseInt(urlParams.get('index')) < parseInt(jpegsOrigin.length) - 1) {
-		next.file = jpegsOrigin[parseInt(urlParams.get('index')) + 1];
+		next.file = jpegsOrigin[parseInt(urlParams.get('index')) + 1].file;
 		next.index ++;
 	}
 
 	const prev = {...currentFile}
 	if (parseInt(urlParams.get('index')) > 0) {
-		prev.file = jpegsOrigin[parseInt(urlParams.get('index')) - 1];
+		prev.file = jpegsOrigin[parseInt(urlParams.get('index')) - 1].file;
 		prev.index --;
 	}
 
@@ -126,7 +126,7 @@ export const SingleImage = (props) => {
 	}
 
 	const basketButton = (file) => {
-		if (props.getBasket.length >0 && props.getBasket.includes(file)) {
+		if (props.getBasket.length >0 && props.getBasket.file.includes(file)) {
 			return removeButton(file)
 		} else return addButton(file)
 	}
@@ -135,20 +135,20 @@ export const SingleImage = (props) => {
 	return(
 		<div>
 			<Header getBasket={props.getBasket} />
-			<h3>{jpegsOrigin[parseInt(urlParams.get('index'))]}</h3>
+			<h3>{decodeURIComponent(jpegsOrigin[parseInt(urlParams.get('index'))].file)}</h3>
 			<div className="single-wrapper">
 				<div className={'image-container'}>
 					<Link
 						to={
 							'/images/'
-							+ jpegsOrigin[parseInt(urlParams.get('index'))]
+							+ jpegsOrigin[parseInt(urlParams.get('index'))].file
 						}
 						target='_blank'
 					>
 						{Slider(parseInt(urlParams.get('index')), jpegsOrigin, props)}
 					</Link>
-					
-					{basketButton(jpegsOrigin[parseInt(urlParams.get('index'))])}
+
+					{basketButton(jpegsOrigin[parseInt(urlParams.get('index'))].file)}
 				</div>
 				<div className={'next-prev-container'}>
 					{ prevButton() }

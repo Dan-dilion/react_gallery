@@ -7,7 +7,7 @@ export const Gallery = (props) => {
 
 	const imageSuccess = (files) => {
 		return files.map((file, i) => {
-			return( Thumbnail(props, 'gallery', file, i) )
+			return( Thumbnail(props, 'gallery', file.file, i) )
 		})
 	}
 
