@@ -5,9 +5,10 @@ import { Thumbnail } from './Thumbnail.js';
 
 
 export const Basket = (props) => {
+
 	const fullBasket = (files) => {
 		return files.map((file, i) => {
-			return( Thumbnail(props, 'basket', file, i) )
+			return( Thumbnail(props, 'basket', file.file, i) )
 		})
 	}
 

@@ -23,7 +23,7 @@ export const Slider = (index, jpegs, props) => {
 				className={'single-image'}
 				key={key}
 				style={{
-					backgroundImage: `url(/images/resize1024/${encodeURIComponent(item.file)})`,
+					backgroundImage: `url(./images/resize1024/${encodeURIComponent(item.file)})`,
 					...props
 				}}
 			/>

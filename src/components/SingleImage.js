@@ -126,7 +126,7 @@ export const SingleImage = (props) => {
 	}
 
 	const basketButton = (file) => {
-		if (props.getBasket.length >0 && props.getBasket.file.includes(file)) {
+		if (props.getBasket.length >0 && props.getBasket.some(item => item.file == file)) {
 			return removeButton(file)
 		} else return addButton(file)
 	}

@@ -41,7 +41,7 @@ export const Header = (props) => {
 		return(
 			<Link
 				to={'/gallery'}
-				onClick={() => { props.getJpegs.forEach(file => props.addBasket(file))} }
+				onClick={() => { props.getJpegs.forEach(file => props.addBasket(file.file))} }
 			><li
 				className="navbar-items standard-button disable-selection"
 			>All To Basket ({props.getJpegs.length})</li></Link>
