@@ -19,7 +19,7 @@ export const Header = (props) => {
 	const downloadButton = () => {
 		return (
 			<a
-				href={zipJpegs(props.getBasket)}
+				href={zipJpegs(props.getBasket.map((item) => {return item.file;} ))}
 			><li
 				className="navbar-items standard-button disable-selection"
 				id="download-button"
