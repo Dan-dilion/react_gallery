@@ -16,15 +16,21 @@ export const Thumbnail = (props, origin, file, i) => {
 		return(
 			<button
 				className="remove-basket standard-button"
-				onClick={() => props.removeBasket(
-					props.getBasket.indexOf(file)
-				)}
+				onClick={ () => {
+					props.removeBasket(
+						props.getBasket.map(
+							(item) => {
+								return item.file;
+							}
+						).indexOf(file)
+					)
+				}}
 			>Remove</button>
 		)
 	}
 
 	const basketButtonPicker = (file) => {
-		if (props.getBasket.length >0 && props.getBasket.includes(file)) {
+		if (props.getBasket.length >0 && props.getBasket.some( item => item.file == file )) {
 			return removeButton(file)
 		} else return addButton(file)
 	}

@@ -1,15 +1,21 @@
 const initialState = {
-	basketJpegs: []
+	basketJpegs: [],
+	nextId: 0
 };
 
 const basketReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case "ADD_BASKET":
-			if (!state.basketJpegs.find(item => item === action.payload)) {
+			if (!state.basketJpegs.some( item => item.file == action.payload) ) {
 				console.log('Adding file to basket: ', action.payload);
 				state = {
 					...state,
-					basketJpegs: [...state.basketJpegs, action.payload]
+					basketJpegs: [...state.basketJpegs,
+					{
+						file: action.payload,
+						id: state.nextId
+					}],
+					nextId: state.nextId + 1
 				};
 				console.log('New State: ', state)
 			} else {
