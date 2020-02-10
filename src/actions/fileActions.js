@@ -1,7 +1,7 @@
 
-export function setJpegs(jpegs) {
+export function addJpegs(jpegs) {
 	return {
-		type: "SET_JPEGS",
+		type: "ADD_JPEGS",
 		payload: jpegs
 	};
 };

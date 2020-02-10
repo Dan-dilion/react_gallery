@@ -7,15 +7,17 @@ export const getJpegs = async (store) => {
 		else return response.text()							// If Error: converts data stream in to text object
 	})
 	.then( responseData => {
-		responseData.forEach((file, i) => {
-			store.dispatch({
-				type: "ADD_JPEG",
-				payload: {
-					file: file,
-					id: i
-				}
+		let newJpegs = responseData.map((file, i) => {
+			return({
+				file: file,
+				id: i
 			})
-		});
+		})
+		console.log('NEWJPEGS: ', newJpegs)
+		store.dispatch({
+			type: "ADD_JPEGS",
+			payload: newJpegs
+		})
 	})
 }
 

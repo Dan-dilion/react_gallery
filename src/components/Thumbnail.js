@@ -38,7 +38,7 @@ export const Thumbnail = (props, origin, jpeg, i) => {
 					+ '?origin='
 					+ origin
 					+ '&index='
-					+ jpeg.id}
+					+ i}
 				><img
 					alt={"File not found: " + jpeg.file}
 					className="images"

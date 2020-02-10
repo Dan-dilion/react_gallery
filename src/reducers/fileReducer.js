@@ -5,12 +5,11 @@ const initialState = {
 const fileReducer = (state = initialState, action) => {
 	console.log('FILE REDUCER HERE')
 	switch (action.type) {
-		case "ADD_JPEG":
-	
+		case "ADD_JPEGS":
 			console.log('Adding Jpeg: ', action.payload);
 			state = {
 				...state,
-				jpegs: [...state.jpegs, action.payload]
+				jpegs: [...state.jpegs, ...action.payload]
 			};
 			console.log('New State: ', state)
 			break;
