@@ -5,14 +5,14 @@
 	display: block;
 	max-height: 10vw;
 	max-width: 100%;
-	transition: box-shadow 1500ms, border-radius 1500ms;
+	transition: box-shadow 1500ms;
 	padding: 0vw;
 	margin-bottom: 1em;
-	border-radius: 1.5vw .3vw;
+	border-radius: .2vw;
 }
 .images:hover{
-	transition: box-shadow 200ms, border-radius 200ms;
-	border-radius: .3vw 1.5vw;
+	transition: box-shadow 200ms;
+	//border-radius: .3vw 1.5vw;
 	box-shadow: .5vw .5vw 1vw .5vw #fec3, 0px 0px 2vw 3vw #fec1;
 }
 
@@ -36,6 +36,8 @@
 	grid-template-columns: 1fr;
 	grid-template-rows: 80% 10%;
 	justify-items: center;
+	background-color: #0002;
+	max-height: 19vh;
 }
 
 .thumbnail-inner-container {

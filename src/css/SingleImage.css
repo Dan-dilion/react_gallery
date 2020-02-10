@@ -5,11 +5,12 @@
 	margin-left: 2vmin;
 	margin-right: 2vmin;
 	padding: .5vmin;
-	border: 2px solid #f8f4ff;
+	border: 2px solid #f8f4ffb0;
 	border-radius: 2vmin;
 	justify-content: center;
 	display: block;
 	position: relative;
+	background-color: #000b;
 }
 
 .image-container {

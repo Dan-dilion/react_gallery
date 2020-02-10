@@ -16,7 +16,7 @@ export const Gallery = (props) => {
 	// that there was an error.
 	const imageFail = (jpegs) => {
 		return(
-			<div className="phcontainer">
+			<div className="ph_fail_container">
 				<div>
 					<p>System Message: {jpegs}</p>
 				</div>

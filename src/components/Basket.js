@@ -18,7 +18,7 @@ export const Basket = (props) => {
 	// that there was an error.
 	const emptyBasket = (files) => {
 		return(
-			<div className="phcontainer">
+			<div className="empty_phcontainer">
 				<div>
 					<p>Your basket is empty!</p>
 				</div>
