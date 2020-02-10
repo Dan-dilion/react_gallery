@@ -6,7 +6,7 @@ const basketReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case "ADD_BASKET":
 			if (!state.basketJpegs.some( item => item.file == action.payload.file) ) {
-				console.log('Adding file to basket: ', action.payload);
+				console.log('Adding item to basket: ', action.payload);
 				state = {
 					...state,
 					basketJpegs: [...state.basketJpegs, action.payload],
@@ -14,16 +14,16 @@ const basketReducer = (state = initialState, action) => {
 				console.log('New State: ', state)
 			} else {
 				console.log('Not Adding: ', action.payload)
-				console.log('File Already in Basket!!! ')
+				console.log('Item Already in Basket!!! ')
 			}
 			break;
 
 		case "REMOVE_BASKET":
 			console.log('Removing item from basket', state.basketJpegs[action.payload]);
-			let pegs = [...state.basketJpegs];
-			pegs.splice(action.payload, 1);
+			let newList = [...state.basketJpegs];
+			newList.splice(action.payload, 1);
 			return {
-				...state, basketJpegs: pegs
+				...state, basketJpegs: newList
 			}
 
 		default:

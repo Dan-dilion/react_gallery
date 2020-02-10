@@ -91,8 +91,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		ADD_BASKET: (jpeg) => {
-			dispatch(addBasket(jpeg));
+		ADD_BASKET: (jpegItem) => {
+			dispatch(addBasket(jpegItem));
 		},
 		REMOVE_BASKET: (index) => {
 			dispatch(removeBasket(index));

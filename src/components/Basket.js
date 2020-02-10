@@ -6,9 +6,9 @@ import { Thumbnail } from './Thumbnail.js';
 
 export const Basket = (props) => {
 
-	const fullBasket = (files) => {
-		return files.map((file, i) => {
-			return( Thumbnail(props, 'basket', file, i) )
+	const fullBasket = (jpegs) => {
+		return jpegs.map((item, i) => {
+			return( Thumbnail(props, 'basket', item, i) )
 		})
 	}
 
@@ -27,12 +27,12 @@ export const Basket = (props) => {
 	}
 
 
-	let imageComponent = (files) => {
-		if (files.length >= 1) {
-			return fullBasket(files);
+	let imageComponent = (jpegs) => {
+		if (jpegs.length >= 1) {
+			return fullBasket(jpegs);
 		}
 		else {
-			return emptyBasket(files);
+			return emptyBasket(jpegs);
 		}
 	}
 

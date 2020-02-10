@@ -1,32 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Thumbnail = (props, origin, jpeg, i) => {
+export const Thumbnail = (props, origin, jpegItem, i) => {
 
-	const addButton = (jpeg) => {
+	const addButton = (jpegItem) => {
 		return(
 			<button
 				className="add-basket standard-button"
-				onClick={ () => props.addBasket(jpeg) }
+				onClick={ () => props.addBasket(jpegItem) }
 			>Add</button>
 		)
 	}
 
-	const removeButton = (jpeg) => {
+	const removeButton = (jpegItem) => {
 		return(
 			<button
 				className="remove-basket standard-button"
 				onClick={ () => {
-					props.removeBasket( props.getBasket.indexOf(jpeg) )
+					props.removeBasket( props.getBasket.indexOf(jpegItem) )
 				}}
 			>Remove</button>
 		)
 	}
 
-	const basketButtonPicker = (jpeg) => {
-		if (props.getBasket.length >0 && props.getBasket.some( item => item.file == jpeg.file )) {
-			return removeButton(jpeg)
-		} else return addButton(jpeg)
+	const basketButtonPicker = (jpegItem) => {
+		if (props.getBasket.length >0 && props.getBasket.some( item => item.file == jpegItem.file )) {
+			return removeButton(jpegItem)
+		} else return addButton(jpegItem)
 	}
 
 	return (
@@ -34,22 +34,22 @@ export const Thumbnail = (props, origin, jpeg, i) => {
 			<div className={'thumbnail-inner-container'} key={i}>
 				<Link
 					to={'./single/'
-					+ jpeg.file
+					+ jpegItem.file
 					+ '?origin='
 					+ origin
 					+ '&index='
 					+ i}
 				><img
-					alt={"File not found: " + jpeg.file}
+					alt={"File not found: " + jpegItem.file}
 					className="images"
-					key={jpeg.id}
+					key={jpegItem.id}
 					src={"./images/resize300/"
-						+ jpeg.file
+						+ jpegItem.file
 					}
 				/></Link>
 
 			</div>
-			{ basketButtonPicker(jpeg) }
+			{ basketButtonPicker(jpegItem) }
 		</div>
 	);
 }

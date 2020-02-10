@@ -10,20 +10,20 @@ export const SingleImage = (props) => {
 	let jpegsOrigin = props.getJpegs;
 	if (urlParams.get('origin') === 'basket') { jpegsOrigin = props.getBasket }
 
-	const currentFile = {
-		file: jpegsOrigin[parseInt(urlParams.get('index'))],
+	const currentJpegItem = {
+		jpegItem: jpegsOrigin[parseInt(urlParams.get('index'))],
 		index: parseInt(urlParams.get('index'))
 	}
 
-	const next = {...currentFile}
+	const next = {...currentJpegItem}
 	if (parseInt(urlParams.get('index')) < parseInt(jpegsOrigin.length) - 1) {
-		next.file = jpegsOrigin[parseInt(urlParams.get('index')) + 1];
+		next.jpegItem = jpegsOrigin[parseInt(urlParams.get('index')) + 1];
 		next.index ++;
 	}
 
-	const prev = {...currentFile}
+	const prev = {...currentJpegItem}
 	if (parseInt(urlParams.get('index')) > 0) {
-		prev.file = jpegsOrigin[parseInt(urlParams.get('index')) - 1];
+		prev.jpegItem = jpegsOrigin[parseInt(urlParams.get('index')) - 1];
 		prev.index --;
 	}
 
@@ -34,7 +34,7 @@ export const SingleImage = (props) => {
 					className="next-image disable-selection"
 					to={
 						'./'
-						+ next.file
+						+ next.jpegItem
 						+ '?origin='
 						+ urlParams.get('origin')
 						+ '&index='
@@ -59,7 +59,7 @@ export const SingleImage = (props) => {
 					className="prev-image disable-selection"
 					to={
 						'./'
-						+ prev.file
+						+ prev.jpegItem
 						+ '?origin='
 						+ urlParams.get('origin')
 						+ '&index='
@@ -76,22 +76,22 @@ export const SingleImage = (props) => {
 
 	}
 
-	const addButton = (file) => {
+	const addButton = (jpegItem) => {
 		return(
 			<button
 				className="add-remove-basket standard-button disable-selection"
-				onClick={ () => props.addBasket(file) }
+				onClick={ () => props.addBasket(jpegItem) }
 			>Add To Basket</button>
 		)
 	}
 
-	const removeButton = (file) => {
+	const removeButton = (jpegItem) => {
 		if ( jpegsOrigin.length <= 1) {
 			return (
 				<button
 					className="add-remove-basket standard-button disable-selection"
 					onClick={() => props.removeBasket(
-					props.getBasket.indexOf(file)
+					props.getBasket.indexOf(jpegItem)
 				)}>
 					<Link to={ '/basket' }>Remove From Basket</Link>
 				</button>
@@ -100,12 +100,12 @@ export const SingleImage = (props) => {
 			return(
 				<button className="add-remove-basket standard-button disable-selection"
 				onClick={() => props.removeBasket(
-					props.getBasket.indexOf(file)
+					props.getBasket.indexOf(jpegItem)
 				)}>
 				<Link
 					to={
 						'./'
-						+ prev.file
+						+ prev.jpegItem
 						+ '?origin='
 						+ urlParams.get('origin')
 						+ '&index='
@@ -118,17 +118,17 @@ export const SingleImage = (props) => {
 				<button
 					className="add-remove-basket standard-button disable-selection"
 					onClick={() => props.removeBasket(
-						props.getBasket.indexOf(file)
+						props.getBasket.indexOf(jpegItem)
 					)}
 				>Remove From Basket</button>
 			)
 		}
 	}
 
-	const basketButton = (file) => {
-		if (props.getBasket.length >0 && props.getBasket.some(item => item.file == file.file)) {
-			return removeButton(file)
-		} else return addButton(file)
+	const basketButton = (jpegItem) => {
+		if (props.getBasket.length >0 && props.getBasket.some(item => item.file == jpegItem.file)) {
+			return removeButton(jpegItem)
+		} else return addButton(jpegItem)
 	}
 
 
