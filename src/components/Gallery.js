@@ -5,31 +5,31 @@ import { Thumbnail } from './Thumbnail.js';
 
 export const Gallery = (props) => {
 
-	const imageSuccess = (files) => {
-		return files.map((file, i) => {
-			return( Thumbnail(props, 'gallery', file.file, i) )
+	const imageSuccess = (jpegs) => {
+		return jpegs.map((item, i) => {
+			return( Thumbnail(props, 'gallery', item, i) )
 		})
 	}
 
 	// The imageFail function will be called in the case that
 	// getJpegs() returns anything other that an array signifying
 	// that there was an error.
-	const imageFail = (files) => {
+	const imageFail = (jpegs) => {
 		return(
 			<div className="phcontainer">
 				<div>
-					<p>System Message: {files}</p>
+					<p>System Message: {jpegs}</p>
 				</div>
 			</div>
 		)
 	}
 
-	let imageComponent = (files) => {
-		if (Array.isArray(files)) {
-			return imageSuccess(files);
+	let imageComponent = (jpegs) => {
+		if (Array.isArray(jpegs)) {
+			return imageSuccess(jpegs);
 		}
 		else {
-			return imageFail(files);
+			return imageFail(jpegs);
 		}
 	}
 

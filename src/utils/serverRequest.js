@@ -7,9 +7,14 @@ export const getJpegs = async (store) => {
 		else return response.text()							// If Error: converts data stream in to text object
 	})
 	.then( responseData => {
-		store.dispatch({
-			type: "SET_JPEGS",
-			payload: responseData
+		responseData.forEach((file, i) => {
+			store.dispatch({
+				type: "ADD_JPEG",
+				payload: {
+					file: file,
+					id: i
+				}
+			})
 		});
 	})
 }

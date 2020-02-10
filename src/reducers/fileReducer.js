@@ -1,15 +1,16 @@
 const initialState = {
-	jpegs: ['Server Not Responding!!!']
+	jpegs: [],
 };
 
 const fileReducer = (state = initialState, action) => {
 	console.log('FILE REDUCER HERE')
 	switch (action.type) {
-		case "SET_JPEGS":
-			console.log('Setting Jpegs: ', action.payload);
+		case "ADD_JPEG":
+	
+			console.log('Adding Jpeg: ', action.payload);
 			state = {
 				...state,
-				jpegs: action.payload
+				jpegs: [...state.jpegs, action.payload]
 			};
 			console.log('New State: ', state)
 			break;

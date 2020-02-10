@@ -1,21 +1,15 @@
 const initialState = {
 	basketJpegs: [],
-	nextId: 0
 };
 
 const basketReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case "ADD_BASKET":
-			if (!state.basketJpegs.some( item => item.file == action.payload) ) {
+			if (!state.basketJpegs.some( item => item.file == action.payload.file) ) {
 				console.log('Adding file to basket: ', action.payload);
 				state = {
 					...state,
-					basketJpegs: [...state.basketJpegs,
-					{
-						file: action.payload,
-						id: state.nextId
-					}],
-					nextId: state.nextId + 1
+					basketJpegs: [...state.basketJpegs, action.payload],
 				};
 				console.log('New State: ', state)
 			} else {
@@ -25,7 +19,7 @@ const basketReducer = (state = initialState, action) => {
 			break;
 
 		case "REMOVE_BASKET":
-			console.log('Removing item from basket', action.payload);
+			console.log('Removing item from basket', state.basketJpegs[action.payload]);
 			let pegs = [...state.basketJpegs];
 			pegs.splice(action.payload, 1);
 			return {

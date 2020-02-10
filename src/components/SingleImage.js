@@ -11,19 +11,19 @@ export const SingleImage = (props) => {
 	if (urlParams.get('origin') === 'basket') { jpegsOrigin = props.getBasket }
 
 	const currentFile = {
-		file: jpegsOrigin[parseInt(urlParams.get('index'))].file,
+		file: jpegsOrigin[parseInt(urlParams.get('index'))],
 		index: parseInt(urlParams.get('index'))
 	}
 
 	const next = {...currentFile}
 	if (parseInt(urlParams.get('index')) < parseInt(jpegsOrigin.length) - 1) {
-		next.file = jpegsOrigin[parseInt(urlParams.get('index')) + 1].file;
+		next.file = jpegsOrigin[parseInt(urlParams.get('index')) + 1];
 		next.index ++;
 	}
 
 	const prev = {...currentFile}
 	if (parseInt(urlParams.get('index')) > 0) {
-		prev.file = jpegsOrigin[parseInt(urlParams.get('index')) - 1].file;
+		prev.file = jpegsOrigin[parseInt(urlParams.get('index')) - 1];
 		prev.index --;
 	}
 
@@ -126,7 +126,7 @@ export const SingleImage = (props) => {
 	}
 
 	const basketButton = (file) => {
-		if (props.getBasket.length >0 && props.getBasket.some(item => item.file == file)) {
+		if (props.getBasket.length >0 && props.getBasket.some(item => item.file == file.file)) {
 			return removeButton(file)
 		} else return addButton(file)
 	}
@@ -148,7 +148,7 @@ export const SingleImage = (props) => {
 						{Slider(parseInt(urlParams.get('index')), jpegsOrigin, props)}
 					</Link>
 
-					{basketButton(jpegsOrigin[parseInt(urlParams.get('index'))].file)}
+					{basketButton(jpegsOrigin[parseInt(urlParams.get('index'))])}
 				</div>
 				<div className={'next-prev-container'}>
 					{ prevButton() }

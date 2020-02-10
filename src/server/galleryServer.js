@@ -37,8 +37,8 @@ app.get('/api/getjpegs', (request, response) => {
 			await resizeImages(jpegs)
 			console.log('6.1 - Resize finnished')
 
-			jpegs = jpegs.map((file, i) => {return ( {file: file, id: i} ) })
-																		// send the server response after the result
+//			jpegs = jpegs.map((file, i) => {return ( {file: file, id: i} ) })
+																// send the server response after the result
 			console.log('7 - Sending Response')
 			response.set({
 				'Content-Type' : 'application/json',			// content type JSON
