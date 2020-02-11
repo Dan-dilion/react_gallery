@@ -68,8 +68,8 @@ li {
 	text-shadow: .1vw .05vh .1vw rgba(0, 0, 0, .6);
 
 	box-shadow:
-		inset .2em .2em .2em .1em #fffa,
-		inset -.2em -.2em .2em .1em #000a,
+		inset .2em .2em .1em .0em #fffa,
+		inset -.2em -.2em .1em .0em #000a,
 		.4vw .4vh 5px 0px #000a;
 }
 .standard-button:hover {
@@ -78,20 +78,20 @@ li {
 	background-color: #feda;
 
 	box-shadow:
-		inset .2em .2em .2em .1em #fff7,
-		inset -.2em -.2em .2em .1em #0007,
+		inset .2em .2em .1em .0em #fff7,
+		inset -.2em -.2em .1em .0em #0007,
 		.4vw .4vh 5px 0px #000a;
 }
 .standard-button:active {
 	transition:  box-shadow 50ms ease-in-out;
 	color: #feda;
 	box-shadow:
-		inset .15em .15em .2em .05em #fff7,
-		inset -.15em -.15em .2em .05em #0007,
+		inset .15em .15em .1em .0em #fff7,
+		inset -.15em -.15em .1em .0em #0007,
 		.1vw .1vh 1px 0px #000a;
 }
 
-#navbar {
+.navbar {
 	height: 2em;
 	width: 100%;
 	background: #444b;

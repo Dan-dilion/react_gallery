@@ -42,6 +42,7 @@
 
 .thumbnail-inner-container {
 	justify-content: center;
-	padding: 5%;
-	margin: 5%;
+	//padding: 5%;
+	//margin: 5%;
+	margin-bottom: 8%;
 }
