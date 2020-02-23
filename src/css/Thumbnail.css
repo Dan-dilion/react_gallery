@@ -1,27 +1,29 @@
 
 .images{
-	justify-self: center;
+	//justify-self: center;
 	z-index: -1;
-	display: block;
-	max-height: 10vw;
-	max-width: 100%;
+	display: flex;
+	max-height: 10vh;
+  //max-width: 80%;
 	transition: box-shadow 1500ms;
 	padding: 0vw;
 	margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
 	border-radius: .2vw;
 }
 .images:hover{
 	transition: box-shadow 200ms;
 	//border-radius: .3vw 1.5vw;
 	box-shadow: .5vw .5vw 1vw .5vw #fec3, 0px 0px 2vw 3vw #fec1;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .remove-basket, .add-basket {
 	position: absolute;
 	bottom: 0px;
-	right: auto;
-	justify-self: stretch;
-    width: 75%;
+  width: 75%;
 	height: 2em;
 	font-size: 1vw;
 	border: none;
@@ -35,14 +37,19 @@
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 80% 10%;
-	justify-items: center;
+  align-content: center;
 	background-color: #0002;
-	max-height: 19vh;
+	max-height: 6vmax;
+  min-height: 15vmin;
+  min-width: 15em;
+  //max-width: 19vw;
 }
 
 .thumbnail-inner-container {
-	justify-content: center;
+	//justify-content: center;
 	//padding: 5%;
 	//margin: 5%;
 	margin-bottom: 8%;
+  max-height: 100%;
+  max-width: 100%;
 }

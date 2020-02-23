@@ -1,4 +1,5 @@
 h1 {
+  margin: 0;
 }
 
 h3 {
@@ -12,6 +13,10 @@ li {
 
 #root {
 	//background-image: url("../resources/header_background.jpg");
+  //background-clip: padding-box;
+
+  z-index: 1;
+  background-color: #0000;
 
 }
 
@@ -21,7 +26,7 @@ li {
 
 .app {
   text-align: center;
-  background-image: url("../resources/header_background.jpg");
+  //background-image: url("../resources/header_background.jpg");
 
 }
 
@@ -36,14 +41,16 @@ li {
 
 .container {
 	display: block;
-	max-width: 80%;
+	max-width: 100%;
 	margin: auto;
 	color: #fed5;
 	position: relative;
 }
 
 .app-header {
-  text-shadow: .2em .2em .2em #000f, 0em 0em 2em #fedf;
+  //padding: 3% 3% 3% 3%;
+  margin-top: 0%;
+  //text-shadow: .2em .2em .2em #000f, 0em 0em 2em #fedf;
   //background-image: url("../resources/header_background.jpg");
   //background-repeat: no-repeat;
   //background-position: center;
@@ -63,14 +70,14 @@ li {
 	transition-duration: 1500ms;
 	text-decoration: none;
 	border: none;
-	border-radius: .3vh;
+	border-radius: .2vh;
 	background-color: #fed6;
-	text-shadow: .1vw .05vh .1vw rgba(0, 0, 0, .6);
+	//text-shadow: .1vw .05vh .1vw rgba(0, 0, 0, .6);
 
 	box-shadow:
-		inset .2em .2em .1em .0em #fffa,
-		inset -.2em -.2em .1em .0em #000a,
-		.4vw .4vh 5px 0px #000a;
+		//inset .2em .2em .1em .0em #fffa,
+		//inset -.2em -.2em .1em .0em #000a,
+		//.4vw .4vh 5px 0px #000a;
 }
 .standard-button:hover {
 	text-decoration: none;
@@ -78,14 +85,13 @@ li {
 	background-color: #feda;
 
 	box-shadow:
-		inset .2em .2em .1em .0em #fff7,
-		inset -.2em -.2em .1em .0em #0007,
-		.4vw .4vh 5px 0px #000a;
+		inset .2em .2em .1em .0em #0004,
+    inset -.2em -.2em .1em .0em #fff4
 }
 .standard-button:active {
 	transition:  box-shadow 50ms ease-in-out;
 	color: #feda;
-	box-shadow:
+	//box-shadow:
 		inset .15em .15em .1em .0em #fff7,
 		inset -.15em -.15em .1em .0em #0007,
 		.1vw .1vh 1px 0px #000a;
@@ -95,7 +101,7 @@ li {
 	height: 2em;
 	width: 100%;
 	background: #444b;
-	border-radius: 0px 0px 1vmin 1vmin;
+	border-radius: 0px 0px 0vmin 0vmin;
 }
 
 .sticky_navbar {
@@ -118,10 +124,10 @@ li {
 	padding: 0vh .5vw 1vh .5vw;
 	margin: 1vh 1vw;
 
+  border-radius: .1em;
 	transition-property:  box-shadow, background-color;
 	transition-duration: 1500ms;
-	border-radius: .2vh .2vw;
-	box-shadow:
+	//box-shadow:
 		inset .1em .1em .1em .05em #fff7,
 		inset -.1em -.1em .1em .05em #0007,
 		.4vw .4vh 5px 0px #0005;
@@ -133,10 +139,7 @@ li {
 	transition-duration: 100ms;
 
 	background-color: #feda;
-	box-shadow:
-		inset .1em .1em .1em .05em #fff7,
-		inset -.1em -.1em .1em .05em #0007,
-			.4vw .4vh 5px 0px #0005;
+
 }
 
 

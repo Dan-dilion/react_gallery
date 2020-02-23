@@ -1,10 +1,7 @@
 .single-wrapper {
 	color: #fed;
-	max-width: 95%;
-	height: 60vh;
-	margin-left: 2vmin;
-	margin-right: 2vmin;
-	padding: .5vmin;
+	max-width: 100%;
+	height: 70vh;
 	border: 2px solid #f8f4ffb0;
 	border-radius: 2vmin;
 	justify-content: center;
@@ -31,11 +28,13 @@
 .single-image {
 	display: block;
 	width: 100%;
-	height: 100%;
-	background-size: cover;
+	height: 90%;
+	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
 	position: absolute;
+  margin-bottom: 10%;
+  margin-top: 1%;
 }
 
 .next-image {
@@ -92,11 +91,10 @@
 
 .add-remove-basket {
 	display: block;
-	margin: auto;
+  margin-bottom: 1%;
 	width: 80%;
 	height: 3em;
 	position: absolute;
 	bottom: 0%;
-	right: 8%;
-
+	right: 10%;
 }
