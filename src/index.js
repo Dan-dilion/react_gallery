@@ -11,6 +11,7 @@ import App from './pages/App.js';
 
 import './css/index.css';
 import './css/App.css';
+import './css/Header.css';
 import './css/Gallery.css';
 import './css/SingleImage.css';
 import './css/FullSize.css';

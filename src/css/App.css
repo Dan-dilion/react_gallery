@@ -47,24 +47,6 @@ li {
 	position: relative;
 }
 
-.app-header {
-  //padding: 3% 3% 3% 3%;
-  margin-top: 0%;
-  //text-shadow: .2em .2em .2em #000f, 0em 0em 2em #fedf;
-  //background-image: url("../resources/header_background.jpg");
-  //background-repeat: no-repeat;
-  //background-position: center;
-  background-color: #000a;
-  //border-radius: 2vw;
-  min-height: 10vh;
-  align-items: center;
-  justify-content: left;
-  font-size: calc(10px + 2vw);
-  color: #fed;
-  transition: color 800ms, background-color 800ms;
-  box-shadow: 0em -5em 5em 5em #ffeedd20;
-}
-
 .standard-button, button{
 	transition-property: background-color, box-shadow ;
 	transition-duration: 1500ms;
@@ -95,62 +77,6 @@ li {
 		inset .15em .15em .1em .0em #fff7,
 		inset -.15em -.15em .1em .0em #0007,
 		.1vw .1vh 1px 0px #000a;
-}
-
-.navbar {
-	height: 2em;
-	width: 100%;
-	background: #444b;
-	border-radius: 0px 0px 0vmin 0vmin;
-}
-
-.sticky_navbar {
-	display: block;
-	position: fixed;
-	top: 0px;
-}
-
-.sticky_navbar + .content {
-  padding-top: 60px;
-}
-
-.navbar-items {
-	font-size: 2vw;
-	color: black;
-	list-style-type: none;
-	width: auto;
-	max-width: 10em;
-	max-height: 1em;
-	padding: 0vh .5vw 1vh .5vw;
-	margin: 1vh 1vw;
-
-  border-radius: .1em;
-	transition-property:  box-shadow, background-color;
-	transition-duration: 1500ms;
-	//box-shadow:
-		inset .1em .1em .1em .05em #fff7,
-		inset -.1em -.1em .1em .05em #0007,
-		.4vw .4vh 5px 0px #0005;
-}
-
-.navbar-items:hover {
-
-	transition-property:  box-shadow, background-color;
-	transition-duration: 100ms;
-
-	background-color: #feda;
-
-}
-
-
-#basket-button {
-	float: right;
-	margin-right: 4vw;
-}
-
-#download-button {
-	float: right;
-	margin-right: 4vw;
 }
 
 .app-link {
