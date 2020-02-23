@@ -69,16 +69,19 @@ export const Header = (props) => {
 	return(
 		<div>
 			<div className="app-header">
-				<h1>React Gallery</h1>
-				<nav className="navbar">
-					<div>
-						<ul>
-							<Link to={'/home'}><li className="navbar-items standard-button disable-selection">Home</li></Link>
-							{ buttonPicker('gallery') }
-							{ buttonPicker('basket') }
-						</ul>
-					</div>
-				</nav>
+        <nav className="navbar">
+          <div>
+            <ul>
+              <Link to={'/home'}><li className="navbar-items standard-button disable-selection">Home</li></Link>
+              { buttonPicker('gallery') }
+              { buttonPicker('basket') }
+            </ul>
+          </div>
+        </nav>
+        <Link to={'/home'}>
+				    <h1>React Gallery</h1>
+        </Link>
+
 			</div>
 		</div>
 	);
