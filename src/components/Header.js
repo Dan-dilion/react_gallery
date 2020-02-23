@@ -44,7 +44,7 @@ export const Header = (props) => {
 				onClick={() => { props.getJpegs.forEach(item => props.addBasket(item))} }
 			><li
 				className="navbar-items standard-button disable-selection"
-			>All To Basket ({props.getJpegs.length})</li></Link>
+			>Add All ({props.getJpegs.length})</li></Link>
 		)
 	}
 

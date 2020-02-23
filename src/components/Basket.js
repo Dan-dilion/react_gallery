@@ -42,7 +42,7 @@ export const Basket = (props) => {
 			<Header
 				getBasket={props.getBasket}
 			/>
-			<h3> Download Basket </h3>
+			<h3> Basket </h3>
 			<div className="phcontainer">
 				{imageComponent(props.getBasket)}
 			</div>

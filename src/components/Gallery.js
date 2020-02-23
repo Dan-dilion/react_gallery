@@ -40,7 +40,7 @@ export const Gallery = (props) => {
 				getJpegs={props.getJpegs}
 				addBasket={props.addBasket}
 			/>
-			<h3 className={'gallery-title'}> Dan's Photography Gallery </h3>
+			<h3 className={'gallery-title'}>  </h3>
 			<div className="phcontainer">
 				{imageComponent(props.getJpegs)}
 			</div>
