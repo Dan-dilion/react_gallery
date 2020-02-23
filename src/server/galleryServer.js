@@ -33,7 +33,6 @@ app.get('/api/getjpegs', (request, response) => {
 		console.log('0 - fetching Jpegs')
 		try {
 			let jpegs = await getJpegs(dir)
-			console.log('3.1 - Get Jpegs Finnished, starting resize')
 			await resizeImages(jpegs)
 			console.log('6.1 - Resize finnished')
 

@@ -6,9 +6,9 @@ const archiver = require('archiver');
 
 
 
-const imgDir = path.join(			// joins two paths together (adds "/" between).
-	path.dirname(__filename), 		// separates the path from the file name.
-	'../images'						// will be joined on to this path.
+const imgDir = path.join(       // joins two paths together (adds "/" between).
+	path.dirname(__filename),     // separates the path from the file name.
+	'../images'                   // will be joined on to this path.
 )
 
 const resizeMedDir = path.join(imgDir, 'resize1024');
@@ -16,49 +16,45 @@ const resizeSmlDir = path.join(imgDir, 'resize300');
 const zipFile = (path.join('./src/images', 'downloaded-images.zip'))
 
 
-const readdir = (dir) => {								// I have wrapped the readdir method in a promise
-	console.log('2 readDir Here')
-	return new Promise((resolve, reject) => {			// so that I can use the .await and the .then methods later
-		fs.readdir(dir, (error, files) => {				//
-			error ? reject(error) : resolve(files);		// ternary opperator, reject promise with error
-		});												// If rejected bypass .then collect with .catch
-	});													// or resolve promise with list of files
-}														// pass result on to .then
+const readdir = (dir) => {                      // I have wrapped the readdir method in a promise
+	return new Promise((resolve, reject) => {     // I can use the await and the .then methods later
+		fs.readdir(dir, (error, files) => {
+			error ? reject(error) : resolve(files);	  // ternary opperator, reject promise with error
+		});                                         // If rejected bypass .then collect with .catch
+	});                                           // or resolve promise with list of files
+}                                               // pass result on to .then
 
-async function forEachAsync(array, callback) {		// Asyncronous version of array.forEach
-  for (let i = 0; i < array.length; i++) {			// each itteration will be passed over to
-    await callback(array[i]);						// the event handelers, freeing up the call stack
+async function forEachAsync(array, callback) {  // Asyncronous version of array.forEach
+  for (let i = 0; i < array.length; i++) {      // each itteration will be passed over to
+    await callback(array[i]);                   // the event handelers, freeing up the call stack
   }
 }
 
-async function getJpegs(dir) {						// This is an async function which allows us
-	console.log('1 - getJpegs here')
-	let jpegs;										// to use the await command. the .then will
-	await readdir(dir)								// only be executed after readdir has finished
+async function getJpegs(dir) {                  // This is an async function which allows us
+	let jpegs;                                    // to use the await command. the .then will
+	await readdir(dir)                            // only be executed after readdir has finished
 	.then(output => {
-			jpegs = output.filter((output) => {				// iterate through the array
-				return (path.extname(output) 				// keep only the entries with
-				== '.jpg' || path.extname(output) 			// .jpg or JPEG extention names
-				== '.JPEG');								// the filter is not case sensitive
-			})												// to make case sensitive use ===
+			jpegs = output.filter((output) => {       // iterate through the array
+				return (path.extname(output)            // keep only the entries with
+				== '.jpg' || path.extname(output)       // .jpg or JPEG extention names
+				== '.JPEG');                            // the filter is not case sensitive
+			})                                        // to make case sensitive use ===
 	})
-	.catch(error => {										// Catch the reject promise object from readdir
-		console.log('getJpegs ERROR: ', error.message)		// Log error
-		throw new Error(error.message)						// throw error (this will be collected by .catch
-	})														// in the calling function)
-	console.log('3 - Jpegs Retreived')
+	.catch(error => {                             // Catch the reject promise object from readdir
+		console.log('getJpegs ERROR: ', error.message)    // Log error to console
+		throw new Error(error.message)              // throw error (this will be collected by .catch
+	})                                            // in the calling function)
 	return jpegs;
 }
 
 async function resizeImages(jpegs) {
-	console.log('4 - resize Images Function')
-	if (!fs.existsSync(resizeSmlDir)) {							//
-    	fs.mkdirSync(resizeSmlDir);								//
-		console.log('Creating Directory... ', resizeSmlDir);	//
+	if (!fs.existsSync(resizeSmlDir)) {
+    	fs.mkdirSync(resizeSmlDir);
+		console.log('Creating Directory... ', resizeSmlDir);
 	}
-	if (!fs.existsSync(resizeMedDir)) {							//
-    	fs.mkdirSync(resizeMedDir);								//
-		console.log('Creating Directory... ', resizeMedDir);	//
+	if (!fs.existsSync(resizeMedDir)) {
+    	fs.mkdirSync(resizeMedDir);
+		console.log('Creating Directory... ', resizeMedDir);
 	}
 
 	await Promise.all([
@@ -70,7 +66,6 @@ async function resizeImages(jpegs) {
 
 
 async function processImages(jpegs, size) {
-	console.log('5 - Processing images')
 
 	let resolution;
 	let saveDir;
@@ -101,14 +96,13 @@ async function processImages(jpegs, size) {
 			let height = null;
 
 			if (!fs.existsSync(resizeFileName)) {
-				console.log('Resizing: ', resizeFileName);
 				const image = sharp(path.join(imgDir, file));
 				await image
 					.metadata()
 					.then(metadata => {
 						if (metadata.width > metadata.height) {	height = resolution; }
 						else { width = resolution; }
-						console.log('ACTUALLY RESIZING', resizeFileName)
+						console.log('Resizing image: ', resizeFileName)
 						return image
 							.jpeg({
 								quality: 80
@@ -119,18 +113,19 @@ async function processImages(jpegs, size) {
 							})
 							.toFile(resizeFileName)
 					})
-					.catch(error => {										// Catch the reject promise object from sharp
-						console.log('Resizeing ERROR: ', error.message)		// Log error
-						throw new Error(error.message)						// throw error
+					.catch(error => {                                    // Catch the reject promise object from sharp
+						console.log('Resizeing ERROR: ', error.message)    // Log error to console
+						throw new Error(error.message)                     // throw error
 					})
 			}
 		})
 	} catch(err) { throw new Error(err) }
-	console.log('6 - Images Processed!')
 }
 
 const zipJpegs = (files, response) => {
+
 	console.log('\nSERVER: Zip-Jpegs ' + files);
+
 	let zip = archiver('zip', {
 		comment: 'This zipFile was created by React-Gallery',
 		zlib: { level: 1 }
