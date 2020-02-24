@@ -1,4 +1,6 @@
 h1.logo {
+  display: flex;
+  width: 90vw;
   color: #fedf;
   margin-left: 1em;
   margin-top: 0em;
@@ -28,12 +30,25 @@ h1.logo {
   display: inline-block;
   float: right;
   margin: 0;
-  padding-right: 0em;
+  padding-right: 1em;
 	height: 0em;
-	//width: auto;
+	width: auto;
   //background-color: #000f;
 	background: #fed7;
 	//border-radius: 0px 0px 0vmin 0vmin;
+}
+
+.function-bar{
+  margin-top: 0em;
+  margin-bottom: 1em;
+  padding-right: 2em;
+  width: 50vw;
+  height: 0em;
+  display: inline-block;
+  position: fixed;
+  right: 0;
+  //float: right;
+  background: #2ed7;
 }
 
 .sticky_navbar {
@@ -47,10 +62,12 @@ h1.logo {
 }
 
 .navbar-items {
+  display: inline-block;
+  float: left;
 	font-size: 2vw;
 	color: #fed;
 	list-style-type: none;
-	width: 6em;
+	width: 4em;
 	//max-width: 10em;
 	//max-height: 1em;
   text-align: center;
@@ -58,7 +75,8 @@ h1.logo {
 	margin: 1vh 1vw;
 
   border-radius: .1em;
-	transition-property:  box-shadow, background-color;
+  border-bottom: solid #fed0 .1em;
+	transition-property:  border;
 	transition-duration: 1500ms;
 	//box-shadow:
 		inset .1em .1em .1em .05em #fff7,
@@ -66,15 +84,84 @@ h1.logo {
 		.4vw .4vh 5px 0px #0005;
 }
 
-.navbar-items:hover {
+.funcbar-items {
+  float: right;
+  list-style-type: none;
+  text-align: center;
+  font-size: 1.5vw;
+  color: #fed;
+  padding: .3em;
+  margin-left: 1em;
+  transition-property:  background-color, border, color;
+  transition-duration: 1500ms;
+  background-color: #0001;
+  border-right: .2em solid #555a;
+  border-bottom: .3em solid #222a;
+}
 
-	transition-property:  box-shadow, background-color;
-	transition-duration: 100ms;
+.funcbar-items:hover{
+  transition-property:  background-color, border, color;
+  transition-duration: 200ms;
+  background-color: #fed2;
+  color: #fedf;
+  border-right: .2em solid #555f;
+  border-bottom: .3em solid #222f;
 
-	background-color: #feda;
+}
 
+.funcbar-items-ghost {
+  float: right;
+  list-style-type: none;
+  text-align: center;
+  font-size: 1.5vw;
+  color: #222;
+  padding: .3em;
+  margin-left: 1em;
+  transition-property:  background-color, border, color;
+  transition-duration: 1500ms;
+  background-color: #0001;
+  border-right: .2em solid #555a;
+  border-bottom: .3em solid #222a;
 }
 
 .nav-button {
   min-width: 4em;
+}
+
+/* I have added this styling at the end to keep it isolated */
+/* It is all the code needed for the animated underline effect */
+.navbar-items {
+position: relative;
+line-height: 24px;
+}
+
+.navbar-items::after {
+content: '';
+position: absolute;
+display: block;
+bottom: 0;
+left: 50%;
+width: 0;
+height: .2em;
+border-bottom: .2em solid #fed;
+}
+
+.navbar-items, .navbar-items::after {
+transition: all 0.4s linear;
+}
+
+.navbar-items:hover::after {
+left: 10%;
+width: 80%;
+}
+
+.selected::after {
+content: '';
+position: absolute;
+display: block;
+bottom: 10%;
+left: 10%;
+width: 80%;
+height: .2em;
+border-bottom: .2em solid #fed;
 }
