@@ -1,5 +1,12 @@
+h1.logo {
+  color: #fedf;
+  margin-left: 1em;
+  margin-top: 0em;
+  margin-bottom: 0;
+}
+
 .app-header {
-  //padding: 3% 3% 3% 3%;
+  padding: 0em 0em .1em 0em;
   margin-top: 0%;
   //text-shadow: .2em .2em .2em #000f, 0em 0em 2em #fedf;
   //background-image: url("../resources/header_background.jpg");
@@ -8,19 +15,25 @@
   background-color: #000a;
   //border-radius: 2vw;
   min-height: 10vh;
-  align-items: center;
-  justify-content: left;
+  //align-items: center;
+  //justify-content: left;
   font-size: calc(10px + 2vw);
   color: #fed;
-  transition: color 800ms, background-color 800ms;
-  box-shadow: 0em -5em 5em 5em #ffeedd20;
+  //transition: color 800ms, background-color 800ms;
+  //box-shadow: 0em -5em 5em 5em #ffeedd20;
+  text-align: left;
 }
 
 .navbar {
-	height: 2em;
-	width: 100%;
-	background: #444b;
-	border-radius: 0px 0px 0vmin 0vmin;
+  display: inline-block;
+  float: right;
+  margin: 0;
+  padding-right: 0em;
+	height: 0em;
+	//width: auto;
+  //background-color: #000f;
+	background: #fed7;
+	//border-radius: 0px 0px 0vmin 0vmin;
 }
 
 .sticky_navbar {
@@ -35,12 +48,13 @@
 
 .navbar-items {
 	font-size: 2vw;
-	color: black;
+	color: #fed;
 	list-style-type: none;
-	width: auto;
-	max-width: 10em;
-	max-height: 1em;
-	padding: 0vh .5vw 1vh .5vw;
+	width: 6em;
+	//max-width: 10em;
+	//max-height: 1em;
+  text-align: center;
+	padding: 0 0 .4em 0;
 	margin: 1vh 1vw;
 
   border-radius: .1em;
@@ -61,13 +75,6 @@
 
 }
 
-
-#basket-button {
-	float: right;
-	margin-right: 4vw;
-}
-
-#download-button {
-	float: right;
-	margin-right: 4vw;
+.nav-button {
+  min-width: 4em;
 }

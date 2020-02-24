@@ -8,9 +8,10 @@ export const Header = (props) => {
 	const basketButton = () => {
 		return(
 			<Link
+        className={'nav-button'}
 				to={'/basket'}
 			><li
-				className="navbar-items standard-button disable-selection"
+				className="navbar-items disable-selection"
 				id="basket-button"
 			>Basket ({props.getBasket.length})</li></Link>
 		)
@@ -19,9 +20,10 @@ export const Header = (props) => {
 	const downloadButton = () => {
 		return (
 			<a
+        className={'nav-button'}
 				href={zipJpegs(props.getBasket.map((item) => {return item.file;} ))}
 			><li
-				className="navbar-items standard-button disable-selection"
+				className="navbar-items disable-selection"
 				id="download-button"
 			>Download ({props.getBasket.length})</li></a>
 		)
@@ -30,9 +32,10 @@ export const Header = (props) => {
 	const galleryButton = () => {
 		return(
 			<Link
+        className={'nav-button'}
 				to={'/gallery'}
 			><li
-				className="navbar-items standard-button disable-selection"
+				className="navbar-items disable-selection"
 			>Gallery</li></Link>
 		)
 	}
@@ -40,10 +43,11 @@ export const Header = (props) => {
 	const downloadAllButton = () => {
 		return(
 			<Link
+        className={'nav-button'}
 				to={'/gallery'}
 				onClick={() => { props.getJpegs.forEach(item => props.addBasket(item))} }
 			><li
-				className="navbar-items standard-button disable-selection"
+				className="navbar-items disable-selection"
 			>Add All ({props.getJpegs.length})</li></Link>
 		)
 	}
@@ -67,22 +71,16 @@ export const Header = (props) => {
 	}
 
 	return(
-		<div>
-			<div className="app-header">
-        <nav className="navbar">
-          <div>
-            <ul>
-              <Link to={'/home'}><li className="navbar-items standard-button disable-selection">Home</li></Link>
-              { buttonPicker('gallery') }
-              { buttonPicker('basket') }
-            </ul>
-          </div>
-        </nav>
-        <Link to={'/home'}>
-				    <h1>React Gallery</h1>
-        </Link>
+		<div className="app-header">
+      <ul className="navbar">
+        <Link className={'nav-button'} to={'/home'}><li className="navbar-items disable-selection">Home</li></Link>
+        { buttonPicker('gallery') }
+        { buttonPicker('basket') }
+      </ul>
+      <Link to={'/home'}>
+			    <h1 className={'logo'}>React Gallery</h1>
+      </Link>
 
-			</div>
 		</div>
 	);
 }
