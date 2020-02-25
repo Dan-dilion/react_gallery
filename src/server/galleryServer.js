@@ -56,11 +56,12 @@ app.get('/api/zipjpegs', (request, response) => {
 	response.attachment('downloaded-images.zip');
 
 	let urlPerameters = JSON.parse(request.query.basketContents)
-	let zip = zipJpegs(urlPerameters, response)
-
-	zip.pipe(response);
-	zip.finalize();
-	console.log('Finalizing Zipfile Structure: ')
+  if (urlPerameters.length) {
+  	let zip = zipJpegs(urlPerameters, response)
+  	zip.pipe(response);
+  	zip.finalize();
+  	console.log('Finalizing Zipfile Structure: ')
+  } else response.sendStatus(204);
 })
 
 app.listen(8987);

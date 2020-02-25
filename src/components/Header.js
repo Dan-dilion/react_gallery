@@ -5,133 +5,137 @@ import { zipJpegs } from '../utils/serverRequest.js'
 
 export const Header = (props) => {
 
-  const urlRoute = () => {
-    let pathNames = window.location.pathname.split('/')
-    return '/' + pathNames[pathNames.length - 1];
+  const homeButton = (status) => {
+    let classNames = 'navbar-items disable-selection';
+    if (status) { classNames = 'selected navbar-items disable-selection'; }
+    return(
+      <Link
+        className={'nav-button'}
+        to={'/home'}
+      ><li
+        id='nav-button'
+        className={classNames}
+      >About</li></Link>
+    )
   }
 
-  let basketSelected = 'navbar-items disable-selection';
-  let gallerySelected = 'navbar-items disable-selection';
-  let homeSelected = 'navbar-items disable-selection';
-  if (urlRoute() == '/basket') basketSelected = 'selected navbar-items disable-selection';
-  if (urlRoute() == '/gallery') gallerySelected = 'selected navbar-items disable-selection';
-  if (urlRoute() == '/home') homeSelected = 'selected navbar-items disable-selection';
-
-  console.log('URL: ', urlRoute())
-  console.log('STYLE: ', gallerySelected)
-	const basketButton = () => {
+	const basketButton = (status) => {
+    let classNames = 'navbar-items disable-selection';
+    if (status) { classNames = 'selected navbar-items disable-selection'; }
 		return(
 			<Link
         className={'nav-button'}
 				to={'/basket'}
 			><li
-				className={" navbar-items disable-selection"}
+				className={classNames}
 				id="basket-button"
 			>Basket ({props.getBasket.length})</li></Link>
 		)
 	}
 
-	const galleryButton = () => {
+	const galleryButton = (status) => {
+    let classNames = 'navbar-items disable-selection';
+    if (status) { classNames = 'selected navbar-items disable-selection'; }
 		return(
 			<Link
         className={'nav-button'}
 				to={'/gallery'}
 			><li
-				className="navbar-items disable-selection"
-			>Gallery</li></Link>
+        id='nav-button'
+				className={classNames}
+			>Gallery ({props.getJpegs.length})</li></Link>
 		)
 	}
 
   const downloadButton = (status) => {
-    if (status) return (
+    let classNames = 'funcbar-items funcbar-items-ghost disable-selection';
+    if (status) { classNames = 'funcbar-items disable-selection'; }
+    return (
 			<a
-        className={'nav-button'}
 				href={zipJpegs(props.getBasket.map((item) => {return item.file;} ))}
 			><li
-				className={"funcbar-items disable-selection"}
-				id="download-button"
-			>Download ({props.getBasket.length})</li></a>
-		)
-    else return (
-      <div
-        className={'nav-button'}
-			><li
-				className={"funcbar-items funcbar-items-ghost disable-selection"}
-				id="download-button"
-			>Download ({props.getBasket.length})</li></div>
-		)
+        id='nav-button'
+				className={classNames}
+			> Download </li></a>
+	  )
 	}
 
-	const addAll = () => {
+	const addAll = (status) => {
+    let classNames = 'funcbar-items funcbar-items-ghost disable-selection';
+    if (status) { classNames = 'funcbar-items disable-selection'; }
 		return(
 			<Link
         className={'nav-button'}
 				to={'/gallery'}
-				onClick={ async () => { await props.getJpegs.forEach( async item => await props.addBasket(item))} }
+				onClick={ () => props.addAll(props.getJpegs) }
 			><li
-				className="funcbar-items disable-selection"
-			>Add All ({props.getJpegs.length})</li></Link>
+        id='nav-button'
+				className={classNames}
+			> Add All to basket</li></Link>
 		)
 	}
 
   const emptyBasketButton = (status) => {
-    if (status) { return(
+    let classNames = 'funcbar-items funcbar-items-ghost disable-selection';
+    if (status) { classNames = 'funcbar-items disable-selection'; }
+    return(
       <div
         className={'nav-button'}
+        onClick={() => props.emptyBasket()}
       ><li
-        className="funcbar-items disable-selection"
-      >Empty Basket</li></div>
-    ) } else return (
-      <div
-        className={'nav-button'}
-      ><li
-        className="funcbar-items-ghost disable-selection"
+        id='nav-button'
+        className={classNames}
       >Empty Basket</li></div>
     )
-
   }
 
 	const buttonPicker = (button) => {
-    if (urlRoute() === '/gallery' || urlRoute() === '/basket'){
-		  switch (button) {
-  			case 'download':
-          if (props.getBasket.length > 0) return downloadButton(1);
-				  else return downloadButton(0);
+    const urlParams = new URLSearchParams(window.location.search);	// Make an object out of the URL perameters
+    const urlRoute = () => {
+      let pathNames = window.location.pathname.split('/')
+      return '/' + pathNames[pathNames.length - 1];
+    }
 
-        case 'fillBasket':
-          if (urlRoute() === '/gallery') return addAll();
-          else if (urlRoute() === '/basket' && props.getBasket.length > 0) return emptyBasketButton(1);
-				  else return emptyBasketButton(0);
+    switch (button) {
 
-  			default:
-  				break;
+      case 'home':
+        if (urlRoute() == '/home' || urlRoute() == '/') return homeButton(1);
+        else return homeButton(0);
 
+      case 'gallery':
+        if (urlRoute() == '/gallery' || urlParams.get('origin') === 'gallery') {
+          return galleryButton(1);
+        } else return galleryButton(0)
+
+      case 'basket':
+        if (urlRoute() == '/basket' || urlParams.get('origin') === 'basket') {
+          return basketButton(1);
+        }
+        else return basketButton(0);
+
+			case 'download':
+        if ((urlRoute() !== '/' || urlRoute() !== '/home') && props.getBasket.length === 0) return downloadButton(0);
+        else return downloadButton(1);
+
+      case 'addAll':
+        if ((urlRoute() !== '/' || urlRoute() !== '/home') && props.getJpegs.length !== props.getBasket.length && urlRoute() === '/gallery') return addAll(1);
+        else return addAll(0);
+
+      case 'emptyBasket':
+        if ((urlRoute() !== '/' || urlRoute() !== '/home') && props.getBasket.length > 0) {
+          return emptyBasketButton(1);
+        } else return emptyBasketButton(0);
+
+  			default: break;
 		  }
-	  }
   }
 
 	return(
 		<div className="app-header">
       <ul className="navbar">
-        <Link
-          className={'nav-button'}
-          to={'/home'}
-        ><li
-          className={homeSelected}
-        >About</li></Link>
-        <Link
-          className={'nav-button'}
-  				to={'/gallery'}
-  			><li
-  				className={gallerySelected}
-  			>Gallery</li></Link>
-        <Link
-          className={'nav-button'}
-          to={'/basket'}
-        ><li
-          className={basketSelected}
-          id="basket-button"
-        >Basket</li></Link>
+        { buttonPicker('home') }
+        { buttonPicker('gallery') }
+        { buttonPicker('basket') }
       </ul>
 
       <Link to={'/home'}>
@@ -140,7 +144,8 @@ export const Header = (props) => {
 
       <ul className="function-bar">
       { buttonPicker('download') }
-      { buttonPicker('fillBasket') }
+      { buttonPicker('addAll') }
+      { buttonPicker('emptyBasket')}
       </ul>
 
 		</div>

@@ -7,8 +7,11 @@ import { Welcome } from './Welcome.js';
 export const Home = (props) => {
 	return(
 		<div className="home-container">
-			<Header getBasket={props.getBasket} />
-			{ Welcome() }
+			<Header
+        getBasket={props.getBasket}
+        getJpegs={props.getJpegs}
+      />
+			<Welcome />
     </div>
 	);
 }

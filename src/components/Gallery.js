@@ -39,6 +39,8 @@ export const Gallery = (props) => {
 				getBasket={props.getBasket}
 				getJpegs={props.getJpegs}
 				addBasket={props.addBasket}
+        addAll={props.addAll}
+        emptyBasket={props.emptyBasket}
 			/>
 			<h3 className={'gallery-title'}>  </h3>
 			<div className="phcontainer">

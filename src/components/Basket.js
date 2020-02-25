@@ -41,6 +41,8 @@ export const Basket = (props) => {
 		<div>
 			<Header
 				getBasket={props.getBasket}
+        getJpegs={props.getJpegs}
+        emptyBasket={props.emptyBasket}
 			/>
 			<div className="phcontainer">
 				{imageComponent(props.getBasket)}

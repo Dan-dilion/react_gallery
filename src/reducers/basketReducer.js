@@ -18,6 +18,11 @@ const basketReducer = (state = initialState, action) => {
 			}
 			break;
 
+      case "ADD_ALL":
+        console.log('Adding entire gallery to the basket');
+        state = { ...state, basketJpegs: [...action.payload] }
+        break;
+
 		case "REMOVE_BASKET":
 			console.log('Removing item from basket', state.basketJpegs[action.payload]);
 			let newList = [...state.basketJpegs];
@@ -25,6 +30,11 @@ const basketReducer = (state = initialState, action) => {
 			return {
 				...state, basketJpegs: newList
 			}
+
+    case "EMPTY_BASKET":
+      console.log('Empying basket');
+      return {...state, basketJpegs: []}
+      break;
 
 		default:
 			console.log('BASKET REDUCER: No action specified!!!');

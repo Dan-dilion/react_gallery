@@ -5,8 +5,8 @@ import { Header } from './Header.js';
 import { Slider } from './Slider.js';
 
 export const SingleImage = (props) => {
-	const urlParams = new URLSearchParams(window.location.search);	// Make an object out of the URL perameters
 
+	const urlParams = new URLSearchParams(window.location.search);	// Make an object out of the URL perameters
 	let jpegsOrigin = props.getJpegs;
 	if (urlParams.get('origin') === 'basket') { jpegsOrigin = props.getBasket }
 
@@ -134,7 +134,10 @@ export const SingleImage = (props) => {
 
 	return(
 		<div>
-			<Header getBasket={props.getBasket} />
+			<Header
+        getBasket={props.getBasket}
+        getJpegs={props.getJpegs}
+      />
 			<h3>{decodeURIComponent(jpegsOrigin[parseInt(urlParams.get('index'))].file)}</h3>
 			<div className="single-wrapper">
 				<div className={'image-container'}>

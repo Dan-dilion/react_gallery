@@ -15,7 +15,9 @@ import { FullSize } from '../components/FullSize.js';
 // Import Redux actions
 import {
 	addBasket,
-	removeBasket
+  addAll,
+	removeBasket,
+  emptyBasket
 } from '../actions/basketActions.js';
 
 // The App component has the react Router in
@@ -47,6 +49,7 @@ class App extends React.Component {
 								exact path={"/"}
 								render={(props) => <Home
                   getBasket={this.props.basket}
+                  getJpegs={this.props.jpegs}
 								/>}
 							/>
 
@@ -62,6 +65,7 @@ class App extends React.Component {
 								path={"/home"}
 								render={(props) => <Home
 									getBasket={this.props.basket}
+                  getJpegs={this.props.jpegs}
 								/>}
 							/>
 
@@ -81,7 +85,9 @@ class App extends React.Component {
 									getJpegs={this.props.jpegs}
 									getBasket={this.props.basket}
 									addBasket={this.props.ADD_BASKET}
+                  addAll={this.props.ADD_ALL}
 									removeBasket={this.props.REMOVE_BASKET}
+                  emptyBasket={this.props.EMPTY_BASKET}
 								/>}
 							/>
 
@@ -97,6 +103,8 @@ class App extends React.Component {
 								render={(props) => <Basket
 									getBasket={this.props.basket}
 									removeBasket={this.props.REMOVE_BASKET}
+                  getJpegs={this.props.jpegs}
+                  emptyBasket={this.props.EMPTY_BASKET}
 								/>}
 							/>
 
@@ -156,10 +164,15 @@ const mapDispatchToProps = (dispatch) => {
 		ADD_BASKET: (jpegItem) => {
 			dispatch(addBasket(jpegItem));
 		},
+    ADD_ALL: (jpegsArray) => {
+      dispatch(addAll(jpegsArray));
+    },
 		REMOVE_BASKET: (index) => {
 			dispatch(removeBasket(index));
 		},
-
+    EMPTY_BASKET: () => {
+      dispatch(emptyBasket());
+    }
 	};
 };
 

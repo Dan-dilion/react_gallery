@@ -12,10 +12,6 @@ li {
 
 
 #root {
-	//background-image: url("../resources/header_background.jpg");
-  //background-clip: padding-box;
-
-  z-index: 1;
   background-color: #0000;
 
 }
