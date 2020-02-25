@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Header } from './Header.js';
 import { Thumbnail } from './Thumbnail.js';
 
 
@@ -38,15 +37,8 @@ export const Basket = (props) => {
 
 
 	return(
-		<div>
-			<Header
-				getBasket={props.getBasket}
-        getJpegs={props.getJpegs}
-        emptyBasket={props.emptyBasket}
-			/>
-			<div className="phcontainer">
-				{imageComponent(props.getBasket)}
-			</div>
+		<div className="phcontainer">
+			{imageComponent(props.getBasket)}
 		</div>
 	);
 }

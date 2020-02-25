@@ -96,19 +96,23 @@ export const Header = (props) => {
       return '/' + pathNames[pathNames.length - 1];
     }
 
+    console.log('urlParams: ', urlParams.get('origin'))
+    console.log('urlRoute: ', urlRoute())
+
+
     switch (button) {
 
       case 'home':
-        if (urlRoute() == '/home' || urlRoute() == '/') return homeButton(1);
+        if (urlRoute() === '/home' || urlRoute() == '/') return homeButton(1);
         else return homeButton(0);
 
       case 'gallery':
-        if (urlRoute() == '/gallery' || urlParams.get('origin') === 'gallery') {
+        if (urlRoute() === '/gallery' || urlParams.get('origin') === 'gallery') {
           return galleryButton(1);
         } else return galleryButton(0)
 
       case 'basket':
-        if (urlRoute() == '/basket' || urlParams.get('origin') === 'basket') {
+        if (urlRoute() === '/basket' || urlParams.get('origin') === 'basket') {
           return basketButton(1);
         }
         else return basketButton(0);

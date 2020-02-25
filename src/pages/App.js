@@ -6,6 +6,7 @@ import { BrowserRouter as Router,
 import { connect } from 'react-redux';
 
 // Import all my components
+import { Header } from '../components/Header.js';
 import { Home } from '../components/Home.js';
 import { Gallery } from '../components/Gallery.js';
 import { SingleImage } from '../components/SingleImage.js';
@@ -25,14 +26,22 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="container">
-
-
+      
 {/*
 * React Router element with base URL
+* The header component to be displayed on every route
 * app container element
 * Route switcher element
 */}
 				<Router basename={process.env.PUBLIC_URL}>
+
+          <Header
+            getJpegs={this.props.jpegs}
+            getBasket={this.props.basket}
+            addAll={this.props.ADD_ALL}
+            emptyBasket={this.props.EMPTY_BASKET}
+          />
+
 				    <div className="app">
 						<Switch>
 
@@ -40,42 +49,28 @@ class App extends React.Component {
 {/*
 * First route -- Home screen
 * Force exact match so route not triggered for all URLs.
-* The render prop allows you to pass props to the render component in an inline
-* function.
-* getBasket prop is passed to the header so getBasket.length can be shown on the
-* basket button.
 */}
 							<Route
 								exact path={"/"}
-								render={(props) => <Home
-                  getBasket={this.props.basket}
-                  getJpegs={this.props.jpegs}
-								/>}
+								component={Home}
 							/>
 
 
 {/*
 * Second Route -- Home screen
 * Path to activate switch
-* inline function returns the component to render and the props to be passed in
-* to the component. getBasket is passed to the header so getBasket.length can be
-* shown on the basket button.
 */}
 							<Route
 								path={"/home"}
-								render={(props) => <Home
-									getBasket={this.props.basket}
-                  getJpegs={this.props.jpegs}
-								/>}
+								component={Home}
 							/>
 
 {/*
 * Third Route -- Gallery view
 * Path to activate switch
-* inline function returns the component and passes in the props.
+* The render tag allows you to pass props to the render component in an inline
+* function which returns the component to render.
 * getJpegs is itterated through to generate the thumnails.
-* getJpegs and getBasket is passed to the headder component to show no. of items
-* on the add-all and the basket buttons.
 * getBasket is also used to pick either an add button or a remove button.
 * addBasket and removeBasket are called by the add and remove buttons.
 */}
@@ -85,9 +80,7 @@ class App extends React.Component {
 									getJpegs={this.props.jpegs}
 									getBasket={this.props.basket}
 									addBasket={this.props.ADD_BASKET}
-                  addAll={this.props.ADD_ALL}
 									removeBasket={this.props.REMOVE_BASKET}
-                  emptyBasket={this.props.EMPTY_BASKET}
 								/>}
 							/>
 
@@ -104,7 +97,6 @@ class App extends React.Component {
 									getBasket={this.props.basket}
 									removeBasket={this.props.REMOVE_BASKET}
                   getJpegs={this.props.jpegs}
-                  emptyBasket={this.props.EMPTY_BASKET}
 								/>}
 							/>
 

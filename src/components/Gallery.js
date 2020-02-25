@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Header } from './Header.js';
 import { Thumbnail } from './Thumbnail.js';
 
 export const Gallery = (props) => {
@@ -34,18 +33,8 @@ export const Gallery = (props) => {
 	}
 
 	return(
-		<div>
-			<Header
-				getBasket={props.getBasket}
-				getJpegs={props.getJpegs}
-				addBasket={props.addBasket}
-        addAll={props.addAll}
-        emptyBasket={props.emptyBasket}
-			/>
-			<h3 className={'gallery-title'}>  </h3>
-			<div className="phcontainer">
-				{imageComponent(props.getJpegs)}
-			</div>
+		<div className="phcontainer">
+			{imageComponent(props.getJpegs)}
 		</div>
 	);
 }

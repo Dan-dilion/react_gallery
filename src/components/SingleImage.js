@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Header } from './Header.js';
 import { Slider } from './Slider.js';
 
 export const SingleImage = (props) => {
@@ -133,12 +132,7 @@ export const SingleImage = (props) => {
 
 
 	return(
-		<div>
-			<Header
-        getBasket={props.getBasket}
-        getJpegs={props.getJpegs}
-      />
-			<h3>{decodeURIComponent(jpegsOrigin[parseInt(urlParams.get('index'))].file)}</h3>
+
 			<div className="single-wrapper">
 				<div className={'image-container'}>
 					<Link
@@ -158,7 +152,6 @@ export const SingleImage = (props) => {
 					{ nextButton() }
 				</div>
 			</div>
-		</div>
 
 
 	)
