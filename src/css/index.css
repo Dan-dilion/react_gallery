@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: scroll;
 }
 
 code {
@@ -12,8 +13,8 @@ code {
     monospace;
 }
 
-html, body {
-  background: linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.0)), url("../resources/header_background.jpg");
+html {
+  background: linear-gradient(#0000, #0000), url("../resources/header_background.jpg");
   //background-position: repeat;
   //margin: 10px;
 }
