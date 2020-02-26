@@ -21,12 +21,38 @@ import {
   emptyBasket
 } from '../actions/basketActions.js';
 
+
+
 // The App component has the react Router in
 class App extends React.Component {
+  constructor() {
+    super();
+
+    const urlRoute = () => {
+      let pathNames = window.location.pathname.split('/')
+      if (pathNames[pathNames.length - 1]) return pathNames[pathNames.length - 1];
+      else return 'home';
+    }
+
+    this.state={
+      selectedPage: urlRoute()
+    };
+  }
+
+  changePage(newPage) {
+    this.setState({
+      selectedPage: newPage
+    })
+  }
+
+
 	render() {
+
+    console.log('This urlRoute: ', this.state.selectedPage);
+
 		return (
 			<div className="container">
-      
+
 {/*
 * React Router element with base URL
 * The header component to be displayed on every route
@@ -36,6 +62,8 @@ class App extends React.Component {
 				<Router basename={process.env.PUBLIC_URL}>
 
           <Header
+            selectedPage={this.state.selectedPage}
+            changePage={(newPage) => this.changePage(newPage)}
             getJpegs={this.props.jpegs}
             getBasket={this.props.basket}
             addAll={this.props.ADD_ALL}
