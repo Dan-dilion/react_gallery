@@ -52,10 +52,14 @@ export class Header extends React.Component {
 
   downloadButton(status) {
     let classNames = 'funcbar-items funcbar-items-ghost disable-selection';
-    if (status) classNames = 'funcbar-items disable-selection';
+    let files = [];
+    if (status) {
+      classNames = 'funcbar-items disable-selection';
+      files = this.props.getBasket.map( item => item.file )
+    }
     return (
       <a
-        href={ zipJpegs( this.props.getBasket.map( item => item.file ) ) }
+        href={ zipJpegs( files ) }
       ><li
         id='nav-button'
         className={ classNames }
