@@ -156,7 +156,7 @@ export class Header extends React.Component {
           { this.buttonPicker('basket') }
         </ul>
 
-        <Link to={'/home'}>
+        <Link to={'/home'} onClick={ () => this.props.changePage('home') }>
   			    <h1 className={'logo'}>React Gallery</h1>
         </Link>
 

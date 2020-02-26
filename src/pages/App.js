@@ -138,6 +138,7 @@ class App extends React.Component {
 							<Route
 								path={"/single"}
 								render={(props) => <SingleImage
+                  selectedPage={this.state.selectedPage}
 									getJpegs={this.props.jpegs}
 									getBasket={this.props.basket}
 									addBasket={this.props.ADD_BASKET}

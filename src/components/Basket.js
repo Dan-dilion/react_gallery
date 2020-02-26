@@ -7,7 +7,7 @@ export const Basket = (props) => {
 
 	const fullBasket = (jpegs) => {
 		return jpegs.map((item, i) => {
-			return( Thumbnail(props, 'basket', item, i) )
+			return( Thumbnail(props, item, i) )
 		})
 	}
 

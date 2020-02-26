@@ -6,7 +6,7 @@ export const Gallery = (props) => {
 
 	const imageSuccess = (jpegs) => {
 		return jpegs.map((item, i) => {
-			return( Thumbnail(props, 'gallery', item, i) )
+			return( Thumbnail(props, item, i) )
 		})
 	}
 
