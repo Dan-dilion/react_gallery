@@ -7,5 +7,5 @@ import basketReducer from './reducers/basketReducer.js';
 
 export default createStore(
 	combineReducers({fileReducer, basketReducer}),
-	applyMiddleware(createLogger())
+	applyMiddleware(createLogger(), thunk)
 );

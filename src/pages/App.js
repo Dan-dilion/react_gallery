@@ -18,9 +18,10 @@ import {
 	addBasket,
   addAll,
 	removeBasket,
-  emptyBasket
+  emptyBasket,
 } from '../actions/basketActions.js';
 
+import { refreshJpegs } from '../actions/fileActions.js';
 
 
 // The App component has the react Router in
@@ -109,6 +110,7 @@ class App extends React.Component {
 									getBasket={this.props.basket}
 									addBasket={this.props.ADD_BASKET}
 									removeBasket={this.props.REMOVE_BASKET}
+                  refreshJpegs={this.props.refreshJpegs}
 								/>}
 							/>
 
@@ -143,6 +145,7 @@ class App extends React.Component {
 									getBasket={this.props.basket}
 									addBasket={this.props.ADD_BASKET}
 									removeBasket={this.props.REMOVE_BASKET}
+                  refreshJpegs={this.props.refreshJpegs}
 								/>}
 							/>
 
@@ -193,6 +196,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
     EMPTY_BASKET: () => {
       dispatch(emptyBasket());
+    },
+    refreshJpegs: () => {
+      dispatch(refreshJpegs());
     }
 	};
 };

@@ -1,3 +1,5 @@
+import { getJpegs } from '../utils/serverRequest.js';
+import store from '../store.js';
 
 export function addJpegs(jpegs) {
 	return {
@@ -5,3 +7,14 @@ export function addJpegs(jpegs) {
 		payload: jpegs
 	};
 };
+
+export const refreshJpegs = () => async dispatch => {
+  if (store.getState().fileReducer.jpegs.length == 0) {
+    try {
+      const newJpegs = await getJpegs()
+      dispatch(addJpegs(newJpegs))
+    } catch (error) {
+      console.log('fileActions.js - refreshJpegs: ERROR!!!', error)
+    }
+  } else console.log('Refresh Jpegs Unnecessary')
+}

@@ -3,8 +3,6 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { createBrowserHistory } from 'history';
 
-import { getJpegs } from './utils/serverRequest.js';
-
 import store from './store.js';
 
 import App from './pages/App.js';
@@ -34,10 +32,6 @@ that way the subdirectory will only be prepended there on the production build.
 export const history = createBrowserHistory({      // This will insure that the relevent path
     basename: process.env.PUBLIC_URL               // is used in each environment: local as
 });                                                // well as production.
-
-// Call the getJpegs function to acquire, from the node server, the list of jpegs in the './images/' folder
-// Pass in the Redux store so that the list can be stored in the global state via the reducers.
-getJpegs(store);
 
 // Render the main React component (<App />).
 render(

@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Thumbnail } from './Thumbnail.js';
 
 export const Gallery = (props) => {
+
+
+  useEffect( () => {                        // Use Effect is like componentDidMount for Function (stateless) components.
+    const asyncWrapper = async () =>{       // I have wrapped refreshJpegs() in this async function because when using
+      await props.refreshJpegs()            // the await method the function will return an empty promise even if there
+    }                                       // is no data to return.
+    asyncWrapper()                          // This way asyncWrapper() returns nothing and refreshJpegs() is called and
+  }, [])                                    // waited for completion without error.
+
+
+// componentDidMount() {
+//   props.refreshJpegs()
+// }
+
+
+  // console.log('RefreshJpegs Here: ', props.refreshJpegs())
+  // props.refreshJpegs();
 
 	const imageSuccess = (jpegs) => {
 		return jpegs.map((item, i) => {
@@ -34,6 +51,7 @@ export const Gallery = (props) => {
 
 	return(
 		<div className="phcontainer">
+      {/*<button onClick={() => props.refreshJpegs()} >PressMe</button>*/}
 			{imageComponent(props.getJpegs)}
 		</div>
 	);

@@ -3,16 +3,17 @@ import { Link } from "react-router-dom";
 
 import { zipJpegs } from '../utils/serverRequest.js';
 
-export class Header extends React.Component {
+//export class Header extends React.Component {
+export const Header = (props) => {
 
-  homeButton(status) {
+  function homeButton(status) {
     let classNames = 'navbar-items disable-selection';
     if (status) classNames = 'selected navbar-items disable-selection';
     return(
       <Link
         className={ 'nav-button' }
         to={ '/home' }
-        onClick={ () => this.props.changePage('home') }
+        onClick={ () => props.changePage('home') }
       ><li
         id='nav-button'
         className={ classNames }
@@ -20,42 +21,42 @@ export class Header extends React.Component {
     )
   }
 
-  basketButton(status) {
+  function basketButton(status) {
     let classNames = 'navbar-items disable-selection';
     if (status) classNames = 'selected navbar-items disable-selection';
     return(
       <Link
         className={ 'nav-button' }
         to={'/basket'}
-        onClick={ () => this.props.changePage('basket') }
+        onClick={ () => props.changePage('basket') }
       ><li
         className={classNames}
         id="basket-button"
-      ><div>Basket</div><div>( { this.props.getBasket.length } )</div></li></Link>
+      ><div>Basket</div><div>( { props.getBasket.length } )</div></li></Link>
     )
   }
 
-  galleryButton(status) {
+  function galleryButton(status) {
     let classNames = 'navbar-items disable-selection';
     if (status) classNames = 'selected navbar-items disable-selection';
     return(
       <Link
         className={ 'nav-button' }
         to={ '/gallery' }
-        onClick={ () => this.props.changePage('gallery') }
+        onClick={ () => props.changePage('gallery') }
       ><li
         id='nav-button'
         className={ classNames }
-      ><div>Gallery</div><div>( { this.props.getJpegs.length } )</div></li></Link>
+      >Gallery</li></Link>
     )
   }
 
-  downloadButton(status) {
+  function downloadButton(status) {
     let classNames = 'funcbar-items funcbar-items-ghost disable-selection';
     let files = [];
     if (status) {
       classNames = 'funcbar-items disable-selection';
-      files = this.props.getBasket.map( item => item.file )
+      files = props.getBasket.map( item => item.file )
     }
     return (
       <a
@@ -67,7 +68,7 @@ export class Header extends React.Component {
     )
   }
 
-  addAll(status) {
+  function addAll(status) {
     let classNames = 'funcbar-items funcbar-items-ghost disable-selection';
     if (status) classNames = 'funcbar-items disable-selection';
     return(
@@ -75,24 +76,24 @@ export class Header extends React.Component {
         className={ 'nav-button' }
         onClick={ () => {
           if (status) {
-            this.props.addAll(this.props.getJpegs)
-            this.props.changePage('gallery')
+            props.addAll(props.getJpegs)
+            props.changePage('gallery')
           }
         } }
       ><li
         id='nav-button'
         className={ classNames }
-      > Add All to basket</li></div>
+      > Add All to Basket</li></div>
     )
   }
 
-  emptyBasketButton(status) {
+  function emptyBasketButton(status) {
     let classNames = 'funcbar-items funcbar-items-ghost disable-selection';
     if (status) classNames = 'funcbar-items disable-selection';
     return(
       <div
         className={ 'nav-button' }
-        onClick={ () => { if (status) this.props.emptyBasket() } }
+        onClick={ () => { if (status) props.emptyBasket() } }
       ><li
         id='nav-button'
         className={ classNames }
@@ -100,72 +101,70 @@ export class Header extends React.Component {
     )
   }
 
-  buttonPicker(button) {
+  function buttonPicker(button) {
     switch (button) {
 
       case 'home':
-        if (this.props.selectedPage === 'home')
-          return this.homeButton(1);
-        else return this.homeButton(0);
+        if (props.selectedPage === 'home')
+          return homeButton(1);
+        else return homeButton(0);
 
       case 'gallery':
-        if (this.props.selectedPage === 'gallery')
-          return this.galleryButton(1);
-        else return this.galleryButton(0);
+        if (props.selectedPage === 'gallery')
+          return galleryButton(1);
+        else return galleryButton(0);
 
       case 'basket':
-        if (this.props.selectedPage === 'basket')
-          return this.basketButton(1);
-        else return this.basketButton(0);
+        if (props.selectedPage === 'basket')
+          return basketButton(1);
+        else return basketButton(0);
 
       case 'download':
         if (
-          this.props.selectedPage !== 'home'
-          && this.props.getBasket.length !== 0
+          props.selectedPage !== 'home'
+          && props.getBasket.length !== 0
         )
-        return this.downloadButton(1);
-        else return this.downloadButton(0);
+        return downloadButton(1);
+        else return downloadButton(0);
 
       case 'addAll':
         if (
-          this.props.selectedPage !== 'home'
-          && this.props.getJpegs.length !== this.props.getBasket.length
-          && this.props.selectedPage === 'gallery'
+          props.selectedPage !== 'home'
+          && props.getJpegs.length !== props.getBasket.length
+          && props.selectedPage === 'gallery'
         )
-        return this.addAll(1);
-        else return this.addAll(0);
+        return addAll(1);
+        else return addAll(0);
 
       case 'emptyBasket':
         if (
-          this.props.selectedPage !== 'home'
-          && this.props.getBasket.length > 0
+          props.selectedPage !== 'home'
+          && props.getBasket.length > 0
         )
-        return this.emptyBasketButton(1);
-        else return this.emptyBasketButton(0);
+        return emptyBasketButton(1);
+        else return emptyBasketButton(0);
 
         default: break;
       }
   }
 
-  render() {
-  	return(
-  		<div className="app-header">
-        <ul className="navbar">
-          { this.buttonPicker('home') }
-          { this.buttonPicker('gallery') }
-          { this.buttonPicker('basket') }
-        </ul>
+	return(
+		<div className="app-header">
+      <ul className="navbar">
+        { buttonPicker('home') }
+        { buttonPicker('gallery') }
+        { buttonPicker('basket') }
+      </ul>
 
-        <Link to={'/home'} onClick={ () => this.props.changePage('home') }>
-  			    <h1 className={'logo'}>React Gallery</h1>
-        </Link>
+      <Link to={'/home'} onClick={ () => props.changePage('home') }>
+			    <h1 className={'logo'}>React Gallery</h1>
+      </Link>
 
-        <ul className="function-bar">
-        { this.buttonPicker('download') }
-        { this.buttonPicker('addAll') }
-        { this.buttonPicker('emptyBasket') }
-        </ul>
-  		</div>
-  	);
-  }
+      <ul className="function-bar">
+      { buttonPicker('download') }
+      { buttonPicker('addAll') }
+      { buttonPicker('emptyBasket') }
+      </ul>
+		</div>
+	);
 }

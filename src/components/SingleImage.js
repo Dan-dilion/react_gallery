@@ -1,23 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { getJpegs } from '../utils/serverRequest.js'
+
 import { Slider } from './Slider.js';
 
 export const SingleImage = (props) => {
 
-  const urlFilename = () => {
-    let pathNames = window.location.pathname.split('/')
-    return pathNames[pathNames.length - 1];
+console.log('Length: ', props.getJpegs.length)
+  if (props.getJpegs.length <= 0) props.refreshJpegs()    // If you arrived here from a link getJpegs will be empty so call refresh()
+
+  let jpegsArray = props.getJpegs;                                              // jpegsArray to point to the Redux store jpegs
+  if (props.selectedPage === 'basket') { jpegsArray = props.getBasket }         // If you arived here from the basket make jpegsArray will be the basket
+
+  const urlFilename = () => {                                                   // get filename from URL:
+    let pathNames = window.location.pathname.split('/')                         // Split path at '/' and make items in to an array
+    return decodeURIComponent(pathNames[pathNames.length - 1]);                 // return the last in the array (will be the file name) and parse it for escape chars
   }
 
-	let jpegsArray = props.getJpegs;
-	if (props.selectedPage === 'basket') { jpegsArray = props.getBasket }
-  
-
 	const currentJpegItem = {
-		jpegItem: jpegsArray.find( item => item.file === urlFilename()),
-		index: jpegsArray.findIndex( item => item.file === urlFilename())
-	}
+  	jpegItem: jpegsArray.find( item => item.file === urlFilename()),
+  	index: jpegsArray.findIndex( item => item.file === urlFilename())
+  }
 
 	const next = {...currentJpegItem}
 	if (currentJpegItem.index < jpegsArray.length - 1) {
@@ -30,12 +34,6 @@ export const SingleImage = (props) => {
 		prev.jpegItem = jpegsArray[currentJpegItem.index - 1];
 		prev.index --;
 	}
-
-  console.log('Current: ', currentJpegItem)
-  console.log('Next: ', next)
-  console.log('Prev: ', prev)
-  console.log('PathNames ', window.location.pathname)
-  console.log('Array', props.getJpegs)
 
 	const nextButton = () => {
 		if (currentJpegItem.index < jpegsArray.length - 1) {
@@ -68,49 +66,52 @@ export const SingleImage = (props) => {
 		)
 	}
 
-	const removeButton = (jpegItem) => {
-		if ( jpegsArray.length <= 1) {
-			return (
-				<button
-					className="add-remove-basket standard-button disable-selection"
-					onClick={() => props.removeBasket(
-					props.getBasket.indexOf(jpegItem)
-				)}>
-					<Link to={ '/basket' }>Remove From Basket</Link>
-				</button>
-			)
-		} else if (props.selectedPage === 'basket') {
-			return(
-				<button className="add-remove-basket standard-button disable-selection"
-				onClick={() => props.removeBasket(
-					props.getBasket.indexOf(jpegItem)
-				)}>
-				<Link
-					to={ './' + prev.jpegItem.file }
-				>Remove From Basket</Link></button>
-			)
-		} else {
-			return (
-				<button
-					className="add-remove-basket standard-button disable-selection"
-					onClick={() => props.removeBasket(
-						props.getBasket.indexOf(jpegItem)
-					)}
-				>Remove From Basket</button>
-			)
-		}
-	}
+  const removeButton = (jpegItem, buttonType) => {
+    const link = (button) => {
+      switch (button) {
+        case 'lastInBasket':
+          return(<Link to={ '/basket' }>Remove From Basket</Link>)
+        case 'firstInBasket':
+          return(<Link to={ './' + next.jpegItem.file }>Remove From Basket</Link>)
+        case 'normalBasket':
+          return(<Link to={ './' + prev.jpegItem.file }>Remove From Basket</Link>)
+        case 'gallery':
+          return('Remove From Basket')
+        default: break;
+      }
+    }
 
-	const basketButtonPicker = (jpegItem) => {
-		if (
+    return(
+      <button
+				className="add-remove-basket standard-button disable-selection"
+				onClick={() => props.removeBasket(
+				props.getBasket.indexOf(jpegItem)
+			)}>
+        {link(buttonType)}
+      </button>
+    )
+  }
+
+  const addRemoveButtonSelecter = (jpegItem) => {
+    if (
       props.getBasket.length > 0
       && props.getBasket.some(item => item.file === jpegItem.file)
-    ) return removeButton(jpegItem)
-		else return addButton(jpegItem)
-	}
+    ) {
+      if (props.selectedPage === 'basket') {
+        if ( jpegsArray.length <= 1) return removeButton(jpegItem, 'lastInBasket')
+        else if ( jpegsArray.indexOf(jpegItem) === 0) return removeButton(jpegItem, 'firstInBasket')
+        else return removeButton(jpegItem, 'normalBasket')
+      }
+      else return removeButton(jpegItem, 'gallery')
+    }
+    else return addButton(jpegItem)
+  }
 
-
-	return(
+// This is a conditional return statement, it will wait for jpegsArray to be
+// refreshed before it tries to render anything. Otherwise, if you arrive here
+// from a link, jpegsArray will be empty and the async refresh method will be
+// triggered after the component is rendered causing a crash!
+	return( jpegsArray.length ?
 		<div className="single-wrapper">
 			<div className={'image-container'}>
 				<Link
@@ -119,13 +120,13 @@ export const SingleImage = (props) => {
 				>
 					{ Slider(currentJpegItem.index, jpegsArray, props) }
         </Link>
-				{ basketButtonPicker(jpegsArray[currentJpegItem.index]) }
+				{ addRemoveButtonSelecter(jpegsArray[currentJpegItem.index]) }
 			</div>
 
 			<div className={'next-prev-container'}>
 				{ prevButton() }
 				{ nextButton() }
 			</div>
-		</div>
+		</div> : <div><h2>Waiting for refresh</h2></div>
 	)
 }

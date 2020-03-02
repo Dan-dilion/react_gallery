@@ -4,7 +4,7 @@ import { useTransition, animated } from 'react-spring';
 
 export const Slider = (index, jpegs, props) => {
 
-	const item = jpegs[index];
+  //const item = jpegs[index];
 
 	const transitions = useTransition(jpegs[index], item => item.id, {
 		from: {opacity: 0, transform: 'scale(1.2)'},
@@ -14,7 +14,6 @@ export const Slider = (index, jpegs, props) => {
 
 	console.log(index + ' ' + jpegs[index].file)
 	console.log(window.location)
-
 
 
 	return transitions.map(({item, props, key}) => {
