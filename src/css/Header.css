@@ -8,14 +8,15 @@ h1.logo {
 }
 
 .app-header {
+  position: fixed;
+  z-index: 2;
   display: block;
-  padding: 0em 0em .1em 0em;
   margin-top: 0%;
   //text-shadow: .2em .2em .2em #000f, 0em 0em 2em #fedf;
   //background-image: url("../resources/header_background.jpg");
   //background-repeat: no-repeat;
   //background-position: center;
-  background-color: #000a;
+  background-color: #000c;
   //border-radius: 2vw;
   min-height: 10vh;
   //align-items: center;
@@ -23,8 +24,9 @@ h1.logo {
   font-size: calc(10px + 2vw);
   color: #fed;
   //transition: color 800ms, background-color 800ms;
-  //box-shadow: 0em -5em 5em 5em #ffeedd20;
+  backdrop-filter: blur(10px);
   text-align: left;
+  min-width: 100%;
 }
 
 .navbar {

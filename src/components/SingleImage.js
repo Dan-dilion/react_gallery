@@ -24,7 +24,7 @@ export const SingleImage = (props) => {
   //   console.log('Re-rendering! ', jpegsArray)
   // })
 
-  const jpegsArray = props.getJpegs;                                              // jpegsArray to point to the Redux store jpegs
+  let jpegsArray = props.getJpegs;                                              // jpegsArray to point to the Redux store jpegs
   if (props.selectedPage === 'basket') { jpegsArray = props.getBasket }         // If you arived here from the basket make jpegsArray will be the basket
 
   const urlFilename = () => {                                                   // get filename from URL:
@@ -40,21 +40,17 @@ export const SingleImage = (props) => {
     index: jpegsArray.findIndex( item => item.file === urlFilename())
   }
 
-  let prev = {...currentJpegItem}
-  if (currentJpegItem.index > 0) {
-    prev = {
-      jpegItem: jpegsArray[currentJpegItem.index - 1],
-		  index: currentJpegItem.index - 1
-    }
-  }
+  const prev = {...currentJpegItem}
+	if (currentJpegItem.index > 0) {
+		prev.jpegItem = jpegsArray[currentJpegItem.index - 1];
+		prev.index --;
+	}
 
-  let next = {...currentJpegItem}
-  if (currentJpegItem.index > 0) {
-    next = {
-      jpegItem: jpegsArray[currentJpegItem.index + 1],
-		  index: currentJpegItem.index + 1
-    }
-  }
+  const next = {...currentJpegItem}
+	if (currentJpegItem.index < jpegsArray.length - 1) {
+		next.jpegItem = jpegsArray[currentJpegItem.index + 1];
+		next.index ++;
+	}
 
   // const [next, setNext] = useState(...currentJpegItem)
   // const [prev, setPrev] = useState(...currentJpegItem)
