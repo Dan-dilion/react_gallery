@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { getJpegs } from '../utils/serverRequest.js'
@@ -8,7 +8,7 @@ import { Slider } from './Slider.js';
 export const SingleImage = (props) => {
 
 console.log('Length: ', props.getJpegs.length)
-  if (props.getJpegs.length <= 0) props.refreshJpegs()    // If you arrived here from a link getJpegs will be empty so call refresh()
+  if (!props.getJpegs.length) props.refreshJpegs()    // If you arrived here from a link getJpegs will be empty so call refresh()
 
   let jpegsArray = props.getJpegs;                                              // jpegsArray to point to the Redux store jpegs
   if (props.selectedPage === 'basket') { jpegsArray = props.getBasket }         // If you arived here from the basket make jpegsArray will be the basket
@@ -18,22 +18,52 @@ console.log('Length: ', props.getJpegs.length)
     return decodeURIComponent(pathNames[pathNames.length - 1]);                 // return the last in the array (will be the file name) and parse it for escape chars
   }
 
-	const currentJpegItem = {
-  	jpegItem: jpegsArray.find( item => item.file === urlFilename()),
-  	index: jpegsArray.findIndex( item => item.file === urlFilename())
+  console.log('URL Filename: ', urlFilename())
+  console.log('Jpegs Array: ', jpegsArray.find( item => item.file === urlFilename()) )
+
+  const currentJpegItem = {
+    jpegItem: jpegsArray.find( item => item.file === urlFilename()),
+    index: jpegsArray.findIndex( item => item.file === urlFilename())
   }
 
-	const next = {...currentJpegItem}
-	if (currentJpegItem.index < jpegsArray.length - 1) {
-		next.jpegItem = jpegsArray[currentJpegItem.index + 1];
-		next.index ++;
-	}
+  let prev = {...currentJpegItem}
+  if (currentJpegItem.index > 0) {
+    prev = {
+      jpegItem: jpegsArray[currentJpegItem.index - 1],
+		  index: currentJpegItem.index - 1
+    }
+  }
 
-	const prev = {...currentJpegItem}
-	if (currentJpegItem.index > 0) {
-		prev.jpegItem = jpegsArray[currentJpegItem.index - 1];
-		prev.index --;
-	}
+  let next = {...currentJpegItem}
+  if (currentJpegItem.index > 0) {
+    next = {
+      jpegItem: jpegsArray[currentJpegItem.index + 1],
+		  index: currentJpegItem.index + 1
+    }
+  }
+
+  // const [next, setNext] = useState(...currentJpegItem)
+  // const [prev, setPrev] = useState(...currentJpegItem)
+  // //let next = {...currentJpegItem}
+  // //let prev = {...currentJpegItem}
+  //
+  //
+  // useEffect( () => {
+  //
+  // 	if (currentJpegItem.index < jpegsArray.length - 1) {
+  // 		setNext( next = {
+  //       jpegItem: jpegsArray[currentJpegItem.index + 1],
+	// 	    index: currentJpegItem.index + 1
+  //     })
+  // 	}
+  //
+  // 	if (currentJpegItem.index > 0) {
+  // 		setPrev( prev = {
+  //       jpegItem: jpegsArray[currentJpegItem.index - 1],
+  // 		  index: currentJpegItem.index - 1
+  //     })
+  //    }
+  // }, [])
 
 	const nextButton = () => {
 		if (currentJpegItem.index < jpegsArray.length - 1) {
@@ -70,13 +100,13 @@ console.log('Length: ', props.getJpegs.length)
     const link = (button) => {
       switch (button) {
         case 'lastInBasket':
-          return(<Link to={ '/basket' }>Remove From Basket</Link>)
+          return(<Link to={ '/basket' }>Remove From Basket LAST</Link>)
         case 'firstInBasket':
-          return(<Link to={ './' + next.jpegItem.file }>Remove From Basket</Link>)
+          return(<Link to={ './' + next.jpegItem.file }>Remove From Basket FIRST</Link>)
         case 'normalBasket':
-          return(<Link to={ './' + prev.jpegItem.file }>Remove From Basket</Link>)
+          return(<Link to={ './' + prev.jpegItem.file }>Remove From Basket NORM</Link>)
         case 'gallery':
-          return('Remove From Basket')
+          return('Remove From Basket GALL')
         default: break;
       }
     }
@@ -107,11 +137,16 @@ console.log('Length: ', props.getJpegs.length)
     else return addButton(jpegItem)
   }
 
+  console.log('URL fileName: ', urlFilename())
+  console.log('prev.jpegItem: ', prev.jpegItem)
+  console.log('currentJpegItem.jpegItem: ', currentJpegItem.jpegItem)
+  console.log('current index: ', props.getBasket.indexOf(currentJpegItem.jpegItem))
+  console.log('next.jpegItem: ', next.jpegItem)
 // This is a conditional return statement, it will wait for jpegsArray to be
 // refreshed before it tries to render anything. Otherwise, if you arrive here
 // from a link, jpegsArray will be empty and the async refresh method will be
 // triggered after the component is rendered causing a crash!
-	return( jpegsArray.length ?
+	return( currentJpegItem.jpegItem && next.jpegItem && prev.jpegItem ?
 		<div className="single-wrapper">
 			<div className={'image-container'}>
 				<Link
@@ -120,7 +155,7 @@ console.log('Length: ', props.getJpegs.length)
 				>
 					{ Slider(currentJpegItem.index, jpegsArray, props) }
         </Link>
-				{ addRemoveButtonSelecter(jpegsArray[currentJpegItem.index]) }
+				{ addRemoveButtonSelecter(currentJpegItem.jpegItem) }
 			</div>
 
 			<div className={'next-prev-container'}>

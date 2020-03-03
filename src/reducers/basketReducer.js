@@ -18,10 +18,10 @@ const basketReducer = (state = initialState, action) => {
 			}
 			break;
 
-      case "ADD_ALL":
-        console.log('Adding entire gallery to the basket');
-        state = { ...state, basketJpegs: [...action.payload] }
-        break;
+    case "ADD_ALL":
+      console.log('Adding entire gallery to the basket');
+      state = { ...state, basketJpegs: [...action.payload] }
+      break;
 
 		case "REMOVE_BASKET":
 			console.log('Removing item from basket', state.basketJpegs[action.payload]);
