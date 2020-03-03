@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 import { getJpegs } from '../utils/serverRequest.js'
@@ -7,10 +8,23 @@ import { Slider } from './Slider.js';
 
 export const SingleImage = (props) => {
 
-console.log('Length: ', props.getJpegs.length)
-  if (!props.getJpegs.length) props.refreshJpegs()    // If you arrived here from a link getJpegs will be empty so call refresh()
+  const jpegsRefresher = async () => { await props.refreshJpegs() }
+  if (!props.getJpegs.length) { jpegsRefresher()    // If you arrived here from a link getJpegs will be empty so call refresh()
+    console.log('Jpegs Refreshed!')
+  }
 
-  let jpegsArray = props.getJpegs;                                              // jpegsArray to point to the Redux store jpegs
+  // let jpegsArray = [];
+  //
+  // useEffect(  () => {
+  //   const jpegsRefresher = async () => { await props.refreshJpegs() }
+  //   jpegsRefresher()
+  //
+  //   jpegsArray = props.getJpegs
+  //   if (props.selectedPage === 'basket') { jpegsArray = props.getBasket }
+  //   console.log('Re-rendering! ', jpegsArray)
+  // })
+
+  const jpegsArray = props.getJpegs;                                              // jpegsArray to point to the Redux store jpegs
   if (props.selectedPage === 'basket') { jpegsArray = props.getBasket }         // If you arived here from the basket make jpegsArray will be the basket
 
   const urlFilename = () => {                                                   // get filename from URL:
@@ -137,6 +151,8 @@ console.log('Length: ', props.getJpegs.length)
     else return addButton(jpegItem)
   }
 
+  console.log('Get Jpegs length: ', props.getJpegs.length)
+  console.log('Get Basket length: ', props.getBasket.length)
   console.log('URL fileName: ', urlFilename())
   console.log('prev.jpegItem: ', prev.jpegItem)
   console.log('currentJpegItem.jpegItem: ', currentJpegItem.jpegItem)
@@ -164,4 +180,13 @@ console.log('Length: ', props.getJpegs.length)
 			</div>
 		</div> : <div><h2>Waiting for refresh</h2></div>
 	)
+}
+
+SingleImage.propTypes = {
+  selectedPage: PropTypes.string,
+  getJpegs: PropTypes.array,
+  getBasket: PropTypes.array,
+  addBasket: PropTypes.func,
+  removeBasket: PropTypes.func,
+  refreshJpegs: PropTypes.func
 }

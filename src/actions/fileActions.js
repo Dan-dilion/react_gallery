@@ -11,8 +11,8 @@ export function addJpegs(jpegs) {
 export const refreshJpegs = () => async dispatch => {
   if (store.getState().fileReducer.jpegs.length == 0) {
     try {
-      const newJpegs = await getJpegs()
-      dispatch(addJpegs(newJpegs))
+      await getJpegs()
+      .then(newJpegs => dispatch(addJpegs(newJpegs)))
     } catch (error) {
       console.log('fileActions.js - refreshJpegs: ERROR!!!', error)
     }
