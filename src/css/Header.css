@@ -12,18 +12,10 @@ h1.logo {
   z-index: 2;
   display: block;
   margin-top: 0%;
-  //text-shadow: .2em .2em .2em #000f, 0em 0em 2em #fedf;
-  //background-image: url("../resources/header_background.jpg");
-  //background-repeat: no-repeat;
-  //background-position: center;
   background-color: #000c;
-  //border-radius: 2vw;
   min-height: 10vh;
-  //align-items: center;
-  //justify-content: left;
   font-size: calc(10px + 2vw);
   color: #fed;
-  //transition: color 800ms, background-color 800ms;
   backdrop-filter: blur(10px);
   text-align: left;
   min-width: 100%;
@@ -36,12 +28,9 @@ h1.logo {
   padding-right: 1em;
 	height: 0em;
 	width: auto;
-  //background-color: #000f;
-	background: #fed7;
-	//border-radius: 0px 0px 0vmin 0vmin;
 }
 
-.function-bar{
+.function-bar {
   display: block;
   margin-top: .2em;
   margin-bottom: 1em;
@@ -49,8 +38,6 @@ h1.logo {
   padding-right: 2em;
   width: auto;
   height: 1em;
-  //right: 0;
-  //float: right;
   background: #3337;
 }
 
