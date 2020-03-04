@@ -1,5 +1,4 @@
 .phcontainer {
-
 	color: #fed;
   max-width: 100%;
 	min-height: 60vh;
@@ -7,7 +6,6 @@
   //margin-right: 2vw;
 	//margin-bottom: 2vh;
   //padding: 2vmin;
-  padding-top: 12em;
   border-radius: 0vw;
   justify-content: space-around;
   display: grid;
@@ -15,7 +13,7 @@
   grid-auto-rows: 1fr;
 	grid-column-gap: 20px;
 
-	background-color: #000a;
+	//background-color: #000a;
 	//box-shadow: 0em 5em 5em 5em #fed1;
 }
 

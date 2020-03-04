@@ -54,16 +54,6 @@ h1.logo {
   background: #3337;
 }
 
-.sticky_navbar {
-	display: block;
-	position: fixed;
-	top: 0px;
-}
-
-.sticky_navbar + .content {
-  padding-top: 60px;
-}
-
 .navbar-items {
   display: inline;
   float: left;
@@ -121,6 +111,11 @@ h1.logo {
 
 #nav-button {
     transition: all 1s;
+}
+
+.header-spacer {
+  display: block;
+  height: 11em;
 }
 
 /* I have added this styling at the end to keep it isolated */

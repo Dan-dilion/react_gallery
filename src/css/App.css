@@ -21,6 +21,8 @@ li {
 }
 
 .app {
+  padding-top: 2em;
+  background-color: #000a;
   text-align: center;
   //background-image: url("../resources/header_background.jpg");
 

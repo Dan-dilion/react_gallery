@@ -71,28 +71,30 @@ class App extends React.Component {
             emptyBasket={this.props.EMPTY_BASKET}
           />
 
-				    <div className="app">
-						<Switch>
+          <div className='header-spacer' />
+
+			    <div className="app">
+  					<Switch>
 
 
 {/*
 * First route -- Home screen
 * Force exact match so route not triggered for all URLs.
 */}
-							<Route
-								exact path={"/"}
-								component={Home}
-							/>
+  						<Route
+  							exact path={"/"}
+  							component={Home}
+  						/>
 
 
 {/*
 * Second Route -- Home screen
 * Path to activate switch
 */}
-							<Route
-								path={"/home"}
-								component={Home}
-							/>
+  						<Route
+  							path={"/home"}
+  							component={Home}
+  						/>
 
 {/*
 * Third Route -- Gallery view
@@ -103,16 +105,16 @@ class App extends React.Component {
 * getBasket is also used to pick either an add button or a remove button.
 * addBasket and removeBasket are called by the add and remove buttons.
 */}
-							<Route
-								path={"/gallery"}
-								render={(props) => <Gallery
-									getJpegs={this.props.jpegs}
-									getBasket={this.props.basket}
-									addBasket={this.props.ADD_BASKET}
-									removeBasket={this.props.REMOVE_BASKET}
+  						<Route
+  							path={"/gallery"}
+  							render={(props) => <Gallery
+  								getJpegs={this.props.jpegs}
+  								getBasket={this.props.basket}
+  								addBasket={this.props.ADD_BASKET}
+  								removeBasket={this.props.REMOVE_BASKET}
                   refreshJpegs={this.props.refreshJpegs}
-								/>}
-							/>
+  							/>}
+  						/>
 
 {/*
 * Fourth route -- Basket view
@@ -121,14 +123,14 @@ class App extends React.Component {
 * getBasket to generate thumbnails and select add or remove button.
 * removeBasket is called by the remove buttons
 */}
-							<Route
-								path={"/basket"}
-								render={(props) => <Basket
-									getBasket={this.props.basket}
-									removeBasket={this.props.REMOVE_BASKET}
+  						<Route
+  							path={"/basket"}
+  							render={(props) => <Basket
+  								getBasket={this.props.basket}
+  								removeBasket={this.props.REMOVE_BASKET}
                   getJpegs={this.props.jpegs}
-								/>}
-							/>
+  							/>}
+  						/>
 
 {/*
 * Fifth route -- Single view (image slider)
@@ -137,17 +139,17 @@ class App extends React.Component {
 * getBasket for next and previous list navigation
 * addBasket and removeBasket are called by the add and remove buttons.
 */}
-							<Route
-								path={"/single"}
-								render={(props) => <SingleImage
+  						<Route
+  							path={"/single"}
+  							render={(props) => <SingleImage
                   selectedPage={this.state.selectedPage}
-									getJpegs={this.props.jpegs}
-									getBasket={this.props.basket}
-									addBasket={this.props.ADD_BASKET}
-									removeBasket={this.props.REMOVE_BASKET}
+  								getJpegs={this.props.jpegs}
+  								getBasket={this.props.basket}
+  								addBasket={this.props.ADD_BASKET}
+  								removeBasket={this.props.REMOVE_BASKET}
                   refreshJpegs={this.props.refreshJpegs}
-								/>}
-							/>
+  							/>}
+  						/>
 
 {/*
 * Sixth route -- Full size image view.
@@ -155,13 +157,13 @@ class App extends React.Component {
 * component to render.
 * There are no props for this component therefore we don't need the render prop.
 */}
-							<Route
-								path={"/images/"}
-								component={ FullSize }
-							/>
+  						<Route
+  							path={"/images/"}
+  							component={ FullSize }
+  						/>
 
-						</Switch>
-				    </div>
+  					</Switch>
+			    </div>
 				</Router>
 			</div>
 		);
