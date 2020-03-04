@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 import { getJpegs } from '../utils/serverRequest.js'
@@ -76,7 +76,7 @@ export const SingleImage = (props) => {
   // }, [])
 
 	const nextButton = () => {
-		if (currentJpegItem.index < jpegsArray.length - 1) {
+		if (currentJpegItem.index < jpegsArray.length - 1) {      // if not the last
 			return (
 				<Link
 					className="next-image disable-selection"
@@ -87,7 +87,7 @@ export const SingleImage = (props) => {
 	}
 
 	const prevButton = () => {
-		if (currentJpegItem.index > 0) {
+		if (currentJpegItem.index > 0) {                          // if not the first
 			return(
 				<Link
 					className="prev-image disable-selection"
@@ -124,9 +124,9 @@ export const SingleImage = (props) => {
     return(
       <button
 				className="add-remove-basket standard-button disable-selection"
-				onClick={() => props.removeBasket(
-				props.getBasket.indexOf(jpegItem)
-			)}>
+				onClick={() => props.removeBasket(props.getBasket.indexOf(jpegItem))}
+      >
+        {/*Remove From Basket TEST*/}
         {link(buttonType)}
       </button>
     )
@@ -134,17 +134,17 @@ export const SingleImage = (props) => {
 
   const addRemoveButtonSelecter = (jpegItem) => {
     if (
-      props.getBasket.length > 0
-      && props.getBasket.some(item => item.file === jpegItem.file)
+      props.getBasket.length > 0                         // if the basket is not empty
+      && props.getBasket.some(item => item.file === jpegItem.file)        // and the item is in the basket
     ) {
-      if (props.selectedPage === 'basket') {
-        if ( jpegsArray.length <= 1) return removeButton(jpegItem, 'lastInBasket')
-        else if ( jpegsArray.indexOf(jpegItem) === 0) return removeButton(jpegItem, 'firstInBasket')
-        else return removeButton(jpegItem, 'normalBasket')
+      if (props.selectedPage === 'basket') {                                                  // if we are browsing the basket
+        if ( jpegsArray.length <= 1) return removeButton(jpegItem, 'lastInBasket')                      // if we are on the last item in the basket
+        else if ( jpegsArray.indexOf(jpegItem) === 0) return removeButton(jpegItem, 'firstInBasket')    // if we are on the first item in the basket
+        else return removeButton(jpegItem, 'normalBasket')                                    // otherwise we're in the middle of the basket
       }
-      else return removeButton(jpegItem, 'gallery')
+      else return removeButton(jpegItem, 'gallery')                       // otherwise we're browsing the Gallery
     }
-    else return addButton(jpegItem)
+    else return addButton(jpegItem)                      // otherwise the basket is empty
   }
 
   console.log('Get Jpegs length: ', props.getJpegs.length)
@@ -178,11 +178,11 @@ export const SingleImage = (props) => {
 	)
 }
 
-SingleImage.propTypes = {
-  selectedPage: PropTypes.string,
-  getJpegs: PropTypes.array,
-  getBasket: PropTypes.array,
-  addBasket: PropTypes.func,
-  removeBasket: PropTypes.func,
-  refreshJpegs: PropTypes.func
-}
+// SingleImage.propTypes = {
+//   selectedPage: PropTypes.string,
+//   getJpegs: PropTypes.array,
+//   getBasket: PropTypes.array,
+//   addBasket: PropTypes.func,
+//   removeBasket: PropTypes.func,
+//   refreshJpegs: PropTypes.func
+// }

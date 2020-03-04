@@ -25,8 +25,8 @@ export const Thumbnail = (props, jpegItem, i) => {
 
 	const basketButtonPicker = (jpegItem) => {
 		if (
-      props.getBasket.length >0 &&
-      props.getBasket.some( item => item.file === jpegItem.file )
+      props.getBasket.length > 0                                          // if basket is not empty
+      && props.getBasket.some( item => item.file === jpegItem.file )      // and item is in basket
     )
     return removeButton(jpegItem)
 		else return addButton(jpegItem)

@@ -8,13 +8,14 @@ export function addJpegs(jpegs) {
 	};
 };
 
-export const refreshJpegs = () => async dispatch => {
+export function refreshJpegs() {return dispatch => {
   if (store.getState().fileReducer.jpegs.length == 0) {
     try {
-      await getJpegs()
+      getJpegs()
       .then(newJpegs => dispatch(addJpegs(newJpegs)))
     } catch (error) {
       console.log('fileActions.js - refreshJpegs: ERROR!!!', error)
     }
-  } else console.log('Refresh Jpegs Unnecessary')
-}
+    console.log('File Action - Jpegs Refreshed.')
+  } else console.log('FileActions - Refresh Jpegs Unnecessary!')
+}}
