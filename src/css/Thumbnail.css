@@ -1,6 +1,5 @@
 
-.images{
-	//justify-self: center;
+.images {
 	max-height: 10vh;
   //max-width: 80%;
   width: 100%;
@@ -10,7 +9,7 @@
   margin-right: auto;
 	border-radius: .2vw;
 }
-.images:hover{
+.images:hover {
 	transition: box-shadow 200ms;
 	//border-radius: .3vw 1.5vw;
 	box-shadow: .5vw .5vw 1vw .5vw #fec3, 0px 0px 2vw 3vw #fec1;
@@ -31,7 +30,7 @@
 	margin-right: auto;
 }
 
-.thumbnail{
+.thumbnail {
 	position: relative;
 	display: block;
 	background-color: #0002;

@@ -45,20 +45,15 @@ li {
 	position: relative;
 }
 
-.standard-button, button{
+.standard-button, button {
 	transition-property: background-color, box-shadow ;
 	transition-duration: 1500ms;
 	text-decoration: none;
 	border: none;
 	border-radius: .2vh;
 	background-color: #fed6;
-	//text-shadow: .1vw .05vh .1vw rgba(0, 0, 0, .6);
-
-	box-shadow:
-		//inset .2em .2em .1em .0em #fffa,
-		//inset -.2em -.2em .1em .0em #000a,
-		//.4vw .4vh 5px 0px #000a;
 }
+
 .standard-button:hover {
 	text-decoration: none;
 	transition: background-color 100ms, box-shadow 100ms;
@@ -68,13 +63,10 @@ li {
 		inset .2em .2em .1em .0em #0004,
     inset -.2em -.2em .1em .0em #fff4
 }
+
 .standard-button:active {
 	transition:  box-shadow 50ms ease-in-out;
 	color: #feda;
-	//box-shadow:
-		inset .15em .15em .1em .0em #fff7,
-		inset -.15em -.15em .1em .0em #0007,
-		.1vw .1vh 1px 0px #000a;
 }
 
 .app-link {
