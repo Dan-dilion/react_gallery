@@ -24,7 +24,6 @@ li {
   padding-top: 2em;
   background-color: #000a;
   text-align: center;
-  //background-image: url("../resources/header_background.jpg");
 
 }
 
@@ -45,7 +44,7 @@ li {
 	position: relative;
 }
 
-.standard-button, button {
+button.standard-button {
 	transition-property: background-color, box-shadow ;
 	transition-duration: 1500ms;
 	text-decoration: none;

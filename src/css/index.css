@@ -14,9 +14,9 @@ code {
 }
 
 html {
+  
   background: linear-gradient(#0000, #0000), url("../resources/header_background.jpg");
-  //background-position: repeat;
-  //margin: 10px;
+
 }
 
 a {

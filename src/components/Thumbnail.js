@@ -6,20 +6,20 @@ export const Thumbnail = (props, jpegItem, i) => {
 	const addButton = (jpegItem) => {
 		return(
 			<button
-				className="add-basket standard-button"
+				className="add-basket-thumb thumb-button"
 				onClick={ () => props.addBasket(jpegItem) }
-			>Add</button>
+			/>
 		)
 	}
 
 	const removeButton = (jpegItem) => {
 		return(
 			<button
-				className="remove-basket standard-button"
+				className="remove-basket-thumb thumb-button"
 				onClick={ () => {
 					props.removeBasket( props.getBasket.indexOf(jpegItem) )
 				}}
-			>Remove</button>
+			/>
 		)
 	}
 

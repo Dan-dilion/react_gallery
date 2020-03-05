@@ -46,3 +46,37 @@
   max-height: 100%;
   max-width: 100%;
 }
+
+.thumb-button{
+  display: flex;
+  position: absolute;
+	top: .2em;
+  left: .2em;
+  width: 4em;
+  height: 4em;
+  z-index: 1;
+  border: solid black 2px;
+  border-radius: 40%;
+  background-color: #fed5;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80%;
+  opacity: .8;
+}
+
+.add-basket-thumb {
+  transition: all;
+  background-image: url("../resources/icons/Basket.png");
+}
+
+.remove-basket-thumb {
+  background-image: url("../resources/icons/minus_in_circle.png");
+}
+
+
+/*
+img.add-basket-thum {
+  opacity: .3;
+
+}
+*/
