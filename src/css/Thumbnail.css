@@ -66,11 +66,13 @@
 
 .add-basket-thumb {
   transition: all;
-  background-image: url("../resources/icons/Basket.png");
+  background-image: url("../resources/icons/plus-circle.svg");
 }
 
 .remove-basket-thumb {
-  background-image: url("../resources/icons/minus_in_circle.png");
+  background-color: #000;
+  background-image: url("../resources/icons/minus-circle.svg");
+  opacity: .5;
 }
 
 
