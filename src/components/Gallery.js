@@ -12,15 +12,6 @@ export const Gallery = (props) => {
     asyncWrapper()                          // This way asyncWrapper() returns nothing and refreshJpegs() is called and
   }, [])                                    // waited for completion without error.
 
-
-// componentDidMount() {
-//   props.refreshJpegs()
-// }
-
-
-  // console.log('RefreshJpegs Here: ', props.refreshJpegs())
-  // props.refreshJpegs();
-
 	const imageSuccess = (jpegs) => {
 		return jpegs.map((item, i) => {
 			return( Thumbnail(props, item, i) )
@@ -28,7 +19,7 @@ export const Gallery = (props) => {
 	}
 
 	// The imageFail function will be called in the case that
-	// getJpegs() returns anything other that an array signifying
+	// getJpegs() returns anything other than an array signifying
 	// that there was an error.
 	const imageFail = (jpegs) => {
 		return(

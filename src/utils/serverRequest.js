@@ -15,7 +15,7 @@ export const getJpegs = async () => {                 // Export method, requires
 				id: i                                         // newJpegs [{file: 'filename.jpg', id: i}]
 			})
 		})
-  return newJpegs;                                    // Return results!
+  return resequenceJpegs(newJpegs);                   // Resequence and return results!
 	})
 }
 
@@ -24,3 +24,93 @@ export const zipJpegs = (files) => {                                    // Expor
 	url.searchParams.append('basketContents', JSON.stringify(files))      // add the array of files to the querry
 	return url.href;                                                      // parameters of the URL.
 }                                                                       // Return the entirety of newly constructed URL.
+
+
+const resequenceJpegs = (jpegs) => {
+
+  let debug = 0;                    // Turn on/off debug info in the console.
+
+  let newSequence = [];
+  let jpegsQueue = [];
+  let columns = 0;
+  let rows = 1;
+  let misFits = 0;
+
+  const logit = (message) => { if (debug) console.log(message)}
+
+  jpegs.forEach( (item, i) => {
+
+    const img = new Image()
+    img.src = "./images/resize300/" + item.file;
+
+    if (columns === 0 && jpegsQueue.length > 0) {           // if at beginning of row and there are items in the queue
+      logit('DUMPING QUEUE!!! ', jpegsQueue.length)
+      misFits ++;
+      jpegsQueue.forEach( (queueItem) => {                  // dump the queue in to the newSequence
+        columns += 2;                                       // uphold the comumns counter
+        newSequence.push(queueItem)
+        logit('Adding to newSequence: ', queueItem.file)
+        if (columns === 12) {
+          rows ++;
+          columns = 0;                                      // reset on each full row
+          logit('NEW ROW!!!')
+        }
+      })
+      jpegsQueue = [];
+    }
+
+    if (img.width < img.height) {                           // if image is portrait
+      logit('PORTRAIT!!!')
+      columns += 1;                                         // uphold the columns counter
+      newSequence.push(item)                                // push in to newSequence
+      logit('Adding to newSequence: ', item.file)
+      if (columns === 12) {
+        rows ++;
+        columns = 0;                                        // reset counter on full row
+        logit('NEW ROW!!!')
+      }
+    } else {                                                // image must be landscape
+      logit('LANDSCAPE!!!')
+      columns += 2;                                         // uphold the columns counter
+      if (columns === 12) {                                 // if the row is full
+        newSequence.push(item)                              // push in to newSequence
+        logit('Adding to newSequence: ', item.file)
+        rows ++;
+        columns = 0;                                        // reset the counter
+        logit('NEW ROW!!!')
+      }
+      else if (columns > 12) {                              // if this image doesn't fit in row
+        logit('MISSFIT!!!')
+        jpegsQueue.push(item);                              // push on to jpegsQueue
+        logit('Adding to queue: ', item.file)
+        columns -= 2;                                       // revert columns counter
+      } else {                                              // must be in the middle of the row
+        newSequence.push(item)                              // push on to newSequence
+        logit('Adding to newSequence: ', item.file)
+      }
+    }
+
+    if (                                                    // if there are no more portraits
+      i === jpegs.length -1                                 // at the final item in array
+      && jpegsQueue.length > 0                              // push the jpegsQueue on to newSequence
+    ) {
+      logit('NO MORE PORTRAITS!!! Dumping Queue!')
+      jpegsQueue.forEach( (item) => {                       // dump the queue in to the newSequence
+        columns += 2;                                       // uphold the columns counter
+        logit('Adding to newSequence: ', item.file)
+        newSequence.push( item)
+        if (columns === 12) {
+          rows ++;
+          columns = 0;                                      // reset on each full row
+          logit('NEW ROW!!!')
+        }
+      })
+    }
+
+  })
+
+  console.log('Array resequenced!!! num of items = ', newSequence.length)
+  logit('Nomber of Rows: ', rows)
+  logit('Nomber of misFits: ', misFits)
+  return newSequence;
+}
