@@ -102,7 +102,7 @@ h1.logo {
 
 .header-spacer {
   display: block;
-  height: 11em;
+  min-height: 10vw;
 }
 
 /* I have added this styling at the end to keep it isolated */

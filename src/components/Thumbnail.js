@@ -32,8 +32,21 @@ export const Thumbnail = (props, jpegItem, i) => {
 		else return addButton(jpegItem)
 	}
 
+  const styles = (i) => {
+    const img = new Image();
+    img.src = "./images/resize300/" + jpegItem.file
+//    console.log(jpegItem.file + ' - ' + img.width + ' x ' + img.height)
+
+    let size = 'span 2';                            // assume image is landscape
+    if (img.width < img.height) size = 'span 1';    // unless image is portrait
+
+    return {
+      'gridColumn': size
+    }
+  }
+
 	return (
-		<div className={'thumbnail'} key={i}>
+		<div className={'thumbnail'} key={i} style={styles(i)}>
 			<div className={'thumbnail-inner-container'} key={i}>
 				<Link
 					to={ './single/' + jpegItem.file }

@@ -8,6 +8,7 @@
   margin-left: auto;
   margin-right: auto;
 	border-radius: .2vw;
+  object-fit: cover;
 }
 .images:hover {
 	transition: box-shadow 200ms;
@@ -34,15 +35,15 @@
 	position: relative;
 	display: block;
 	background-color: #0002;
-	max-height: 6vmax;
-  min-height: 15vmin;
+	//max-height: 6vmax;
+  //min-height: 15vmin;
+  //grid-column: span 3;
 }
 
 .thumbnail-inner-container {
 	//justify-content: center;
 	//padding: 5%;
 	//margin: 5%;
-	margin-bottom: 8%;
   max-height: 100%;
   max-width: 100%;
 }

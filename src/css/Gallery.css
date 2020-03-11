@@ -5,13 +5,15 @@
   //margin-left: 2vw;
   //margin-right: 2vw;
 	//margin-bottom: 2vh;
+
+  margin-top: 4vh;
   //padding: 2vmin;
   border-radius: 0vw;
-  justify-content: space-around;
+  justify-content: center;
   display: grid;
-	grid-template-columns:  repeat(auto-fill, minmax(16vw, 20vw));
-  grid-auto-rows: 1fr;
-	grid-column-gap: 20px;
+	grid-template-columns:  repeat(12, auto);
+  //grid-auto-rows: 1fr;
+	grid-gap: 10px;
 
 	//background-color: #000a;
 	//box-shadow: 0em 5em 5em 5em #fed1;
