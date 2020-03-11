@@ -30,6 +30,7 @@ const resequenceJpegs = (jpegs) => {
 
   let debug = 0;                    // Turn on/off debug info in the console.
 
+//  let newSequence = jpegs;
   let newSequence = [];
   let jpegsQueue = [];
   let columns = 0;
@@ -37,6 +38,27 @@ const resequenceJpegs = (jpegs) => {
   let misFits = 0;
 
   const logit = (message) => { if (debug) console.log(message)}
+
+  // const getPortrait = () => {
+  //   const portrait = jpegs.find( (item) => {
+  //     const img = new Image()
+  //     img.src = "./images/resize300/" + item.file;
+  //     if (img.width < img.height) return item;
+  //   })
+  //   return jpegs.splice( jpegs.findIndex(portrait()), 1 )      // splice at start index, delete count, return deleted
+  // }
+  //
+  // const getLandscape = () => {
+  //   const landscape = jpegs.find( (item) => {
+  //     const img = new Image()
+  //     img.src = "./images/resize300/" + item.file;
+  //     if (img.width > img.height) return item;
+  //   })
+  //   return jpegs.splice( jpegs.findIndex(landscape()), 1 )      // splice at start index, delete count, return deleted
+  // }
+  //
+  // logit(getLandscape())
+
 
   jpegs.forEach( (item, i) => {
 
