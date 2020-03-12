@@ -37,10 +37,8 @@ export const zipJpegs = (files) => {                                    // Expor
 
 const resequenceJpegs = (jpegs) => {
 
-  let debug = 1;                    // Turn on/off debug info in the console.
+  let debug = 0;                    // Turn on/off debug info in the console.
   let newSequence = [];
-  let columns = 0;
-  let rows = 1;
 
   const logit = (...message) => {
     if (debug) {
@@ -50,196 +48,89 @@ const resequenceJpegs = (jpegs) => {
     }
   }
 
-  const getPortrait = (pegs) => {                                 // Function to make array of all portrait images
-    let portraits = [];                                           // declare empty array
-    jpegs.forEach(item => {                                       // iterate through jpegs
-      const img = new Image()                                     // create instance of the Image object
-      img.src = "./images/resize300/" + item.file;                // use this iterations filename as the source
-      if (img.width < img.height) portraits.push(item);           // if the width is smaller than the height add it to portraits
+  const getPortraits = (pegs) => {                           // Function to make array of all portrait images
+    let ports = [];                                          // declare empty array
+    jpegs.forEach(item => {                                  // iterate through jpegs
+      const img = new Image()                                // create instance of the Image object
+      img.src = "./images/resize300/" + item.file;           // use this iterations filename as the source
+      if (img.width < img.height) ports.push(item);          // if the width is smaller than the height add it to portraits
     })
-    return portraits;                                             // return the array of portraits
+    return ports;                                            // return the array of portraits
   }
 
-  const getLandscape = (pegs) => {                                // Function to make array of all landscape images
-    let landscapes = [];                                          // declare empty array
-    jpegs.forEach(item => {                                       // iterate through jpegs
-      const img = new Image()                                     // create instance of the Image object
-      img.src = "./images/resize300/" + item.file;                // use this iterations filename as the source
-      if (img.width >= img.height) landscapes.push(item);         // if the width is larger than or the same as the height add it to landscapes
+  const getLandscapes = (pegs) => {                          // Function to make array of all landscape images
+    let lands = [];                                          // declare empty array
+    jpegs.forEach(item => {                                  // iterate through jpegs
+      const img = new Image()                                // create instance of the Image object
+      img.src = "./images/resize300/" + item.file;           // use this iterations filename as the source
+      if (img.width >= img.height) lands.push(item);         // if the width is larger than or the same as the height add it to landscapes
     })
-    return landscapes;                                            // return the array of landscapes
+    return lands;                                            // return the array of landscapes
   }
 
-  const landscapes = getLandscape(jpegs)
-  const portraits = getPortrait(jpegs)
+  const portraits = getPortraits(jpegs)
+  const landscapes = getLandscapes(jpegs)
 
   logit('Number of Portraits = ', portraits.length)
   logit('Number of Landscapes = ', landscapes.length)
 
-  const numOfRows = () => {                                                               // Function to predict the number of rows after image distribution
+  const getNumOfRows = () => {                                                            // Function to predict the number of rows after image distribution
     let predictedRows = parseInt(((landscapes.length * 2) + portraits.length) / 12)       // landscapes take twice as much space as portraits
-    if (((landscapes.length * 2) + portraits.length) % 12 > 0) rows++;                    // if there is a remainder add a final row
+    if ((((landscapes.length * 2) + portraits.length) % 12) > 0) predictedRows++;         // if there is a remainder add a final row
     return predictedRows;                                                                 // return prediction
   }
 
-  logit('Predicted Num Of Rows: ', numOfRows())
+  const numOfRows = getNumOfRows()
+  logit('Predicted Num Of Rows: ', numOfRows)
 
-  const pFrequency = parseInt(landscapes.length / (portraits.length - (numOfRows())))     // the number of landsacpe images inbetween the portraits after you
-                                                                                          // deduct the portraits used to ofset the rows
-  // const lFrequency = portraits.length / landscapes.length
-
-  logit('pFrequency = ', pFrequency)
-  // logit('lFrequency = ', lFrequency)
-
-  while (landscapes.length > 0 || portraits.length > 0) {             // Continue looping while there are portraits and landscapes left to distribute
-
-    for (let j = parseInt(pFrequency); j > 0; j-- ) {
-      logit('J Distribution: ', j)
-
-      if (portraits.length > 0 && rows % 2 == 0 && columns == 0) {    // If there's still portraits left, the row is odd and first in row
-        newSequence.push(portraits.shift());                          // push portrait
-        columns ++;                                                   // uphold columns counter
-        j ++;                                                         // reimberse landscape distribution counter
-        logit('Even Row!!!');
-        logit('column: ', columns);
-        logit('row: ', rows);
-      } else if (landscapes.length > 0) {                             // if there's still landscapes left
-        if (columns + 2 <= 12) {                                      // if landscape is not too big to fit in row
-          newSequence.push(landscapes.shift());                       // push landscape
-          columns += 2;                                               // uphold columns counter
-          logit('column: ', columns);
-          logit('row: ', rows);
-        } else {                                                      // landscape must be too big to fit in row
-          newSequence.push(portraits.shift());                        // push portrait
-          columns ++;                                                 // uphold columns counter
-          j ++;                                                       // reimberse landscape distribution counter
-          logit('Missfit!!!')
-          logit('column: ', columns);
-          logit('row: ', rows);
-        }
-
-        if (columns === 12) {                                         // if columns is 12
-          columns = 0;                                                // reset columns
-          rows ++;                                                    // increment rows
-          logit('New Row!!!');
-        }
-      }
-    }
-                                                                      // after lanscape distribution
-    if (portraits.length > 0) {                                       // if there's still portraits left
-      newSequence.push(portraits.shift())                             // push portrait
-      columns ++;                                                     // uphold columns counter
-      logit('column: ', columns);
-      logit('row: ', rows);
-      if (columns === 12) {                                           // if columns is 12
-        columns = 0;                                                  // reset columns
-        rows ++;                                                      // increment rows
-        logit('New Row!!!');
-      }
+  const sequencer = (numOfPortraits = 0, offset = 0) => {                                    // This is the sequencer!
+    let pattern = '111111';                                                                  // if no numberOfPortraits is given the default will be none
+    switch(numOfPortraits) {                                                                 //
+      case  2: if (offset) pattern = '0111110'; else pattern = '1101011'; break;             // alternate patterns for offset and not (even and odd)
+      case  4: if (offset) pattern = '01011010'; else pattern = '10100101'; break;           //
+      case  6: if (offset) pattern = '010010010'; else pattern = '100010001'; break;         //
+      case  8: if (offset) pattern = '0010000100'; else pattern = '1000000001'; break;       //
+      case 10: pattern = '00000100000'; break;                                               // only one symmetrical pattern can be made
+      case 12: pattern = '000000000000'; break;                                              // only one symmetrical pattern can be made
+      default: break;
     }
 
+    logit('Pattern: ', pattern);
+
+    pattern.split('').forEach(item => {                                                      // convert the pattern in to an array and begin itterating it's items
+      if (parseInt(item) && landscapes.length > 0) newSequence.push(landscapes.shift())      // if item is a 1 and there are landscapes left push landscape
+      else if (portraits.length > 0) newSequence.push(portraits.shift())                     // otherwise if there are any portraits left push portrait
+      else if (landscapes.length > 0) newSequence.push(landscapes.shift())                   // otherwise if there are any landscapes left push lanscape
+    });
+  }
+
+  let offset = 0;
+  let leftOver = 0;
+  let oddPorts = 0;
+  let evenPorts = 2;
+
+  if (portraits.length > numOfRows) leftOver = portraits.length - numOfRows;    // if there is enough portraits to offset every other row set how many are left over
+  logit('LeftOver: ', leftOver)
+
+  if ((portraits.length / numOfRows) <= 1) evenPorts = 2;                   // if there's less or the same number of portraits than the number of rows
+  else if ((portraits.length / numOfRows) <= 2) evenPorts = 2;              // if there's less than or the same number of portraits for two per row
+  else if ((portraits.length / numOfRows) <= 4) evenPorts = 4;              // if there's less than or the same number of portraits for four per row
+  else if ((portraits.length / numOfRows) <= 6) evenPorts = 6;              // if there's less than or the same number of portraits for six per row
+  else if ((portraits.length / numOfRows) <= 8) evenPorts = 8;              // if there's less than or the same number of portraits for eight per row
+  else if ((portraits.length / numOfRows) <= 10) evenPorts = 10;            // if there's less than or the same number of portraits for ten per row
+  else evenPorts = 12;                                                      // if there's less than or the same number of portraits for twelve per row
+
+  logit('Case Selector: ', (portraits.length / numOfRows) )
+
+  for ( let i = numOfRows; i > 0; i -- ) {                                  // Iterate round this loop once for each row
+    if (leftOver > 0) { oddPorts = evenPorts; leftOver --; }                // if there is enough portraits for the even rows also distribute in odd rows
+    else oddPorts = 0;                                                      // if there is only enough portraits left for the even rows do not distribute in odd rows
+    if (!offset) sequencer(oddPorts, offset)                                // if on odd numbered row call the sequencer and pass in num of odd portraits
+    else sequencer(evenPorts, offset)                                       // else call sequencer and pass in num of even portraits
+    offset = !offset;                                                       // Toggle offset
+    logit('itteration: ', i)
   }
 
   console.log('Array resequenced!!! num of items = ', newSequence.length)
   return newSequence;
-//  return jpegs;     // Bypass the whole alogrythm
 }
-
-
-// const resequenceJpegs = (jpegs) => {
-//
-//   let debug = 0;                    // Turn on/off debug info in the console.
-//
-// //  let newSequence = jpegs;        // Bypass the whole alogrythm
-//   let newSequence = [];
-//   let jpegsQueue = [];
-//   let columns = 0;
-//   let rows = 1;
-//   let misFits = 0;
-//
-//   const logit = (...message) => {
-//     if (debug) {
-//       let output = '';
-//       message.forEach(item => output += item);
-//       console.log(output)
-//     }
-//   }
-//
-//   jpegs.forEach( (item, i) => {
-//
-//     const img = new Image()
-//     img.src = "./images/resize300/" + item.file;
-//
-//     logit('image: ' + item.file + ' w: ' + img.width + ' h: ' + img.height)
-//
-//     if (columns === 0 && jpegsQueue.length > 0) {           // if at beginning of row and there are items in the queue
-//       logit('DUMPING QUEUE!!! ', jpegsQueue.length)
-//       misFits ++;
-//       jpegsQueue.forEach( (queueItem) => {                  // dump the queue in to the newSequence
-//         columns += 2;                                       // uphold the comumns counter
-//         newSequence.push(queueItem)
-//         logit('Adding to newSequence: ', queueItem.file)
-//         if (columns === 12) {
-//           rows ++;
-//           columns = 0;                                      // reset on each full row
-//           logit('NEW ROW!!!')
-//         }
-//       })
-//       jpegsQueue = [];
-//     }
-//
-//     if (img.width < img.height) {                           // if image is portrait
-//       logit('PORTRAIT!!!')
-//       columns += 1;                                         // uphold the columns counter
-//       newSequence.push(item)                                // push in to newSequence
-//       logit('Adding to newSequence: ', item.file)
-//       if (columns === 12) {
-//         rows ++;
-//         columns = 0;                                        // reset counter on full row
-//         logit('NEW ROW!!!')
-//       }
-//     } else {                                                // image must be landscape
-//       logit('LANDSCAPE!!!')
-//       columns += 2;                                         // uphold the columns counter
-//       if (columns === 12) {                                 // if the row is full
-//         newSequence.push(item)                              // push in to newSequence
-//         logit('Adding to newSequence: ', item.file)
-//         rows ++;
-//         columns = 0;                                        // reset the counter
-//         logit('NEW ROW!!!')
-//       }
-//       else if (columns > 12) {                              // if this image doesn't fit in row
-//         logit('MISSFIT!!!')
-//         jpegsQueue.push(item);                              // push on to jpegsQueue
-//         logit('Adding to queue: ', item.file)
-//         columns -= 2;                                       // revert columns counter
-//       } else {                                              // must be in the middle of the row
-//         newSequence.push(item)                              // push on to newSequence
-//         logit('Adding to newSequence: ', item.file)
-//       }
-//     }
-//
-//     if (                                                    // if there are no more portraits
-//       i === jpegs.length -1                                 // at the final item in array
-//       && jpegsQueue.length > 0                              // push the jpegsQueue on to newSequence
-//     ) {
-//       logit('NO MORE PORTRAITS!!! Dumping Queue!')
-//       jpegsQueue.forEach( (item) => {                       // dump the queue in to the newSequence
-//         columns += 2;                                       // uphold the columns counter
-//         logit('Adding to newSequence: ', item.file)
-//         newSequence.push( item)
-//         if (columns === 12) {
-//           rows ++;
-//           columns = 0;                                      // reset on each full row
-//           logit('NEW ROW!!!')
-//         }
-//       })
-//     }
-//
-//   })
-//
-//   console.log('Array resequenced!!! num of items = ', newSequence.length)
-//   logit('Nomber of Rows: ', rows)
-//   logit('Nomber of misFits: ', misFits)
-//   return newSequence;
-// }
