@@ -26,18 +26,9 @@ export const zipJpegs = (files) => {                                    // Expor
 }                                                                       // Return the entirety of newly constructed URL.
 
 
-
-
-
-
-
-
-
-
-
 const resequenceJpegs = (jpegs) => {
 
-  let debug = 0;                    // Turn on/off debug info in the console.
+  let debug = 1;                    // Turn on/off debug info in the console.
   let newSequence = [];
 
   const logit = (...message) => {
@@ -79,9 +70,8 @@ const resequenceJpegs = (jpegs) => {
     if ((((landscapes.length * 2) + portraits.length) % 12) > 0) predictedRows++;         // if there is a remainder add a final row
     return predictedRows;                                                                 // return prediction
   }
-
-  const numOfRows = getNumOfRows()
-  logit('Predicted Num Of Rows: ', numOfRows)
+  const predictedNumOfRows = getNumOfRows()
+  logit('Predicted Num Of Rows: ', predictedNumOfRows)
 
   const sequencer = (numOfPortraits = 0, offset = 0) => {                                    // This is the sequencer!
     let pattern = '111111';                                                                  // if no numberOfPortraits is given the default will be none
@@ -105,30 +95,39 @@ const resequenceJpegs = (jpegs) => {
   }
 
   let offset = 0;
-  let leftOver = 0;
+  let leftOverRows = 0;
   let oddPorts = 0;
   let evenPorts = 2;
 
-  if (portraits.length > numOfRows) leftOver = portraits.length - numOfRows;    // if there is enough portraits to offset every other row set how many are left over
-  logit('LeftOver: ', leftOver)
+  if ((portraits.length / predictedNumOfRows) <= 1) evenPorts = 2;                   // if there's less or the same number of portraits than the number of rows
+  else if ((portraits.length / predictedNumOfRows) <= 2) evenPorts = 2;              // if there's less than or the same number of portraits for two per row
+  else if ((portraits.length / predictedNumOfRows) <= 4) evenPorts = 4;              // if there's less than or the same number of portraits for four per row
+  else if ((portraits.length / predictedNumOfRows) <= 6) evenPorts = 6;              // if there's less than or the same number of portraits for six per row
+  else if ((portraits.length / predictedNumOfRows) <= 8) evenPorts = 8;              // if there's less than or the same number of portraits for eight per row
+  else if ((portraits.length / predictedNumOfRows) <= 10) evenPorts = 10;            // if there's less than or the same number of portraits for ten per row
+  else evenPorts = 12;                                                               // if there's less than or the same number of portraits for twelve per row
+  logit('Case Selector: ', (portraits.length / predictedNumOfRows) )
 
-  if ((portraits.length / numOfRows) <= 1) evenPorts = 2;                   // if there's less or the same number of portraits than the number of rows
-  else if ((portraits.length / numOfRows) <= 2) evenPorts = 2;              // if there's less than or the same number of portraits for two per row
-  else if ((portraits.length / numOfRows) <= 4) evenPorts = 4;              // if there's less than or the same number of portraits for four per row
-  else if ((portraits.length / numOfRows) <= 6) evenPorts = 6;              // if there's less than or the same number of portraits for six per row
-  else if ((portraits.length / numOfRows) <= 8) evenPorts = 8;              // if there's less than or the same number of portraits for eight per row
-  else if ((portraits.length / numOfRows) <= 10) evenPorts = 10;            // if there's less than or the same number of portraits for ten per row
-  else evenPorts = 12;                                                      // if there's less than or the same number of portraits for twelve per row
+  if (portraits.length > predictedNumOfRows) {                                       // if there is enough portraits to offset every other row
+    leftOverRows = Math.ceil(                                                        // rounds a real number up to the nearest integer even if less than 0.5 over
+      ((portraits.length - ((predictedNumOfRows / 2) * evenPorts)) / evenPorts)      // number of rows that can be filled with the left over portraits (after offset rows)
+    );
+  }                                                                                  
+  logit('LeftOver: ', leftOverRows)
 
-  logit('Case Selector: ', (portraits.length / numOfRows) )
-
-  for ( let i = numOfRows; i > 0; i -- ) {                                  // Iterate round this loop once for each row
-    if (leftOver > 0) { oddPorts = evenPorts; leftOver --; }                // if there is enough portraits for the even rows also distribute in odd rows
+  for ( let i = predictedNumOfRows; i > 0; i -- ) {                         // Iterate round this loop once for each predicted row
+    if (leftOverRows > 0 && !offset) {                                      // if there is enough portraits for the even rows also distribute in odd rows
+      oddPorts = evenPorts;                                                 // distribute the same number of portraits in the odd rows as the even
+      leftOverRows --;                                                      // decreace the number of leftOverRows
+    }
     else oddPorts = 0;                                                      // if there is only enough portraits left for the even rows do not distribute in odd rows
     if (!offset) sequencer(oddPorts, offset)                                // if on odd numbered row call the sequencer and pass in num of odd portraits
     else sequencer(evenPorts, offset)                                       // else call sequencer and pass in num of even portraits
     offset = !offset;                                                       // Toggle offset
+
     logit('itteration: ', i)
+    logit('left over rows: ', leftOverRows)
+    logit('OddPorts: ' + oddPorts + ' even Ports: ' + evenPorts)
   }
 
   console.log('Array resequenced!!! num of items = ', newSequence.length)
