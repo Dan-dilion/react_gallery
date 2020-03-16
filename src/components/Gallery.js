@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import { Thumbnail } from './Thumbnail.js';
+import { resequenceJpegs } from '../utils/utils.js'
 
 export const Gallery = (props) => {
 
@@ -43,7 +44,7 @@ export const Gallery = (props) => {
 	return(
 		<div className="phcontainer">
       {/*<button onClick={() => props.refreshJpegs()} >PressMe</button>*/}
-			{imageComponent(props.getJpegs)}
+			{imageComponent(resequenceJpegs(props.getJpegs))}
 		</div>
 	);
 }

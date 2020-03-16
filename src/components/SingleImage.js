@@ -25,7 +25,7 @@ export const SingleImage = (props) => {
   // })
 
   let jpegsArray = props.getJpegs;                                              // jpegsArray to point to the Redux store jpegs
-  if (props.selectedPage === 'basket') { jpegsArray = props.getBasket }         // If you arived here from the basket make jpegsArray will be the basket
+  if (props.selectedPage === 'basket') jpegsArray = props.getBasket       // If you arived here from the basket jpegsArray will be the basket
 
   const urlFilename = () => {                                                   // get filename from URL:
     let pathNames = window.location.pathname.split('/')                         // Split path at '/' and make items in to an array

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Thumbnail } from './Thumbnail.js';
+import { resequenceJpegs } from '../utils/utils.js'
 
 
 export const Basket = (props) => {
@@ -38,7 +39,7 @@ export const Basket = (props) => {
 
 	return(
 		<div className="phcontainer">
-			{imageComponent(props.getBasket)}
+			{imageComponent(resequenceJpegs(props.getBasket))}
 		</div>
 	);
 }
