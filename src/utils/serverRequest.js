@@ -13,9 +13,15 @@ export const getJpegs = async () => {                 // Export method, requires
 	})
 	.then( async responseData => {
 		let newJpegs = await responseData.map((file, i) => {    // itterate through the list of jpegs
+      const img = new Image()
+      img.src = "./images/resize300/" + file
 			return({                                              // replace each item with and object
 				file: file,                                         // so the new structure looks like this:
-				id: i                                               // newJpegs [{file: 'filename.jpg', id: i}]
+				id: i,                                              // newJpegs [{file: 'filename.jpg', id: i}]
+        res: {
+          height: img.height,
+          width: img.width
+        }
 			})
 		})
     //return await resequenceJpegs(newJpegs);           // Resequence and return results!

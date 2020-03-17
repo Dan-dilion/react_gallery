@@ -11,24 +11,20 @@ export const resequenceJpegs = (jpegs) => {
     }
   }
 
-  const getPortraits = (pegs) => {                           // Function to make array of all portrait images
-    let ports = [];                                          // declare empty array
-    jpegs.forEach(item => {                                  // iterate through jpegs
-      const img = new Image()                                // create instance of the Image object
-      img.src = "./images/resize300/" + item.file;           // use this iterations filename as the source
-      if (img.width < img.height) ports.push(item);          // if the width is smaller than the height add it to portraits
+  const getPortraits = (pegs) => {                              // Function to make array of all portrait images
+    let ports = [];                                             // declare empty array
+    jpegs.forEach(item => {                                     // iterate through jpegs
+      if (item.res.width < item.res.height) ports.push(item);   // if the width is smaller than the height add it to portraits
     })
-    return ports;                                            // return the array of portraits
+    return ports;                                               // return the array of portraits
   }
 
-  const getLandscapes = (pegs) => {                          // Function to make array of all landscape images
-    let lands = [];                                          // declare empty array
-    jpegs.forEach(item => {                                  // iterate through jpegs
-      const img = new Image()                                // create instance of the Image object
-      img.src = "./images/resize300/" + item.file;           // use this iterations filename as the source
-      if (img.width >= img.height) lands.push(item);         // if the width is larger than or the same as the height add it to landscapes
+  const getLandscapes = (pegs) => {                             // Function to make array of all landscape images
+    let lands = [];                                             // declare empty array
+    jpegs.forEach(item => {                                     // iterate through jpegs
+      if (item.res.width >= item.res.height) lands.push(item);  // if the width is larger than or the same as the height add it to landscapes
     })
-    return lands;                                            // return the array of landscapes
+    return lands;                                               // return the array of landscapes
   }
 
   const portraits = getPortraits(jpegs)

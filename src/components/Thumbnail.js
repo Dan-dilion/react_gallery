@@ -33,12 +33,9 @@ export const Thumbnail = (props, jpegItem, i) => {
 	}
 
   const styles = (i) => {
-    const img = new Image();
-    img.src = "./images/resize300/" + jpegItem.file
-//    console.log(jpegItem.file + ' - ' + img.width + ' x ' + img.height)
 
-    let size = 'span 2';                            // assume image is landscape
-    if (img.width < img.height) size = 'span 1';    // unless image is portrait
+    let size = 'span 2';                                                // assume image is landscape
+    if (jpegItem.res.width < jpegItem.res.height) size = 'span 1';      // unless image is portrait
 
     return {
       'gridColumn': size
