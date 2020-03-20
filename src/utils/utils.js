@@ -1,6 +1,6 @@
 export const resequenceJpegs = (jpegs) => {
 
-  let debug = 1;                    // Turn on/off debug info in the console.
+  let debug = 0;                    // Turn on/off debug info in the console.
   let newSequence = [];
 
   const logit = (...message) => {
