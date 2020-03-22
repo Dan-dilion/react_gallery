@@ -19,6 +19,12 @@
 	//box-shadow: 0em 5em 5em 5em #fed1;
 }
 
+@media screen and (max-width: 800px) {
+  .phcontainer{
+    grid-template-columns:  repeat(6, 1fr);
+  }
+}
+
 
 .gallery-title {
 	z-index: 2;
