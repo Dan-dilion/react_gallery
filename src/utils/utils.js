@@ -1,6 +1,6 @@
 export const resequenceJpegs = (jpegs) => {
 
-  let debug = 1;                    // Turn on/off debug info in the console.
+  let debug = 0;                    // Turn on/off debug info in the console.
   let newSequence = [];
   let gridWidth = 12;
   if (window.matchMedia("(max-width: 800px)").matches) gridWidth = 6;
@@ -78,12 +78,9 @@ export const resequenceJpegs = (jpegs) => {
 
 
   let offsetToggle = 1;
-//  let leftOverRows = 0;
   let leftoverPorts = 0;
   let oddPorts = 0;
   let evenPorts = 0;
-  let portsPerRow = portraits.length / predictedNumOfRows;
-  //let rowsPerPortraitPair = (portraits.length / 2)
 
 /*                                **
 **  Logical Portraits Distributer **
@@ -106,7 +103,7 @@ export const resequenceJpegs = (jpegs) => {
     leftoverPorts = i;                                           // break out of the loop and add the leftover portraits to leftoverPorts
   }
 
-// This next loop calls the sequencer for each row and distributes leftoverPorts amonst the odd numbered rows
+// This next loop calls the sequencer for each row and distributes leftoverPorts amongst the odd numbered rows
 
   offsetToggle = 0;                                      // Reset the toggle
   for (let i = predictedNumOfRows; i > 0; i--) {         // loop once for every row
@@ -114,14 +111,14 @@ export const resequenceJpegs = (jpegs) => {
       if (leftoverPorts > 0) {                           // call the sequencer and pass in the number of oddPorts
         sequencer(oddPorts + 2, offsetToggle)            // if there are leftoverPorts left add 2 to the number
         leftoverPorts -= 2;                              // of oddPorts and deduct 2 from the number of leftoverPorts
-      } else sequencer(oddPorts, offsetToggle);          // if there's no leftoverPorts just pass in the oddPorts
+      } else sequencer(oddPorts, offsetToggle);          // if there's no leftoverPorts just pass in oddPorts unadulterated
     }
-    else sequencer(evenPorts, offsetToggle);             // otherwise its an even row, call sequencer and pass in evenPorts
+    else sequencer(evenPorts, offsetToggle);             // Otherwise it's an even row, call sequencer and pass in evenPorts
 
     offsetToggle = !offsetToggle;                        // switch the toggle
   }
 
-  logit('Case Selector: ' + portsPerRow + ' evenPorts: ' + evenPorts)
+  logit('OddPorts: ' + oddPorts + ' evenPorts: ' + evenPorts)
 
   console.log('Array resequenced!!! num of items = ', newSequence.length)
   return newSequence;
