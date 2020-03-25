@@ -21,7 +21,10 @@ import {
   emptyBasket,
 } from '../actions/basketActions.js';
 
-import { refreshJpegs } from '../actions/fileActions.js';
+import {
+  refreshJpegs,
+  toggleIsFetching
+} from '../actions/fileActions.js';
 
 
 // The App component has the react Router in
@@ -109,10 +112,12 @@ class App extends React.Component {
   							path={"/gallery"}
   							render={(props) => <Gallery
   								getJpegs={this.props.jpegs}
-  								getBasket={this.props.basket}
+                  isFetchingJpegs={this.props.isFetchingJpegs}
+                  toggleIsFetching={this.props.TOGGLE_FLAG}
+                  refreshJpegs={this.props.refreshJpegs}
+                  getBasket={this.props.basket}
   								addBasket={this.props.ADD_BASKET}
   								removeBasket={this.props.REMOVE_BASKET}
-                  refreshJpegs={this.props.refreshJpegs}
   							/>}
   						/>
 
@@ -143,11 +148,13 @@ class App extends React.Component {
   							path={"/single"}
   							render={(props) => <SingleImage
                   selectedPage={this.state.selectedPage}
-  								getJpegs={this.props.jpegs}
   								getBasket={this.props.basket}
   								addBasket={this.props.ADD_BASKET}
   								removeBasket={this.props.REMOVE_BASKET}
                   refreshJpegs={this.props.refreshJpegs}
+                  getJpegs={this.props.jpegs}
+                  isFetchingJpegs={this.props.isFetchingJpegs}
+                  toggleIsFetching={this.props.TOGGLE_FLAG}
   							/>}
   						/>
 
@@ -176,6 +183,7 @@ class App extends React.Component {
 */
 const mapStateToProps = (state) => {
 	return {
+    isFetchingJpegs: state.fileReducer.isFetching,
 		jpegs: state.fileReducer.jpegs,
 		basket: state.basketReducer.basketJpegs
 	};
@@ -198,6 +206,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
     EMPTY_BASKET: () => {
       dispatch(emptyBasket());
+    },
+    TOGGLE_FLAG: (state) => {
+      dispatch(toggleIsFetching(state));
     },
     refreshJpegs: () => {
       dispatch(refreshJpegs());

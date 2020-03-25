@@ -5,12 +5,17 @@ import { resequenceJpegs } from '../utils/utils.js'
 
 export const Gallery = (props) => {
 
-const [jpegs, setJpegs] = useState(resequenceJpegs(props.getJpegs))
+//const [jpegs, setJpegs] = useState(resequenceJpegs(props.getJpegs))
+
+let jpegs = [];
+
+if (!props.isFetchingJpegs) jpegs = resequenceJpegs(props.getJpegs)
+console.log('Current Jpegs: ', jpegs.length + ' Is Fetching: ', props.isFetchingJpegs)
 
   useEffect( () => {                                                      // Use Effect is like componentDidMount for Function (stateless) components.
     const asyncWrapper = async () =>{                                     // I have wrapped refreshJpegs() in this async function because when using
       console.log('Gallery Calling Refresh')
-      await props.refreshJpegs()                                          // the await method the function will return an empty promise even if there
+      props.refreshJpegs()                                                // the await method the function will return an empty promise even if there
       console.log('Gallery: Refresh called: ' + props.getJpegs.length)
     }                                                                     // is no data to return.
     asyncWrapper()                                                        // This way asyncWrapper() returns nothing and refreshJpegs() is called and
@@ -22,10 +27,14 @@ const [jpegs, setJpegs] = useState(resequenceJpegs(props.getJpegs))
   const mediaQueryAction = (action) => {                                  // This is the action it will take when the condition is matched
     if (action.matches) {                                                 //
       console.log('Viewport is 800px or less')                            //
-      setJpegs(resequenceJpegs(jpegs));                                   //
+      props.toggleIsFetching(true);
+      jpegs = resequenceJpegs(jpegs);                                     //
+      props.toggleIsFetching(false);
     } else {                                                              //
       console.log('Viewport is larger than 800px!')                       //
-      setJpegs(resequenceJpegs(jpegs));                                   //
+      props.toggleIsFetching(true);
+      jpegs = resequenceJpegs(jpegs);                                     //
+      props.toggleIsFetching(false);
     }
   }
   mediaQueryListener.addListener(mediaQueryAction)
@@ -58,10 +67,11 @@ const [jpegs, setJpegs] = useState(resequenceJpegs(props.getJpegs))
 		}
 	}
 
-	return(
+	return( !props.isFetchingJpegs ?
 		<div className="phcontainer">
       {/*<button onClick={() => props.refreshJpegs()} >PressMe</button>*/}
 			{imageComponent(jpegs)}
-		</div>
+		</div> :
+    <div> <h2>Loading Images...</h2> </div>
 	);
 }

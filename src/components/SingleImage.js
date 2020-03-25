@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 import { getJpegs } from '../utils/serverRequest.js'
@@ -110,13 +110,13 @@ export const SingleImage = (props) => {
     const link = (button) => {
       switch (button) {
         case 'lastInBasket':
-          return(<Link to={ '/basket' }>Remove From Basket LAST</Link>)
-        case 'firstInBasket':
-          return(<Link to={ './' + next.jpegItem.file }>Remove From Basket FIRST</Link>)
+          return(<Link to={ '/basket' }>Remove From Basket</Link>)
+        case 'BeginningOfBasket':
+          return(<Link to={ './' + next.jpegItem.file }>Remove From Basket</Link>)
         case 'normalBasket':
-          return(<Link to={ './' + prev.jpegItem.file }>Remove From Basket NORM</Link>)
+          return(<Link to={ './' + prev.jpegItem.file }>Remove From Basket</Link>)
         case 'gallery':
-          return('Remove From Basket GALL')
+          return('Remove From Basket')
         default: break;
       }
     }
@@ -124,7 +124,11 @@ export const SingleImage = (props) => {
     return(
       <button
 				className="add-remove-basket standard-button disable-selection"
-				onClick={() => props.removeBasket(props.getBasket.indexOf(jpegItem))}
+				onClick={() => {
+          props.toggleIsFetching(true);
+          props.removeBasket(props.getBasket.indexOf(jpegItem))
+          props.toggleIsFetching(false);
+        }}
       >
         {/*Remove From Basket TEST*/}
         {link(buttonType)}
@@ -137,9 +141,9 @@ export const SingleImage = (props) => {
       props.getBasket.length > 0                         // if the basket is not empty
       && props.getBasket.some(item => item.file === jpegItem.file)        // and the item is in the basket
     ) {
-      if (props.selectedPage === 'basket') {                                                  // if we are browsing the basket
-        if ( jpegsArray.length <= 1) return removeButton(jpegItem, 'lastInBasket')                      // if we are on the last item in the basket
-        else if ( jpegsArray.indexOf(jpegItem) === 0) return removeButton(jpegItem, 'firstInBasket')    // if we are on the first item in the basket
+      if (props.selectedPage === 'basket') {                                                  // if we are viewing the basket
+        if ( jpegsArray.length <= 1) return removeButton(jpegItem, 'lastInBasket')                          // if we are on the only item in the basket
+        else if ( jpegsArray.indexOf(jpegItem) === 0) return removeButton(jpegItem, 'BeginningOfBasket')    // if we are on the first item in the basket
         else return removeButton(jpegItem, 'normalBasket')                                    // otherwise we're in the middle of the basket
       }
       else return removeButton(jpegItem, 'gallery')                       // otherwise we're browsing the Gallery
@@ -158,7 +162,7 @@ export const SingleImage = (props) => {
 // refreshed before it tries to render anything. Otherwise, if you arrive here
 // from a link, jpegsArray will be empty and the async refresh method will be
 // triggered after the component is rendered causing a crash!
-	return( currentJpegItem.jpegItem && next.jpegItem && prev.jpegItem ?
+	return( !props.isFetchingJpegs && currentJpegItem.jpegItem && next.jpegItem && prev.jpegItem ?
 		<div className="single-wrapper">
 			<div className={'image-container'}>
 				<Link
@@ -178,11 +182,11 @@ export const SingleImage = (props) => {
 	)
 }
 
-SingleImage.propTypes = {
-  selectedPage: PropTypes.string,
-  getJpegs: PropTypes.array,
-  getBasket: PropTypes.array,
-  addBasket: PropTypes.func,
-  removeBasket: PropTypes.func,
-  refreshJpegs: PropTypes.func
-}
+// SingleImage.propTypes = {
+//   selectedPage: PropTypes.string,
+//   getJpegs: PropTypes.array,
+//   getBasket: PropTypes.array,
+//   addBasket: PropTypes.func,
+//   removeBasket: PropTypes.func,
+//   refreshJpegs: PropTypes.func
+// }

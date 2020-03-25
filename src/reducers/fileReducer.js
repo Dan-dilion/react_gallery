@@ -1,4 +1,5 @@
 const initialState = {
+  isFetching: true,
 	jpegs: [],
 };
 
@@ -10,6 +11,11 @@ const fileReducer = (state = initialState, action) => {
 				jpegs: [...state.jpegs, ...action.payload]
 			};
 			break;
+    case "TOGGLE_FLAG":
+      state = {
+        ...state,
+        isFetching: action.payload
+      }
 
 		default:
 			console.log('FILE REDUCER: No action specified!!!');

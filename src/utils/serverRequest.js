@@ -1,5 +1,6 @@
 //import { resequenceJpegs } from './utils.js'
-
+import store from '../store.js';
+import { toggleIsFetching } from '../actions/fileActions.js';
 
 // This is the route and port that the node server will be listening to for api
 // requests.
@@ -24,20 +25,20 @@ export const getJpegs = async () => {                 // Export method, requires
 **  Unfortunately neither of them work!
 */
 
-  .then( responseData => {
-    const newJpegs = responseData.map((file, i) => {
-      const img = new Image();
-      img.src = "./images/resize300/" + file
-
-      return {                                              // replace each item with and object
-      	file: file,                                         // so the new structure looks like this:
-      	id: i,                                              // newJpegs [{file: 'filename.jpg', id: i}]
-        res: {width: img.width, height: img.height}         //actualDimentions()
-      }
-    })
-    console.log(newJpegs)
-    return newJpegs;
-	})
+  // .then( responseData => {
+  //   const newJpegs = responseData.map((file, i) => {
+  //     const img = new Image();
+  //     img.src = "./images/resize300/" + file
+  //
+  //     return {                                              // replace each item with and object
+  //     	file: file,                                         // so the new structure looks like this:
+  //     	id: i,                                              // newJpegs [{file: 'filename.jpg', id: i}]
+  //       res: {width: img.width, height: img.height}         //actualDimentions()
+  //     }
+  //   })
+  //   console.log(newJpegs)
+  //   return newJpegs;
+	// })
 
 
 /*
@@ -51,22 +52,24 @@ export const getJpegs = async () => {                 // Export method, requires
 **  get a blank array ("[]") sugesting that it's not waiting.
 */
 
-//   .then( async responseData => {
-//     let newJpegs = [];
-//     await Promise.all(responseData.map( async (file, i) => {
-//       const img = await new Image()
-//       await img.addEventListener('load', () => {
-//           newJpegs.push({
-//             file: file,
-//             id: i,
-//             res: { width: img.width, height: img.height }
-//         })
-//       })
-//       img.src = "./images/resize300/" + file
-//     }))
-//     console.log(newJpegs)
-//     return newJpegs;
-//   })
+  .then( async responseData => {
+    let newJpegs = [];
+    await Promise.all(responseData.map( (file, i) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.addEventListener('load', () => {
+            resolve({
+              file: file,
+              id: i,
+              res: { width: img.width, height: img.height }
+          })
+        })
+        img.src = "./images/resize300/" + file
+      }).then( response => newJpegs.push(response) )
+    }))
+    console.log(newJpegs)
+    return newJpegs;
+  })
 
 
 /*
@@ -74,33 +77,32 @@ export const getJpegs = async () => {                 // Export method, requires
 */
 
 	// .then( async responseData => {
-	// 	let newJpegs = [];
-  //   await responseData.map( async (file, i) => {                               // itterate through the list of jpegs
   //
-  //     const getDimentions = async () => {
-  //       return await new Promise((resolve, reject) => {
-  //         try{
-  //           const img = new Image();
-  //           img.addEventListener('load', () => {
-  //             console.log('w: ' + img.width + 'h: ' + img.height)
-  //             resolve( {
-  //                 file: file,
-  //                 id: i,
-  //                 res: { width: img.width, height: img.height }
-  //               })
-  //             //img.onerror = reject('ERROR!!!')
+  //   const getDimentions = () => {
+  //     return new Promise((resolve, reject) => {
+  //       let newJpegs = [];
+  //
+  //       responseData.map((file, i) => {                               // itterate through the list of jpegs
+  //         let img = new Image();
+  //         img.onload = () => {
+  //           console.log('w: ' + img.width + 'h: ' + img.height)
+  //           newJpegs.push({
+  //             file: file,
+  //             id: i,
+  //             res: { width: img.width, height: img.height }
   //           })
-  //           img.src = "./images/resize300/" + file
-  //         } catch (err) {
-  //           reject('Error')
-  //           console.log('error');
   //         }
+  //         img.onerror = (e) => reject('ERROR!!!', e)
+  //         img.src = "./images/resize300/" + file
   //       })
-  //     }
-  //     await getDimentions().then(async output => { await newJpegs.push(output)})
-	// 	})
-  //   console.log(newJpegs)
-  //   return newJpegs;
+  //       resolve(newJpegs)
+  //     })
+  //   }
+  //
+  //   await getDimentions().then( output => {
+  //     console.log('NEWJPEGS!!! ', output)
+  //     return output;
+  //   })
 	// })
 
   /*
