@@ -48,7 +48,7 @@ export const Thumbnail = (props, jpegItem, i) => {
 				<Link
 					to={ './single/' + jpegItem.file }
 				><img
-					alt={"File not found: " + jpegItem.file}
+					alt={"./resources/icons/ajax-loader-white-on-black.gif"}
 					className="images"
 					key={jpegItem.id}
 					src={"./images/resize300/"

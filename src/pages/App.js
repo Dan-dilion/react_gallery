@@ -74,7 +74,7 @@ class App extends React.Component {
             emptyBasket={this.props.EMPTY_BASKET}
           />
 
-          <div className='header-spacer' />
+          {/*<div className='header-spacer' />*/}
 
 			    <div className="app">
   					<Switch>

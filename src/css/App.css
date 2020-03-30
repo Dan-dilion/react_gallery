@@ -21,7 +21,7 @@ li {
 }
 
 .app {
-  padding-top: 2em;
+  padding-top: 13%;
   background-color: #000a;
   text-align: center;
 
@@ -36,37 +36,13 @@ li {
   -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
 }
 
-.container {
+/* .container {
 	display: block;
 	max-width: 100%;
 	margin: auto;
 	color: #fed5;
 	position: relative;
-}
-
-button.standard-button {
-	transition-property: background-color, box-shadow ;
-	transition-duration: 1500ms;
-	text-decoration: none;
-	border: none;
-	border-radius: .2vh;
-	background-color: #fed6;
-}
-
-.standard-button:hover {
-	text-decoration: none;
-	transition: background-color 100ms, box-shadow 100ms;
-	background-color: #feda;
-
-	box-shadow:
-		inset .2em .2em .1em .0em #0004,
-    inset -.2em -.2em .1em .0em #fff4
-}
-
-.standard-button:active {
-	transition:  box-shadow 50ms ease-in-out;
-	color: #feda;
-}
+} */
 
 .app-link {
   color: #fed5;

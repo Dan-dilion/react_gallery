@@ -31,3 +31,12 @@
 	text-shadow: .2em .2em .1em #000f;
 	background-color: #0000;
 }
+
+.app-header {
+  position: fixed;
+}
+
+.header-spacer {
+  //display: block;
+  border: 5px solid white;
+}

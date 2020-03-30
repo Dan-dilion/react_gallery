@@ -101,8 +101,10 @@ h1.logo {
 }
 
 .header-spacer {
+  position: absolute;
   display: block;
   min-height: 10vw;
+  border: 5px solid red;
 }
 
 /* I have added this styling at the end to keep it isolated */

@@ -27,7 +27,7 @@ export const SingleImage = (props) => {
   // })
 
   let jpegsArray = props.getJpegs;                                              // jpegsArray to point to the Redux store jpegs
-  if (props.selectedPage === 'basket') jpegsArray = props.getBasket       // If you arived here from the basket jpegsArray will be the basket
+  if (props.selectedPage === 'basket') jpegsArray = props.getBasket             // If you arived here from the basket jpegsArray will be the basket
 
   const urlFilename = () => {                                                   // get filename from URL:
     let pathNames = window.location.pathname.split('/')                         // Split path at '/' and make items in to an array
@@ -42,13 +42,13 @@ export const SingleImage = (props) => {
     index: jpegsArray.findIndex( item => item.file === urlFilename())
   }
 
-  const prev = {...currentJpegItem}
+  const prev = {currentJpegItem}
 	if (currentJpegItem.index > 0) {
 		prev.jpegItem = jpegsArray[currentJpegItem.index - 1];
 		prev.index --;
 	}
 
-  const next = {...currentJpegItem}
+  const next = {currentJpegItem}
 	if (currentJpegItem.index < jpegsArray.length - 1) {
 		next.jpegItem = jpegsArray[currentJpegItem.index + 1];
 		next.index ++;
@@ -77,13 +77,17 @@ export const SingleImage = (props) => {
   //    }
   // }, [])
 
+  const exitButton = () => {
+    return(<Link className="exit-button top-buttons" to={ '/' + props.selectedPage } />)
+  }
+
 	const nextButton = () => {
 		if (currentJpegItem.index < jpegsArray.length - 1) {      // if not the last
 			return (
 				<Link
-					className="next-image disable-selection"
+					className="next-image disable-selection next-prev-button"
 					to={ './' + next.jpegItem.file }
-				>Next</Link>
+				/>
 			)
 		}
 	}
@@ -92,50 +96,56 @@ export const SingleImage = (props) => {
 		if (currentJpegItem.index > 0) {                          // if not the first
 			return(
 				<Link
-					className="prev-image disable-selection"
+					className="prev-image disable-selection next-prev-button"
 					to={ './' + prev.jpegItem.file }
-				>Prev</Link>
+				/>
 			)
-		}
+		} else return(<div className="next-prev-button"/>)
 	}
 
 	const addButton = (jpegItem) => {
 		return(
 			<button
-				className="add-remove-basket standard-button disable-selection"
+				className="add-button top-buttons"
 				onClick={ () => props.addBasket(jpegItem) }
-			>Add To Basket</button>
+			/>
 		)
 	}
 
   const removeButton = (jpegItem, buttonType) => {
-    const link = (button) => {
-      switch (button) {
-        case 'lastInBasket':
-          return(<Link to={ '/basket' }>Remove From Basket</Link>)
-        case 'BeginningOfBasket':
-          return(<Link to={ './' + next.jpegItem.file }>Remove From Basket</Link>)
-        case 'normalBasket':
-          return(<Link to={ './' + prev.jpegItem.file }>Remove From Basket</Link>)
-        case 'gallery':
-          return('Remove From Basket')
-        default: break;
-      }
-    }
 
-    return(
-      <button
-				className="add-remove-basket standard-button disable-selection"
-				onClick={() => {
-          props.toggleIsFetching(true);
-          props.removeBasket(props.getBasket.indexOf(jpegItem))
-          props.toggleIsFetching(false);
-        }}
-      >
-        {/*Remove From Basket TEST*/}
-        {link(buttonType)}
-      </button>
-    )
+    switch (buttonType) {
+      case 'lastInBasket':
+        return(<Link
+          className="top-buttons remove-button"
+          to={ '/basket' }
+          onClick={ () => props.removeBasket(props.getBasket.indexOf(jpegItem)) }
+        />); break;
+      case 'BeginningOfBasket':
+        return(<Link
+          className="top-buttons remove-button"
+          to={ './' + next.jpegItem.file }
+          onClick={ () => props.removeBasket(props.getBasket.indexOf(jpegItem)) }
+        />); break;
+      case 'normalBasket':
+        return(<Link
+          className="top-buttons remove-button"
+          to={ './' + prev.jpegItem.file }
+          onClick={ () => props.removeBasket(props.getBasket.indexOf(jpegItem)) }
+        />); break;
+      case 'gallery':
+        return(
+          <button
+            className="top-buttons remove-button"
+    				onClick={() => {
+              props.toggleIsFetching(true);
+              props.removeBasket(props.getBasket.indexOf(jpegItem))
+              props.toggleIsFetching(false);
+            }}
+          />
+        ); break;
+      default: break;
+    }
   }
 
   const addRemoveButtonSelecter = (jpegItem) => {
@@ -144,8 +154,8 @@ export const SingleImage = (props) => {
       && props.getBasket.some(item => item.file === jpegItem.file)        // and the item is in the basket
     ) {
       if (props.selectedPage === 'basket') {                                                  // if we are viewing the basket
-        if ( jpegsArray.length <= 1) return removeButton(jpegItem, 'lastInBasket')                          // if we are on the only item in the basket
-        else if ( jpegsArray.indexOf(jpegItem) === 0) return removeButton(jpegItem, 'BeginningOfBasket')    // if we are on the first item in the basket
+        if ( props.getBasket.length <= 1) return removeButton(jpegItem, 'lastInBasket')                     // if we are on the only item in the basket
+        else if ( props.getBasket.indexOf(jpegItem) === 0) return removeButton(jpegItem, 'BeginningOfBasket')    // if we are on the first item in the basket
         else return removeButton(jpegItem, 'normalBasket')                                    // otherwise we're in the middle of the basket
       }
       else return removeButton(jpegItem, 'gallery')                       // otherwise we're browsing the Gallery
@@ -164,22 +174,23 @@ export const SingleImage = (props) => {
 // refreshed before it tries to render anything. Otherwise, if you arrive here
 // from a link, jpegsArray will be empty and the async refresh method will be
 // triggered after the component is rendered causing a crash!
-	return( !props.isFetchingJpegs && currentJpegItem.jpegItem && next.jpegItem && prev.jpegItem ?
+	return( !props.isFetchingJpegs && currentJpegItem.jpegItem ?
 		<div className="single-wrapper">
-			<div className={'image-container'}>
 				<Link
 					to={ '/images/' + currentJpegItem.jpegItem.file }
 					target='_blank'
 				>
 					{ Slider(currentJpegItem.index, jpegsArray, props) }
         </Link>
-				{ addRemoveButtonSelecter(currentJpegItem.jpegItem) }
-			</div>
+        <div className="top-buttons-container">
+          { exitButton() }
+          { addRemoveButtonSelecter(currentJpegItem.jpegItem) }
+        </div>
+        <div className="next-prev-container">
+          { prevButton() }
+          { nextButton() }
+        </div>
 
-			<div className={'next-prev-container'}>
-				{ prevButton() }
-				{ nextButton() }
-			</div>
 		</div> : <div><h2>Waiting for refresh</h2></div>
 	)
 }

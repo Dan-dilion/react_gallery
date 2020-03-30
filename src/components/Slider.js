@@ -19,7 +19,7 @@ export const Slider = (index, jpegs, props) => {
 	return transitions.map(({item, props, key}) => {
 		return (
 			<animated.div
-				className={'single-image'}
+				className={'slider'}
 				key={key}
 				style={{
 					backgroundImage: `url(./images/resize1024/${encodeURIComponent(item.file).replace(/\(/g, "%28").replace(/\)/g, "%29")})`,
