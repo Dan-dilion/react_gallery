@@ -1,3 +1,6 @@
+import '../css/Gallery.css';
+
+
 import React, { useState, useEffect } from "react";
 
 import { Thumbnail } from './Thumbnail.js';

@@ -1,3 +1,5 @@
+import '../css/Gallery.css';
+
 import React from "react";
 
 import { Thumbnail } from './Thumbnail.js';
