@@ -6,17 +6,6 @@
   //border: 5px solid blue;
 }
 
-/* .image-container {
-  display: flex;
-  border: 5px solid red;
-  position: absolute;
-}
-
-.slider-container {
-  border: 5px solid white;
-  position: absolute;
-} */
-
 .slider {
   position: absolute;
   //padding: 0 32px 0 32px;
@@ -27,8 +16,6 @@
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-  /* margin-bottom: 1%;
-  margin-top: 1%; */
 }
 
 .top-buttons-container {
