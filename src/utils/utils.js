@@ -42,34 +42,56 @@ export const resequenceJpegs = (jpegs) => {
 /*                     **
 **  Pattern sequencer  **
 **                     */
-  const sequencer = (numOfPortraits = 0, offset = 0) => {                                      // This is the sequencer!
+  const sequencer = (numOfPortraits = 0, patternSelecter = 1, offset = 0) => {                          // This is the sequencer!
     let pattern = [];
-    if (gridWidth == 12) {
-      pattern = '111111';                                                                      // if no numberOfPortraits is given the default will be none
-      switch(numOfPortraits) {                                                                 //
-        case  2: if (offset) pattern = '0111110'; else pattern = '1101011'; break;             // alternate patterns for offset and not (even and odd)
-        case  4: if (offset) pattern = '01011010'; else pattern = '10100101'; break;           //
-        case  6: if (offset) pattern = '010010010'; else pattern = '100010001'; break;         //
-        case  8: if (offset) pattern = '0010000100'; else pattern = '1000000001'; break;       //
-        case 10: pattern = '00000100000'; break;                                               // only one symmetrical pattern can be made
-        case 12: pattern = '000000000000'; break;                                              // only one symmetrical pattern can be made
+
+    if (gridWidth == 12) {                                               // This is the pattern sequencer for the 12 fraction grid
+      pattern = ['111111'];                                              // if no numberOfPortraits is given the default will be none
+      switch(numOfPortraits) {
+        case  2:
+          if (offset) pattern = ['0111110'];                             // offset patterns begin with portraits (0)
+          else pattern = ['1101011', '1011101']; break;                  // Not offset patterns begin with landscapes (1)
+        case  4:
+          if (offset) pattern = ['01011010', '01100110'];
+          else pattern = ['10100101', '10011001']; break;
+        case  6:
+          if (offset) pattern = ['010010010', '001010100'];
+          else pattern = ['100010001']; break;
+        case  8:
+          if (offset) pattern = [
+            '0100000010', '0010000100', '0001001000', '0000110000'
+          ];
+          else pattern = ['1000000001']; break;
+        case 10: pattern = ['00000100000']; break;                       // only one symmetrical pattern can be made
+        case 12: pattern = ['000000000000']; break;                      // only one symmetrical pattern can be made
         default: break;
       }
     }
-    if (gridWidth == 6) {
-      pattern = '111'
-      if (numOfPortraits > 0) {
-        if (offset) pattern = '0110';
-        else pattern = '1001';
+
+    if (gridWidth == 6) {                                                // This is the pattern sequencer for the 6 fraction grid
+      pattern = ['111'];
+      switch(numOfPortraits) {
+        case 2: if (offset) pattern = ['0110']; else pattern = ['1001']; break
+        case 4: pattern = ['00100']; break;
+        default: break;
       }
     }
 
-    logit('Pattern: ' + pattern + ' gridWidth: ' + gridWidth + ' numOfPortraits: ' + numOfPortraits);
+    while (patternSelecter > pattern.length) {            // This little loop makes sure that the pattern selecter is always
+      patternSelecter -= pattern.length;                  // in range of the number of deviations in the pattern array
+    }
+
+    logit('Pattern: ' + pattern[patternSelecter] + ' gridWidth: ' + gridWidth + ' numOfPortraits: ' + numOfPortraits);
 
 /*                    **
-**  Image Distributer **
+**  Image Dropper     **
 **                    */
-    [...pattern].forEach(item => {                                                           // convert the pattern in to an array and begin itterating through it's characters
+
+// The Image Dropper will itterate through each character in the pattern and drop a portrait for 0 characters and a landscape for 1's.
+// it is written in such a way that if there are none of the desired images left it will just drop the other type.
+// This way it is always better to over prescribe the portraits (round numbers up) because it will always be able to compensate.
+
+    [...pattern[patternSelecter -= 1]].forEach(item => {                                     // convert the pattern in to an array and begin itterating through it's characters
       if (parseInt(item) && landscapes.length > 0) newSequence.push(landscapes.shift())      // if item is a 1 and there are landscapes left push landscape
       else if (portraits.length > 0) newSequence.push(portraits.shift())                     // otherwise if there are any portraits left push portrait
       else if (landscapes.length > 0) newSequence.push(landscapes.shift())                   // otherwise if there are any landscapes left push lanscape
@@ -77,18 +99,20 @@ export const resequenceJpegs = (jpegs) => {
   }
 
 
-  let offsetToggle = 1;
+  let offsetToggle = 1;           // Set to 1 to ensure the portraits are distributed on the even numbered rows first
   let leftoverPorts = 0;
   let oddPorts = 0;
   let evenPorts = 0;
+  let oddPatternNumber = 1;
+  let evenPatternNumber = 1;
 
 /*                                **
-**  Logical Portraits Distributer **
+**  Portraits Distributer         **
 **                                */
 
 // this next loop decides how many time you can distribute 2 portraits on every other row
 // Each time through the loop it either adds two portraits to the even rows or two to the odd rows
-// If there is not enough portraits left for a whole pass they are added to leftoverPorts
+// If there is not enough portraits left for a whole pass they are added to leftoverPorts variable
 
   if (portraits.lenghth < predictedNumOfRows) evenPorts = 2;     // if there not enough portraits for the offset rows
   else {                                                         // use the portraits for the offset rows only
@@ -103,19 +127,29 @@ export const resequenceJpegs = (jpegs) => {
     leftoverPorts = i;                                           // break out of the loop and add the leftover portraits to leftoverPorts
   }
 
-// This next loop calls the sequencer for each row and distributes leftoverPorts amongst the odd numbered rows
+/*                    **
+**    Row Builder     **
+**                    */
 
-  offsetToggle = 0;                                      // Reset the toggle
-  for (let i = predictedNumOfRows; i > 0; i--) {         // loop once for every row
-    if (!offsetToggle) {                                 // if its an odd numbered row
-      if (leftoverPorts > 0) {                           // call the sequencer and pass in the number of oddPorts
-        sequencer(oddPorts + 2, offsetToggle)            // if there are leftoverPorts left add 2 to the number
-        leftoverPorts -= 2;                              // of oddPorts and deduct 2 from the number of leftoverPorts
-      } else sequencer(oddPorts, offsetToggle);          // if there's no leftoverPorts just pass in oddPorts unadulterated
+// This next loop calls the sequencer for each row and feed in the number of Portraits allocated by the portrait distributer
+// If there were any portraits left over in leftoverPorts it distributes them amongst the odd numbered rows
+
+  oddPatternNumber = 1;
+  evenPatternNumber = 1;                                              // reset the pattern selecters
+  offsetToggle = 0;                                                   // Reset the toggle
+  for (let i = predictedNumOfRows; i > 0; i--) {                      // loop once for every row
+    if (!offsetToggle) {                                              // if its an odd numbered row
+      if (leftoverPorts > 0) {                                        // call the sequencer and pass in the number of oddPorts
+        sequencer(oddPorts + 2, oddPatternNumber, offsetToggle)       // if there are leftoverPorts left add 2 to the number
+        leftoverPorts -= 2;                                           // of oddPorts and deduct 2 from the number of leftoverPorts
+      } else sequencer(oddPorts, oddPatternNumber, offsetToggle);     // if there's no leftoverPorts just pass in oddPorts unadulterated
+      oddPatternNumber +=1;                                           // Keep track of the pattern deviation
     }
-    else sequencer(evenPorts, offsetToggle);             // Otherwise it's an even row, call sequencer and pass in evenPorts
-
-    offsetToggle = !offsetToggle;                        // switch the toggle
+    else {
+      sequencer(evenPorts, evenPatternNumber, offsetToggle);          // Otherwise it's an even row, call sequencer and pass in evenPorts
+      evenPatternNumber += 1;                                         // Keep track of the offset pattern deviation
+    }
+    offsetToggle = !offsetToggle;                                     // switch the toggle
   }
 
   logit('OddPorts: ' + oddPorts + ' evenPorts: ' + evenPorts)
