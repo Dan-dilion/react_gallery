@@ -24,7 +24,7 @@ export function removeBasket(index) {           // I have introduced a tiny dela
   return dispatch => {                          // the remove button in the single image
     setTimeout( () =>                           // slider was causing a random crash.
       dispatch(removeBasketAction(index))       // This hasn't entirly fixed the problem
-    , 100)                                       // but it is considerably more stable!
+    , 0)                                       // but it is considerably more stable!
   }                                             // (I realise this is a hack but i need to
 }                                               // get my site online and get a job!)
 
