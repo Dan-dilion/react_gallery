@@ -43,7 +43,7 @@ export const Thumbnail = (props, jpegItem, i) => {
   }
 
 	return (
-		<div className={'thumbnail'} key={i} style={styles(i)}>
+		<div className={'thumbnail fade-in'} key={i} style={styles(i)}>
 			<div className={'thumbnail-inner-container'} key={i}>
 				<Link
 					to={ './single/' + jpegItem.file }
