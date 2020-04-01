@@ -19,6 +19,7 @@
 	background-color: #0002;
 }
 
+/* If hovering over .thumbnail apply these attributes to .images */
 .thumbnail:hover .images {
 	transition: box-shadow 200ms;
 	box-shadow: .5vw .5vw 1vw .5vw #fec3, 0px 0px 2vw 3vw #fec1;
@@ -26,8 +27,15 @@
   background-repeat: no-repeat;
 }
 
-.thumbnail:hover .thumb-button {
+/* If hovering over .thumbnail apply these attributes to .add-basket-button but only with gallery className */
+.thumbnail:hover .add-basket-thumb.gallery {
   opacity: .7;
+  transition: opacity 500ms;
+}
+
+/* If hovering over .thumbnail apply these attributes to .remove-basket-button but only with basket className */
+.thumbnail:hover .remove-basket-thumb.basket {
+  opacity: .6;
   transition: opacity 500ms;
 }
 
@@ -37,8 +45,6 @@
   left: .2em;
   width: 4vw;
   height: 4vw;
-  //width: 3.5em;
-  //height: 3.5em;
   z-index: 1;
   border: solid black 2px;
   border-radius: 50%;
@@ -51,13 +57,13 @@
   cursor: pointer;
 }
 
+/* If the viewport is less than 800px wide apply these attributes */
 @media screen and (max-width: 800px) {
   .thumb-button{
     top: .1em;
     left: .1em;
     width: 6vw;
     height: 6vw;
-    opacity: .7;
   }
 }
 
@@ -68,9 +74,18 @@
 .remove-basket-thumb {
   background-color: #000;
   background-image: url("../resources/icons/minus-circle.svg");
-  opacity: .5;
 }
 
-.thumb-wait-load {
+/* Only apply to .remove-basket-thumb when className gallery is present */
+.remove-basket-thumb.gallery {
+  opacity: .6;
+}
 
+@media (any-pointer: coarse) {
+  .add-basket-thumb {
+    opacity: .7;
+  }
+  .remove-basket-thumb {
+    opacity: .6;
+  }
 }

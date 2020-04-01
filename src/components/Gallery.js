@@ -27,7 +27,8 @@ console.log('Current Jpegs: ', jpegs.length + ' Is Fetching: ', props.isFetching
 
 
   const mediaQueryListener = window.matchMedia('(max-width: 800px)')      // This is the condition that will trigger the Media Query Listener
-  const mediaQueryAction = (action) => {                                  // This is the action it will take when the condition is matched
+  const mediaQueryAction = (action) => {
+    console.log('matchMedia Action Called!!!')                            // This is the action it will take when the condition is matched
     if (action.matches) {                                                 //
       console.log('Viewport is 800px or less')                            //
       props.toggleIsFetching(true);

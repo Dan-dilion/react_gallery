@@ -159,7 +159,7 @@ export const Header = (props) => {
       </ul>
 
       <Link to={'/home'} onClick={ () => props.changePage('home') }>
-			    <h1 className={'logo'}>React Gallery</h1>
+			    <h1 className='logo'>React Gallery</h1>
       </Link>
 
       <ul className="function-bar">

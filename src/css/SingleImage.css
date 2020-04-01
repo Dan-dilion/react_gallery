@@ -1,21 +1,26 @@
 .single-wrapper {
-  display: flow;              /* Element behaves like block, contents is flexbox formatting */
-  position: relative;         /* Floated to create new BFC (Formatting Context) */
+  /* border: 5px solid blue; */
+  position: relative;         /* Floated to create new formatting context */
   width: calc(100% -20px);
   margin-top: 5vh;
-  //border: 5px solid blue;
 }
 
 .slider {
+  /* border: 5px solid green; */
   position: absolute;
-  //padding: 0 32px 0 32px;
   margin: 0 100px 0 100px;
-  //border: 5px solid green;
 	height: calc(100% - 10px);
   width: calc(100% - 200px);
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
+}
+
+@media screen and (max-width: 800px) {
+  .slider {
+    margin: 0 50px 0 50px;
+    width: calc(100% - 100px);
+  }
 }
 
 .top-buttons-container {
@@ -24,24 +29,23 @@
 }
 
 .top-buttons {
+  /* border: 5px solid purple; */
   margin: 0 50px;
   text-decoration: none;
   background-color: #0000;
-  //border: 5px solid purple;
-  //margin: 5px;
   z-index: 4;
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
   width: 33%;
   height: 50px;
-  opacity: .3;
+  opacity: .6;
   transition: opacity, 2000ms;
 }
 
 .top-buttons:hover {
   transition: opacity, 500ms;
-  opacity: .6;
+  opacity: .8;
 
 }
 
@@ -51,16 +55,13 @@
 }
 
 .remove-button {
-  background-image: url("../resources/icons/minus-circle.svg");
+  background-image: url("../resources/icons/shopping-cart-x.svg");
   background-position: right;
-  //height: calc(50px + 10px);
 }
 
 .add-button {
   background-image: url("../resources/icons/shopping-cart.svg");
   background-position: right;
-  //height: calc(50px + 10px);
-  //width: calc(33% + 10px)
 }
 
 .next-prev-container {
@@ -69,7 +70,7 @@
 }
 
 .next-prev-button {
-	//border: 2px solid yellow;
+	/* border: 5px solid yellow; */
 	background-color: #0000;
   opacity: .2;
 	font-size: xxx-large;
@@ -78,7 +79,6 @@
 	width: 33%;
   background-size: 30%;
 	background-repeat: no-repeat;
-
   transition-property: opacity;
 	transition-duration: 2000ms;
 }

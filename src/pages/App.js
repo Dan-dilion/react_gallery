@@ -111,6 +111,7 @@ class App extends React.Component {
   						<Route
   							path={"/gallery"}
   							render={(props) => <Gallery
+                  selectedPage={this.state.selectedPage}
   								getJpegs={this.props.jpegs}
                   isFetchingJpegs={this.props.isFetchingJpegs}
                   toggleIsFetching={this.props.TOGGLE_FLAG}
@@ -131,6 +132,7 @@ class App extends React.Component {
   						<Route
   							path={"/basket"}
   							render={(props) => <Basket
+                  selectedPage={this.state.selectedPage}
   								getBasket={this.props.basket}
   								removeBasket={this.props.REMOVE_BASKET}
                   getJpegs={this.props.jpegs}
