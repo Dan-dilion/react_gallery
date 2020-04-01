@@ -90,6 +90,11 @@
   border-bottom: .3em solid #222a;
 }
 
+.funcbar-items-ghost:hover {
+  cursor: not-allowed;
+  background-color: #000;
+}
+
 .nav-button {
   //min-width: 4em;
 }

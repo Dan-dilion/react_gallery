@@ -14,6 +14,7 @@
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
+  cursor: zoom-in;
 }
 
 @media screen and (max-width: 800px) {

@@ -11,6 +11,10 @@
   object-fit: cover;
 }
 
+.images:hover {
+  cursor: zoom-in;
+}
+
 .thumbnail {
   margin-top: auto;
   margin-bottom: auto;
