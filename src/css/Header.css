@@ -42,18 +42,15 @@
   /* border: 2px solid white; */
   display: inline;
   float: left;
-	font-size: 2vw;
+	font-size: calc(2vw);
 	color: #fed;
 	list-style-type: none;
 	width: 4em;
   text-align: center;
-	padding: 1vh .5vw .4em .5vw;
-	margin: 1vh .5vw;
-
+	padding: 2% .5vw .4em .5vw;
+	margin: 1% .5vw;
   border-radius: .1em;
   border-bottom: solid #fed0 .1em;
-	transition-property:  border;
-	transition-duration: 1500ms;
 }
 
 .funcbar-items {
@@ -64,7 +61,7 @@
   font-size: 60%;
   color: #fed;
   padding: .2vh .6vw .2vh .6vw;
-  margin-left: 1em;
+  margin: auto 0 auto 1em;
   transition-property:  background-color, border, color;
   transition-duration: 1500ms;
   background-color: #0004;
@@ -117,6 +114,8 @@
 position: relative;
 line-height: 1.3em;
 height: 1em;
+transition-property:  border;
+transition-duration: 1500ms;
 }
 
 .navbar-items::after {

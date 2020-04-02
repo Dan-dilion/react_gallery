@@ -1,7 +1,7 @@
 .single-wrapper {
   /* border: 5px solid blue; */
   position: relative;         /* Floated to create new formatting context */
-  width: calc(100% -20px);
+  width: 100%;
   margin-top: 5vh;
 }
 

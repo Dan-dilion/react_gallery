@@ -1,13 +1,9 @@
 h1 {
-
+  font-size: 200%;
 }
 
 h3 {
 	margin: 0px;
-}
-
-li {
-	float: left;
 }
 
 
@@ -21,7 +17,7 @@ li {
 }
 
 .app {
-  padding-top: 13%;
+  padding-top: 12%;
   background-color: #000a;
   text-align: center;
 
