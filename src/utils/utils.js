@@ -16,7 +16,7 @@ export const resequenceJpegs = (jpegs) => {
 
   const getPortraits = (pegs) => {                              // Function to make array of all portrait images
     let ports = [];                                             // declare empty array
-    jpegs.forEach(item => {                                     // iterate through jpegs
+    pegs.forEach(item => {                                      // iterate through jpegs
       if (item.res.width < item.res.height) ports.push(item);   // if the width is smaller than the height add it to portraits
     })
     return ports;                                               // return the array of portraits
@@ -24,7 +24,7 @@ export const resequenceJpegs = (jpegs) => {
 
   const getLandscapes = (pegs) => {                             // Function to make array of all landscape images
     let lands = [];                                             // declare empty array
-    jpegs.forEach(item => {                                     // iterate through jpegs
+    pegs.forEach(item => {                                      // iterate through jpegs
       if (item.res.width >= item.res.height) lands.push(item);  // if the width is larger than or the same as the height add it to landscapes
     })
     return lands;                                               // return the array of landscapes
@@ -45,34 +45,34 @@ export const resequenceJpegs = (jpegs) => {
   const sequencer = (numOfPortraits = 0, patternSelecter = 1, offset = 0) => {                          // This is the sequencer!
     let pattern = [];
 
-    if (gridWidth == 12) {                                               // This is the pattern sequencer for the 12 fraction grid
-      pattern = ['111111'];                                              // if no numberOfPortraits is given the default will be none
+    if (gridWidth == 12) {        // This is the pattern sequencer for the 12 fraction grid
+      pattern = ['000000'];       // if no numberOfPortraits is given the default will be none
       switch(numOfPortraits) {
         case  2:
-          if (offset) pattern = ['0111110'];                             // offset patterns begin with portraits (0)
-          else pattern = ['1101011', '1011101']; break;                  // Not offset patterns begin with landscapes (1)
+          if (offset) pattern = ['1000001'];                             // offset patterns begin with portraits (0)
+          else pattern = ['0010100', '0100010']; break;                  // Not offset patterns begin with landscapes (1)
         case  4:
-          if (offset) pattern = ['01011010', '01100110'];
-          else pattern = ['10100101', '10011001']; break;
+          if (offset) pattern = ['10100101', '10011001'];                // I have left out 00111100 for better aesthetics
+          else pattern = ['01011010', '01100110']; break;                // I have left out 11000011 for better aesthetics
         case  6:
-          if (offset) pattern = ['010010010', '001010100'];
-          else pattern = ['100010001']; break;
+          if (offset) pattern = ['101101101', '110101011'];
+          else pattern = ['011101110']; break;
         case  8:
           if (offset) pattern = [
-            '0100000010', '0010000100', '0001001000', '0000110000'
+            '1011111101', '1101111011', '1110110111', '1111001111'
           ];
-          else pattern = ['1000000001']; break;
-        case 10: pattern = ['00000100000']; break;                       // only one symmetrical pattern can be made
-        case 12: pattern = ['000000000000']; break;                      // only one symmetrical pattern can be made
+          else pattern = ['0111111110']; break;
+        case 10: pattern = ['11111011111']; break;                       // only one symmetrical pattern can be made
+        case 12: pattern = ['111111111111']; break;                      // only one symmetrical pattern can be made
         default: break;
       }
     }
 
-    if (gridWidth == 6) {                                                // This is the pattern sequencer for the 6 fraction grid
-      pattern = ['111'];
+    if (gridWidth == 6) {         // This is the pattern sequencer for the 6 fraction grid
+      pattern = ['000'];          // if no numberOfPortraits is given the default will be none
       switch(numOfPortraits) {
-        case 2: if (offset) pattern = ['0110']; else pattern = ['1001']; break
-        case 4: pattern = ['00100']; break;
+        case 2: if (offset) pattern = ['1001']; else pattern = ['0110']; break
+        case 4: pattern = ['11011']; break;
         default: break;
       }
     }
@@ -92,9 +92,9 @@ export const resequenceJpegs = (jpegs) => {
 // This way it is always better to over prescribe the portraits (round numbers up) because it will always be able to compensate.
 
     [...pattern[patternSelecter -= 1]].forEach(item => {                                     // convert the pattern in to an array and begin itterating through it's characters
-      if (parseInt(item) && landscapes.length > 0) newSequence.push(landscapes.shift())      // if item is a 1 and there are landscapes left push landscape
-      else if (portraits.length > 0) newSequence.push(portraits.shift())                     // otherwise if there are any portraits left push portrait
-      else if (landscapes.length > 0) newSequence.push(landscapes.shift())                   // otherwise if there are any landscapes left push lanscape
+      if (parseInt(item) && portraits.length > 0) newSequence.push(portraits.shift())      // if item is a 1 and there are landscapes left push landscape
+      else if (landscapes.length > 0) newSequence.push(landscapes.shift())                     // otherwise if there are any portraits left push portrait
+      else if (portraits.length > 0) newSequence.push(portraits.shift())                   // otherwise if there are any landscapes left push lanscape
     });
   }
 

@@ -15,17 +15,6 @@ export const SingleImage = (props) => {
     console.log('Jpegs Refreshed!')
   }
 
-  // let jpegsArray = [];
-  //
-  // useEffect(  () => {
-  //   const jpegsRefresher = async () => { await props.refreshJpegs() }
-  //   jpegsRefresher()
-  //
-  //   jpegsArray = props.getJpegs
-  //   if (props.selectedPage === 'basket') { jpegsArray = props.getBasket }
-  //   console.log('Re-rendering! ', jpegsArray)
-  // })
-
   let jpegsArray = props.getJpegs;                                              // jpegsArray to point to the Redux store jpegs
   if (props.selectedPage === 'basket') jpegsArray = props.getBasket             // If you arived here from the basket jpegsArray will be the basket
 
@@ -53,29 +42,6 @@ export const SingleImage = (props) => {
 		next.jpegItem = jpegsArray[currentJpegItem.index + 1];
 		next.index ++;
 	}
-
-  // const [next, setNext] = useState(...currentJpegItem)
-  // const [prev, setPrev] = useState(...currentJpegItem)
-  // //let next = {...currentJpegItem}
-  // //let prev = {...currentJpegItem}
-  //
-  //
-  // useEffect( () => {
-  //
-  // 	if (currentJpegItem.index < jpegsArray.length - 1) {
-  // 		setNext( next = {
-  //       jpegItem: jpegsArray[currentJpegItem.index + 1],
-	// 	    index: currentJpegItem.index + 1
-  //     })
-  // 	}
-  //
-  // 	if (currentJpegItem.index > 0) {
-  // 		setPrev( prev = {
-  //       jpegItem: jpegsArray[currentJpegItem.index - 1],
-  // 		  index: currentJpegItem.index - 1
-  //     })
-  //    }
-  // }, [])
 
   const exitButton = () => {
     return(<Link className="exit-button top-buttons" to={ '/' + props.selectedPage } />)
@@ -148,7 +114,7 @@ export const SingleImage = (props) => {
     }
   }
 
-  const addRemoveButtonSelecter = (jpegItem) => {
+  const addRemoveButtonDispenser = (jpegItem) => {
     if (
       props.getBasket.length > 0                         // if the basket is not empty
       && props.getBasket.some(item => item.file === jpegItem.file)        // and the item is in the basket
@@ -170,6 +136,7 @@ export const SingleImage = (props) => {
   console.log('currentJpegItem.jpegItem: ', currentJpegItem.jpegItem)
   console.log('current index: ', props.getBasket.indexOf(currentJpegItem.jpegItem))
   console.log('next.jpegItem: ', next.jpegItem)
+
 // This is a conditional return statement, it will wait for jpegsArray to be
 // refreshed before it tries to render anything. Otherwise, if you arrive here
 // from a link, jpegsArray will be empty and the async refresh method will be
@@ -184,7 +151,7 @@ export const SingleImage = (props) => {
         </Link>
         <div className="top-buttons-container">
           { exitButton() }
-          { addRemoveButtonSelecter(currentJpegItem.jpegItem) }
+          { addRemoveButtonDispenser(currentJpegItem.jpegItem) }
         </div>
         <div className="next-prev-container">
           { prevButton() }
@@ -194,12 +161,3 @@ export const SingleImage = (props) => {
 		</div> : <div><h2>Waiting for refresh</h2></div>
 	)
 }
-
-// SingleImage.propTypes = {
-//   selectedPage: PropTypes.string,
-//   getJpegs: PropTypes.array,
-//   getBasket: PropTypes.array,
-//   addBasket: PropTypes.func,
-//   removeBasket: PropTypes.func,
-//   refreshJpegs: PropTypes.func
-// }

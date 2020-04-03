@@ -103,7 +103,7 @@ export const Header = (props) => {
     )
   }
 
-  function buttonPicker(button) {
+  function buttonDispenser(button) {
     switch (button) {
 
       case 'home':
@@ -153,9 +153,9 @@ export const Header = (props) => {
 	return(
 		<div className="app-header">
       <ul className="navbar">
-        { buttonPicker('home') }
-        { buttonPicker('gallery') }
-        { buttonPicker('basket') }
+        { buttonDispenser('home') }
+        { buttonDispenser('gallery') }
+        { buttonDispenser('basket') }
       </ul>
 
       <Link to={'/home'} onClick={ () => props.changePage('home') }>
@@ -163,9 +163,9 @@ export const Header = (props) => {
       </Link>
 
       <ul className="function-bar">
-      { buttonPicker('download') }
-      { buttonPicker('addAll') }
-      { buttonPicker('emptyBasket') }
+      { buttonDispenser('download') }
+      { buttonDispenser('addAll') }
+      { buttonDispenser('emptyBasket') }
       </ul>
 		</div>
 	);

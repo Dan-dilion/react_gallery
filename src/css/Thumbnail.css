@@ -21,14 +21,14 @@
 	position: relative;
 	display: block;
 	background-color: #0002;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 /* If hovering over .thumbnail apply these attributes to .images */
 .thumbnail:hover .images {
 	transition: box-shadow 200ms;
 	box-shadow: .5vw .5vw 1vw .5vw #fec3, 0px 0px 2vw 3vw #fec1;
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 /* If hovering over .thumbnail apply these attributes to .add-basket-button but only with gallery className */
@@ -71,12 +71,16 @@
 }
 
 .add-basket-thumb {
-  background-image: url("../resources/icons/plus-circle.svg");
+  background-image: url("../resources/icons/shopping-cart-dark.svg");
+  background-position-y: 65%;
+  background-position-x: center;
 }
 
 .remove-basket-thumb {
   background-color: #000;
-  background-image: url("../resources/icons/minus-circle.svg");
+  background-image: url("../resources/icons/shopping-cart-x.svg");
+  background-position-y: 65%;
+  background-position-x: center;
 }
 
 /* Only apply to .remove-basket-thumb when className gallery is present */

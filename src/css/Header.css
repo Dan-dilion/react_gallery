@@ -101,51 +101,43 @@
     transition-duration: 1s;
 }
 
-.header-spacer {
-  position: absolute;
-  display: block;
-  min-height: 10vw;
-  border: 5px solid red;
-}
 
-/* I have added this styling at the end to keep it isolated */
-/* It is all the code needed for the animated underline effect */
+/* I have added this styling at the end to keep it isolated                   */
+/* It is all the code needed for the animated underline effect                */
 .navbar-items {
-position: relative;
-line-height: 1.3em;
-height: 1em;
-transition-property:  border;
-transition-duration: 1500ms;
+  position: relative;       /* establishes a new flow context to anchor the   */
+  line-height: 1.3em;       /* absolute positionned ::after psudo element.    */
+  height: 1em;              /* Also ristrict the height of the element to 1em */
 }
 
-.navbar-items::after {
-content: '';
-position: absolute;
-bottom: 0;
-left: 50%;
-width: 0;
-height: .2em;
-border-bottom: .15em solid #fed;
+.navbar-items::after {      /* Creates a psudo element after the navbar-items */
+  content: '';              /* elements. Absolute positionning allows the use */
+  position: absolute;       /* of left & bottom and anchors element to it's   */
+  bottom: 0;                /* closest ancestor with reletive positionning.   */
+  left: 50%;                /* The psudo element is positionned in the middle */
+  width: 0;                 /* at the bottom with a solid border and 0 width. */
+  height: .2em;             /* Element is not yet visible!                    */
+  border-bottom: .15em solid #fed;
 }
 
-.navbar-items, .navbar-items::after {
-transition-property: left, width, background-color;
-transition-duration: 0.4s;
-transition-timing-function: ease-in-out;
+.navbar-items, .navbar-items::after { /* propertys transition over a duration */
+  transition-property: left, width, background-color, border;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in-out;
 }
 
-.navbar-items:hover::after {
-left: 10%;
-width: 80%;
-}
+.navbar-items:hover::after {    /* On hover ajust the position and the width  */
+  left: 10%;                    /* of the psudo element (making them visible) */
+  width: 80%;                   /* the transition will be animated because of */
+}                               /* the transition effects */
 
-.selected {
+.selected {                     /* When selected highlight the background     */
   transition: background-color 1500ms;
   background-color: #fed4;
 }
 
-.selected::after {
-left: 10%;
-width: 80%;
-border-bottom: .15em solid #fed;
+.selected::after {              /* When selected Keep the underline visible   */
+  left: 10%;
+  width: 80%;
+  border-bottom: .15em solid #fed;
 }
