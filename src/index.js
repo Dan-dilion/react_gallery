@@ -8,6 +8,7 @@ import store from './store.js';
 import App from './pages/App.js';
 
 import './css/index.css';
+import './css/prism.css';
 import './css/App.css';
 import './css/FullSize.css';
 import './css/Thumbnail.css';
