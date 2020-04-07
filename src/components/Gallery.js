@@ -18,7 +18,7 @@ console.log('Current Jpegs: ', jpegs.length + ' Is Fetching: ', props.isFetching
   useEffect( () => {                                                      // Use Effect is like componentDidMount for Function (stateless) components.
     const asyncWrapper = async () =>{                                     // I have wrapped refreshJpegs() in this async function because when using
       console.log('Gallery Calling Refresh')
-      props.refreshJpegs()                                                // the await method the function will return an empty promise even if there
+      await props.refreshJpegs()                                          // the await method the function will return an empty promise even if there
       console.log('Gallery: Refresh called: ' + props.getJpegs.length)
     }                                                                     // is no data to return.
     asyncWrapper()                                                        // This way asyncWrapper() returns nothing and refreshJpegs() is called and

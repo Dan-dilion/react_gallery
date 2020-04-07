@@ -119,8 +119,8 @@ export const SingleImage = (props) => {
       props.getBasket.length > 0                         // if the basket is not empty
       && props.getBasket.some(item => item.file === jpegItem.file)        // and the item is in the basket
     ) {
-      if (props.selectedPage === 'basket') {                                                  // if we are viewing the basket
-        if ( props.getBasket.length <= 1) return removeButton(jpegItem, 'lastInBasket')                     // if we are on the only item in the basket
+      if (props.selectedPage === 'basket') {                                                  // if we are viewing the basket contents
+        if ( props.getBasket.length <= 1) return removeButton(jpegItem, 'lastInBasket')                     // if we are viewing the only item in the basket
         else if ( props.getBasket.indexOf(jpegItem) === 0) return removeButton(jpegItem, 'BeginningOfBasket')    // if we are on the first item in the basket
         else return removeButton(jpegItem, 'normalBasket')                                    // otherwise we're in the middle of the basket
       }

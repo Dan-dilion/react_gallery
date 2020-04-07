@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Thumbnail = (props, jpegItem, i) => {
 
+  //const [fade, setFade] = useState('fade-in');
+  const fade = 'fade-in';
+
+  // if (
+  //   props.selectedPage === 'basket'
+  //   && !props.getBasket.some( item => item.file !== jpegItem.file )
+  // ) fade = 'fade-out';
+
+// props.selectedPage is added to the classNames so that CSS can target the
+// buttons in basket view seperately from buttons in gallery view.
 	const addButton = (jpegItem) => {
 		return(
 			<button
@@ -12,13 +22,18 @@ export const Thumbnail = (props, jpegItem, i) => {
 		)
 	}
 
+// props.selectedPage is added to the classNames so that CSS can target the
+// buttons in basket view seperately from buttons in gallery view.
 	const removeButton = (jpegItem) => {
 		return(
 			<button
 				className={"remove-basket-thumb thumb-button " + props.selectedPage}
 				onClick={ () => {
-					props.removeBasket( props.getBasket.indexOf(jpegItem) )
-				}}
+          /*setFade( () => fade = 'fade-out' )*/
+          setTimeout( () => {
+					  props.removeBasket( props.getBasket.indexOf(jpegItem) )
+          }, 500)
+        }}
 			/>
 		)
 	}
@@ -32,18 +47,16 @@ export const Thumbnail = (props, jpegItem, i) => {
 		else return addButton(jpegItem)
 	}
 
-  const styles = (i) => {
-
-    let size = 'span 2';                                                // assume image is landscape
-    if (jpegItem.res.width < jpegItem.res.height) size = 'span 1';      // unless image is portrait
-
+  const styles = () => {
+    let size = 'span 2';                                                // assume image is landscape, span 2 grid fractions
+    if (jpegItem.res.width < jpegItem.res.height) size = 'span 1';      // unless image is portrait, span 1 grid fraction
     return {
-      'gridColumn': size
+      'gridColumn': size                                                // return css gridColumn statement
     }
   }
 
 	return (
-		<div className={'thumbnail fade-in'} key={i} style={styles(i)}>
+		<div className={'thumbnail ' + fade} key={i} style={styles()}>
 			<div className={'thumbnail-inner-container'} key={i}>
 				<Link
 					to={ './single/' + jpegItem.file }
