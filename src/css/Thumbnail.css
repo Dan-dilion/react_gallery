@@ -28,7 +28,7 @@
 /* If hovering over .thumbnail apply these attributes to .images */
 .thumbnail:hover .images {
 	transition: box-shadow 200ms;
-	box-shadow: .5vw .5vw 1vw .5vw #fec3, 0px 0px 2vw 3vw #fec1;
+	box-shadow: 0 0 1.5vw .5vw #fec3, 0px 0px 2vw 3vw #fec1;
 }
 
 /* If hovering over .thumbnail apply these attributes to .add-basket-button but only with gallery className */

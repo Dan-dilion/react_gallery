@@ -12,7 +12,7 @@ import './css/prism.css';
 import './css/App.css';
 import './css/FullSize.css';
 import './css/Thumbnail.css';
-import './css/home.css';
+
 
 /************************ Added by Create-React-App ************************
 **                                                                        **

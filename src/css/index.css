@@ -20,14 +20,15 @@ html {
 }
 
 a {
-	//color: black;
+	color: chocolate;
 	text-decoration: none;
   font-size: 1em;
+  //background-color: #333a;
   border: 0;
 }
 
 a:hover {
-	text-decoration: none;
+	text-decoration: underline;
 
 }
 

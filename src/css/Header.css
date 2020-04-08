@@ -20,6 +20,10 @@
   margin-bottom: 0;
 }
 
+.app-header a:hover {
+  text-decoration: none;
+}
+
 .navbar {
   float: right;
   margin: 0;

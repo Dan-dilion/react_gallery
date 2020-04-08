@@ -9,36 +9,41 @@ h3 {
 }
 
 .home-container {
-  display: flow-root;
-  //padding-top: 1em;
-  background-color: #0002;
-}
-
-.about-wrapper {
   /* border: 1px solid white; */
-  width: 80%;
+  display: block;
+  width: calc(95% - 3em);
   margin: auto;
-  margin-top: 1em;
-  padding: 1em;
+  margin: 1em auto 0 auto;
+  padding: 2em;
   background-color: #222;
-  border-radius: .5em;
+  border-radius: 10px;
 }
 
 .welcome-message {
   /* border: 1px solid white; */
-  display: inline-block;
-  padding: 0% 2%;
-  width: 33%;
+  width: 95%;
   font-size: 1.5rem;
   text-align: left;
   color: #cba;
 }
 
+.ul-container {
+  /* border: 2px solid white; */
+  display: inline-flex;
+}
+
+.technologies-ul {
+  /* border: 2px solid white; */
+  margin-right: 5rem;
+  color: inherit;
+  font-size: 2rem;
+}
+
 .code-exerpt {
-  /* border: 1px solid white; */
-  display: inline-block;
+  border: 1px solid white;
+  display: block;
   margin: 1em;
-  width: 50em;
+  width: 55em;
   max-height: 30vh;
   overflow: auto;
   margin-bottom: 40%;

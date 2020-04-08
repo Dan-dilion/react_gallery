@@ -158,7 +158,7 @@ export const Header = (props) => {
         { buttonDispenser('basket') }
       </ul>
 
-      <Link to={'/home'} onClick={ () => props.changePage('home') }>
+      <Link to={'/home'} className='title-link' onClick={ () => props.changePage('home') }>
 			    <h1 className='logo'>React Gallery</h1>
       </Link>
 

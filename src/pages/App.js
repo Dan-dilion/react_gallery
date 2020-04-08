@@ -81,8 +81,9 @@ class App extends React.Component {
 
 
 {/*
-* First route -- Home screen
+* Route -- Home screen
 * Force exact match so route not triggered for all URLs.
+* If no route default to homescreen
 */}
   						<Route
   							exact path={"/"}
@@ -91,7 +92,7 @@ class App extends React.Component {
 
 
 {/*
-* Second Route -- Home screen
+* Route -- Home/about screen
 * Path to activate switch
 */}
   						<Route
@@ -99,8 +100,12 @@ class App extends React.Component {
   							component={Home}
   						/>
 
+              <Route
+  							path={"/about"}
+  							component={Home}
+  						/>
 {/*
-* Third Route -- Gallery view
+* Route -- Gallery view
 * Path to activate switch
 * The render tag allows you to pass props to the render component in an inline
 * function which returns the component to render.
@@ -123,7 +128,7 @@ class App extends React.Component {
   						/>
 
 {/*
-* Fourth route -- Basket view
+* Route -- Basket view
 * Path to activate switch
 * inline function returns the component and passes in the props.
 * getBasket to generate thumbnails and select add or remove button.
@@ -140,7 +145,7 @@ class App extends React.Component {
   						/>
 
 {/*
-* Fifth route -- Single view (image slider)
+* Route -- Single view (image slider)
 * Path to activate switch
 * getJpegs for next and previous list navigation
 * getBasket for next and previous list navigation
@@ -161,7 +166,7 @@ class App extends React.Component {
   						/>
 
 {/*
-* Sixth route -- Full size image view.
+* Route -- Full size image view.
 * Path to activate switch.
 * component to render.
 * There are no props for this component therefore we don't need the render prop.
