@@ -6,118 +6,34 @@ import { toggleIsFetching } from '../actions/fileActions.js';
 // requests.
 const apiUrl = 'http://' + window.location.hostname + ':8987/api/'
 
-export const getJpegs = async () => {                 // Export method, requires a Redux store input.
-	return await fetch(apiUrl + 'getjpegs')             // Make server request to get the list of jpegs
+export const getJpegs = async () => {                       // Export method.
+	return await fetch(apiUrl + 'getjpegs')                   // Make server request to get the list of jpegs
 	.then( async response => {									              // Error Handeling (if there is an error it will be text)
 		if (response.ok) return await response.json()				    // If no error: converts the data streem into json object
 		else return await response.text()							          // If Error: converts data stream in to text object
 	})
 
-
-/*
-**  This next .then() statement has the problem that it doesnt wait for Image() to load
-**  and by the time the rest of the program is using the jpegs Array the width and height
-**  data is not available. The effect is that the resequencing method does not work until
-**  you refresh the page after the prliminary first load of the gallery.
-**
-**  the following two (commented) .then() statements are my attempts to get the browser
-**  to wait until the dimentions have been retrieved from the Image() object.
-**  Unfortunately neither of them work!
-*/
-
-  // .then( responseData => {
-  //   const newJpegs = responseData.map((file, i) => {
-  //     const img = new Image();
-  //     img.src = "./images/resize300/" + file
-  //
-  //     return {                                              // replace each item with and object
-  //     	file: file,                                         // so the new structure looks like this:
-  //     	id: i,                                              // newJpegs [{file: 'filename.jpg', id: i}]
-  //       res: {width: img.width, height: img.height}         //actualDimentions()
-  //     }
-  //   })
-  //   console.log(newJpegs)
-  //   return newJpegs;
-	// })
-
-
-/*
-**  This next .then() statement almost works!!! But it doesn't!
-**  I think what is happening is it's updating the memory after
-**  it runs the rest of the program! The console.log at the end
-**  looks like it dumps a nice array with all the correct data in.
-**  It even shows up in Redux logger's output for the action
-**  except it never updates the new state with the jpegs array.
-**  Also if you console.log(JSON.stringify(newJpegs)) you just
-**  get a blank array ("[]") sugesting that it's not waiting.
-*/
-
-  .then( async responseData => {
-    let newJpegs = [];
-    await Promise.all(responseData.map( (file, i) => {
-      return new Promise((resolve, reject) => {
-        const img = new Image()
-        img.addEventListener('load', () => {
-            resolve({
-              file: file,
-              id: i,
-              res: { width: img.width, height: img.height }
-          })
-        })
-        img.src = "./images/resize300/" + file
-      }).then( response => newJpegs.push(response) )
-    }))
-    console.log(newJpegs)
-    return newJpegs;
+  .then( async responseData => {                                  // Pass in the response from previous .then statement.
+    let newJpegs = [];                                            // Declare an empty array.
+    await Promise.all(responseData.map( (file, i) => {            // Process every itteration of the response data concurrently.
+      return new Promise((resolve, reject) => {                   // Each itteration returns a promise.
+        const img = new Image()                                   // create new image object.
+        img.addEventListener('load', () => {                      // When the image has loaded,
+            resolve({                                             // resolve the promise with the following object.
+              file: file,                                         // Filename.
+              id: i,                                              // Id (used by React-Spring).
+              toBeRemoved: false,                                 // Used by the basket to indicate when to fade-out a thumbnail.
+              res: { width: img.width, height: img.height }       // Dimentions used by pattern sequencer.
+          })                                                      //
+        })                                                        //
+        img.src = "./images/resize300/" + file                    // Initialises loading the image.
+      }).then( response => newJpegs.push(response) )              // Add the new jpeg object to newJpegs.
+    }))                                                           //
+    console.log(newJpegs)                                         //
+    return newJpegs;                                              // Return array.
   })
 
-
-/*
-**  This Next attempt has the exact same effect as the one above!!!
-*/
-
-	// .then( async responseData => {
-  //
-  //   const getDimentions = () => {
-  //     return new Promise((resolve, reject) => {
-  //       let newJpegs = [];
-  //
-  //       responseData.map((file, i) => {                               // itterate through the list of jpegs
-  //         let img = new Image();
-  //         img.onload = () => {
-  //           console.log('w: ' + img.width + 'h: ' + img.height)
-  //           newJpegs.push({
-  //             file: file,
-  //             id: i,
-  //             res: { width: img.width, height: img.height }
-  //           })
-  //         }
-  //         img.onerror = (e) => reject('ERROR!!!', e)
-  //         img.src = "./images/resize300/" + file
-  //       })
-  //       resolve(newJpegs)
-  //     })
-  //   }
-  //
-  //   await getDimentions().then( output => {
-  //     console.log('NEWJPEGS!!! ', output)
-  //     return output;
-  //   })
-	// })
-
-  /*
-  **  I think I might have found a question on stackOverflow that might resolve
-  **  this problem or it might not. Find it here:
-  **
-  **  https://stackoverflow.com/questions/46399223/async-await-in-image-loading
-  **
-  **  It's responders are saying that the OP
-  **  shouold turn the image.prototype.onload function in to a promise.
-  **  It's possible that I have already thried something similar in the last
-  **  attempt (above) but it's definitely worth looking in to next.
-  */
-
-  .catch(err => console.log('ERROR!!!', err))
+  .catch(err => console.log('ERROR!!!', err))                     // Catch errors, output console log.
 }
 
 export const zipJpegs = (files) => {                                    // Export method, Requires an array of files

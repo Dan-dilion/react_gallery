@@ -10,8 +10,8 @@ export const Home = (props) => {
   })
 
   return(
-      <div className="home-container fade-in">
-        <section className="welcome-message">
+      <div className="home-container">
+        <section className="welcome-message fade-in">
           <h2>Welcome to React Gallery</h2>
           <p>My name is Daniel Marston, I am a self-taught React/Javascript
           developer seeking entry into the corporate world. I am eager to gain
@@ -32,7 +32,7 @@ export const Home = (props) => {
         <br />
 
         <div className="ul-container">
-          <section className="technologies-ul">
+          <section className="technologies-ul fade-in">
             <h3>Back End</h3>
             <ul>
               <li>NodeJS</li>
@@ -59,7 +59,7 @@ export const Home = (props) => {
             </ul>
           </section>
 
-          <section className="technologies-ul">
+          <section className="technologies-ul fade-in">
             <h3>Front End</h3>
             <ul>
               <li>Javascript</li>
@@ -81,7 +81,7 @@ export const Home = (props) => {
           </section>
         </div>
 
-        <section className="Write-up">
+        <section className="Write-up fade-in">
         <p></p>
         <p></p>
         <p></p>

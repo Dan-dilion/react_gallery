@@ -42,9 +42,9 @@ h3 {
   color: #fed5;
 }
 
-@-webkit-keyframes fadeIn { from { opacity:0; transform: scale(0.8);} to { opacity:1; transform: scale(1);} }
-@-moz-keyframes fadeIn { from { opacity:0; transform: scale(0.8); } to { opacity:1; transform: scale(1);} }
-@keyframes fadeIn { from { opacity:0; transform: scale(0.8);} to { opacity:1; transform: scale(1);} }
+@-webkit-keyframes fadeIn { from { opacity: 0; transform: scale(0.8);} to { opacity: 1; transform: scale(1);} }
+@-moz-keyframes fadeIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1);} }
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.8);} to { opacity: 1; transform: scale(1);} }
 
 .fade-in {
 	opacity:0;  /* make things invisible upon start */
@@ -56,17 +56,17 @@ h3 {
 	-moz-animation-fill-mode:forwards;
 	animation-fill-mode:forwards;
 
-	-webkit-animation-duration:.5s;
-	-moz-animation-duration:.5s;
-	animation-duration:.5s;
+	-webkit-animation-duration: .5s;
+	-moz-animation-duration: .5s;
+	animation-duration: .5s;
 }
 
-@-webkit-keyframes fadeout { from { opacity:1; transform: scale(1);} to { opacity:0; transform: scale(0.8);} }
-@-moz-keyframes fadeout { from { opacity:1; transform: scale(1); } to { opacity:0; transform: scale(0.8);} }
-@keyframes fadeout { from { opacity:1; transform: scale(1);} to { opacity:0; transform: scale(0.8);} }
+@-webkit-keyframes fadeout { from { opacity: 1; transform: scale(1);} to { opacity: 0; transform: scale(1.2);} }
+@-moz-keyframes fadeout { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(1.2);} }
+@keyframes fadeout { from { opacity: 1; transform: scale(1);} to { opacity: 0; transform: scale(1.2);} }
 
 .fade-out {
-	opacity:1;  /* make things visible upon start */
+	opacity: 1;  /* make things visible upon start */
 	-webkit-animation:fadeout ease-in-out 1;  /* call our keyframe named fadeout, use animattion ease-in and repeat it only 1 time */
 	-moz-animation:fadeout ease-in-out 1;
 	animation:fadeout ease-in-out 1;
@@ -75,7 +75,7 @@ h3 {
 	-moz-animation-fill-mode:forwards;
 	animation-fill-mode:forwards;
 
-	-webkit-animation-duration:.5s;
-	-moz-animation-duration:.5s;
-	animation-duration:.5s;
+	-webkit-animation-duration: .2s;
+	-moz-animation-duration: .2s;
+	animation-duration: .2s;
 }

@@ -24,12 +24,26 @@ const basketReducer = (state = initialState, action) => {
       break;
 
 		case "REMOVE_BASKET":
-			console.log('Removing item from basket', state.basketJpegs[action.payload]);
+			console.log('Removing item from basket ', state.basketJpegs[action.payload]);
 			let newList = [...state.basketJpegs];
 			newList.splice(action.payload, 1);
 			return {
 				...state, basketJpegs: newList
 			}
+
+    case "TO_BE_REMOVED":
+      console.log('Flagging Item for removal ', state.basketJpegs[action.payload]);
+      state = {
+        ...state,
+        basketJpegs: [
+          ...state.basketJpegs
+        ]
+      }
+      state.basketJpegs[action.payload] = {
+        ...state.basketJpegs[action.payload],
+        toBeRemoved: !state.basketJpegs[action.payload].toBeRemoved
+      }
+      break;
 
     case "EMPTY_BASKET":
       console.log('Empying basket');

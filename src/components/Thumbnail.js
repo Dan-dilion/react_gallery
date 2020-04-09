@@ -3,13 +3,8 @@ import { Link } from "react-router-dom";
 
 export const Thumbnail = (props, jpegItem, i) => {
 
-  //const [fade, setFade] = useState('fade-in');
-  const fade = 'fade-in';
-
-  // if (
-  //   props.selectedPage === 'basket'
-  //   && !props.getBasket.some( item => item.file !== jpegItem.file )
-  // ) fade = 'fade-out';
+  let fade = 'fade-in';
+  if ( jpegItem.toBeRemoved ) fade = 'fade-out';
 
 // props.selectedPage is added to the classNames so that CSS can target the
 // buttons in basket view seperately from buttons in gallery view.
@@ -29,10 +24,7 @@ export const Thumbnail = (props, jpegItem, i) => {
 			<button
 				className={"remove-basket-thumb thumb-button " + props.selectedPage}
 				onClick={ () => {
-          /*setFade( () => fade = 'fade-out' )*/
-          setTimeout( () => {
 					  props.removeBasket( props.getBasket.indexOf(jpegItem) )
-          }, 500)
         }}
 			/>
 		)
