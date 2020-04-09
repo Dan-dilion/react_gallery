@@ -2,7 +2,8 @@
   /* border: 5px solid blue; */
   position: relative;         /* Floated to create new formatting context */
   width: 100%;
-  margin-top: 5vh;
+  margin: 2vh 0 0vh 0;
+  padding-bottom: 0;
 }
 
 .slider {

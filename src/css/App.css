@@ -17,6 +17,7 @@ h3 {
 }
 
 .app {
+  display: block;
   padding-top: 13%;
   background-color: #000a;
 }

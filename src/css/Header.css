@@ -4,7 +4,7 @@
   display: block;
   margin-top: 0%;
   background-color: #000c;
-  min-height: 5em;
+  //min-height: 5em;
   font-size: calc(10px + 2vw);
   color: #fed;
   backdrop-filter: blur(10px);
@@ -34,7 +34,7 @@
 .function-bar {
   display: block;
   margin-top: .2em;
-  margin-bottom: 1em;
+  margin-bottom: 5px;
   padding: .2em;
   padding-right: 4%;
   width: auto;

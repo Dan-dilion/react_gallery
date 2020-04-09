@@ -6,7 +6,7 @@
   margin-right: 2vw;
 	//margin-bottom: 2vh;
 
-  margin-top: 2.5rem;
+
   //padding: 2vmin;
   border-radius: 0vw;
   justify-content: center;
@@ -23,21 +23,12 @@
 @media screen and (max-width: 800px) {
   .phcontainer{
     grid-template-columns:  repeat(6, 1fr);
+    margin-top: 2.5rem;
   }
 }
-
 
 .gallery-title {
 	z-index: 2;
 	text-shadow: .2em .2em .1em #000f;
 	background-color: #0000;
-}
-
-.app-header {
-  position: fixed;
-}
-
-.header-spacer {
-  //display: block;
-  border: 5px solid white;
 }

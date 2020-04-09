@@ -13,18 +13,17 @@ export const Home = (props) => {
       <div className="home-container">
         <section className="welcome-message fade-in">
           <h2>Welcome to React Gallery</h2>
-          <p>My name is Daniel Marston, I am a self-taught React/Javascript
+          <p>My name is Daniel Marston; I am a self-taught React/Javascript
           developer seeking entry into the corporate world. I am eager to gain
-          commercial experience in order to become a valued developer to a
-          reputable organisation and find my place in the industry.
+          commercial experience and become a valuable developer to a reputable
+          organisation.
           </p>
-          <p>I have developed React Gallery as a means to showcase the
-          technologies I have learned during my studies. It is still under
-          development so expect new features to be added regularly. I have
-          developed it purely in Javascript using state of the art techniques
-          and leading web technologies. Below is a brief summary of technologies
-          used. Feel free to read on for a more detailed description, I hope you
-          enjoy using it.
+          <p>I have developed React Gallery as a way to apply the technologies
+          I have learned during my studies – expect regular updates and new
+          features. Thanks to NodeJS I have been able to develop the front end
+          and the back end exclusively using Javascript, incorporating state of
+          the art techniques and leading web technologies. Below is a brief
+          summary of the technologies I have used.
           </p>
           <p>Source code can be downloaded from <a target="_blank" href="https://github.com/dan-dilion">my GitHub account</a>.</p>
         </section>
@@ -37,7 +36,6 @@ export const Home = (props) => {
             <ul>
               <li>NodeJS</li>
               <li>NPM</li>
-              <li>APIs</li>
               <ul>
                 <li>Express-Router</li>
                 <li>Archiver</li>
@@ -66,10 +64,8 @@ export const Home = (props) => {
               <li>Frameworks & APIs</li>
               <ul>
                 <li>React</li>
-                <li>React-Router</li>
                 <li>React-Spring</li>
                 <li>Redux</li>
-                <li>Middleware</li>
                   <ul>
                     <li>Redux-Logger</li>
                     <li>Redux-Thunk</li>
