@@ -91,9 +91,9 @@ export const resequenceJpegs = (jpegs) => {
 // it is written in such a way that if there are none of the desired images left it will just drop the other type.
 // This way it is always better to over prescribe the portraits (round numbers up) because it will always be able to compensate.
 
-    [...pattern[patternSelecter -= 1]].forEach(item => {                                     // convert the pattern in to an array and begin itterating through it's characters
+    [...pattern[patternSelecter -= 1]].forEach(item => {                                   // convert the pattern in to an array and begin itterating through it's characters
       if (parseInt(item) && portraits.length > 0) newSequence.push(portraits.shift())      // if item is a 1 and there are landscapes left push landscape
-      else if (landscapes.length > 0) newSequence.push(landscapes.shift())                     // otherwise if there are any portraits left push portrait
+      else if (landscapes.length > 0) newSequence.push(landscapes.shift())                 // otherwise if there are any portraits left push portrait
       else if (portraits.length > 0) newSequence.push(portraits.shift())                   // otherwise if there are any landscapes left push lanscape
     });
   }

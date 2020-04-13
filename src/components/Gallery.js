@@ -10,20 +10,12 @@ export const Gallery = (props) => {
 
 //const [jpegs, setJpegs] = useState(resequenceJpegs(props.getJpegs))
 
-let jpegs = [];
+  props.refreshJpegs()
+  
+  let jpegs = [];
 
-if (!props.isFetchingJpegs) jpegs = resequenceJpegs(props.getJpegs)
-console.log('Current Jpegs: ', jpegs.length + ' Is Fetching: ', props.isFetchingJpegs)
-
-  useEffect( () => {                                                      // Use Effect is like componentDidMount for Function (stateless) components.
-    const asyncWrapper = async () =>{                                     // I have wrapped refreshJpegs() in this async function because when using
-      console.log('Gallery Calling Refresh')
-      await props.refreshJpegs()                                          // the await method the function will return an empty promise even if there
-      console.log('Gallery: Refresh called: ' + props.getJpegs.length)
-    }                                                                     // is no data to return.
-    asyncWrapper()                                                        // This way asyncWrapper() returns nothing and refreshJpegs() is called and
-  }, [])                                                                  // waited for completion without error.
-
+  if (!props.isFetchingJpegs) jpegs = resequenceJpegs(props.getJpegs)
+  console.log('Current Jpegs: ', jpegs.length + ' Is Fetching: ', props.isFetchingJpegs)
 
 
   const mediaQueryListener = window.matchMedia('(max-width: 800px)')      // This is the condition that will trigger the Media Query Listener
