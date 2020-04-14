@@ -78,7 +78,7 @@ export const SingleImage = (props) => {
 		)
 	}
 
-  const removeButton = (jpegItem, buttonType) => {
+  const removeButtonDispenser = (jpegItem, buttonType) => {
 
     switch (buttonType) {
       case 'lastInBasket':
@@ -87,7 +87,7 @@ export const SingleImage = (props) => {
           to={ '/basket' }
           onClick={ () => props.removeBasket(props.getBasket.indexOf(jpegItem)) }
         />); break;
-      case 'BeginningOfBasket':
+      case 'beginningOfBasket':
         return(<Link
           className="top-buttons remove-button"
           to={ './' + next.jpegItem.file }
@@ -114,17 +114,17 @@ export const SingleImage = (props) => {
     }
   }
 
-  const addRemoveButtonDispenser = (jpegItem) => {
+  const addRemoveButtonSelector = (jpegItem) => {
     if (
       props.getBasket.length > 0                         // if the basket is not empty
       && props.getBasket.some(item => item.file === jpegItem.file)        // and the item is in the basket
     ) {
       if (props.selectedPage === 'basket') {                                                  // if we are viewing the basket contents
-        if ( props.getBasket.length <= 1) return removeButton(jpegItem, 'lastInBasket')                     // if we are viewing the only item in the basket
-        else if ( props.getBasket.indexOf(jpegItem) === 0) return removeButton(jpegItem, 'BeginningOfBasket')    // if we are on the first item in the basket
-        else return removeButton(jpegItem, 'normalBasket')                                    // otherwise we're in the middle of the basket
+        if ( props.getBasket.length <= 1) return removeButtonDispenser(jpegItem, 'lastInBasket')                     // if we are viewing the only item in the basket
+        else if ( props.getBasket.indexOf(jpegItem) === 0) return removeButtonDispenser(jpegItem, 'beginningOfBasket')    // if we are on the first item in the basket
+        else return removeButtonDispenser(jpegItem, 'normalBasket')                                    // otherwise we're in the middle of the basket
       }
-      else return removeButton(jpegItem, 'gallery')                       // otherwise we're browsing the Gallery
+      else return removeButtonDispenser(jpegItem, 'gallery')                       // otherwise we're browsing the Gallery
     }
     else return addButton(jpegItem)                      // otherwise the basket is empty
   }
@@ -151,7 +151,7 @@ export const SingleImage = (props) => {
         </Link>
         <div className="top-buttons-container">
           { exitButton() }
-          { addRemoveButtonDispenser(currentJpegItem.jpegItem) }
+          { addRemoveButtonSelector(currentJpegItem.jpegItem) }
         </div>
         <div className="next-prev-container">
           { prevButton() }

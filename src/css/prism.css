@@ -40,11 +40,13 @@ pre[class*="language-"] {
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
 	background: #2d2d2d;
+  backdrop-filter: blur(10px);
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-	padding: .1em;
+	padding: .1em .2em .1em .2em;
+  margin: 0;
 	border-radius: .3em;
 	white-space: normal;
 }

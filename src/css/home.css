@@ -1,11 +1,35 @@
-
 h2 {
   color: #fedf;
-  font-size: 45px;
+  font-size: 3rem;
+  text-decoration: underline;
 }
 
 h3 {
   color: #fedf;
+  font-size: 2rem;
+
+}
+
+strong {
+  color: #dcbf;
+}
+
+ul {
+  margin: 0;
+}
+
+
+p {
+  margin-top: 0;
+}
+
+cite {
+  font-weight: bold;
+  color: #cbaf;
+}
+
+.clear{
+  clear: both;
 }
 
 .home-container {
@@ -17,30 +41,36 @@ h3 {
   padding: 2em;
   background-color: #222;
   border-radius: 10px;
+  font-size: 1.5em;
+  text-align: left;
+  color: #ba9f;
 }
 
 .welcome-message {
   /* border: 1px solid white; */
+  display: inline-block;
   width: 95%;
-  font-size: 1.5rem;
-  text-align: left;
-  color: #cba;
 }
 
 .ul-container {
   /* border: 2px solid white; */
-  display: inline-flex;
+  display: block;
+
+  width: 100%;
 }
 
 .technologies-ul {
   /* border: 2px solid white; */
-  margin-right: 5rem;
+  display: inline-block;
+  float: left;
+  min-width: 23em;
+  width: 30%;
+  margin-right: 3rem;
   color: inherit;
-  font-size: 2rem;
 }
 
 .code-exerpt {
-  border: 1px solid white;
+  /* border: 1px solid white; */
   display: block;
   margin: 1em;
   width: 55em;
@@ -48,4 +78,6 @@ h3 {
   overflow: auto;
   margin-bottom: 40%;
   margin-left: 2em;
+  background-color: #000;
+  filter: blur(5);
 }
