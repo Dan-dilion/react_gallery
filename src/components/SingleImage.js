@@ -79,52 +79,71 @@ export const SingleImage = (props) => {
 	}
 
   const removeButtonDispenser = (jpegItem, buttonType) => {
-
     switch (buttonType) {
+
+                // If last image in basket link back to
+                // basket view after image is removed
       case 'lastInBasket':
         return(<Link
           className="top-buttons remove-button"
           to={ '/basket' }
-          onClick={ () => props.removeBasket(props.getBasket.indexOf(jpegItem)) }
+          onClick={() => {
+            props.removeBasket(props.getBasket.indexOf(jpegItem))
+          }}
         />); break;
+
+                // If at the beginning of the basket slide
+                // to next after image is removed
       case 'beginningOfBasket':
         return(<Link
           className="top-buttons remove-button"
           to={ './' + next.jpegItem.file }
-          onClick={ () => props.removeBasket(props.getBasket.indexOf(jpegItem)) }
+          onClick={() => {
+            props.removeBasket(props.getBasket.indexOf(jpegItem))
+          }}
         />); break;
+
+                // If in the middle of the basket array
+                // slide to previous after image is removed
       case 'normalBasket':
         return(<Link
           className="top-buttons remove-button"
           to={ './' + prev.jpegItem.file }
-          onClick={ () => props.removeBasket(props.getBasket.indexOf(jpegItem)) }
+          onClick={() => {
+            props.removeBasket(props.getBasket.indexOf(jpegItem))
+          }}
         />); break;
+
+                // If viewing the gallery just remove image
       case 'gallery':
         return(
           <button
             className="top-buttons remove-button"
     				onClick={() => {
-              props.toggleIsFetching(true);
               props.removeBasket(props.getBasket.indexOf(jpegItem))
-              props.toggleIsFetching(false);
             }}
           />
         ); break;
+
       default: break;
     }
   }
 
   const addRemoveButtonSelector = (jpegItem) => {
     if (
-      props.getBasket.length > 0                         // if the basket is not empty
-      && props.getBasket.some(item => item.file === jpegItem.file)        // and the item is in the basket
+      props.getBasket.length > 0                // if the basket is not empty
+      && props.getBasket.some(
+        item => item.file === jpegItem.file     // and the item is in the basket
+      )
     ) {
-      if (props.selectedPage === 'basket') {                                                  // if we are viewing the basket contents
-        if ( props.getBasket.length <= 1) return removeButtonDispenser(jpegItem, 'lastInBasket')                     // if we are viewing the only item in the basket
-        else if ( props.getBasket.indexOf(jpegItem) === 0) return removeButtonDispenser(jpegItem, 'beginningOfBasket')    // if we are on the first item in the basket
-        else return removeButtonDispenser(jpegItem, 'normalBasket')                                    // otherwise we're in the middle of the basket
+      if (props.selectedPage === 'basket') {             // if we are viewing the basket contents
+        if (props.getBasket.length <= 1)                            // if we are viewing the only item in the basket
+          return removeButtonDispenser(jpegItem, 'lastInBasket')
+        else if ( props.getBasket.indexOf(jpegItem) === 0)              // if we are viewing the first item in the basket
+          return removeButtonDispenser(jpegItem, 'beginningOfBasket')
+        else return removeButtonDispenser(jpegItem, 'normalBasket')     // otherwise we're in the middle of the basket
       }
-      else return removeButtonDispenser(jpegItem, 'gallery')                       // otherwise we're browsing the Gallery
+      else return removeButtonDispenser(jpegItem, 'gallery')       // otherwise we're browsing the Gallery
     }
     else return addButton(jpegItem)                      // otherwise the basket is empty
   }

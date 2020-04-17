@@ -6,16 +6,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: scroll;
+
 }
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
+
 html {
 
-  background: linear-gradient(#0000, #0000), url("../resources/header_background.jpg");
+  background: url("../resources/header_background.jpg");
 
 }
 

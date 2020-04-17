@@ -11,7 +11,6 @@ pre[class*="language-"] {
 	color: #ccc;
 	background: none;
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size: 1em;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
@@ -33,14 +32,13 @@ pre[class*="language-"] {
 /* Code blocks */
 pre[class*="language-"] {
 	padding: 1em;
-	margin: 0;
+	/* margin: 0; */
 	overflow: auto;
 }
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
 	background: #2d2d2d;
-  backdrop-filter: blur(10px);
 }
 
 /* Inline code */

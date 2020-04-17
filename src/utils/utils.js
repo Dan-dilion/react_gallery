@@ -40,7 +40,7 @@ export const resequenceJpegs = (jpegs) => {
   logit('Predicted Num Of Rows: ', predictedNumOfRows)                                                  // round result up if not an integer
 
 /*                     **
-**  Pattern sequencer  **
+**  Pattern selector   **
 **                     */
   const sequencer = (numOfPortraits = 0, patternSelecter = 1, offset = 0) => {                          // This is the sequencer!
     let pattern = [];
@@ -52,8 +52,8 @@ export const resequenceJpegs = (jpegs) => {
           if (offset) pattern = ['1000001'];                             // offset patterns begin with portraits (0)
           else pattern = ['0010100', '0100010']; break;                  // Not offset patterns begin with landscapes (1)
         case  4:
-          if (offset) pattern = ['10100101', '10011001'];                // I have left out 00111100 for better aesthetics
-          else pattern = ['01011010', '01100110']; break;                // I have left out 11000011 for better aesthetics
+          if (offset) pattern = ['10100101', '10011001'];                // I have left out 11000011 for better aesthetics
+          else pattern = ['01011010', '01100110']; break;                // I have left out 00111100 for better aesthetics
         case  6:
           if (offset) pattern = ['101101101', '110101011'];
           else pattern = ['011101110']; break;
@@ -84,10 +84,10 @@ export const resequenceJpegs = (jpegs) => {
     logit('Pattern: ' + pattern[patternSelecter] + ' gridWidth: ' + gridWidth + ' numOfPortraits: ' + numOfPortraits);
 
 /*                    **
-**  Image Dropper     **
+**  Row Sequencer     **
 **                    */
 
-// The Image Dropper will itterate through each character in the pattern and drop a portrait for 0 characters and a landscape for 1's.
+// The Image Dropper will itterate through each character in the pattern and drop a portrait for 1 characters and a landscape for 0's.
 // it is written in such a way that if there are none of the desired images left it will just drop the other type.
 // This way it is always better to over prescribe the portraits (round numbers up) because it will always be able to compensate.
 
@@ -99,20 +99,19 @@ export const resequenceJpegs = (jpegs) => {
   }
 
 
+  /*                                **
+  **  Portraits Distributer         **
+  **                                */
+  // this next loop decides how many time you can distribute 2 portraits on every other row
+  // Each time through the loop it either adds two portraits to the even rows or two to the odd rows
+  // If there is not enough portraits left for a whole pass they are added to leftoverPorts variable
+
   let offsetToggle = 1;           // Set to 1 to ensure the portraits are distributed on the even numbered rows first
   let leftoverPorts = 0;
   let oddPorts = 0;
   let evenPorts = 0;
   let oddPatternNumber = 1;
   let evenPatternNumber = 1;
-
-/*                                **
-**  Portraits Distributer         **
-**                                */
-
-// this next loop decides how many time you can distribute 2 portraits on every other row
-// Each time through the loop it either adds two portraits to the even rows or two to the odd rows
-// If there is not enough portraits left for a whole pass they are added to leftoverPorts variable
 
   if (portraits.lenghth < predictedNumOfRows) evenPorts = 2;     // if there not enough portraits for the offset rows
   else {                                                         // use the portraits for the offset rows only
@@ -140,8 +139,8 @@ export const resequenceJpegs = (jpegs) => {
   for (let i = predictedNumOfRows; i > 0; i--) {                      // loop once for every row
     if (!offsetToggle) {                                              // if its an odd numbered row
       if (leftoverPorts > 0) {                                        // call the sequencer and pass in the number of oddPorts
-        sequencer(oddPorts + 2, oddPatternNumber, offsetToggle)       // if there are leftoverPorts left add 2 to the number
-        leftoverPorts -= 2;                                           // of oddPorts and deduct 2 from the number of leftoverPorts
+        sequencer(oddPorts + 2, oddPatternNumber, offsetToggle)       // if there are leftoverPorts left add 2 extra images
+        leftoverPorts -= 2;                                           // from oddPorts and deduct 2 from the number of leftoverPorts
       } else sequencer(oddPorts, oddPatternNumber, offsetToggle);     // if there's no leftoverPorts just pass in oddPorts unadulterated
       oddPatternNumber +=1;                                           // Keep track of the pattern deviation
     }

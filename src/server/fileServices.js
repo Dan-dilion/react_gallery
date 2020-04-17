@@ -36,7 +36,7 @@ async function getJpegs(dir) {                  // This is an async function whi
 	.then(output => {
 			jpegs = output.filter((output) => {       // iterate through the array
 				return (path.extname(output)            // keep only the entries with
-				== '.jpg' || path.extname(output)       // .jpg or JPEG extention names
+				== '.jpg' || path.extname(output)       // .jpg or .JPEG extention names
 				== '.JPEG');                            // the filter is not case sensitive
 			})                                        // to make case sensitive use ===
 	})

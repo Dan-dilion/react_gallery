@@ -7,9 +7,10 @@
   //min-height: 5em;
   font-size: calc(10px + 2vw);
   color: #fed;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
   text-align: left;
-  min-width: 100%;
+  width: 100%;
+
 }
 
 .logo {

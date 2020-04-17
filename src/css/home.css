@@ -1,7 +1,7 @@
 h2 {
   color: #fedf;
   font-size: 3rem;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 h3 {
@@ -23,6 +23,11 @@ p {
   margin-top: 0;
 }
 
+pre {
+  padding: 0;
+  margin: 0;
+}
+
 cite {
   font-weight: bold;
   color: #cbaf;
@@ -32,13 +37,41 @@ cite {
   clear: both;
 }
 
+.code-exerpt {
+  /* border: 1px solid white; */
+  display: inline-block;
+  overflow: auto;
+  border-radius: 15px 0 0 0px;
+  margin: 0;
+  font-size: 1rem;
+  max-width: 44rem;
+
+  scrollbar-width: thin;
+  scrollbar-color: #222 #2d2d2d;
+}
+.code-exerpt::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.code-exerpt::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+.code-exerpt::-webkit-scrollbar-thumb {
+  background-color: #1d1d1d;
+  border-radius: 3px;
+  border: 1px solid #333;
+}
+.code-exerpt::-webkit-scrollbar-corner {
+  background-color: #2d2d2d;
+}
+
 .home-container {
   /* border: 1px solid white; */
   display: block;
   width: calc(95% - 3em);
   margin: auto;
-  margin: 1em auto 0 auto;
-  padding: 2em;
+  //margin: 0em auto 0 auto;
+  padding: 2em 0 2em 2em;
   background-color: #222;
   border-radius: 10px;
   font-size: 1.5em;
@@ -46,38 +79,176 @@ cite {
   color: #ba9f;
 }
 
-.welcome-message {
-  /* border: 1px solid white; */
-  display: inline-block;
-  width: 95%;
+.right-pad {
+  padding-right: 2rem;
 }
 
-.ul-container {
-  /* border: 2px solid white; */
-  display: block;
+.section-container {
+  /* border: 1px solid white; */
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 
-  width: 100%;
+.section-text {
+  /* border: 1px solid green; */
+  flex-grow: 1;
+  width: 35%;
+  padding-right: 2em;
+}
+
+.intro-box {
+  /* border: 1px solid white; */
+}
+
+.welcome-message {
+  /* border: 1px solid green; */
+  display: inline-block;
+  flex-grow: 3;
+}
+
+.tech-ul-container {
+  /* border: 1px solid purple; */
+  display: inline-flex;
+  justify-content: flex-start;
+  flex-grow: 2;
+  flex-wrap: wrap;
 }
 
 .technologies-ul {
-  /* border: 2px solid white; */
+  /* border: 2px solid blue; */
   display: inline-block;
-  float: left;
-  min-width: 23em;
-  width: 30%;
-  margin-right: 3rem;
-  color: inherit;
+  max-width: 10em;
+  margin: 0 3em 0 3em;
 }
 
-.code-exerpt {
-  /* border: 1px solid white; */
-  display: block;
-  margin: 1em;
-  width: 55em;
-  max-height: 30vh;
-  overflow: auto;
-  margin-bottom: 40%;
-  margin-left: 2em;
-  background-color: #000;
-  filter: blur(5);
+.concept {
+}
+
+.Header-navbar {
+
+}
+
+.underline-animation-text {
+
+}
+
+.underline-animation-code .code-exerpt {
+  /* border-radius: 1px solid blue; */
+  max-height: 12em;
+}
+
+.button-logic-text {
+
+}
+
+.button-logic-code {
+}
+
+.button-logic-code .code-exerpt {
+  max-height: 14em;
+}
+
+.gallery-basket-text {
+}
+
+.gallery-basket-code {
+
+}
+
+.gallery-basket-code .code-exerpt {
+  max-height: 32em;
+  /* font-size: 1vw; */
+}
+
+.single-image-text {
+
+}
+
+.single-image-code h3 {
+  /* max-width: 70%; */
+}
+
+.single-image-code .code-exerpt {
+  height: 21em;
+}
+
+.basket-redux-text {
+
+}
+
+.basket-redux-code .code-exerpt{
+  max-height: 30em;
+}
+
+.nodejs-container {
+  /* border: 2px solid chocolate; */
+}
+
+.nodejs-text {
+  /* border: 2px solid pink; */
+}
+
+.nodejs-code-container {
+  /* border: 2px yellow solid; */
+  width: 100%;
+}
+
+.nodejs-code {
+  /* border: 2px solid white; */
+}
+
+.nodejs-code .code-exerpt {
+  max-height: 15rem;
+}
+
+@media screen and (max-width: 800px) {
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  .home-container {
+    font-size: 1em;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding-right: 2rem;
+  }
+
+  .code-exerpt {
+    margin: 0;
+    font-size: 1.7vw;
+    max-width: 58em;
+  }
+
+  .gallery-basket-code .code-exerpt {
+    font-size: 1.1vw;
+    max-width: 90em;
+  }
+
+  .right-pad {
+    padding-right: 0;
+  }
+
+  .intro-box {
+    display: block;
+  }
+
+  .welcome-message {
+    display: block;
+    width: 100%;
+  }
+
+  .technologies-ul {
+    font-size: 1em;
+  }
+
+  .underline-animation-container {
+    max-width: 100%;
+  }
 }

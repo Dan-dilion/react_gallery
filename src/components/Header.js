@@ -105,7 +105,6 @@ export const Header = (props) => {
 
   function buttonDispenser(button) {
     switch (button) {
-
       case 'home':
         if (props.selectedPage === 'home')
           return homeButton(1);
@@ -123,31 +122,30 @@ export const Header = (props) => {
 
       case 'download':
         if (
-          props.selectedPage !== 'home'
-          && props.getBasket.length !== 0
+          props.selectedPage !== 'home'       // If not on homepage and
+          && props.getBasket.length !== 0     // there are items in the basket
         )
         return downloadButton(1);
         else return downloadButton(0);
 
       case 'addAll':
         if (
-          props.selectedPage !== 'home'
-          && props.getJpegs.length !== props.getBasket.length
-          && props.selectedPage === 'gallery'
+          props.getJpegs.length !== props.getBasket.length   // If all images are not already in the
+          && props.selectedPage === 'gallery'                // basket and selected page is gallery
         )
         return addAll(1);
         else return addAll(0);
 
       case 'emptyBasket':
         if (
-          props.selectedPage !== 'home'
-          && props.getBasket.length > 0
+          props.selectedPage !== 'home'       // If not on homepage and
+          && props.getBasket.length > 0       // basket is not empty
         )
         return emptyBasketButton(1);
         else return emptyBasketButton(0);
 
-        default: break;
-      }
+      default: break;
+    }
   }
 
 	return(

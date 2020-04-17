@@ -32,8 +32,7 @@ export const getJpegs = async () => {                       // Export method.
     console.log(newJpegs)                                         //
     return newJpegs;                                              // Return array.
   })
-
-  .catch(err => console.log('ERROR!!!', err))                     // Catch errors, output console log.
+  .catch( err => console.log('ERROR!!!', err) )                   // Catch errors, output console log.
 }
 
 export const zipJpegs = (files) => {                                    // Export method, Requires an array of files

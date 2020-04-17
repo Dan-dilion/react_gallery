@@ -15,21 +15,22 @@ export const toggleIsFetching = (state) => {
   }
 }
 
-export const refreshJpegs = () => {
-  return async dispatch => {
-    console.log('FileActions, refresh called - jpegs.length: ', store.getState().fileReducer.jpegs.length)
-    if (store.getState().fileReducer.jpegs.length === 0) {
-      await getJpegs()
-        .then( async response => {
-          console.log('GetJpegs response: ', response)
-          dispatch( toggleIsFetching(true) )
-          await dispatch( addJpegs(response) )
-          console.log('File Action - Jpegs Refreshed. ', store.getState().fileReducer.jpegs.length)
-          dispatch( toggleIsFetching(false) )
-        })
-        .catch( error => console.log('fileActions.js - refreshJpegs: ERROR!!!', error ) )
-
-    } else console.log('FileActions - Refresh Jpegs Unnecessary! ', store.getState().fileReducer.jpegs.length)
+export const refreshJpegs = () => {                                             // refreshJpegs() is an asynchronous
+  return async dispatch => {                                                    // Redux action made possible by Redux-Thunk
+    if (store.getState().fileReducer.jpegs.length === 0) {                      // If there are no images
+      await getJpegs()                                                          // Wait for getJpegs() to be complete
+        .then( async response => {                                              // When getJpegs() responds
+          dispatch( toggleIsFetching(true) )                                    // toggle the "isFetching" flag
+          await dispatch( addJpegs(response) )                                  // Send the response to addJpegs()
+          dispatch( toggleIsFetching(false) )                                   // toggle the "isFetching" flag
+        })                                                                      //
+        .catch( error => {                                                      // If anything had an error in it's response
+          console.log('fileActions.js - refreshJpegs: ERROR!!!', error )        // Log the error to console
+        })                                                                      //
+    } else console.log(                                                         // If there are already images then
+      'FileActions - Refresh Jpegs Unnecessary! ',                              // a refresh is unnecessary
+      store.getState().fileReducer.jpegs.length                                 // log message to console
+    )
   }
 }
 
