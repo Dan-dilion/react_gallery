@@ -18,20 +18,12 @@
   cursor: zoom-in;
 }
 
-@media screen and (max-width: 800px) {
-  .slider {
-    margin: 0 50px 0 50px;
-    width: calc(100% - 100px);
-  }
-}
-
 .top-buttons-container {
   display: flex;
   justify-content: space-between;
 }
 
 .top-buttons {
-  /* border: 5px solid purple; */
   margin: 0 50px;
   text-decoration: none;
   background-color: #0000;
@@ -43,12 +35,11 @@
   height: 50px;
   opacity: .6;
   transition: opacity, 2000ms;
+  outline: none;
 }
-
 .top-buttons:hover {
   transition: opacity, 500ms;
   opacity: .8;
-
 }
 
 .exit-button {
@@ -99,4 +90,15 @@
 .next-image {
   background-image: url("../resources/icons/chevron-right(fed).svg");
   background-position: right;
+}
+
+@media screen and (max-width: 800px) {
+  .slider {
+    margin: 0 50px 0 50px;
+    width: calc(100% - 100px);
+  }
+
+  .top-buttons-container {
+    margin-top: 30px;
+  }
 }

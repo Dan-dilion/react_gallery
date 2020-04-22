@@ -97,21 +97,28 @@ cite {
   padding-right: 2em;
 }
 
+.embedded-video {
+  width: 90%;
+  margin: 0 5% 0 5%;
+}
+
 .intro-box {
   /* border: 1px solid white; */
+  display: inline-flex;
+  flex-wrap: wrap;
 }
 
 .welcome-message {
   /* border: 1px solid green; */
   display: inline-block;
-  flex-grow: 3;
+  width: 100%;
 }
 
 .tech-ul-container {
   /* border: 1px solid purple; */
   display: inline-flex;
   justify-content: flex-start;
-  flex-grow: 2;
+  //flex-grow: 2;
   flex-wrap: wrap;
 }
 
@@ -120,6 +127,13 @@ cite {
   display: inline-block;
   max-width: 10em;
   margin: 0 3em 0 3em;
+}
+
+.walkthrough-video {
+  display: inline-block;
+  margin: auto;
+  width: 50%;
+  flex-grow: 1;
 }
 
 .concept {
@@ -149,16 +163,37 @@ cite {
   max-height: 14em;
 }
 
+.gallery-basket-container {
+  display: block;
+}
+
 .gallery-basket-text {
+  display: block;
+}
+
+.sequencer-container {
+  /* border: 2px solid orange; */
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .gallery-basket-code {
-
+  display: inline-block;
+  margin: auto;
 }
 
 .gallery-basket-code .code-exerpt {
   max-height: 32em;
   /* font-size: 1vw; */
+}
+
+.responsive-design-video {
+  display: inline-block;
+  margin: auto;
+  width: 50%;
+  flex-grow: 1;
 }
 
 .single-image-text {
@@ -185,8 +220,24 @@ cite {
   /* border: 2px solid chocolate; */
 }
 
+.nodejs-text-vid-wrapper {
+  display: inline-flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 .nodejs-text {
   /* border: 2px solid pink; */
+  display: inline-block;
+  width: 50%;
+  flex-grow: 1;
+}
+
+.nodejs-video {
+  display: inline-block;
+  margin: auto;
+  width: 45%;
+  flex-grow: 1;
 }
 
 .nodejs-code-container {
@@ -199,7 +250,7 @@ cite {
 }
 
 .nodejs-code .code-exerpt {
-  max-height: 15rem;
+  height: 15em;
 }
 
 @media screen and (max-width: 800px) {
@@ -244,11 +295,24 @@ cite {
     width: 100%;
   }
 
+  .walkthrough-video {
+    width: 100%;
+  }
+
   .technologies-ul {
-    font-size: 1em;
+    font-size: .8em;
+    margin: 0 2em 0 0em;
   }
 
   .underline-animation-container {
     max-width: 100%;
+  }
+
+  .responsive-design-video {
+    width: 100%;
+  }
+
+  .nodejs-video {
+    width: 100%;
   }
 }

@@ -78,7 +78,7 @@ export const resequenceJpegs = (jpegs) => {
     }
 
     while (patternSelecter > pattern.length) {            // This little loop makes sure that the pattern selecter is always
-      patternSelecter -= pattern.length;                  // in range of the number of deviations in the pattern array
+      patternSelecter -= pattern.length;                  // in range of the number of variations in the pattern array
     }
 
     logit('Pattern: ' + pattern[patternSelecter] + ' gridWidth: ' + gridWidth + ' numOfPortraits: ' + numOfPortraits);
@@ -87,9 +87,9 @@ export const resequenceJpegs = (jpegs) => {
 **  Row Sequencer     **
 **                    */
 
-// The Image Dropper will itterate through each character in the pattern and drop a portrait for 1 characters and a landscape for 0's.
+// The Image Dropper will itterate through each character in the pattern and drop a portrait for "1" characters and a landscape for "0" characters.
 // it is written in such a way that if there are none of the desired images left it will just drop the other type.
-// This way it is always better to over prescribe the portraits (round numbers up) because it will always be able to compensate.
+// This way it is always better to over prescribe the portraits (round numbers up) if there is a discrepancy because it can always compensate.
 
     [...pattern[patternSelecter -= 1]].forEach(item => {                                   // convert the pattern in to an array and begin itterating through it's characters
       if (parseInt(item) && portraits.length > 0) newSequence.push(portraits.shift())      // if item is a 1 and there are landscapes left push landscape

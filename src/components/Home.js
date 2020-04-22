@@ -87,8 +87,17 @@ export const Home = (props) => {
           <br className="clear" />
         </section>
 
-        <br />
-        <br />
+        <section className="walkthrough-video fade-in">
+          <h3>Walkthrough</h3>
+          <video className="embedded-video" controls>
+            <source src="./resources/video/walkthrough.mp4" type="video/mp4">
+            </source>
+            There was a problem finding the video source
+          </video>
+
+          <br />
+          <br />
+        </section>
       </div>
 
       <section className="concept right-pad fade-in">
@@ -274,7 +283,7 @@ switch (button) {
 
       </div>
 
-      <div className="gallery-basket-container section-container fade-in">
+      <div className="gallery-basket-container fade-in">
 
         <section className="gallery-basket-text right-pad">
           <h3>Gallery & Basket View</h3>
@@ -310,159 +319,176 @@ switch (button) {
           </p>
         </section>
 
-        <section className="gallery-basket-code right-pad">
-          <h3>JS - resequenceJpegs()</h3>
-          <pre className="code-exerpt">
-            <code className="language-js">
-              {`
-export const resequenceJpegs = (jpegs) => {
+        <div className="sequencer-container">
+          <section className="gallery-basket-code right-pad">
+            <h3>JS - resequenceJpegs()</h3>
+            <pre className="code-exerpt">
+              <code className="language-js">
+                {`
+  export const resequenceJpegs = (jpegs) => {
 
-  let newSequence = [];
-  let gridWidth = 12;
-  if (window.matchMedia("(max-width: 800px)").matches) gridWidth = 6;
+    let newSequence = [];
+    let gridWidth = 12;
+    if (window.matchMedia("(max-width: 800px)").matches) gridWidth = 6;
 
-  const getPortraits = (pegs) => {                                    // Function to make array of all portrait images
-    let ports = [];                                                   // declare empty array
-    pegs.forEach(item => {                                            // iterate through jpegs
-      if (item.res.width < item.res.height) ports.push(item);         // if the width is smaller than the height add it to portraits
-    })
-    return ports;                                                     // return the array of portraits
-  }
+    const getPortraits = (pegs) => {                                    // Function to make array of all portrait images
+      let ports = [];                                                   // declare empty array
+      pegs.forEach(item => {                                            // iterate through jpegs
+        if (item.res.width < item.res.height) ports.push(item);         // if the width is smaller than the height add it to portraits
+      })
+      return ports;                                                     // return the array of portraits
+    }
 
-  const getLandscapes = (pegs) => {                                   // Function to make array of all landscape images
-    let lands = [];                                                   // declare empty array
-    pegs.forEach(item => {                                            // iterate through jpegs
-      if (item.res.width >= item.res.height) lands.push(item);        // if width is larger or the same as height add it to landscapes
-    })
-    return lands;                                                     // return the array of landscapes
-  }
+    const getLandscapes = (pegs) => {                                   // Function to make array of all landscape images
+      let lands = [];                                                   // declare empty array
+      pegs.forEach(item => {                                            // iterate through jpegs
+        if (item.res.width >= item.res.height) lands.push(item);        // if width is larger or the same as height add it to landscapes
+      })
+      return lands;                                                     // return the array of landscapes
+    }
 
-  const portraits = getPortraits(jpegs)
-  const landscapes = getLandscapes(jpegs)
-  const predictedNumOfRows =  Math.ceil(                              // calculate the number of rows there will be
-    ((landscapes.length * 2) + portraits.length) / gridWidth          // landscapes take twice as much space as portraits,
-  )
+    const portraits = getPortraits(jpegs)
+    const landscapes = getLandscapes(jpegs)
+    const predictedNumOfRows =  Math.ceil(                              // calculate the number of rows there will be
+      ((landscapes.length * 2) + portraits.length) / gridWidth          // landscapes take twice as much space as portraits,
+    )
 
-/*                     **
-**  Pattern selecter   **
-**                     */
+  /*                     **
+  **  Pattern selecter   **
+  **                     */
 
-  const sequencer = (numOfPortraits = 0, patternSelecter = 1, offset = 0) => {
-    let pattern = [];
+    const sequencer = (numOfPortraits = 0, patternSelecter = 1, offset = 0) => {
+      let pattern = [];
 
-    if (gridWidth == 12) {                                            // This is the pattern store for the 12 fraction grid
-      pattern = ['000000'];                                           // if no numberOfPortraits is given the default will be none
-      switch(numOfPortraits) {
-        case  2:
-          if (offset) pattern = ['1000001'];                          // offset patterns begin with portraits (1)
-          else pattern = ['0010100', '0100010']; break;               // normal patterns begin with landscapes (0)
-        case  4:
-          if (offset) pattern = ['10100101', '10011001'];             // I have left out 11000011 for the aesthetics
-          else pattern = ['01011010', '01100110']; break;             // I have left out 00111100 for the aesthetics
-        case  6:
-          if (offset) pattern = ['101101101', '110101011'];
-          else pattern = ['011101110']; break;
-        case  8:
-          if (offset) pattern = [
-            '1011111101', '1101111011', '1110110111', '1111001111'
-          ];
-          else pattern = ['0111111110']; break;
-        case 10: pattern = ['11111011111']; break;                    // only one symmetrical pattern can be made
-        case 12: pattern = ['111111111111']; break;                   // only one symmetrical pattern can be made
-        default: break;
+      if (gridWidth == 12) {                                            // This is the pattern store for the 12 fraction grid
+        pattern = ['000000'];                                           // if no numberOfPortraits is given the default will be none
+        switch(numOfPortraits) {
+          case  2:
+            if (offset) pattern = ['1000001'];                          // offset patterns begin with portraits (1)
+            else pattern = ['0010100', '0100010']; break;               // normal patterns begin with landscapes (0)
+          case  4:
+            if (offset) pattern = ['10100101', '10011001'];             // I have left out 11000011 for the aesthetics
+            else pattern = ['01011010', '01100110']; break;             // I have left out 00111100 for the aesthetics
+          case  6:
+            if (offset) pattern = ['101101101', '110101011'];
+            else pattern = ['011101110']; break;
+          case  8:
+            if (offset) pattern = [
+              '1011111101', '1101111011', '1110110111', '1111001111'
+            ];
+            else pattern = ['0111111110']; break;
+          case 10: pattern = ['11111011111']; break;                    // only one symmetrical pattern can be made
+          case 12: pattern = ['111111111111']; break;                   // only one symmetrical pattern can be made
+          default: break;
+        }
       }
-    }
 
-    if (gridWidth == 6) {                                             // This is the pattern store for the 6 fraction grid
-      pattern = ['000'];                                              // if no numberOfPortraits is given the default will be none
-      switch(numOfPortraits) {
-        case 2: if (offset) pattern = ['1001']; else pattern = ['0110']; break
-        case 4: pattern = ['11011']; break;
-        default: break;
+      if (gridWidth == 6) {                                             // This is the pattern store for the 6 fraction grid
+        pattern = ['000'];                                              // if no numberOfPortraits is given the default will be none
+        switch(numOfPortraits) {
+          case 2: if (offset) pattern = ['1001']; else pattern = ['0110']; break
+          case 4: pattern = ['11011']; break;
+          default: break;
+        }
       }
+
+      while (patternSelecter > pattern.length) {                        // This little loop makes sure that the pattern selecter is always
+        patternSelecter -= pattern.length;                              // in range of the number of deviations in the pattern array
+      }
+
+  /*                    **
+  **  Row Sequencer     **
+  **                    */
+  // The Image Dropper will itterate through each character in the pattern and drop a portrait for 1 characters and a landscape for 0's.
+  // it is written in such a way that if there are none of the desired images left it will just drop the other type.
+  // This way it is always better to over prescribe the portraits (round numbers up) because it will always be able to compensate.
+
+      [...pattern[patternSelecter -= 1]].forEach(item => {              // convert pattern to an array and itterate through it's characters
+        if (parseInt(item) && portraits.length > 0)
+          newSequence.push(portraits.shift())                           // if item is a 1 and there are landscapes left push landscape
+        else if (landscapes.length > 0)
+          newSequence.push(landscapes.shift())                          // otherwise if there are any portraits left push portrait
+        else if (portraits.length > 0)
+          newSequence.push(portraits.shift())                           // otherwise if there are any landscapes left push lanscape
+      });
     }
 
-    while (patternSelecter > pattern.length) {                        // This little loop makes sure that the pattern selecter is always
-      patternSelecter -= pattern.length;                              // in range of the number of deviations in the pattern array
+  /*                                **
+  **  Portraits Distributer         **
+  **                                */
+
+  let offsetToggle = 1;                                                 // Set to 1 so portraits are first distributed on even rows
+  let leftoverPorts = 0;
+  let oddPorts = 0;
+  let evenPorts = 0;
+  let oddPatternNumber = 1;
+  let evenPatternNumber = 1;
+
+  // this next loop decides how many time you can distribute 2 portraits on every other row
+  // Each time through the loop it either adds two portraits to the even rows or two to the odd rows
+  // If there is not enough portraits left for a whole pass they are added to leftoverPorts variable
+
+    if (portraits.lenghth < predictedNumOfRows) evenPorts = 2;          // if there not enough portraits for offset rows
+    else {                                                              // only use the portraits for the offset rows
+      let i = portraits.length;
+      do {
+        i -= predictedNumOfRows;                                        // each loop deduct 2 portraits for half the number of rows
+        if (offsetToggle) evenPorts += 2;                               // either add 2 portraits to evenPorts
+        else oddPorts += 2;                                             // or 2 on to oddPorts (depending on offsetToggle).
+        offsetToggle = !offsetToggle;                                   // switch offsetToggle ready for the next pass
+      }
+      while (i > predictedNumOfRows);                                   // if not enough portraits left for one pass of the loop
+      leftoverPorts = i;                                                // exit the loop and add the leftover portraits to leftoverPorts
     }
 
-/*                    **
-**  Row Sequencer     **
-**                    */
-// The Image Dropper will itterate through each character in the pattern and drop a portrait for 1 characters and a landscape for 0's.
-// it is written in such a way that if there are none of the desired images left it will just drop the other type.
-// This way it is always better to over prescribe the portraits (round numbers up) because it will always be able to compensate.
+  /*                    **
+  **    Row Builder     **
+  **                    */
+  // This next loop calls the sequencer for each row and feeds in the number of Portraits allocated by the portrait distributer
+  // If there were any portraits left over in leftoverPorts it distributes them amongst the odd numbered rows
 
-    [...pattern[patternSelecter -= 1]].forEach(item => {              // convert pattern to an array and itterate through it's characters
-      if (parseInt(item) && portraits.length > 0)
-        newSequence.push(portraits.shift())                           // if item is a 1 and there are landscapes left push landscape
-      else if (landscapes.length > 0)
-        newSequence.push(landscapes.shift())                          // otherwise if there are any portraits left push portrait
-      else if (portraits.length > 0)
-        newSequence.push(portraits.shift())                           // otherwise if there are any landscapes left push lanscape
-    });
+    oddPatternNumber = 1;
+    evenPatternNumber = 1;                                              // reset the pattern selecters
+    offsetToggle = 0;                                                   // Reset the toggle
+    for (let i = predictedNumOfRows; i > 0; i--) {                      // loop once for every row
+      if (!offsetToggle) {                                              // if its an odd numbered row
+        if (leftoverPorts > 0) {                                        // call the sequencer and pass in the number of oddPorts
+          sequencer(oddPorts + 2, oddPatternNumber, offsetToggle)       // if there are any leftoverPorts add 2 extra images to the row
+          leftoverPorts -= 2;                                           // and deduct 2 from leftoverPorts
+        } else sequencer(oddPorts, oddPatternNumber, offsetToggle);     // if there's no leftoverPorts just pass in oddPorts unadulterated
+        oddPatternNumber +=1;                                           // Keep track of the pattern variant
+      }
+      else {
+        sequencer(evenPorts, evenPatternNumber, offsetToggle);          // Otherwise it's an even row, call sequencer and pass in evenPorts
+        evenPatternNumber += 1;                                         // Keep track of the offset pattern variant
+      }
+      offsetToggle = !offsetToggle;                                     // switch the toggle
+    }
+
+    return newSequence;                                                 // Return the resequenced array!
   }
+                `}
+              </code>
+            </pre>
+            <br />
+            <br />
+          </section>
 
-/*                                **
-**  Portraits Distributer         **
-**                                */
-
-let offsetToggle = 1;                                                 // Set to 1 so portraits are first distributed on even rows
-let leftoverPorts = 0;
-let oddPorts = 0;
-let evenPorts = 0;
-let oddPatternNumber = 1;
-let evenPatternNumber = 1;
-
-// this next loop decides how many time you can distribute 2 portraits on every other row
-// Each time through the loop it either adds two portraits to the even rows or two to the odd rows
-// If there is not enough portraits left for a whole pass they are added to leftoverPorts variable
-
-  if (portraits.lenghth < predictedNumOfRows) evenPorts = 2;          // if there not enough portraits for offset rows
-  else {                                                              // only use the portraits for the offset rows
-    let i = portraits.length;
-    do {
-      i -= predictedNumOfRows;                                        // each loop deduct 2 portraits for half the number of rows
-      if (offsetToggle) evenPorts += 2;                               // either add 2 portraits to evenPorts
-      else oddPorts += 2;                                             // or 2 on to oddPorts (depending on offsetToggle).
-      offsetToggle = !offsetToggle;                                   // switch offsetToggle ready for the next pass
-    }
-    while (i > predictedNumOfRows);                                   // if not enough portraits left for one pass of the loop
-    leftoverPorts = i;                                                // exit the loop and add the leftover portraits to leftoverPorts
-  }
-
-/*                    **
-**    Row Builder     **
-**                    */
-// This next loop calls the sequencer for each row and feeds in the number of Portraits allocated by the portrait distributer
-// If there were any portraits left over in leftoverPorts it distributes them amongst the odd numbered rows
-
-  oddPatternNumber = 1;
-  evenPatternNumber = 1;                                              // reset the pattern selecters
-  offsetToggle = 0;                                                   // Reset the toggle
-  for (let i = predictedNumOfRows; i > 0; i--) {                      // loop once for every row
-    if (!offsetToggle) {                                              // if its an odd numbered row
-      if (leftoverPorts > 0) {                                        // call the sequencer and pass in the number of oddPorts
-        sequencer(oddPorts + 2, oddPatternNumber, offsetToggle)       // if there are any leftoverPorts add 2 extra images to the row
-        leftoverPorts -= 2;                                           // and deduct 2 from leftoverPorts
-      } else sequencer(oddPorts, oddPatternNumber, offsetToggle);     // if there's no leftoverPorts just pass in oddPorts unadulterated
-      oddPatternNumber +=1;                                           // Keep track of the pattern variant
-    }
-    else {
-      sequencer(evenPorts, evenPatternNumber, offsetToggle);          // Otherwise it's an even row, call sequencer and pass in evenPorts
-      evenPatternNumber += 1;                                         // Keep track of the offset pattern variant
-    }
-    offsetToggle = !offsetToggle;                                     // switch the toggle
-  }
-
-  return newSequence;                                                 // Return the resequenced array!
-}
-              `}
-            </code>
-          </pre>
           <br />
           <br />
-        </section>
+
+          <section className="responsive-design-video fade-in right-pad">
+            <h3>Responsive Design</h3>
+            <video className="embedded-video" controls>
+              <source src="./resources/video/responsive-design.mp4" type="video/mp4">
+              </source>
+              There was a problem finding the video source
+            </video>
+
+            <br />
+            <br />
+          </section>
+        </div>
 
       </div>
 
@@ -632,56 +658,73 @@ const removeButtonDispenser = (jpegItem, buttonType) => {
 
       <div className="nodejs-container section-container fade-in">
 
-        <section className="nodejs-text right-pad">
-          <h3>NodeJS</h3>
-          <p>
-            Using a Node server allows me to run a portion of the website outside
-            of the browser environment. This enables functionality that would
-            otherwise be restricted by the browser but allows me to maintain the
-            same level of security by controlling the precise level of access to
-            the server’s resources.
-          </p>
-          <p>
-            I have used the <a href="https://expressjs.com/" target="_blank">
-            Express</a> API for routing client requests, it is configured to
-            listen to a specific port and respond to certain URIs. It circumvents
-            Cross Origin Resource Sharing (CORS) restrictions by attaching the
-            “Access-Control-Allow-Origin” header to it’s responses.
-          </p>
-          <p>
-            <code className="language-js">getJpegs()</code> is one of the services
-            provided by the Node server. When the browser makes an XHR “GET”
-            request Node will respond with an array containing all images in the
-            images folder attached to the response segment of the "GET" request.
-            You can see the response from <code className="language-js">
-            getJpegs()</code> by visiting <a
-              href="http://www.waxworlds.org:8987/api/getjpegs/" target="_blank">
-              the URL that the Express router is
-              configured to respond to
-            </a>.
-          </p>
-          <p>
-            <code className="language-js">resizeImages()</code> resizes new images
-            placed in the images folder using the Sharp API available with
-            the <a href="https://www.npmjs.com/" target="_blank">
-            Node Package Manager</a> (
-            <a href="https://www.npmjs.com/" target="_blank">NPM</a>).
-          </p>
-          <p>
-            <code className="language-js">zipJpegs()</code> receives a list of
-            files that is embedded in the search parameter segment of the URL
-            used in the “GET” request intercepted by Express-Router. Using
-            the <a href="https://www.archiverjs.com/" target="_blank">
-            archiver</a> API (also available
-            from <a href="https://www.npmjs.com/" target="_blank">NPM</a>), it
-            will begin to zip these files and pipe a read-stream back to the
-            browser in the XHR response as an attachment. The data stream is
-            passed in chunks of data to the browser so there are no temporary
-            files stored on the server. Depending on how the browser is
-            configured, it will either save the zip file in the Downloads folder
-            or invoke the “save as” prompt.
-          </p>
-        </section>
+      <div className="nodejs-wrapper">
+        <h3>NodeJS</h3>
+        <p>
+          Using a Node server allows me to run a portion of the website outside
+          of the browser environment. This enables functionality that would
+          otherwise be restricted by the browser but allows me to maintain the
+          same level of security by controlling the precise level of access to
+          the server’s resources.
+        </p>
+        <p>
+          I have used the <a href="https://expressjs.com/" target="_blank">
+          Express</a> API for routing client requests, it is configured to
+          listen to a specific port and respond to certain URIs. It circumvents
+          Cross Origin Resource Sharing (CORS) restrictions by attaching the
+          “Access-Control-Allow-Origin” header to it’s responses.
+        </p>
+
+          <div className="nodejs-text-vid-wrapper">
+            <section className="nodejs-text right-pad">
+              <p>
+                <code className="language-js">getJpegs()</code> is one of the services
+                provided by the Node server. When the browser makes an XHR “GET”
+                request Node will respond with an array containing all images in the
+                images folder attached to the response segment of the "GET" request.
+                You can see the response from <code className="language-js">
+                getJpegs()</code> by visiting <a
+                  href="http://www.waxworlds.org:8987/api/getjpegs/" target="_blank">
+                  the URL that the Express router is
+                  configured to respond to
+                </a>.
+              </p>
+              <p>
+                <code className="language-js">resizeImages()</code> resizes new images
+                placed in the images folder using the Sharp API available with
+                the <a href="https://www.npmjs.com/" target="_blank">
+                Node Package Manager</a> (
+                <a href="https://www.npmjs.com/" target="_blank">NPM</a>).
+              </p>
+              <p>
+                <code className="language-js">zipJpegs()</code> receives a list of
+                files that is embedded in the search parameter segment of the URL
+                used in the “GET” request intercepted by Express-Router. Using
+                the <a href="https://www.archiverjs.com/" target="_blank">
+                archiver</a> API (also available
+                from <a href="https://www.npmjs.com/" target="_blank">NPM</a>), it
+                will begin to zip these files and pipe a read-stream back to the
+                browser in the XHR response as an attachment. The data stream is
+                passed in chunks of data to the browser so there are no temporary
+                files stored on the server. Depending on how the browser is
+                configured, it will either save the zip file in the Downloads folder
+                or invoke the “save as” prompt.
+              </p>
+            </section>
+
+            <section className="nodejs-video fade-in right-pad">
+              <h3>Node Server</h3>
+              <video className="embedded-video" controls>
+                <source src="./resources/video/node-server.mp4" type="video/mp4">
+                </source>
+                There was a problem finding the video source
+              </video>
+
+              <br />
+              <br />
+            </section>
+          </div>
+        </div>
 
         <div className="nodejs-code-container section-container">
 
@@ -736,7 +779,7 @@ return await fetch(apiUrl + 'getjpegs')                   // Make XHR request to
         </div>
       </div>
 
-      <section>
+      <section className="deployment right-pad">
       <h3>Bundlers, trans-compilers and other build tools</h3>
 
       <p>
@@ -788,11 +831,6 @@ return await fetch(apiUrl + 'getjpegs')                   // Make XHR request to
       </section>
 
       <br className="clear" />
-
-
-
-
-
     </div>
   )
 }

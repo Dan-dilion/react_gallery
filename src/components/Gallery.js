@@ -11,7 +11,7 @@ export const Gallery = (props) => {
 //const [jpegs, setJpegs] = useState(resequenceJpegs(props.getJpegs))
 
   props.refreshJpegs()
-  
+
   let jpegs = [];
 
   if (!props.isFetchingJpegs) jpegs = resequenceJpegs(props.getJpegs)
@@ -20,7 +20,6 @@ export const Gallery = (props) => {
 
   const mediaQueryListener = window.matchMedia('(max-width: 800px)')      // This is the condition that will trigger the Media Query Listener
   const mediaQueryAction = (action) => {
-    console.log('matchMedia Action Called!!!')                            // This is the action it will take when the condition is matched
     if (action.matches) {                                                 //
       console.log('Viewport is 800px or less')                            //
       props.toggleIsFetching(true);

@@ -58,6 +58,7 @@
   opacity: 0;
   transition: opacity 1500ms;
   cursor: pointer;
+  outline: none;
 }
 
 /* If the viewport is less than 800px wide apply these attributes */
