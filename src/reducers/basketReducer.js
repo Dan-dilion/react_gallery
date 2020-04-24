@@ -1,3 +1,8 @@
+// These are the basket reducers. They respond to actions when they are
+// dispatched and will change the state accordingly. Each reducer takes the old
+// state and creates a new state with the changes in effect. This process
+// has to be immutable because of the way React works.
+
 const initialState = {
 	basketJpegs: [],
 };
@@ -5,13 +10,11 @@ const initialState = {
 const basketReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case "ADD_BASKET":
-			if (!state.basketJpegs.some( item => item.file == action.payload.file) ) {
-				console.log('Adding item to basket: ', action.payload);
+			if (!state.basketJpegs.some( item => item.file === action.payload.file) ) {
 				state = {
 					...state,
 					basketJpegs: [...state.basketJpegs, action.payload],
 				};
-				console.log('New State: ', state)
 			} else {
 				console.log('Not Adding: ', action.payload)
 				console.log('Item Already in Basket!!! ')
@@ -19,12 +22,10 @@ const basketReducer = (state = initialState, action) => {
 			break;
 
     case "ADD_ALL":
-      console.log('Adding entire gallery to the basket');
       state = { ...state, basketJpegs: [...action.payload] }
       break;
 
 		case "REMOVE_BASKET":
-			console.log('Removing item from basket ', state.basketJpegs[action.payload]);
 			let newList = [...state.basketJpegs];
 			newList.splice(action.payload, 1);
 			return {
@@ -32,7 +33,6 @@ const basketReducer = (state = initialState, action) => {
 			}
 
     case "TO_BE_REMOVED":
-      console.log('Flagging Item for removal ', state.basketJpegs[action.payload]);
       state = {
         ...state,
         basketJpegs: [
@@ -46,9 +46,7 @@ const basketReducer = (state = initialState, action) => {
       break;
 
     case "EMPTY_BASKET":
-      console.log('Empying basket');
       return {...state, basketJpegs: []}
-      break;
 
 		default:
 			console.log('BASKET REDUCER: No action specified!!!');

@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 import { zipJpegs } from '../utils/serverRequest.js';
 
-//export class Header extends React.Component {
 export const Header = (props) => {
 
+// homeButton() is the 'About' button!
   function homeButton(status) {
-    let classNames = 'navbar-items disable-selection';
-    if (status) classNames = 'selected navbar-items disable-selection';
+    let classNames = 'navbar-items';
+    if (status) classNames = 'selected navbar-items';       // adds the 'selected' class name if status is true
     return(
       <Link
         className={ 'nav-button' }
@@ -23,9 +23,10 @@ export const Header = (props) => {
     )
   }
 
+// basketButton()
   function basketButton(status) {
-    let classNames = 'navbar-items disable-selection';
-    if (status) classNames = 'selected navbar-items disable-selection';
+    let classNames = 'navbar-items';
+    if (status) classNames = 'selected navbar-items';       // adds the 'selected' class name if status is true
     return(
       <Link
         className={ 'nav-button' }
@@ -38,9 +39,10 @@ export const Header = (props) => {
     )
   }
 
+// galleryButton()
   function galleryButton(status) {
-    let classNames = 'navbar-items disable-selection';
-    if (status) classNames = 'selected navbar-items disable-selection';
+    let classNames = 'navbar-items';
+    if (status) classNames = 'selected navbar-items';       // adds the 'selected' class name if status is true
     return(
       <Link
         className={ 'nav-button' }
@@ -53,35 +55,34 @@ export const Header = (props) => {
     )
   }
 
+// downloadButton()
   function downloadButton(status) {
-    let classNames = 'funcbar-items funcbar-items-ghost disable-selection';
-    let files = [];
-    if (status) {
-      classNames = 'funcbar-items disable-selection';
-      files = props.getBasket.map( item => item.file )
-    }
-    return (
+    let classNames = 'funcbar-items disable-selection funcbar-items-ghost';     // If status is true remove the 'ghost' classname
+    if (status) classNames = 'funcbar-items';                                   // "disable-selection" is only necessary for div elements
+
+// a conditional/turnery return statement that will return a disfunctional button if status is false
+    return ( status ?
       <a
-        href={ zipJpegs( files ) }
+        href={ zipJpegs( props.getBasket.map( item => item.file ) ) }
       ><li
         id='nav-button'
         className={ classNames }
-      > Download </li></a>
+      > Download </li></a> :
+      <div><li
+        id='nav-button'
+        className={ classNames }
+      > Download </li></div>
     )
   }
 
+// addAll()
   function addAll(status) {
-    let classNames = 'funcbar-items funcbar-items-ghost disable-selection';
-    if (status) classNames = 'funcbar-items disable-selection';
+    let classNames = 'funcbar-items funcbar-items-ghost disable-selection';     // "disable-selection" is only necessary for divs, it disables text selection
+    if (status) classNames = 'funcbar-items disable-selection';                 // If status is true remove 'funcbar-items-ghost' from classNames
     return(
       <div
         className={ 'nav-button' }
-        onClick={ () => {
-          if (status) {
-            props.addAll(props.getJpegs)
-            props.changePage('gallery')
-          }
-        } }
+        onClick={ () => { if (status) props.addAll(props.getJpegs) } }
       ><li
         id='nav-button'
         className={ classNames }
@@ -89,9 +90,10 @@ export const Header = (props) => {
     )
   }
 
+// emptyBasketButton()
   function emptyBasketButton(status) {
-    let classNames = 'funcbar-items funcbar-items-ghost disable-selection';
-    if (status) classNames = 'funcbar-items disable-selection';
+    let classNames = 'funcbar-items funcbar-items-ghost disable-selection';     // "disable-selection" is only necessary for divs, it disables text selection
+    if (status) classNames = 'funcbar-items disable-selection';                 // If status is true remove 'funcbar-items-ghost' from classNames
     return(
       <div
         className={ 'nav-button' }
@@ -103,7 +105,9 @@ export const Header = (props) => {
     )
   }
 
-  function buttonDispenser(button) {
+// buttonDispenser() inputs the type of button and will dispense the appropriate
+// button with the appropriate state
+  const buttonDispenser = (button) => {
     switch (button) {
       case 'home':
         if (props.selectedPage === 'home')
@@ -122,24 +126,24 @@ export const Header = (props) => {
 
       case 'download':
         if (
-          props.selectedPage !== 'home'       // If not on homepage and
-          && props.getBasket.length !== 0     // there are items in the basket
+          props.selectedPage !== 'home'                       // If not on homepage and
+          && props.getBasket.length !== 0                     // there are items in the basket
         )
         return downloadButton(1);
         else return downloadButton(0);
 
       case 'addAll':
         if (
-          props.getJpegs.length !== props.getBasket.length   // If all images are not already in the
-          && props.selectedPage === 'gallery'                // basket and selected page is gallery
+          props.getJpegs.length !== props.getBasket.length    // If all images are not already in the
+          && props.selectedPage === 'gallery'                 // basket and selected page is 'gallery'
         )
         return addAll(1);
         else return addAll(0);
 
       case 'emptyBasket':
         if (
-          props.selectedPage !== 'home'       // If not on homepage and
-          && props.getBasket.length > 0       // basket is not empty
+          props.selectedPage !== 'home'                       // If not on homepage and
+          && props.getBasket.length > 0                       // basket is not empty
         )
         return emptyBasketButton(1);
         else return emptyBasketButton(0);
@@ -148,19 +152,21 @@ export const Header = (props) => {
     }
   }
 
+// The main header element defines the navbar, the title and the function=bar
+// It calls the button dispenser for each button and sets the title.
 	return(
-		<div className="app-header">
-      <ul className="navbar">
+		<div id="app-header">
+      <ul id="navbar">
         { buttonDispenser('home') }
         { buttonDispenser('gallery') }
         { buttonDispenser('basket') }
       </ul>
 
-      <Link to={'/home'} className='title-link' onClick={ () => props.changePage('home') }>
-			    <h1 className='logo'>React Gallery</h1>
+      <Link to={'/home'} onClick={ () => props.changePage('home') }>
+			    <h1 id='logo'>React Gallery</h1>
       </Link>
 
-      <ul className="function-bar">
+      <ul id="function-bar">
       { buttonDispenser('download') }
       { buttonDispenser('addAll') }
       { buttonDispenser('emptyBasket') }

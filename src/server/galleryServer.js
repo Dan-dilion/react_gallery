@@ -4,65 +4,62 @@ const url = require('url');
 const path = require ('path');
 const fs = require ('fs');
 
+// import variables and functions
 const {
-	imgDir,
-	zipFile,
-	resizeImages,
-	getJpegs,
-	zipJpegs
+  imgDir,
+  zipFile,
+  resizeImages,
+  getJpegs,
+  zipJpegs
 } = require('./fileServices.js');
 
-let app = express();
+let app = express();                                              // Instantiate express object
 
 
 app.use((request, response, next) => {
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+  response.header("Access-Control-Allow-Origin", "*");            // Set response headders to allow CORS
+  next();                                                         // (Cross Origin Resource Sharing)
 });
 
-app.get('/' || '/home', (request, response) => {
-	response.set({'Content-Type' : 'text/html'});
-	console.log('ROUTING FAILURE: No params in URL.');
-	response.sendStatus(204);		// status 204 (successful but no content) type html
+// Listen for a "GET" request to '/' or '/home' - This will just respond with nothing
+app.get('/' || '/home', (request, response) => {                  // will respond to "GET" request at the specified URIs
+  response.set({'Content-Type' : 'text/html'});                   // Set response type
+  console.log('ROUTING FAILURE: No params in URL.');              // Log message to console
+  response.sendStatus(204);		                                    // status 204 (successful but no content) type html
 })
 
-app.get('/api/getjpegs', (request, response) => {
-	console.log('SERVER: fetching jpegs');
-	async function waitJpegs(dir) {								// getJpegs() async function wait for output
-		console.log('0 - fetching Jpegs')
-		try {
-			let jpegs = await getJpegs(dir)
-			await resizeImages(jpegs)
-			console.log('6.1 - Resize finnished')
-
-//			jpegs = jpegs.map((file, i) => {return ( {file: file, id: i} ) })
-																// send the server response after the result
-			console.log('7 - Sending Response')
-			response.set({
-				'Content-Type' : 'application/json',			// content type JSON
-			});
-			data = JSON.stringify(jpegs);						// stringify jpegs array
-			console.log(data);									// send jpegs array in server response
-			response.send(data);									// send jpegs array in server response
-		} catch(err) {
-			returnError(err);									// send the error in the response
-		}
-	}
-	waitJpegs(imgDir)
+// Listen for "GET" request to '/api/getjpegs' - Return list of files in the images folder
+app.get('/api/getjpegs', (request, response) => {                 // will respond to "GET" request at specified URI
+  console.log('SERVER: fetching jpegs for: ', request.ip);
+  async function waitJpegs(dir) {								                  // waitJpegs() async function wait for output
+    try {
+      let jpegs = await getJpegs(dir)                             // Wait for array of jpegs to be returned
+      await resizeImages(jpegs)                                   // Wait for images to be resized
+      response.set({                                              // send the server response
+        'Content-Type' : 'application/json',			                // Declare content type JSON
+      });
+      data = JSON.stringify(jpegs);						                    // stringify jpegs array
+      console.log('SERVER: returning ' + jpegs.length + ' jpegs');
+      response.send(data);									                      // send stringified jpegs array in server response
+    } catch(err) {                                                // If there was an error
+      returnError(err);									                          // send the error in the response
+    }
+  }
+  waitJpegs(imgDir)
 })
 
-app.get('/api/zipjpegs', (request, response) => {
-	response.attachment('downloaded-images.zip');
+// Listen for "GET" request to /api/zipjpegs - Initate the zipJpegs function and return zipfile in readstreem
+app.get('/api/zipjpegs', (request, response) => {                 // will respond to "GET" request at specified URI
+  response.attachment('downloaded-images.zip');                   // Set response type
 
-	let urlPerameters = JSON.parse(request.query.basketContents)
-  if (urlPerameters.length) {
-  	let zip = zipJpegs(urlPerameters, response)
-  	zip.pipe(response);
-  	zip.finalize();
-  	console.log('Finalizing Zipfile Structure: ')
-  } else response.sendStatus(204);
-})
+  let urlPerameters = JSON.parse(request.query.basketContents)    // Strip the basketContents array from the URI
+  if (urlPerameters.length) {                                     // If there are any items in the array
+    let zip = zipJpegs(urlPerameters, response)                   // pass items to zipJpegs() and 'zip' will be the outcome
+    zip.pipe(response);                                           // Pipe the response thtrough a readstreem back to client
+    zip.finalize();                                               // Finalise the zipfile structure
+    console.log('Finalizing Zipfile Structure for: ', request.ip)
+  } else response.sendStatus(204);                                // If no files in URI respond with status 204
+})                                                                // (successful but no content)
 
-app.listen(8987);
+app.listen(8987);                                                 // Server to listen to specified port
 console.log("server initialised - port: 8987\n");

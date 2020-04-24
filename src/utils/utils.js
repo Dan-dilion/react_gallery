@@ -1,18 +1,8 @@
 export const resequenceJpegs = (jpegs) => {
 
-  let debug = 0;                    // Turn on/off debug info in the console.
   let newSequence = [];
   let gridWidth = 12;
-  if (window.matchMedia("(max-width: 800px)").matches) gridWidth = 6;
-  console.log('Grid Width = ', gridWidth)
-
-  const logit = (...message) => {
-    if (debug) {
-      let output = '';
-      message.forEach(item => output += item);
-      console.log(output)
-    }
-  }
+  if (window.matchMedia("(max-width: 800px)").matches) gridWidth = 6;     // set the gridWidth according to the viewport width
 
   const getPortraits = (pegs) => {                              // Function to make array of all portrait images
     let ports = [];                                             // declare empty array
@@ -33,19 +23,15 @@ export const resequenceJpegs = (jpegs) => {
   const portraits = getPortraits(jpegs)
   const landscapes = getLandscapes(jpegs)
 
-  logit('Number of Portraits = ', portraits.length)
-  logit('Number of Landscapes = ', landscapes.length)
-
   const predictedNumOfRows =  Math.ceil(((landscapes.length * 2) + portraits.length) / gridWidth)       // landscapes take twice as much space as portraits,
-  logit('Predicted Num Of Rows: ', predictedNumOfRows)                                                  // round result up if not an integer
-
+                                                                                                        // round result up if not an integer
 /*                     **
 **  Pattern selector   **
 **                     */
   const sequencer = (numOfPortraits = 0, patternSelecter = 1, offset = 0) => {                          // This is the sequencer!
     let pattern = [];
 
-    if (gridWidth == 12) {        // This is the pattern sequencer for the 12 fraction grid
+    if (gridWidth === 12) {        // This is the pattern sequencer for the 12 fraction grid
       pattern = ['000000'];       // if no numberOfPortraits is given the default will be none
       switch(numOfPortraits) {
         case  2:
@@ -55,12 +41,12 @@ export const resequenceJpegs = (jpegs) => {
           if (offset) pattern = ['10100101', '10011001'];                // I have left out 11000011 for better aesthetics
           else pattern = ['01011010', '01100110']; break;                // I have left out 00111100 for better aesthetics
         case  6:
-          if (offset) pattern = ['101101101', '110101011'];
-          else pattern = ['011101110']; break;
+          if (offset) pattern = ['101101101', '110101011'];              // To access different variations of the pattern
+          else pattern = ['011101110']; break;                           // just cycle through the index number of the pattern group
         case  8:
-          if (offset) pattern = [
-            '1011111101', '1101111011', '1110110111', '1111001111'
-          ];
+          if (offset) pattern = [                                        // I am using the patternSelecter variable for this
+            '1011111101', '1101111011', '1110110111', '1111001111'       // it accumulates for every odd or even row and is
+          ];                                                             // always kept within range (see later)
           else pattern = ['0111111110']; break;
         case 10: pattern = ['11111011111']; break;                       // only one symmetrical pattern can be made
         case 12: pattern = ['111111111111']; break;                      // only one symmetrical pattern can be made
@@ -68,7 +54,7 @@ export const resequenceJpegs = (jpegs) => {
       }
     }
 
-    if (gridWidth == 6) {         // This is the pattern sequencer for the 6 fraction grid
+    if (gridWidth === 6) {         // This is the pattern sequencer for the 6 fraction grid
       pattern = ['000'];          // if no numberOfPortraits is given the default will be none
       switch(numOfPortraits) {
         case 2: if (offset) pattern = ['1001']; else pattern = ['0110']; break
@@ -77,11 +63,9 @@ export const resequenceJpegs = (jpegs) => {
       }
     }
 
-    while (patternSelecter > pattern.length) {            // This little loop makes sure that the pattern selecter is always
-      patternSelecter -= pattern.length;                  // in range of the number of variations in the pattern array
-    }
-
-    logit('Pattern: ' + pattern[patternSelecter] + ' gridWidth: ' + gridWidth + ' numOfPortraits: ' + numOfPortraits);
+    while (patternSelecter > pattern.length) {            // This little loop makes sure that the pattern selecter is always in range of the
+      patternSelecter -= pattern.length;                  // number of variations in the pattern array it repeatedly subtracts the number of
+    }                                                     // patterns available until the value is within range
 
 /*                    **
 **  Row Sequencer     **
@@ -150,8 +134,6 @@ export const resequenceJpegs = (jpegs) => {
     }
     offsetToggle = !offsetToggle;                                     // switch the toggle
   }
-
-  logit('OddPorts: ' + oddPorts + ' evenPorts: ' + evenPorts)
 
   console.log('Array resequenced!!! num of items = ', newSequence.length)
   return newSequence;

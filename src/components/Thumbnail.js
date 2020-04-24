@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 export const Thumbnail = (props, jpegItem, i) => {
@@ -6,8 +6,10 @@ export const Thumbnail = (props, jpegItem, i) => {
   let fade = 'fade-in';
   if ( jpegItem.toBeRemoved ) fade = 'fade-out';
 
-// props.selectedPage is added to the classNames so that CSS can target the
-// buttons in basket view seperately from buttons in gallery view.
+
+// addButton() - props.selectedPage is added to the classNames so that CSS can
+// target the buttons in basket view seperately from buttons in gallery view.
+// onClick the button calls the 'ADD_BASKET' action.
 	const addButton = (jpegItem) => {
 		return(
 			<button
@@ -17,8 +19,9 @@ export const Thumbnail = (props, jpegItem, i) => {
 		)
 	}
 
-// props.selectedPage is added to the classNames so that CSS can target the
-// buttons in basket view seperately from buttons in gallery view.
+// removeButton() - props.selectedPage is added to the classNames so that CSS
+// can target the buttons in basket view seperately from buttons in gallery
+// view. onClick the button calls the 'REMOVE_BASKET' action.
 	const removeButton = (jpegItem) => {
 		return(
 			<button
@@ -30,13 +33,10 @@ export const Thumbnail = (props, jpegItem, i) => {
 		)
 	}
 
-	const basketButtonPicker = (jpegItem) => {
-		if (
-      props.getBasket.length > 0                                          // if basket is not empty
-      && props.getBasket.some( item => item.file === jpegItem.file )      // and item is in basket
-    )
-    return removeButton(jpegItem)
-		else return addButton(jpegItem)
+	const basketButtonDispenser = (jpegItem) => {
+		if (props.getBasket.some( item => item.file === jpegItem.file ))      // if the item is in basket
+      return removeButton(jpegItem)                                       // return removeButton()
+		else return addButton(jpegItem)                                       // Otherwise return addButton()
 	}
 
   const styles = () => {
@@ -47,22 +47,26 @@ export const Thumbnail = (props, jpegItem, i) => {
     }
   }
 
+// The Thumbnail element
 	return (
-		<div className={'thumbnail ' + fade} key={i} style={styles()}>
-			<div className={'thumbnail-inner-container'} key={i}>
-				<Link
-					to={ './single/' + jpegItem.file }
-				><img
-					alt={"./resources/icons/ajax-loader-white-on-black.gif"}
-					className="images"
-					key={jpegItem.id}
-					src={"./images/resize300/"
-						+ jpegItem.file
-					}
-				/></Link>
-
-			</div>
-			{ basketButtonPicker(jpegItem) }
-		</div>
+		<div
+      className={'thumbnail ' + fade}
+      key={i}
+      style={styles()}
+    >
+      <Link
+        className={'thumbnail-inner-container'}
+        key={i}
+    		to={ './single/' + jpegItem.file }
+    	>
+        <img
+    			alt={"./resources/icons/ajax-loader-white-on-black.gif"}
+    			className="images"
+    			key={jpegItem.id}
+    			src={"./images/resize300/"+ jpegItem.file}
+      	/>
+      </Link>
+      { basketButtonDispenser(jpegItem) }
+    </div>
 	);
 }

@@ -1,3 +1,5 @@
+// These are the Redux actions for the basket reducer. When dispatched they
+// instruct to the reducer how to change the Redux state object/store.
 
 export function addBasket(jpeg) {
 	return {
@@ -13,7 +15,14 @@ export function addAll(jpegsArray) {
   }
 }
 
-export function removeBasketAction(index) {
+export function emptyBasket() {
+  return {
+    type: "EMPTY_BASKET",
+    payload: null
+  };
+};
+
+export function removeBasket(index) {
 	return {
 		type: "REMOVE_BASKET",
 		payload: index
@@ -27,18 +36,11 @@ export function toBeRemoved(index) {
   }
 }
 
-export function removeBasket(index) {           // removeBasket cals the toBeRemoved action
-  return dispatch => {                          // first which sets the "toBeRomoved" flag
-    dispatch(toBeRemoved(index))                // that is used to trigger the thumbnail
-    setTimeout( () =>                           // fading out. There is then a delay while
-      dispatch(removeBasketAction(index))       // the fade out happens and finally the
-    , 200)                                      // removeBasketAction is called to remove
-  }                                             // the image from the basket array
-}
-
-export function emptyBasket() {
-  return {
-    type: "EMPTY_BASKET",
-    payload: null
-  };
-};
+export function removeBasketFadeDelay(index) {  // removeBasketFadeDelay() cals the toBeRemoved action
+  return dispatch => {                          // first which sets the "toBeRomoved" flag that is used
+    dispatch(toBeRemoved(index))                // to trigger the thumbnail fading out. There is then a
+    setTimeout( () =>                           // delay while the fade out happens and finally the
+      dispatch(removeBasket(index))             // removeBasket() action is called. This action is only
+    , 200)                                      // used in basket view, inducing a delay to the
+  }                                             // removeBasket() action creats a crash when removing
+}                                               // images in single image basket view.

@@ -1,26 +1,24 @@
-import '../css/Gallery.css';
-
 import React from "react";
 
 import { Thumbnail } from './Thumbnail.js';
 import { resequenceJpegs } from '../utils/utils.js'
 
+import '../css/Gallery.css';
 
 export const Basket = (props) => {
 
+// fullBasket() will iterate through each item in 'jpegs' and return the
+// thumbnail JSX
 	const fullBasket = (jpegs) => {
 		return jpegs.map((item, i) => {
 			return( Thumbnail(props, item, i) )
 		})
 	}
 
-
-	// The imageFail function will be called in the case that
-	// getJpegs() returns anything other that an array signifying
-	// that there was an error.
+// emptyBasket() just displayes an empty basket message!
 	const emptyBasket = (files) => {
 		return(
-			<div className="empty_phcontainer">
+			<div id="empty_phcontainer">
 				<div>
 					<p>Your basket is empty!</p>
 				</div>
@@ -30,17 +28,19 @@ export const Basket = (props) => {
 
 
 	let imageComponent = (jpegs) => {
-		if (jpegs.length >= 1) {
-			return fullBasket(jpegs);
+		if (jpegs.length >= 1) {              // If the basket is not empty
+			return fullBasket(jpegs);           // return the fullBasket() method
 		}
-		else {
-			return emptyBasket(jpegs);
+		else {                                // otherwise the basket must be empty
+			return emptyBasket(jpegs);          // so return the emptyBasket() message
 		}
 	}
 
-
+// This is the main basket element. It calls imageComponent() and passes it
+// the resequenced array of jpegs. It will then return the outcome of the
+// fullBasket() method or emptyBasket().
 	return(
-		<div className="phcontainer">
+		<div id="phcontainer">
 			{imageComponent(resequenceJpegs(props.getBasket))}
 		</div>
 	);

@@ -41,7 +41,7 @@ cite {
   /* border: 1px solid white; */
   display: inline-block;
   overflow: auto;
-  border-radius: 15px 0 0 0px;
+  border-radius: 2vw 0 0 0px;
   margin: 0;
   font-size: 1rem;
   max-width: 44rem;
@@ -100,6 +100,7 @@ cite {
 .embedded-video {
   width: 90%;
   margin: 0 5% 0 5%;
+  border-radius: 1vw;
 }
 
 .intro-box {

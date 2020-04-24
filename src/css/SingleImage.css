@@ -1,24 +1,23 @@
 .single-wrapper {
   /* border: 5px solid blue; */
-  position: relative;         /* Floated to create new formatting context */
+  position: relative;         /* Floated to create new flow context           */
   width: 100%;
   margin: 2vh 0 0vh 0;
   padding-bottom: 0;
 }
 
 .slider {
-  /* border: 5px solid green; */
-  position: absolute;
+  position: absolute;         /* Anchored to the above flow context           */
   margin: 0 100px 0 100px;
 	height: calc(100% - 10px);
   width: calc(100% - 200px);
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-  cursor: zoom-in;
+  cursor: zoom-in;            /* Magnifying glass to indicate you can enlarge */
 }
 
-.top-buttons-container {
+.top-buttons-container {      /* The exit, add and remove buttons at the top  */
   display: flex;
   justify-content: space-between;
 }
@@ -63,7 +62,6 @@
 }
 
 .next-prev-button {
-	/* border: 5px solid yellow; */
 	background-color: #0000;
   opacity: .2;
 	font-size: xxx-large;
@@ -82,6 +80,10 @@
 	transition-duration: 500ms;
 }
 
+.no-highlight:hover {           /* Used for when next and prev are dissabled  */
+  opacity: .1;
+}
+
 .prev-image {
   background-image: url("../resources/icons/chevron-left(fed).svg");
   background-position: left;
@@ -92,6 +94,7 @@
   background-position: right;
 }
 
+/* Responsive design tweaks */
 @media screen and (max-width: 800px) {
   .slider {
     margin: 0 50px 0 50px;

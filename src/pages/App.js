@@ -13,21 +13,25 @@ import { SingleImage } from '../components/SingleImage.js';
 import { Basket } from '../components/Basket.js';
 import { FullSize } from '../components/FullSize.js';
 
-// Import Redux actions
+// Import Redux actions from basketReducer
 import {
 	addBasket,
   addAll,
 	removeBasket,
+  removeBasketFadeDelay,
   emptyBasket,
 } from '../actions/basketActions.js';
 
+// Import Redux actions from fileReducer
 import {
   refreshJpegs,
   toggleIsFetching
 } from '../actions/fileActions.js';
 
 
-// The App component has the react Router in
+// The App component has the react Router in, it is the only component that
+// instantiates the react component class. All other components are function
+// components.
 class App extends React.Component {
   constructor() {
     super();
@@ -38,6 +42,7 @@ class App extends React.Component {
       else return 'home';
     }
 
+// This is the React state (seperate from the Redux Store)
     this.state={
       selectedPage: urlRoute()
     };
@@ -49,22 +54,28 @@ class App extends React.Component {
     })
   }
 
-
+// The Root React Render DOM
 	render() {
-
-    console.log('This urlRoute: ', this.state.selectedPage);
-
 		return (
-			<div className="container">
+			<div id="container">
 
 {/*
-* React Router element with base URL
-* The header component to be displayed on every route
-* app container element
-* Route switcher element
+* React Router element with set base URL (environment variable retrieved from
+* "homepage" attribute in package.json) used for deployment to a subdirectory.
+* React's route switcher element
 */}
 				<Router basename={process.env.PUBLIC_URL}>
 
+{/*
+* The header component will be displayed in front of every other route.
+* selectedPage is passed to the header component as a prop and provides access
+* to this components only state variable.
+* changePage is a function that is passed in as a prop that provides the ability
+* to change this components only state variable (this.state.selectedPage).
+* getJpegs and getBasket are passed as props to the routed component, they
+* provid access to and they subscribes to state variables in the Redux store.
+* addAll and emptyBasket provide access to dispatchable Redux actions
+*/}
           <Header
             selectedPage={this.state.selectedPage}
             changePage={(newPage) => this.changePage(newPage)}
@@ -74,15 +85,14 @@ class App extends React.Component {
             emptyBasket={this.props.EMPTY_BASKET}
           />
 
-          {/*<div className='header-spacer' />*/}
-
-			    <div className="app">
+{/* All routes will be children of this 'app' element */}
+			    <div id="app">
   					<Switch>
 
 
 {/*
 * Route -- Home screen
-* Force exact match so route not triggered for all URLs.
+* Force exact match so route not triggered for all URLs beginning with '/'.
 * If no route default to homescreen
 */}
   						<Route
@@ -93,7 +103,6 @@ class App extends React.Component {
 
 {/*
 * Route -- Home/about screen
-* Path to activate switch
 */}
   						<Route
   							path={"/home"}
@@ -104,18 +113,22 @@ class App extends React.Component {
   							path={"/about"}
   							component={Home}
   						/>
+
 {/*
 * Route -- Gallery view
-* Path to activate switch
-* The render tag allows you to pass props to the render component in an inline
-* function which returns the component to render.
-* getJpegs is itterated through to generate the thumnails.
-* getBasket is also used to pick either an add button or a remove button.
-* addBasket and removeBasket are called by the add and remove buttons.
+* URL endpoint to activate route switch
+* Render function returns the component to the DOM and passes in the props.
+* selectedPage is passed to the component as a prop and provides access to this
+* components only state variable.
+* getJpegs, getBasket and isFetchingJpegs are passed as props to the routed
+* component. They provid access to and they subscribes to state variables in
+* the Redux store.
+* addBasket, removeBasket, refreshJpegs, toggleIsFetching provide access to
+* dispatchable Redux actions
 */}
   						<Route
   							path={"/gallery"}
-  							render={(props) => <Gallery
+  							render={ (props) => <Gallery
                   selectedPage={this.state.selectedPage}
   								getJpegs={this.props.jpegs}
                   isFetchingJpegs={this.props.isFetchingJpegs}
@@ -129,27 +142,19 @@ class App extends React.Component {
 
 {/*
 * Route -- Basket view
-* Path to activate switch
-* inline function returns the component and passes in the props.
-* getBasket to generate thumbnails and select add or remove button.
-* removeBasket is called by the remove buttons
 */}
   						<Route
   							path={"/basket"}
   							render={(props) => <Basket
                   selectedPage={this.state.selectedPage}
   								getBasket={this.props.basket}
-  								removeBasket={this.props.REMOVE_BASKET}
+  								removeBasket={this.props.removeBasketFadeDelay}
                   getJpegs={this.props.jpegs}
   							/>}
   						/>
 
 {/*
 * Route -- Single view (image slider)
-* Path to activate switch
-* getJpegs for next and previous list navigation
-* getBasket for next and previous list navigation
-* addBasket and removeBasket are called by the add and remove buttons.
 */}
   						<Route
   							path={"/single"}
@@ -167,9 +172,7 @@ class App extends React.Component {
 
 {/*
 * Route -- Full size image view.
-* Path to activate switch.
-* component to render.
-* There are no props for this component therefore we don't need the render prop.
+* There are no props for this component.
 */}
   						<Route
   							path={"/images/"}
@@ -211,6 +214,9 @@ const mapDispatchToProps = (dispatch) => {
 		REMOVE_BASKET: (index) => {
 			dispatch(removeBasket(index));
 		},
+    removeBasketFadeDelay: (index) => {
+      dispatch(removeBasketFadeDelay(index));
+    },
     EMPTY_BASKET: () => {
       dispatch(emptyBasket());
     },

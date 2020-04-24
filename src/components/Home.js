@@ -7,7 +7,7 @@ export const Home = (props) => {
 
   useEffect(() => {                   // Necessary to initialise Prism
       Prism.highlightAll();           // Otherwise you have to refresh
-  })                                  // page for highlights to work
+  })                                  // page to establish highlights
 
   return(
     <div className="home-container">
@@ -32,7 +32,8 @@ export const Home = (props) => {
           </p>
           <p>
             Source code can be downloaded from <a target="_blank"
-            href="https://github.com/dan-dilion">my GitHub account</a>.
+            rel="noopener noreferrer" href="https://github.com/dan-dilion">
+            my GitHub account</a>.
           </p>
 
         </section>
@@ -499,32 +500,32 @@ switch (button) {
           <p>
             In single image view, the image slider will slide through the images
             in the gallery or the basket. I have
-            implemented <a href='https://www.react-spring.io/' target="_blank">
-            React-Spring</a> for the transition effect. Going forward, I intend
-            to add other effects such as finger gestures in mobile view.
+            implemented <a href='https://www.react-spring.io/' target="_blank"
+            rel="noopener noreferrer">React-Spring</a> for the transition
+            effect. Going forward, I intend to add other effects such as finger
+            gestures in mobile view.
           </p>
           <p>
             The <code className="language-js">
-            removeButtonDispenser()</code> function
-            will dispense one of four different remove buttons that each behave
-            differently depending on the selected page (gallery or basket) and
-            the position of the image within the array of images. The four
-            buttons are:
+            removeButtonDispenser()</code> function will dispense one of four
+            different remove buttons that each behave differently depending on
+            the selected page (gallery or basket) and the position of the image
+            within the array of images. The four buttons are:
           </p>
           <ul>
           <li>
-            <cite>lastInBasket</cite> – no images remaining in basket on
+            <cite>removeLastInBasket</cite> – no images remaining in basket on
             removal, return to (empty) basket view
           </li>
           <li>
-            <cite>beginningOfBasket</cite> – no previous images, slide to
+            <cite>removeBeginningOfBasket</cite> – no previous images, slide to
             next image on removal
           </li>
           <li>
-            <cite>normalBasket</cite> – slide to previous image on removal
+            <cite>removeFromBasket</cite> – slide to previous image on removal
           </li>
           <li>
-            <cite>gallery</cite> – just remove image from basket and
+            <cite>removeGallery</cite> – just remove image from basket and
             replace <code className="language-js">
             removeButton()</code> with <code className="language-js">
             addButton()</code>
@@ -537,51 +538,19 @@ switch (button) {
           <h3>removeButtonDispenser()</h3>
           <pre className="code-exerpt">
             <code className="language-js">
-              {`
-const removeButtonDispenser = (jpegItem, buttonType) => {
-  switch (buttonType) {
-
-    case 'lastInBasket':                                          // If last image in basket link back to
-      return(<Link                                                // basket view after image is removed
-        className="top-buttons remove-button"
-        to={ '/basket' }
-        onClick={() => {
-          props.removeBasket(props.getBasket.indexOf(jpegItem))
-        }}
-      />); break;
-
-    case 'beginningOfBasket':                                     // If at the beginning of the basket slide
-      return(<Link                                                // to next after image is removed
-        className="top-buttons remove-button"
-        to={ './' + next.jpegItem.file }
-        onClick={() => {
-          props.removeBasket(props.getBasket.indexOf(jpegItem))
-        }}
-      />); break;
-
-    case 'normalBasket':                                          // If in the middle of the basket array
-      return(<Link                                                // slide to previous after image is removed
-        className="top-buttons remove-button"
-        to={ './' + prev.jpegItem.file }
-        onClick={() => {
-          props.removeBasket(props.getBasket.indexOf(jpegItem))
-        }}
-      />); break;
-
-    case 'gallery':                                               // If viewing the gallery just remove image
-      return(
-        <button
-          className="top-buttons remove-button"
-          onClick={() => {
-            props.removeBasket(props.getBasket.indexOf(jpegItem))
-          }}
-        />
-      ); break;
-
-    default: break;
-  }
-}
-              `}
+              {`const addRemoveButtonDispenser = (currentItem) => {
+  if (
+    props.getBasket.length === 0
+    || !props.getBasket.some(item => item.file === currentItem.jpegItem.file)   // If the basket is empty or the current item is not in the basket
+  ) return addButton(currentItem)                                               // Return addButton() button
+  else if (props.selectedPage === 'gallery')                                    // If we are viewing the gallery images
+    return removeGallery(currentItem)                                           // Return removeGallery() button
+  else if (props.getBasket.length <= 1)                                         // if we are viewing the only item in the basket
+    return removeLastInBasket(currentItem)                                      // Return removeLastInBasket() button
+  else if (currentItem.index === 0)                                             // if we are viewing the first item in the basket
+    return removeBeginningOfBasket(currentItem)                                 // Return removeBeginningOfBasket() button
+  else return removeFromBasket(currentItem)                                     // otherwise we're in the middle of the basket
+}`}
             </code>
           </pre>
           <br />
@@ -621,8 +590,9 @@ const removeButtonDispenser = (jpegItem, buttonType) => {
 
           <p>
             <strong>Note:</strong> I have used the middleware <a
-            href="https://www.npmjs.com/package/redux-thunk" target="_blank">
-            Redux-Thunk</a> so that I can dispatch asynchronous actions.
+            href="https://www.npmjs.com/package/redux-thunk" target="_blank"
+            rel="noopener noreferrer">Redux-Thunk</a> so that I can dispatch
+            asynchronous actions.
           </p>
         </section>
 
@@ -668,11 +638,12 @@ const removeButtonDispenser = (jpegItem, buttonType) => {
           the server’s resources.
         </p>
         <p>
-          I have used the <a href="https://expressjs.com/" target="_blank">
-          Express</a> API for routing client requests, it is configured to
-          listen to a specific port and respond to certain URIs. It circumvents
-          Cross Origin Resource Sharing (CORS) restrictions by attaching the
-          “Access-Control-Allow-Origin” header to it’s responses.
+          I have used the <a href="https://expressjs.com/" target="_blank"
+          rel="noopener noreferrer">Express</a> API for routing client requests,
+          it is configured to listen to a specific port and respond to certain
+          URIs. It circumvents Cross Origin Resource Sharing (CORS) restrictions
+          by attaching the “Access-Control-Allow-Origin” header to it’s
+          responses.
         </p>
 
           <div className="nodejs-text-vid-wrapper">
@@ -684,31 +655,32 @@ const removeButtonDispenser = (jpegItem, buttonType) => {
                 images folder attached to the response segment of the "GET" request.
                 You can see the response from <code className="language-js">
                 getJpegs()</code> by visiting <a
-                  href="http://www.waxworlds.org:8987/api/getjpegs/" target="_blank">
-                  the URL that the Express router is
-                  configured to respond to
-                </a>.
+                href="http://www.waxworlds.org:8987/api/getjpegs/"
+                target="_blank" rel="noopener noreferrer">the URL that the
+                Express router is configured to respond to</a>.
               </p>
               <p>
                 <code className="language-js">resizeImages()</code> resizes new images
                 placed in the images folder using the Sharp API available with
-                the <a href="https://www.npmjs.com/" target="_blank">
-                Node Package Manager</a> (
-                <a href="https://www.npmjs.com/" target="_blank">NPM</a>).
+                the <a href="https://www.npmjs.com/" target="_blank"
+                rel="noopener noreferrer">Node Package Manager</a> (
+                <a href="https://www.npmjs.com/" target="_blank"
+                rel="noopener noreferrer">NPM</a>).
               </p>
               <p>
                 <code className="language-js">zipJpegs()</code> receives a list of
                 files that is embedded in the search parameter segment of the URL
                 used in the “GET” request intercepted by Express-Router. Using
-                the <a href="https://www.archiverjs.com/" target="_blank">
-                archiver</a> API (also available
-                from <a href="https://www.npmjs.com/" target="_blank">NPM</a>), it
-                will begin to zip these files and pipe a read-stream back to the
-                browser in the XHR response as an attachment. The data stream is
-                passed in chunks of data to the browser so there are no temporary
-                files stored on the server. Depending on how the browser is
-                configured, it will either save the zip file in the Downloads folder
-                or invoke the “save as” prompt.
+                the <a href="https://www.archiverjs.com/" target="_blank"
+                rel="noopener noreferrer">archiver</a> API (also available
+                from <a href="https://www.npmjs.com/" target="_blank"
+                rel="noopener noreferrer">NPM</a>), it will begin to zip these
+                files and pipe a read-stream back to the browser in the XHR
+                response as an attachment. The data stream is passed in chunks
+                of data to the browser so there are no temporary files stored
+                on the server. Depending on how the browser is configured, it
+                will either save the zip file in the Downloads folder or invoke
+                the “save as” prompt.
               </p>
             </section>
 
@@ -788,13 +760,13 @@ return await fetch(apiUrl + 'getjpegs')                   // Make XHR request to
         to be used in a React project. It stores its configuration settings
         in the package.json file created by NPM and will bundle, minify and
         optimise your code when you build your app for
-        production. <a href="https://create-react-app.dev/" target="_blank">
-        Create-React-App</a> also configures the browser to refresh upon
-        changes to the code in the project
-        directory. <a href="https://nodemon.io/" target="_blank">Nodemon</a> is
-        another tool that I have used to monitor for changes. In this case it
-        monitors my server code and relaunches my Node server when anything is
-        changed.
+        production. <a href="https://create-react-app.dev/" target="_blank"
+        rel="noopener noreferrer">Create-React-App</a> also configures the
+        browser to refresh upon changes to the code in the project
+        directory. <a href="https://nodemon.io/" target="_blank"
+        rel="noopener noreferrer">Nodemon</a> is another tool that I have used
+        to monitor for changes. In this case it monitors my server code and
+        relaunches my Node server when anything is changed.
       </p>
 
       <br />

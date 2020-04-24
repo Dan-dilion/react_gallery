@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTransition, animated } from 'react-spring';
 
 
 export const Slider = (index, jpegs, props) => {
 
-  //const item = jpegs[index];
-
+// CSS keyframes for the Spring animation
 	const transitions = useTransition(jpegs[index], item => item.id, {
 		from: {opacity: 0, transform: 'scale(1.2)'},
 		enter: {opacity: 1, transform: 'scale(1)'},
 		leave: {opacity: 0, transform: 'scale(0.8)'},
 	})
-
-	console.log(index + ' ' + jpegs[index].file)
-	console.log(window.location)
-
 
 	return transitions.map(({item, props, key}) => {
 		return (

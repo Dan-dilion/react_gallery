@@ -1,6 +1,4 @@
-//import { resequenceJpegs } from './utils.js'
-import store from '../store.js';
-import { toggleIsFetching } from '../actions/fileActions.js';
+// All Server Request Utilities live in this file
 
 // This is the route and port that the node server will be listening to for api
 // requests.
@@ -29,7 +27,6 @@ export const getJpegs = async () => {                       // Export method.
         img.src = "./images/resize300/" + file                    // Initialises loading the image.
       }).then( response => newJpegs.push(response) )              // Add the new jpeg object to newJpegs.
     }))                                                           //
-    console.log(newJpegs)                                         //
     return newJpegs;                                              // Return array.
   })
   .catch( err => console.log('ERROR!!!', err) )                   // Catch errors, output console log.

@@ -1,114 +1,100 @@
-.app-header {
-  position: fixed;
-  z-index: 2;
-  display: block;
-  margin-top: 0%;
+#app-header {                             /* Root element for header component                            */
+  position: fixed;                        /* Header will stay in place, content will scroll under         */
+  z-index: 2;                             /* Element will be above others                                 */
+  display: block;                         /* Block flow context                                           */
   background-color: #000c;
-  //min-height: 5em;
-  font-size: calc(10px + 2vw);
-  color: #fed;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);             /* Creates frosted glass effect (not supported in firefox yet!) */
   text-align: left;
   width: 100%;
-
 }
 
-.logo {
-  width: 90%;
+#logo {                                   /* Element for the main title                                   */
+  width: 60%;
   color: #fed;
+  font-size: calc(10px + 5vw);
   margin-left: 5%;
   margin-top: 0em;
   margin-bottom: 0;
 }
 
-.app-header a:hover {
-  text-decoration: none;
+#app-header a:hover {
+  text-decoration: none;                 /* Removes the underline hover effect from the title             */
 }
 
-.navbar {
+#navbar {                                /* Nav bar element                                               */
   float: right;
   margin: 0;
   padding-right: 1em;
-	height: 0em;
 }
 
-.function-bar {
+#function-bar {                          /* Function Bar element                                          */
   display: block;
   margin-top: .2em;
   margin-bottom: 5px;
   padding: .2em;
   padding-right: 4%;
-  width: auto;
   height: 1em;
   background: #3337;
+  font-size: calc(10px + 1vw);           /* Set the size for the function bar buttons via their font      */
 }
 
 .navbar-items {
-  /* border: 2px solid white; */
-  display: inline;
+  display: inline-block;
   float: left;
-	font-size: calc(2vw);
-	color: #fed;
-	list-style-type: none;
-	width: 4em;
-  text-align: center;
-	padding: 2% .5vw .4em .5vw;
-	margin: 1% .5vw;
+  width: 4em;
+  margin: 1% .5vw;
+  padding: 2% .5vw .4em .5vw;
   border-radius: .1em;
-  border-bottom: solid #fed0 .1em;
+  border-bottom: solid #0000 1.2em;      /* Invisible border to extend element past the underline effect  */
+  color: #fed;
+  text-align: center;
+	font-size: calc(2vw);
+	list-style-type: none;
 }
 
 .funcbar-items {
   display: inline;
   float: right;
-  list-style-type: none;
-  text-align: center;
-  font-size: 60%;
-  color: #fed;
-  padding: .2vh .6vw .2vh .6vw;
   margin: auto 0 auto 1em;
-  transition-property:  background-color, border, color;
-  transition-duration: 1500ms;
+  padding: .2vh .6vw .2vh .6vw;
   background-color: #0004;
   border-right: .2em solid #555a;
   border-bottom: .3em solid #222a;
+  text-align: center;
+  font-size: 60%;
+  color: #fed;
+  list-style-type: none;
+  transition-property:  background-color, border, color;
+  transition-duration: 1500ms;
 }
 
 .funcbar-items:hover{
-  transition-property:  background-color, border, color;
-  transition-duration: 200ms;
-  background-color: #fed2;
   border-right: .2em solid #555f;
   border-bottom: .3em solid #222f;
-
+  background-color: #fed2;
+  transition-property:  background-color, border, color;
+  transition-duration: 200ms;
 }
 
 .funcbar-items-ghost {
-  color: #222;
-  transition-property:  background-color, border, color;
-  transition-duration: 1500ms;
-  background-color: #000f;
   border-right: .2em solid #555a;
   border-bottom: .3em solid #222a;
+  color: #222;
+  background-color: #000f;
+  transition-property:  background-color, border, color;
+  transition-duration: 1500ms;
 }
 
 .funcbar-items-ghost:hover {
-  cursor: not-allowed;
   background-color: #000;
-}
-
-.nav-button {
-  //min-width: 4em;
-}
-
-#nav-button {
-    transition-property: background-color border color;
-    transition-duration: 1s;
+  color: #333;
+  cursor: not-allowed;
+  transition-property:  background-color, border, color;
+  transition-duration: 200ms;
 }
 
 
-/* I have added this styling at the end to keep it isolated                   */
-/* It is all the code needed for the animated underline effect                */
+/* Animated underline effect */
 .navbar-items {
   position: relative;       /* establishes a new flow context to anchor the   */
   line-height: 1.3em;       /* absolute positionned ::after psudo element.    */

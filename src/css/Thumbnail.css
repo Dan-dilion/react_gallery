@@ -1,12 +1,7 @@
 
 .images {
-	//max-height: 10vh;
-  //max-width: 80%;
   width: 100%;
 	transition: box-shadow 1500ms;
-	padding: 0vw;
-  margin-left: auto;
-  margin-right: auto;
 	border-radius: .4vw;
   object-fit: cover;
 }
@@ -16,10 +11,10 @@
 }
 
 .thumbnail {
+  display: block;
+  position: relative;
   margin-top: auto;
   margin-bottom: auto;
-	position: relative;
-	display: block;
 	background-color: #0002;
   background-size: contain;
   background-repeat: no-repeat;
@@ -89,6 +84,7 @@
   opacity: .6;
 }
 
+/* If coarce pointer available assume mobile device, eliminate hover effects */
 @media (any-pointer: coarse) {
   .add-basket-thumb {
     opacity: .7;
