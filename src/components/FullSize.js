@@ -1,6 +1,6 @@
 import React from "react";
 
-// Just a simple element that displayes the full sized image.
+// Just a simple element that displays the full sized image.
 export const FullSize = () => {
 	return(
 		<img

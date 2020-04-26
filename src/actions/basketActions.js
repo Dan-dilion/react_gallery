@@ -1,5 +1,5 @@
 // These are the Redux actions for the basket reducer. When dispatched they
-// instruct to the reducer how to change the Redux state object/store.
+// instruct the reducer how to change the Redux state object/store.
 
 export function addBasket(jpeg) {
 	return {
@@ -36,11 +36,11 @@ export function toBeRemoved(index) {
   }
 }
 
-export function removeBasketFadeDelay(index) {  // removeBasketFadeDelay() cals the toBeRemoved action
+export function removeBasketFadeDelay(index) {  // removeBasketFadeDelay() calls the toBeRemoved action
   return dispatch => {                          // first which sets the "toBeRomoved" flag that is used
     dispatch(toBeRemoved(index))                // to trigger the thumbnail fading out. There is then a
     setTimeout( () =>                           // delay while the fade out happens and finally the
       dispatch(removeBasket(index))             // removeBasket() action is called. This action is only
-    , 200)                                      // used in basket view, inducing a delay to the
-  }                                             // removeBasket() action creats a crash when removing
+    , 200)                                      // used in basket view – inducing a delay to the
+  }                                             // removeBasket() action creates a crash when removing
 }                                               // images in single image basket view.

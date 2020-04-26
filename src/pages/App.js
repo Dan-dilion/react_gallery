@@ -29,8 +29,8 @@ import {
 } from '../actions/fileActions.js';
 
 
-// The App component has the react Router in, it is the only component that
-// instantiates the react component class. All other components are function
+// The App component has the React router in. It is the only component that
+// instantiates the React component class. All other components are function
 // components.
 class App extends React.Component {
   constructor() {
@@ -42,7 +42,7 @@ class App extends React.Component {
       else return 'home';
     }
 
-// This is the React state (seperate from the Redux Store)
+// This is the React state (separate from the Redux Store)
     this.state={
       selectedPage: urlRoute()
     };
@@ -60,7 +60,7 @@ class App extends React.Component {
 			<div id="container">
 
 {/*
-* React Router element with set base URL (environment variable retrieved from
+* React router element with set base URL (environment variable retrieved from
 * "homepage" attribute in package.json) used for deployment to a subdirectory.
 * React's route switcher element
 */}
@@ -72,8 +72,8 @@ class App extends React.Component {
 * to this components only state variable.
 * changePage is a function that is passed in as a prop that provides the ability
 * to change this components only state variable (this.state.selectedPage).
-* getJpegs and getBasket are passed as props to the routed component, they
-* provid access to and they subscribes to state variables in the Redux store.
+* getJpegs and getBasket are passed as props to the routed component. They
+* provide access to and subscribe to state variables in the Redux store.
 * addAll and emptyBasket provide access to dispatchable Redux actions
 */}
           <Header
@@ -121,7 +121,7 @@ class App extends React.Component {
 * selectedPage is passed to the component as a prop and provides access to this
 * components only state variable.
 * getJpegs, getBasket and isFetchingJpegs are passed as props to the routed
-* component. They provid access to and they subscribes to state variables in
+* component. They provide access to and subscribe to state variables in
 * the Redux store.
 * addBasket, removeBasket, refreshJpegs, toggleIsFetching provide access to
 * dispatchable Redux actions

@@ -15,7 +15,7 @@ export const Basket = (props) => {
 		})
 	}
 
-// emptyBasket() just displayes an empty basket message!
+// emptyBasket() just displays an empty basket message!
 	const emptyBasket = (files) => {
 		return(
 			<div id="empty_phcontainer">

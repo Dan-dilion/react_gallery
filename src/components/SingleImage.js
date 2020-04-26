@@ -12,10 +12,10 @@ export const SingleImage = (props) => {
   let jpegsArray = props.getJpegs;                                              // jpegsArray to point to the Redux store jpegs
   if (props.selectedPage === 'basket') jpegsArray = props.getBasket             // If you arived here from the basket jpegsArray will be the basket
 
-  const urlFilename = () => {                                                   // get filename from URL:
-    let pathNames = window.location.pathname.split('/')                         // Split path at '/' and make all segments in to an array
-    return decodeURIComponent(pathNames[pathNames.length - 1]);                 // return the last in the array (will be the file name) and
-  }                                                                             // parse it for escape chars
+  const urlFilename = () => {                                                   // Get filename from URL:
+    let pathNames = window.location.pathname.split('/')                         // Split path at '/' and make all segments into an array
+    return decodeURIComponent(pathNames[pathNames.length - 1]);                 // Return the last in the array (will be the file name) and
+  }                                                                             // Parse it for escape chars
 
   const currentJpegItem = {                                                     // Set up the currentJpegItem pointer
     jpegItem: jpegsArray.find( item => item.file === urlFilename()),            // Retrieves the filename for the current item from the URL
@@ -24,14 +24,14 @@ export const SingleImage = (props) => {
 
   const prev = {currentJpegItem}                                                // Set up the previous item pointer for the prev button
 	if (currentJpegItem.index > 0) {                                              // If not the first item in the array
-		prev.jpegItem = jpegsArray[currentJpegItem.index - 1];                      // target the previous item in the array
-		prev.index --;                                                              // set the index
+		prev.jpegItem = jpegsArray[currentJpegItem.index - 1];                      // Target the previous item in the array
+		prev.index --;                                                              // Set the index
 	}
 
   const next = {currentJpegItem}                                                // Set up the next item pointer for the next button
-	if (currentJpegItem.index < jpegsArray.length - 1) {                          // if not the last item in the array
+	if (currentJpegItem.index < jpegsArray.length - 1) {                          // If not the last item in the array
 		next.jpegItem = jpegsArray[currentJpegItem.index + 1];                      // Target the next item in the array
-		next.index ++;                                                              // set the index
+		next.index ++;                                                              // Set the index
 	}
 
 // exitButton() - A simple React link to either the gallery or the basket depending on which one is selected
@@ -39,8 +39,8 @@ export const SingleImage = (props) => {
     return(<Link className="exit-button top-buttons" to={ '/' + props.selectedPage } />)
   }
 
-// nextButton() - Links to the next pointer object defined earlier
-// Return is conditional/turnery - If its the last image in the array return a disfunctional button
+// nextButton() - links to the next pointer object defined earlier
+// Return is conditional/ternary – if it's the last image in the array return dysfunctional button
 	const nextButton = () => {
 		return ( (currentJpegItem.index < jpegsArray.length - 1) ?
 			<Link
@@ -51,8 +51,8 @@ export const SingleImage = (props) => {
 		)
 	}
 
-// prevButton() - Links to the previous pointer object
-// Return is conditional/turnery - If its the first in the array return dysfunctional button
+// prevButton() - links to the previous pointer object
+// Return is conditional/ternary - if it's the first in the array return dysfunctional button
 	const prevButton = () => {
 		return( (currentJpegItem.index > 0) ?
 			<Link
@@ -63,10 +63,10 @@ export const SingleImage = (props) => {
 		)
 	}
 
-// addRemoveButtonDispenser() - chooses which of the four remove button variants to use or it returns addButton()
+// addRemoveButtonDispenser() – chooses which of the four remove button variants to use or returns addButton()
   const addRemoveButtonDispenser = (currentItem) => {
 
-// removeGallery() - If viewing the gallery remove button will just
+// removeGallery() - if viewing the gallery remove button will just
 // remove image from basket
     const removeGallery = (currentItem) => {
       return(
@@ -140,17 +140,17 @@ export const SingleImage = (props) => {
     ) return addButton(currentItem)                                             // Return addButton() button
     else if (props.selectedPage === 'gallery')                                  // If we are viewing the gallery images
       return removeGallery(currentItem)                                         // Return removeGallery() button
-    else if (props.getBasket.length <= 1)                                       // if we are viewing the only item in the basket
+    else if (props.getBasket.length <= 1)                                       // If we are viewing the only item in the basket
       return removeLastInBasket(currentItem)                                    // Return removeLastInBasket() button
-    else if (currentItem.index === 0)                                           // if we are viewing the first item in the basket
+    else if (currentItem.index === 0)                                           // If we are viewing the first item in the basket
       return removeBeginningOfBasket(currentItem)                               // Return removeBeginningOfBasket() button
-    else return removeFromBasket(currentItem)                                   // otherwise we're in the middle of the basket
+    else return removeFromBasket(currentItem)                                   // Otherwise we're in the middle of the basket
   }
 
-// This is a conditional return statement, it will wait for jpegsArray to be
+// This is a conditional return statement – it will wait for jpegsArray to be
 // refreshed before it tries to render anything. Otherwise, if you arrive here
 // from a link, jpegsArray will be empty and the refresh method will be
-// triggered after the component is rendered causing a crash!
+// triggered after the component is rendered, causing a crash!
 	return( currentJpegItem.jpegItem ?
 		<div className="single-wrapper">
 				<Link

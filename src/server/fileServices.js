@@ -4,9 +4,9 @@ const sharp = require('sharp');                            // Image Processing A
 const archiver = require('archiver');                      // Zip file API
 
 
-const imgDir = path.join(                                  // joins two paths together (adds "/" between).
-  path.dirname(__filename),                                // separates the path from the file name.
-  '../images'                                              // will be joined on to this path.
+const imgDir = path.join(                                  // Joins two paths together (adds "/" between).
+  path.dirname(__filename),                                // Separates the path from the file name.
+  '../images'                                              // Will be joined on to this path.
 )
 
 const resizeMedDir = path.join(imgDir, 'resize1024');
@@ -17,14 +17,14 @@ const zipFile = (path.join('./src/images', 'downloaded-images.zip'))
 const readdir = (dir) => {                                 // I have wrapped the readdir method in a promise
   return new Promise((resolve, reject) => {                // I can use the await and the .then methods later
     fs.readdir(dir, (error, files) => {
-      error ? reject(error) : resolve(files);              // ternary opperator, reject promise with error
+      error ? reject(error) : resolve(files);              // Ternary opperator, reject promise with error
     });                                                    // If rejected bypass .then collect with .catch
   });                                                      // or resolve promise with list of files
-}                                                          // pass result on to .then
+}                                                          // Pass result on to .then
 
-async function forEachAsync(array, callback) {             // Asyncronous version of array.forEach
-  for (let i = 0; i < array.length; i++) {                 // each itteration will be passed over to
-    await callback(array[i]);                              // the event handelers, freeing up the call stack
+async function forEachAsync(array, callback) {             // Asynchronous version of array.forEach
+  for (let i = 0; i < array.length; i++) {                 // Each iteration will be passed over to
+    await callback(array[i]);                              // the event handlers, freeing up the call stack
   }
 }
 
@@ -34,38 +34,38 @@ async function getJpegs(dir) {                             // Async function all
   .then(output => {                                        // Iterate through the directory contents
     jpegs = output.filter((output) => {                    // and filter out all jpegs
       return (
-        path.extname(output)                               // keep only the entries with
-        == '.jpg' || path.extname(output)                  // .jpg or .JPEG extention names
-        == '.JPEG'                                         // the filter is not case sensitive
+        path.extname(output)                               // Keep only the entries with
+        == '.jpg' || path.extname(output)                  // .jpg or .JPEG extension names
+        == '.JPEG'                                         // The filter is not case sensitive
       );
     })
   })
   .catch(error => {                                        // Catch the reject promise object from readdir
     console.log('getJpegs ERROR: ', error.message)         // Log error to console
-    throw new Error(error.message)                         // throw error (this will be collected by .catch
+    throw new Error(error.message)                         // Throw error (this will be collected by .catch
   })                                                       // in the calling function)
   return jpegs;                                            // Return the list of jpeg files
 }
 
-async function resizeImages(jpegs) {                        
+async function resizeImages(jpegs) {
   if (!fs.existsSync(resizeSmlDir)) {                      // If directory does not exist
-    fs.mkdirSync(resizeSmlDir);                            // create directory
+    fs.mkdirSync(resizeSmlDir);                            // Create directory
     console.log('Creating Directory... ', resizeSmlDir);
   }
   if (!fs.existsSync(resizeMedDir)) {                      // If directory does not exist
-    fs.mkdirSync(resizeMedDir);                            // create directory
+    fs.mkdirSync(resizeMedDir);                            // Create directory
     console.log('Creating Directory... ', resizeMedDir);
   }
 
   await Promise.all([                                      // Asynchronously promisifys an
     processImages(jpegs, 'm'),                             // array of functions and processes
-    processImages(jpegs, 's')                              // all entries simaltaniously
+    processImages(jpegs, 's')                              // all entries simultaneously
   ])                                                       //
   .catch((err) => { throw new Error(err); })               // Catches and throws any errors
 }
 
 
-async function processImages(jpegs, size) {                // receives an array of images and a size ('m' or 's')
+async function processImages(jpegs, size) {                // Receives an array of images and a size ('m' or 's')
 
   let resolution;
   let saveDir;
@@ -86,36 +86,36 @@ async function processImages(jpegs, size) {                // receives an array 
       saveDir = resizeSmlDir;
   }
 
-  sharp.cache({                                            // Ajust Sharps cache settings so that
+  sharp.cache({                                            // Adjust Sharp's cache settings so that
     memory: 50,                                            // it has a minimal impact on the
     files: 1,                                              // server and uses minimal resources
     items: 1
   })
   try {
-    await forEachAsync(jpegs, async (file) => {            // Itterate through each jpeg and
-      let resizeFileName = path.join(saveDir, file);       // preform the following function
+    await forEachAsync(jpegs, async (file) => {            // Iterate through each jpeg and
+      let resizeFileName = path.join(saveDir, file);       // perform the following function
       let width = null;
       let height = null;
 
       if (!fs.existsSync(resizeFileName)) {                            // If the file does not already exist
-        const image = sharp(path.join(imgDir, file));                  // instantiate the sharp object
+        const image = sharp(path.join(imgDir, file));                  // Instantiate the sharp object
         await image.metadata()                                         // Promisify the metadata method
         .then(metadata => {                                            // Pass output through to .then
           if (metadata.width > metadata.height)	height = resolution;   // Respect portrait and landscape, assign the
-          else width = resolution;                                     // resize resolution to the smallest dimention
+          else width = resolution;                                     // resize resolution to the smallest dimension
           console.log('Resizing image: ', resizeFileName)
           return image.jpeg({                              // Return jpeg file type method
             quality: 80                                    // Set compression quality
           })
-          .resize(width, height, {                         // Run resize method, if only one dimentions is specified
+          .resize(width, height, {                         // Run resize method, if only one dimension is specified
             fit: 'inside',                                 // rezize will respect aspect ratio
             withoutEnlargement: true,                      // if the image is smaller than rezize, do not enlarge
           })
-          .toFile(resizeFileName)                          // save new image to file
+          .toFile(resizeFileName)                          // Save new image to file
         })
         .catch(error => {                                  // Catch the reject promise object from sharp
           console.log('Resizeing ERROR: ', error.message)  // Log error to console
-          throw new Error(error.message)                   // throw error
+          throw new Error(error.message)                   // Throw error
         })
       }
     })
@@ -132,7 +132,7 @@ const zipJpegs = (files, response) => {
   })                                                       // jpegs are already compressed
 
   files.map( (file) =>{                                    // Iterate through list of files
-    zip.file(path.join(imgDir, file), {                    // pass the file to the zip.file() method
+    zip.file(path.join(imgDir, file), {                    // Pass the file to the zip.file() method
       name: path.join('Downloaded-images/', file)          // Set internal directory structure
     });
   })

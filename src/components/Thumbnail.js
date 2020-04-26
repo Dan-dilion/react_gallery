@@ -7,7 +7,7 @@ export const Thumbnail = (props, jpegItem, i) => {
   if ( jpegItem.toBeRemoved ) fade = 'fade-out';
 
 
-// addButton() - props.selectedPage is added to the classNames so that CSS can
+// addButton() – props.selectedPage is added to the classNames so that CSS can
 // target the buttons in basket view seperately from buttons in gallery view.
 // onClick the button calls the 'ADD_BASKET' action.
 	const addButton = (jpegItem) => {
@@ -36,7 +36,7 @@ export const Thumbnail = (props, jpegItem, i) => {
 	const basketButtonDispenser = (jpegItem) => {
 		if (props.getBasket.some( item => item.file === jpegItem.file ))      // if the item is in basket
       return removeButton(jpegItem)                                       // return removeButton()
-		else return addButton(jpegItem)                                       // Otherwise return addButton()
+		else return addButton(jpegItem)                                       // otherwise return addButton()
 	}
 
   const styles = () => {

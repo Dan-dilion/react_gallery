@@ -57,10 +57,10 @@ export const Header = (props) => {
 
 // downloadButton()
   function downloadButton(status) {
-    let classNames = 'funcbar-items disable-selection funcbar-items-ghost';     // If status is true remove the 'ghost' classname
+    let classNames = 'funcbar-items disable-selection funcbar-items-ghost';     // If status is true remove the 'ghost' class name
     if (status) classNames = 'funcbar-items';                                   // "disable-selection" is only necessary for div elements
 
-// a conditional/turnery return statement that will return a disfunctional button if status is false
+// a conditional/ternary return statement that will return a dysfunctional button if status is false
     return ( status ?
       <a
         href={ zipJpegs( props.getBasket.map( item => item.file ) ) }
@@ -77,7 +77,7 @@ export const Header = (props) => {
 
 // addAll()
   function addAll(status) {
-    let classNames = 'funcbar-items funcbar-items-ghost disable-selection';     // "disable-selection" is only necessary for divs, it disables text selection
+    let classNames = 'funcbar-items funcbar-items-ghost disable-selection';     // "disable-selection" is only necessary for divs – it disables text selection
     if (status) classNames = 'funcbar-items disable-selection';                 // If status is true remove 'funcbar-items-ghost' from classNames
     return(
       <div
@@ -92,7 +92,7 @@ export const Header = (props) => {
 
 // emptyBasketButton()
   function emptyBasketButton(status) {
-    let classNames = 'funcbar-items funcbar-items-ghost disable-selection';     // "disable-selection" is only necessary for divs, it disables text selection
+    let classNames = 'funcbar-items funcbar-items-ghost disable-selection';     // "disable-selection" is only necessary for divs – it disables text selection
     if (status) classNames = 'funcbar-items disable-selection';                 // If status is true remove 'funcbar-items-ghost' from classNames
     return(
       <div
@@ -152,7 +152,7 @@ export const Header = (props) => {
     }
   }
 
-// The main header element defines the navbar, the title and the function=bar
+// The main header element defines the navbar, the title and the function-bar
 // It calls the button dispenser for each button and sets the title.
 	return(
 		<div id="app-header">

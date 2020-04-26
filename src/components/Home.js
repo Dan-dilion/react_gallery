@@ -161,37 +161,37 @@ export const Home = (props) => {
 {
 `.navbar-items {
   position: relative;                            /* establishes a new flow context to anchor the   */
-  line-height: 1.3em;                            /* absolute positionned ::after psudo element.    */
-  height: 1em;                                   /* Also ristrict the height of the element to 1em */
+  line-height: 1.3em;                            /* absolute positioned ::after psudo element.     */
+  height: 1em;                                   /* Also restrict the height of the element to 1em */
 }
 
 .navbar-items::after {                           /* Creates a psudo element after the navbar-items */
-  content: '';                                   /* elements. Absolute positionning allows the use */
-  position: absolute;                            /* of left & bottom and anchors element to it's   */
-  bottom: 0;                                     /* closest ancestor with reletive positionning.   */
-  left: 50%;                                     /* The psudo element is positionned in the middle */
+  content: '';                                   /* elements. Absolute positioning allows the use  */
+  position: absolute;                            /* of left & bottom and anchors element to its    */
+  bottom: 0;                                     /* closest ancestor with relative positioning.    */
+  left: 50%;                                     /* The pseudo element is positioned in the middle */
   width: 0;                                      /* at the bottom with a solid border and 0 width. */
   height: 5px;                                   /* Element is not yet visible!                    */
   border-bottom: 5px solid #fed;
 }
-                                                 /* propertys transition over a duration */
+                                                 /* property's transition over a duration */
 .navbar-items, .navbar-items::after {
   transition-property: left, width, background-color, border;
   transition-duration: 400ms;
   transition-timing-function: ease-in-out;
 }
 
-.navbar-items:hover::after {                     /* On hover ajust the position and the width  */
-  left: 10%;                                     /* of the psudo element (making them visible) */
-  width: 80%;                                    /* the transition will be animated because of */
-}                                                /* the transition effects                     */
+.navbar-items:hover::after {                     /* On hover ajust the position and the width   */
+  left: 10%;                                     /* of the psuedo element (making them visible) */
+  width: 80%;                                    /* the transition will be animated because of  */
+}                                                /* the transition effects                      */
 
-.selected {                                      /* When selected highlight the background     */
+.selected {                                      /* When selected highlight the background      */
   transition: background-color 1500ms;
   background-color: #fed4;
 }
 
-.selected::after {                               /* When selected Keep the underline visible   */
+.selected::after {                               /* When selected keep the underline visible    */
   left: 10%;
   width: 80%;
   border-bottom: 5px solid #fed;
@@ -351,14 +351,14 @@ switch (button) {
     const portraits = getPortraits(jpegs)
     const landscapes = getLandscapes(jpegs)
     const predictedNumOfRows =  Math.ceil(                              // calculate the number of rows there will be
-      ((landscapes.length * 2) + portraits.length) / gridWidth          // landscapes take twice as much space as portraits,
+      ((landscapes.length * 2) + portraits.length) / gridWidth          // landscapes take twice as much space as portraits
     )
 
   /*                     **
-  **  Pattern selecter   **
+  **  Pattern selector   **
   **                     */
 
-    const sequencer = (numOfPortraits = 0, patternSelecter = 1, offset = 0) => {
+    const sequencer = (numOfPortraits = 0, patternSelector = 1, offset = 0) => {
       let pattern = [];
 
       if (gridWidth == 12) {                                            // This is the pattern store for the 12 fraction grid
@@ -393,18 +393,18 @@ switch (button) {
         }
       }
 
-      while (patternSelecter > pattern.length) {                        // This little loop makes sure that the pattern selecter is always
-        patternSelecter -= pattern.length;                              // in range of the number of deviations in the pattern array
+      while (patternSelector > pattern.length) {                        // This little loop makes sure that the pattern selector is always
+        patternSelector -= pattern.length;                              // in range of the number of deviations in the pattern array
       }
 
   /*                    **
   **  Row Sequencer     **
   **                    */
-  // The Image Dropper will itterate through each character in the pattern and drop a portrait for 1 characters and a landscape for 0's.
+  // The Image Dropper will iterate through each character in the pattern and drop a portrait for 1 characters and a landscape for 0s.
   // it is written in such a way that if there are none of the desired images left it will just drop the other type.
   // This way it is always better to over prescribe the portraits (round numbers up) because it will always be able to compensate.
 
-      [...pattern[patternSelecter -= 1]].forEach(item => {              // convert pattern to an array and itterate through it's characters
+      [...pattern[patternSelector -= 1]].forEach(item => {              // convert pattern to an array and iterate through its characters
         if (parseInt(item) && portraits.length > 0)
           newSequence.push(portraits.shift())                           // if item is a 1 and there are landscapes left push landscape
         else if (landscapes.length > 0)
@@ -415,7 +415,7 @@ switch (button) {
     }
 
   /*                                **
-  **  Portraits Distributer         **
+  **  Portraits Distributor         **
   **                                */
 
   let offsetToggle = 1;                                                 // Set to 1 so portraits are first distributed on even rows
@@ -425,7 +425,7 @@ switch (button) {
   let oddPatternNumber = 1;
   let evenPatternNumber = 1;
 
-  // this next loop decides how many time you can distribute 2 portraits on every other row
+  // This next loop decides how many time you can distribute 2 portraits on every other row
   // Each time through the loop it either adds two portraits to the even rows or two to the odd rows
   // If there is not enough portraits left for a whole pass they are added to leftoverPorts variable
 
@@ -445,25 +445,25 @@ switch (button) {
   /*                    **
   **    Row Builder     **
   **                    */
-  // This next loop calls the sequencer for each row and feeds in the number of Portraits allocated by the portrait distributer
+  // This next loop calls the sequencer for each row and feeds in the number of portraits allocated by the portrait distributor
   // If there were any portraits left over in leftoverPorts it distributes them amongst the odd numbered rows
 
     oddPatternNumber = 1;
-    evenPatternNumber = 1;                                              // reset the pattern selecters
-    offsetToggle = 0;                                                   // Reset the toggle
+    evenPatternNumber = 1;                                              // reset the pattern selectors
+    offsetToggle = 0;                                                   // reset the toggle
     for (let i = predictedNumOfRows; i > 0; i--) {                      // loop once for every row
       if (!offsetToggle) {                                              // if its an odd numbered row
         if (leftoverPorts > 0) {                                        // call the sequencer and pass in the number of oddPorts
           sequencer(oddPorts + 2, oddPatternNumber, offsetToggle)       // if there are any leftoverPorts add 2 extra images to the row
           leftoverPorts -= 2;                                           // and deduct 2 from leftoverPorts
-        } else sequencer(oddPorts, oddPatternNumber, offsetToggle);     // if there's no leftoverPorts just pass in oddPorts unadulterated
-        oddPatternNumber +=1;                                           // Keep track of the pattern variant
+        } else sequencer(oddPorts, oddPatternNumber, offsetToggle);     // if there are no leftoverPorts just pass in oddPorts unadulterated
+        oddPatternNumber +=1;                                           // keep track of the pattern variant
       }
       else {
         sequencer(evenPorts, evenPatternNumber, offsetToggle);          // Otherwise it's an even row, call sequencer and pass in evenPorts
         evenPatternNumber += 1;                                         // Keep track of the offset pattern variant
       }
-      offsetToggle = !offsetToggle;                                     // switch the toggle
+      offsetToggle = !offsetToggle;                                     // Switch the toggle
     }
 
     return newSequence;                                                 // Return the resequenced array!
@@ -545,11 +545,11 @@ switch (button) {
   ) return addButton(currentItem)                                               // Return addButton() button
   else if (props.selectedPage === 'gallery')                                    // If we are viewing the gallery images
     return removeGallery(currentItem)                                           // Return removeGallery() button
-  else if (props.getBasket.length <= 1)                                         // if we are viewing the only item in the basket
+  else if (props.getBasket.length <= 1)                                         // If we are viewing the only item in the basket
     return removeLastInBasket(currentItem)                                      // Return removeLastInBasket() button
-  else if (currentItem.index === 0)                                             // if we are viewing the first item in the basket
+  else if (currentItem.index === 0)                                             // If we are viewing the first item in the basket
     return removeBeginningOfBasket(currentItem)                                 // Return removeBeginningOfBasket() button
-  else return removeFromBasket(currentItem)                                     // otherwise we're in the middle of the basket
+  else return removeFromBasket(currentItem)                                     // Otherwise we're in the middle of the basket
 }`}
             </code>
           </pre>
@@ -600,21 +600,21 @@ switch (button) {
           <h3>refreshJpegs()</h3>
           <pre className="code-exerpt">
             <code className="language-js">
-{`export const refreshJpegs = () => {                                         // refreshJpegs() is an asynchronous
+{`export const refreshJpegs = () => {                                       // refreshJpegs() is an asynchronous
   return async dispatch => {                                                // Redux action made possible by Redux-Thunk
     if (store.getState().fileReducer.jpegs.length === 0) {                  // If there are no images
       await getJpegs()                                                      // Wait for getJpegs() to be complete
         .then( async response => {                                          // When getJpegs() responds
-          dispatch( toggleIsFetching(true) )                                // toggle the "isFetching" flag
+          dispatch( toggleIsFetching(true) )                                // Toggle the "isFetching" flag
           await dispatch( addJpegs(response) )                              // Send the response to addJpegs()
-          dispatch( toggleIsFetching(false) )                               // toggle the "isFetching" flag
+          dispatch( toggleIsFetching(false) )                               // Toggle the "isFetching" flag
         })                                                                  //
-        .catch( error => {                                                  // If anything had an error in it's response
+        .catch( error => {                                                  // If anything had an error in its response
           console.log('fileActions.js - refreshJpegs: ERROR!!!', error )    // Log the error to console
         })                                                                  //
-    } else console.log(                                                     // If there are already images then
-      'FileActions - Refresh Jpegs Unnecessary! ',                          // a refresh is unnecessary
-      store.getState().fileReducer.jpegs.length                             // log message to console
+    } else console.log(                                                     // If there are already images
+      'FileActions - Refresh Jpegs Unnecessary! ',                          // A refresh is unnecessary
+      store.getState().fileReducer.jpegs.length                             // Log message to console
     )
   }
 }`}
@@ -707,10 +707,10 @@ switch (button) {
               <code className="language-js">
 {`export const getJpegs = async () => {
 return await fetch(apiUrl + 'getjpegs')                   // Make XHR request to to NodeJS server
-.then( async response => {                                // Error Handeling (if Node server returns an error it will be text)
-  if (response.ok) return await response.json()           // If no error: converts the data streem into json object
-  else return await response.text()                       // If Error: converts data stream in to text object and
-})                                                        // error will be displayed in the gallery
+.then( async response => {                                // Error Handling (if Node server returns an error it will be text)
+  if (response.ok) return await response.json()           // If no error: converts the data stream into json object
+  else return await response.text()                       // If error: converts data stream in to text object and
+})                                                        // Error will be displayed in the gallery
 .catch(err => console.log('ERROR!!!', err))               // Catch errors not from NodeJS, output to console
 `}
               </code>
@@ -725,21 +725,21 @@ return await fetch(apiUrl + 'getjpegs')                   // Make XHR request to
             <h3>getJpegs()</h3>
             <pre className="code-exerpt">
               <code className="language-js">
-{`async function getJpegs(dir) {                          // This is an async function which allows us
-  let jpegs;                                            // to use the await command. the .then will
+{`async function getJpegs(dir) {                        // This is an async function which allows us
+  let jpegs;                                            // to use the await command. The .then will
   await readdir(dir)                                    // only be executed after readdir has finished
   .then(output => {
     jpegs = output.filter((output) => {                 // iterate through the array
       return (path.extname(output)                      // keep only the entries with
-      == '.jpg' || path.extname(output)                 // .jpg or .JPEG extention names
+      == '.jpg' || path.extname(output)                 // .jpg or .JPEG extension names
       == '.JPEG');                                      // the filter is not case sensitive
     })                                                  // to make case sensitive use ===
   })
-  .catch(error => {                                     // Catch the reject promise object from readdir
-    console.log('getJpegs ERROR: ', error.message)      // Log error to console
+  .catch(error => {                                     // catch the reject promise object from readdir
+    console.log('getJpegs ERROR: ', error.message)      // log error to console
     throw new Error(error.message)                      // throw error (this will be collected by .catch
   })                                                    // in the calling function)
-  return jpegs;                                         // Return the list of jpegs
+  return jpegs;                                         // return the list of jpegs
 }`}
               </code>
             </pre>

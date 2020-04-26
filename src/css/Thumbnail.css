@@ -84,7 +84,7 @@
   opacity: .6;
 }
 
-/* If coarce pointer available assume mobile device, eliminate hover effects */
+/* If coarse pointer available assume mobile device, eliminate hover effects */
 @media (any-pointer: coarse) {
   .add-basket-thumb {
     opacity: .7;

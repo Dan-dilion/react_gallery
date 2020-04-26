@@ -6,14 +6,14 @@
   margin-right: 2vw;
 }
 
-#empty_phcontainer {                                /* empty basket thumbnail */
+#empty_phcontainer {                                /* Empty basket thumbnail */
   color: #fed;
 }
 
-/* Ajustments for screens smaller the 800px wide */
+/* Adjustments for screens smaller than 800px wide */
 @media screen and (max-width: 800px) {
   #phcontainer{
-    grid-template-columns:  repeat(6, 1fr);        /* Half the grid size */
+    grid-template-columns:  repeat(6, 1fr);        /* Halve the grid size */
     margin-top: 2.5rem;
   }
 }

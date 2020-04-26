@@ -13,13 +13,13 @@ export const Gallery = (props) => {
 // mediaQueryList is a filtered list of all the window media variables. The preceding clause acts as the filter.
   const mediaQueryList = window.matchMedia('(max-width: 800px)')          // This is the condition that will trigger the Media Query Listener
   const mediaQueryAction = (action) => {                                  // This is the action that will be taken
-      props.toggleIsFetching(true);                                       // The isFetching flagg ensures the page is not rendered until
+      props.toggleIsFetching(true);                                       // The isFetching flag ensures the page is not rendered until
       jpegs = resequenceJpegs(jpegs);                                     // the array is resequenced
       props.toggleIsFetching(false);
   }
   mediaQueryList.addListener(mediaQueryAction)                            // Attach listener to the mediaQueryList and pass it an action
 
-// imageSuccess() will itterate through each item in the jpegs array and return it in a Thumbnail() component.
+// imageSuccess() will iterate through each item in the jpegs array and return it in a Thumbnail() component.
 	const imageSuccess = (jpegs) => {
 		return jpegs.map((item, i) => {
 			return( Thumbnail(props, item, i) )
@@ -29,7 +29,7 @@ export const Gallery = (props) => {
 	// The imageFail function will be called in the case that getJpegs() returns
   // anything other than an array. If there was an error on the server when it
   // fetches the image files it will return the error as plain text.
-  // imageFail() will display the server erron in the page.
+  // imageFail() will display the server error in the page.
 	const imageFail = (jpegs) => {
 		return(
 			<div className="ph_fail_container">
@@ -40,10 +40,10 @@ export const Gallery = (props) => {
 		)
 	}
 
-// imageComponent() decides weather to return the imageSuccess() method or the
+// imageComponent() decides whether to return the imageSuccess() method or the
 // imageFail() method depending on the response from the server.
 	let imageComponent = (jpegs) => {
-		if (Array.isArray(jpegs)) {                 // If jpegs is an array assume the server request was successfull
+		if (Array.isArray(jpegs)) {                 // If jpegs is an array assume the server request was successful
 			return imageSuccess(jpegs);               // return imageSuccess()
 		}
 		else {
@@ -52,7 +52,7 @@ export const Gallery = (props) => {
 	}
 
 // The main gallery element is a conditional return statement. If the
-// isFetching flag is set it will return a "wait" message otherwise it will
+// isFetching flag is set it will return a "wait" message. Otherwise it will
 // return imageComponent()
 	return( !props.isFetchingJpegs ?
 		<div id="phcontainer">
