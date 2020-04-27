@@ -7,7 +7,6 @@ h2 {
 h3 {
   color: #fedf;
   font-size: 2rem;
-
 }
 
 strong {
@@ -17,7 +16,6 @@ strong {
 ul {
   margin: 0;
 }
-
 
 p {
   margin-top: 0;
@@ -33,7 +31,7 @@ cite {
   color: #cbaf;
 }
 
-.clear{
+.clear {
   clear: both;
 }
 
@@ -41,26 +39,29 @@ cite {
   /* border: 1px solid white; */
   display: inline-block;
   overflow: auto;
-  border-radius: 2vw 0 0 0px;
+  border-radius: 2vw 0 0 0;
   margin: 0;
   font-size: 1rem;
   max-width: 44rem;
-
   scrollbar-width: thin;
   scrollbar-color: #222 #2d2d2d;
 }
+
 .code-exerpt::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
+
 .code-exerpt::-webkit-scrollbar-track {
   background: #2d2d2d;
 }
+
 .code-exerpt::-webkit-scrollbar-thumb {
   background-color: #1d1d1d;
   border-radius: 3px;
   border: 1px solid #333;
 }
+
 .code-exerpt::-webkit-scrollbar-corner {
   background-color: #2d2d2d;
 }
@@ -70,7 +71,6 @@ cite {
   display: block;
   width: calc(95% - 3em);
   margin: auto;
-  //margin: 0em auto 0 auto;
   padding: 2em 0 2em 2em;
   background-color: #222;
   border-radius: 10px;
@@ -84,14 +84,12 @@ cite {
 }
 
 .section-container {
-  /* border: 1px solid white; */
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
 .section-text {
-  /* border: 1px solid green; */
   flex-grow: 1;
   width: 35%;
   padding-right: 2em;
@@ -104,22 +102,18 @@ cite {
 }
 
 .intro-box {
-  /* border: 1px solid white; */
   display: inline-flex;
   flex-wrap: wrap;
 }
 
 .welcome-message {
-  /* border: 1px solid green; */
   display: inline-block;
   width: 100%;
 }
 
 .tech-ul-container {
-  /* border: 1px solid purple; */
   display: inline-flex;
   justify-content: flex-start;
-  //flex-grow: 2;
   flex-wrap: wrap;
 }
 
@@ -137,27 +131,8 @@ cite {
   flex-grow: 1;
 }
 
-.concept {
-}
-
-.Header-navbar {
-
-}
-
-.underline-animation-text {
-
-}
-
 .underline-animation-code .code-exerpt {
-  /* border-radius: 1px solid blue; */
   max-height: 12em;
-}
-
-.button-logic-text {
-
-}
-
-.button-logic-code {
 }
 
 .button-logic-code .code-exerpt {
@@ -173,7 +148,6 @@ cite {
 }
 
 .sequencer-container {
-  /* border: 2px solid orange; */
   width: 100%;
   display: inline-flex;
   justify-content: space-around;
@@ -187,7 +161,6 @@ cite {
 
 .gallery-basket-code .code-exerpt {
   max-height: 32em;
-  /* font-size: 1vw; */
 }
 
 .responsive-design-video {
@@ -197,28 +170,12 @@ cite {
   flex-grow: 1;
 }
 
-.single-image-text {
-
-}
-
-.single-image-code h3 {
-  /* max-width: 70%; */
-}
-
 .single-image-code .code-exerpt {
   height: 21em;
 }
 
-.basket-redux-text {
-
-}
-
-.basket-redux-code .code-exerpt{
+.basket-redux-code .code-exerpt {
   max-height: 30em;
-}
-
-.nodejs-container {
-  /* border: 2px solid chocolate; */
 }
 
 .nodejs-text-vid-wrapper {
@@ -228,7 +185,6 @@ cite {
 }
 
 .nodejs-text {
-  /* border: 2px solid pink; */
   display: inline-block;
   width: 50%;
   flex-grow: 1;
@@ -242,12 +198,7 @@ cite {
 }
 
 .nodejs-code-container {
-  /* border: 2px yellow solid; */
   width: 100%;
-}
-
-.nodejs-code {
-  /* border: 2px solid white; */
 }
 
 .nodejs-code .code-exerpt {
@@ -255,7 +206,6 @@ cite {
 }
 
 @media screen and (max-width: 800px) {
-
   h2 {
     font-size: 2rem;
   }
@@ -301,8 +251,8 @@ cite {
   }
 
   .technologies-ul {
-    font-size: .8em;
-    margin: 0 2em 0 0em;
+    font-size: 0.8em;
+    margin: 0 2em 0 0;
   }
 
   .underline-animation-container {

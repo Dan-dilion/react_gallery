@@ -1,8 +1,8 @@
 
 .images {
   width: 100%;
-	transition: box-shadow 1500ms;
-	border-radius: .4vw;
+  transition: box-shadow 1500ms;
+  border-radius: 0.4vw;
   object-fit: cover;
 }
 
@@ -15,33 +15,33 @@
   position: relative;
   margin-top: auto;
   margin-bottom: auto;
-	background-color: #0002;
+  background-color: #0002;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 /* If hovering over .thumbnail apply these attributes to .images */
 .thumbnail:hover .images {
-	transition: box-shadow 200ms;
-	box-shadow: 0 0 1.5vw .5vw #fec3, 0px 0px 2vw 3vw #fec1;
+  transition: box-shadow 200ms;
+  box-shadow: 0 0 1.5vw 0.5vw #fec3, 0 0 2vw 3vw #fec1;
 }
 
 /* If hovering over .thumbnail apply these attributes to .add-basket-button but only with gallery className */
 .thumbnail:hover .add-basket-thumb.gallery {
-  opacity: .7;
+  opacity: 0.7;
   transition: opacity 500ms;
 }
 
 /* If hovering over .thumbnail apply these attributes to .remove-basket-button but only with basket className */
 .thumbnail:hover .remove-basket-thumb.basket {
-  opacity: .6;
+  opacity: 0.6;
   transition: opacity 500ms;
 }
 
-.thumb-button{
+.thumb-button {
   position: absolute;
-	top: .2em;
-  left: .2em;
+  top: 0.2em;
+  left: 0.2em;
   width: 4vw;
   height: 4vw;
   z-index: 1;
@@ -58,9 +58,9 @@
 
 /* If the viewport is less than 800px wide apply these attributes */
 @media screen and (max-width: 800px) {
-  .thumb-button{
-    top: .1em;
-    left: .1em;
+  .thumb-button {
+    top: 0.1em;
+    left: 0.1em;
     width: 6vw;
     height: 6vw;
   }
@@ -81,15 +81,16 @@
 
 /* Only apply to .remove-basket-thumb when className gallery is present */
 .remove-basket-thumb.gallery {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 /* If coarse pointer available assume mobile device, eliminate hover effects */
 @media (any-pointer: coarse) {
   .add-basket-thumb {
-    opacity: .7;
+    opacity: 0.7;
   }
+
   .remove-basket-thumb {
-    opacity: .6;
+    opacity: 0.6;
   }
 }

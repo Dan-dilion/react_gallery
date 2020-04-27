@@ -1,24 +1,23 @@
 .single-wrapper {
-  /* border: 5px solid blue; */
   position: relative;         /* Floated to create new flow context           */
   width: 100%;
-  margin: 2vh 0 0vh 0;
+  margin: 2vh 0 0 0;
   padding-bottom: 0;
 }
 
 .slider {
   position: absolute;         /* Anchored to the above flow context           */
   margin: 0 100px 0 100px;
-	height: calc(100% - 10px);
+  height: calc(100% - 10px);
   width: calc(100% - 200px);
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+  background-size: contain;   /* Don't distort images to fit element          */
+  background-repeat: no-repeat;
+  background-position: center;
   cursor: zoom-in;            /* Magnifying glass to indicate you can enlarge */
 }
 
 .top-buttons-container {      /* The exit, add and remove buttons at the top  */
-  display: flex;
+  display: flex;              /* Children adopt flex flow context             */
   justify-content: space-between;
 }
 
@@ -26,19 +25,20 @@
   margin: 0 50px;
   text-decoration: none;
   background-color: #0000;
-  z-index: 4;
-  background-size: contain;
+  z-index: 2;                /* Display on top                                */
+  background-size: contain;  /* Dont stretch background image to fit element  */
   background-repeat: no-repeat;
-  cursor: pointer;
+  cursor: pointer;           /* Pointer cursor to indicate clickable element  */
   width: 33%;
   height: 50px;
-  opacity: .6;
-  transition: opacity, 2000ms;
+  opacity: 0.6;
+  transition: opacity, 2000ms;  /* Animate transitions (2seconds)             */
   outline: none;
 }
+
 .top-buttons:hover {
-  transition: opacity, 500ms;
-  opacity: .8;
+  transition: opacity, 500ms;   /* Animate transitions (2seconds)             */
+  opacity: 0.8;
 }
 
 .exit-button {
@@ -62,26 +62,24 @@
 }
 
 .next-prev-button {
-	background-color: #0000;
-  opacity: .2;
-	font-size: xxx-large;
-	z-index: 2;
-	min-height: 65vh;
-	width: 33%;
+  background-color: #0000;
+  opacity: 0.2;
+  font-size: xxx-large;
+  z-index: 2;                   /* Display on top */
+  min-height: 65vh;
+  width: 33%;
   background-size: 30%;
-	background-repeat: no-repeat;
-  transition-property: opacity;
-	transition-duration: 2000ms;
+  background-repeat: no-repeat;
+  transition: opacity, 2000ms;  /* Animate transitions (2seconds)             */
 }
 
 .next-prev-button:hover {
-  opacity: .6;
-	transition-property: opacity;
-	transition-duration: 500ms;
+  opacity: 0.6;
+  transition: opacity, 500ms;   /* Animate transitions (2seconds)             */
 }
 
 .no-highlight:hover {           /* Used for when next and prev are dissabled  */
-  opacity: .1;
+  opacity: 0.1;
 }
 
 .prev-image {

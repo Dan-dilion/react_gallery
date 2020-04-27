@@ -1,7 +1,7 @@
 #phcontainer {                                      /* Root element for basket and gallery components */
-  display: grid;                                    /* Grid flow context */
-	grid-template-columns:  repeat(12, 1fr);
-	grid-gap: 10px;
+  display: grid;                                    /* Grid flow context                              */
+  grid-template-columns: repeat(12, 1fr);           /* 12 grid fractions each one is 1 fraction wide  */
+  grid-gap: 10px;                                   /* space between grid elements                    */
   margin-left: 2vw;
   margin-right: 2vw;
 }
@@ -12,8 +12,8 @@
 
 /* Adjustments for screens smaller than 800px wide */
 @media screen and (max-width: 800px) {
-  #phcontainer{
-    grid-template-columns:  repeat(6, 1fr);        /* Halve the grid size */
+  #phcontainer {
+    grid-template-columns: repeat(6, 1fr);          /* Halve the grid size */
     margin-top: 2.5rem;
   }
 }

@@ -1,87 +1,124 @@
-#app-header {                             /* Root element for header component                            */
-  position: fixed;                        /* Header will stay in place, content will scroll under         */
-  z-index: 2;                             /* Element will be above others                                 */
-  display: block;                         /* Block flow context                                           */
+#app-header {                       /* Root element for header component                            */
+  position: fixed;                  /* Header will stay in place, content will scroll under         */
+  z-index: 2;                       /* Element will be above others                                 */
+  display: block;                   /* Block flow context                                           */
   background-color: #000c;
-  backdrop-filter: blur(8px);             /* Creates frosted glass effect (not supported in Firefox yet!) */
+  backdrop-filter: blur(8px);       /* Creates frosted glass effect (not supported in Firefox yet!) */
   text-align: left;
   width: 100%;
 }
 
-#logo {                                   /* Element for the main title                                   */
+#logo {                             /* Element for the main title                                   */
   width: 60%;
   color: #fed;
   font-size: calc(10px + 5vw);
   margin-left: 5%;
-  margin-top: 0em;
+  margin-top: 0;
   margin-bottom: 0;
 }
 
 #app-header a:hover {
-  text-decoration: none;                 /* Removes the underline hover effect from the title             */
+  text-decoration: none;            /* Removes the underline hover effect from the title            */
 }
 
-#navbar {                                /* Nav bar element                                               */
+#navbar {                           /* Nav bar element                                              */
   float: right;
   margin: 0;
   padding-right: 1em;
 }
 
-#function-bar {                          /* Function bar element                                          */
+#function-bar {                     /* Function bar element                                         */
   display: block;
-  margin-top: .2em;
+  margin-top: 0.2em;
   margin-bottom: 5px;
-  padding: .2em;
+  padding: 0.2em;
   padding-right: 4%;
   height: 1em;
   background: #3337;
-  font-size: calc(10px + 1vw);           /* Set the size for the function bar buttons via their font      */
+  font-size: calc(10px + 1vw);      /* Set the size for the function bar buttons via their font     */
 }
 
 .navbar-items {
   display: inline-block;
   float: left;
   width: 4em;
-  margin: 1% .5vw;
-  padding: 2% .5vw .4em .5vw;
-  border-radius: .1em;
-  border-bottom: solid #0000 1.2em;      /* Invisible border to extend element past the underline effect  */
+  margin: 1% 0.5vw;
+  padding: 2% 0.5vw 0.4em 0.5vw;
+  border-radius: 0.1em;
+  border-bottom: #0000 1.2em;       /* Invisible border extends element past the underline effect   */
   color: #fed;
   text-align: center;
-	font-size: calc(2vw);
-	list-style-type: none;
+  font-size: calc(2vw);
+  list-style-type: none;    /* Clear ul styling                                */
+  position: relative;       /* Establishes a new flow context to anchor the    */
+  line-height: 1.3em;       /* absolute positioned ::after psuedo element.     */
+  height: 1em;              /* Also restricts the height of the element to 1em */
+}
+
+/* Animated underline effect */
+.navbar-items::after {      /* Creates a psuedo element after the navbar-items */
+  content: '';              /* elements. Absolute positioning allows the use   */
+  position: absolute;       /* of left & bottom and anchors element to its     */
+  bottom: 0;                /* closest ancestor with relative positioning.     */
+  left: 50%;                /* The psuedo element is positioned in the middle  */
+  width: 0;                 /* at the bottom with a solid border and 0 width.  */
+  height: 0.2em;            /* Element is not yet visible!                     */
+  border-bottom: 0.15em solid #fed;
+}
+
+.navbar-items,
+.navbar-items::after {      /* property's transition over a duration           */
+  transition-property: left, width, background-color, border;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in-out;
+}
+
+.navbar-items:hover::after {/* On hover ajust the position and the width       */
+  left: 10%;                /* of the psuedo element (making them visible)     */
+  width: 80%;               /* the transition will be animated because of      */
+}                           /* the transition effects                          */
+
+.selected {                 /* When selected highlight the background          */
+  transition: background-color 1500ms;
+  background-color: #fed4;
+}
+
+.selected::after {          /* When selected keep the underline visible        */
+  left: 10%;
+  width: 80%;
+  border-bottom: 0.15em solid #fed;
 }
 
 .funcbar-items {
   display: inline;
   float: right;
   margin: auto 0 auto 1em;
-  padding: .2vh .6vw .2vh .6vw;
+  padding: 0.2vh 0.6vw 0.2vh 0.6vw;
   background-color: #0004;
-  border-right: .2em solid #555a;
-  border-bottom: .3em solid #222a;
+  border-right: 0.2em solid #555a;
+  border-bottom: 0.3em solid #222a;
   text-align: center;
   font-size: 60%;
   color: #fed;
   list-style-type: none;
-  transition-property:  background-color, border, color;
+  transition-property: background-color, border, color;
   transition-duration: 1500ms;
 }
 
-.funcbar-items:hover{
-  border-right: .2em solid #555f;
-  border-bottom: .3em solid #222f;
+.funcbar-items:hover {
+  border-right: 0.2em solid #555f;
+  border-bottom: 0.3em solid #222f;
   background-color: #fed2;
-  transition-property:  background-color, border, color;
+  transition-property: background-color, border, color;
   transition-duration: 200ms;
 }
 
 .funcbar-items-ghost {
-  border-right: .2em solid #555a;
-  border-bottom: .3em solid #222a;
+  border-right: 0.2em solid #555a;
+  border-bottom: 0.3em solid #222a;
   color: #222;
   background-color: #000f;
-  transition-property:  background-color, border, color;
+  transition-property: background-color, border, color;
   transition-duration: 1500ms;
 }
 
@@ -89,46 +126,6 @@
   background-color: #000;
   color: #333;
   cursor: not-allowed;
-  transition-property:  background-color, border, color;
+  transition-property: background-color, border, color;
   transition-duration: 200ms;
-}
-
-
-/* Animated underline effect */
-.navbar-items {
-  position: relative;       /* Establishes a new flow context to anchor the    */
-  line-height: 1.3em;       /* absolute positioned ::after psuedo element.     */
-  height: 1em;              /* Also restricts the height of the element to 1em */
-}
-
-.navbar-items::after {      /* Creates a psuedo element after the navbar-items */
-  content: '';              /* elements. Absolute positioning allows the use   */
-  position: absolute;       /* of left & bottom and anchors element to its     */
-  bottom: 0;                /* closest ancestor with relative positioning.     */
-  left: 50%;                /* The psuedo element is positioned in the middle  */
-  width: 0;                 /* at the bottom with a solid border and 0 width.  */
-  height: .2em;             /* Element is not yet visible!                     */
-  border-bottom: .15em solid #fed;
-}
-
-.navbar-items, .navbar-items::after { /* property's transition over a duration */
-  transition-property: left, width, background-color, border;
-  transition-duration: 0.4s;
-  transition-timing-function: ease-in-out;
-}
-
-.navbar-items:hover::after {    /* On hover ajust the position and the width   */
-  left: 10%;                    /* of the psuedo element (making them visible) */
-  width: 80%;                   /* the transition will be animated because of  */
-}                               /* the transition effects                      */
-
-.selected {                     /* When selected highlight the background      */
-  transition: background-color 1500ms;
-  background-color: #fed4;
-}
-
-.selected::after {              /* When selected keep the underline visible    */
-  left: 10%;
-  width: 80%;
-  border-bottom: .15em solid #fed;
 }
