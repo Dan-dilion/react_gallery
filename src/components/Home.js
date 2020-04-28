@@ -90,9 +90,18 @@ export const Home = (props) => {
 
         <section className="walkthrough-video fade-in">
           <h3>Walkthrough</h3>
-          <video className="embedded-video" controls>
-            <source src="./resources/video/walkthrough.mp4" type="video/mp4">
-            </source>
+          <video
+            className="embedded-video"
+            poster="./resources/icons/play-circle-fill.svg"
+            preload="none"
+            controls
+            disablePictureInPicture
+            controlsList="nodownload"
+          >
+          <source
+            src="./resources/video/walkthrough.mp4"
+            type="video/mp4"
+          />
             There was a problem finding the video source
           </video>
 
@@ -480,9 +489,18 @@ switch (button) {
 
           <section className="responsive-design-video fade-in right-pad">
             <h3>Responsive Design</h3>
-            <video className="embedded-video" controls>
-              <source src="./resources/video/responsive-design.mp4" type="video/mp4">
-              </source>
+            <video
+              className="embedded-video"
+              poster="./resources/icons/play-circle-fill.svg"
+              preload="none"
+              controls
+              disablePictureInPicture
+              controlsList="nodownload"
+            >
+            <source
+              src="./resources/video/responsive-design.mp4"
+              type="video/mp4"
+            />
               There was a problem finding the video source
             </video>
 
@@ -686,9 +704,18 @@ switch (button) {
 
             <section className="nodejs-video fade-in right-pad">
               <h3>Node Server</h3>
-              <video className="embedded-video" controls>
-                <source src="./resources/video/node-server.mp4" type="video/mp4">
-                </source>
+              <video
+                className="embedded-video"
+                poster="./resources/icons/play-circle-fill.svg"
+                preload="none"
+                controls
+                disablePictureInPicture
+                controlsList="nodownload"
+              >
+              <source
+                src="./resources/video/node-server.mp4"
+                type="video/mp4"
+              />
                 There was a problem finding the video source
               </video>
 
