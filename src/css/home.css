@@ -5,6 +5,7 @@ h2 {
 }
 
 h3 {
+  display: block;
   color: #fedf;
   font-size: 2rem;
 }
@@ -36,13 +37,13 @@ cite {
 }
 
 .code-exerpt {
-  /* border: 1px solid white; */
   display: inline-block;
   overflow: auto;
   border-radius: 2vw 0 0 0;
   margin: 0;
   font-size: 1rem;
-  max-width: 44rem;
+  max-width: 40vw;
+  min-width: 38rem;
   scrollbar-width: thin;
   scrollbar-color: #222 #2d2d2d;
 }
@@ -67,20 +68,15 @@ cite {
 }
 
 .home-container {
-  /* border: 1px solid white; */
   display: block;
-  width: calc(95% - 3em);
+  width: calc(100% - 8rem);
   margin: auto;
-  padding: 2em 0 2em 2em;
+  padding: 2rem 2rem 2rem 2rem;
   background-color: #222;
   border-radius: 10px;
   font-size: 1.5em;
   text-align: left;
   color: #ba9f;
-}
-
-.right-pad {
-  padding-right: 2rem;
 }
 
 .section-container {
@@ -96,20 +92,23 @@ cite {
 }
 
 .embedded-video {
-  width: 90%;
+  min-width: 30rem;
+  max-width: 60%;
+  max-height: 20rem;
   margin: 1em 5% 0 0;
   border-radius: 1vw;
   background-color: #0002;
 }
 
-.intro-box {
-  display: inline-flex;
-  flex-wrap: wrap;
+.welcome-message {
+  display: block;
 }
 
-.welcome-message {
-  display: inline-block;
+.intro-box {
+  display: inline-flex;
+  justify-content: flex-start;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .tech-ul-container {
@@ -119,7 +118,6 @@ cite {
 }
 
 .technologies-ul {
-  /* border: 2px solid blue; */
   display: inline-block;
   max-width: 10em;
   margin: 0 3em 0 3em;
@@ -128,8 +126,6 @@ cite {
 .walkthrough-video {
   display: inline-block;
   margin: auto;
-  width: 50%;
-  flex-grow: 1;
 }
 
 .underline-animation-code .code-exerpt {
@@ -167,8 +163,6 @@ cite {
 .responsive-design-video {
   display: inline-block;
   margin: auto;
-  width: 50%;
-  flex-grow: 1;
 }
 
 .single-image-code .code-exerpt {
@@ -187,19 +181,22 @@ cite {
 
 .nodejs-text {
   display: inline-block;
-  width: 50%;
+  width: 55%;
   flex-grow: 1;
 }
 
 .nodejs-video {
-  display: inline-block;
-  margin: auto;
-  width: 45%;
-  flex-grow: 1;
+  display: inline-flex;
+  flex-grow: 4;
 }
 
 .nodejs-code-container {
   width: 100%;
+}
+
+.node-video-inner-container {
+  display: block;
+  margin: auto;
 }
 
 .nodejs-code .code-exerpt {
@@ -213,25 +210,41 @@ cite {
 
   h3 {
     font-size: 1rem;
+    text-align: left;
   }
 
   .home-container {
     font-size: 1em;
-    display: block;
-    width: 100%;
+    width: calc(100% - 2em);
     margin: 0;
-    padding-right: 2rem;
+    padding: 0 1em 0 1em;
+  }
+
+  .section-container {
+    display: block;
+  }
+
+  .section-text {
+    width: auto;
   }
 
   .code-exerpt {
-    margin: 0;
-    font-size: 1.7vw;
-    max-width: 58em;
+    font-size: 1.5vw;
+    min-width: 80vw;
   }
 
-  .gallery-basket-code .code-exerpt {
-    font-size: 1.1vw;
-    max-width: 90em;
+  .embedded-video {
+    display: block;
+    width: auto;
+    min-width: 60vw;
+    height: 30vw;
+    margin: 0;
+  }
+
+  .code-container {
+    display: block;
+    width: 80vw;
+    margin: 0 auto;
   }
 
   .right-pad {
@@ -240,31 +253,28 @@ cite {
 
   .intro-box {
     display: block;
-  }
-
-  .welcome-message {
-    display: block;
-    width: 100%;
+    text-align: center;
   }
 
   .walkthrough-video {
-    width: 100%;
+    display: block;
+    width: 60vw;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .tech-ul-container {
+    flex-wrap: nowrap;
+  }
+
+  .technologies-ul ul {
+    font-size: 2vw;
+    padding: 0.6rem;
+    text-align: left;
   }
 
   .technologies-ul {
-    font-size: 0.8em;
-    margin: 0 2em 0 0;
-  }
-
-  .underline-animation-container {
-    max-width: 100%;
-  }
-
-  .responsive-design-video {
-    width: 100%;
-  }
-
-  .nodejs-video {
-    width: 100%;
+    display: inline;
+    margin: 0 4vw;
   }
 }

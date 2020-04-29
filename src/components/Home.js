@@ -10,34 +10,32 @@ export const Home = (props) => {
   })                                  // page to establish highlights
 
   return(
-    <div className="home-container">
-      <div className="intro-box right-pad">
-        <section className="welcome-message fade-in">
-          <h2>Welcome to React Gallery</h2>
-          <p>
-            My name is Daniel Marston; I am a self-taught React/Javascript
-            developer seeking entry into the corporate world. I am eager to gain
-            commercial experience and become a valuable developer to a reputable
-            organisation.
-          </p>
-          <p>
-            I am developing React Gallery as a way to apply the technologies I
-            have learned during my studies. React is a magic box of tricks. I
-            love developing with it – it is fast, responsive and makes UI design
-            simple and rewarding. I believe it is the future of professional web
-            design. Combining React with NodeJS, I have been able to develop the
-            front end and the back end exclusively using Javascript,
-            incorporating state of the art techniques and leading web development
-            practices. Below is a summary of the technologies I have used.
-          </p>
-          <p>
-            Source code can be downloaded from <a target="_blank"
-            rel="noopener noreferrer" href="https://github.com/dan-dilion">
-            my GitHub account</a>.
-          </p>
-
-        </section>
-
+    <div className="home-container" >
+      <section className="welcome-message fade-in">
+        <h2>Welcome to React Gallery</h2>
+        <p>
+          My name is Daniel Marston; I am a self-taught React/Javascript
+          developer seeking entry into the corporate world. I am eager to gain
+          commercial experience and become a valuable developer to a reputable
+          organisation.
+        </p>
+        <p>
+          I am developing React Gallery as a way to apply the technologies I
+          have learned during my studies. React is a magic box of tricks. I
+          love developing with it – it is fast, responsive and makes UI design
+          simple and rewarding. I believe it is the future of professional web
+          design. Combining React with NodeJS, I have been able to develop the
+          front end and the back end exclusively using Javascript,
+          incorporating state of the art techniques and leading web development
+          practices. Below is a summary of the technologies I have used.
+        </p>
+        <p>
+          Source code can be downloaded from <a target="_blank"
+          rel="noopener noreferrer" href="https://github.com/dan-dilion">
+          my GitHub account</a>.
+        </p>
+      </section>
+      <div className="intro-box">
         <section className="tech-ul-container">
           <div className="technologies-ul fade-in">
             <h3>Back End</h3>
@@ -110,7 +108,7 @@ export const Home = (props) => {
         </section>
       </div>
 
-      <section className="concept right-pad fade-in">
+      <section className="concept fade-in">
         <h3>Concept</h3>
         <p>
           React Gallery is designed to provide a useful way to share
@@ -120,7 +118,7 @@ export const Home = (props) => {
         </p>
       </section>
 
-      <section className="Header-navbar right-pad fade-in">
+      <section className="Header-navbar fade-in">
         <h3>Header, Nav-Bar & Function Bar</h3>
         <p>
           The header provides the primary controls for the application. It also
@@ -144,8 +142,7 @@ export const Home = (props) => {
       </section>
 
       <div className="underline-animation-container section-container fade-in">
-
-        <section className="underline-animation-text section-text right-pad">
+        <section className="underline-animation-text section-text">
           <h3>Underline Animation</h3>
           <p>
             Using CSS, I have attached a pseudo element to
@@ -163,7 +160,7 @@ export const Home = (props) => {
           </p>
         </section>
 
-        <section className="underline-animation-code right-pad">
+        <section className="underline-animation-code code-container">
           <h3>CSS</h3>
           <pre className="code-exerpt">
             <code className="language-css">
@@ -216,7 +213,7 @@ export const Home = (props) => {
 
       <div className="button-logic-container section-container fade-in">
 
-        <section className="button-logic-text section-text right-pad">
+        <section className="button-logic-text section-text">
           <h3>Button Logic</h3>
           <p>
             I have centralised the button logic with
@@ -234,7 +231,7 @@ export const Home = (props) => {
           </p>
         </section>
 
-        <section className="button-logic-code right-pad">
+        <section className="button-logic-code code-container">
           <h3>JS - buttonDispenser()</h3>
           <pre className="code-exerpt">
             <code className="language-js">
@@ -295,7 +292,7 @@ switch (button) {
 
       <div className="gallery-basket-container fade-in">
 
-        <section className="gallery-basket-text right-pad">
+        <section className="gallery-basket-text">
           <h3>Gallery & Basket View</h3>
           <p>
             Gallery view is the centrepiece of the web-app. Its first incarnation
@@ -330,7 +327,7 @@ switch (button) {
         </section>
 
         <div className="sequencer-container">
-          <section className="gallery-basket-code right-pad">
+          <section className="gallery-basket-code">
             <h3>JS - resequenceJpegs()</h3>
             <pre className="code-exerpt">
               <code className="language-js">
@@ -487,7 +484,7 @@ switch (button) {
           <br />
           <br />
 
-          <section className="responsive-design-video fade-in right-pad">
+          <section className="responsive-design-video fade-in">
             <h3>Responsive Design</h3>
             <video
               className="embedded-video"
@@ -513,7 +510,7 @@ switch (button) {
 
       <div className="single-image-container section-container fade-in">
 
-        <section className="single-image-text section-text right-pad">
+        <section className="single-image-text section-text">
           <h3>Single Image Slider</h3>
           <p>
             In single image view, the image slider will slide through the images
@@ -552,8 +549,8 @@ switch (button) {
           <br />
         </section>
 
-        <section className="single-image-code right-pad">
-          <h3>removeButtonDispenser()</h3>
+        <section className="single-image-code code-container">
+          <h3>addRemoveButtonDispenser()</h3>
           <pre className="code-exerpt">
             <code className="language-js">
               {`const addRemoveButtonDispenser = (currentItem) => {
@@ -579,7 +576,7 @@ switch (button) {
 
       <div className="basket-redux-container section-container fade-in">
 
-        <section className="basket-redux-text section-text right-pad">
+        <section className="basket-redux-text section-text">
           <h3>The Basket and Redux</h3>
           <p>
             The basket utility allows the user to add, review, remove and
@@ -614,7 +611,7 @@ switch (button) {
           </p>
         </section>
 
-        <section className="basket-redux-code right-pad">
+        <section className="basket-redux-code code-container">
           <h3>refreshJpegs()</h3>
           <pre className="code-exerpt">
             <code className="language-js">
@@ -646,26 +643,26 @@ switch (button) {
 
       <div className="nodejs-container section-container fade-in">
 
-      <div className="nodejs-wrapper">
-        <h3>NodeJS</h3>
-        <p>
-          Using a Node server allows me to run a portion of the website outside
-          of the browser environment. This enables functionality that would
-          otherwise be restricted by the browser but allows me to maintain the
-          same level of security by controlling the precise level of access to
-          the server’s resources.
-        </p>
-        <p>
-          I have used the <a href="https://expressjs.com/" target="_blank"
-          rel="noopener noreferrer">Express</a> API for routing client requests,
-          it is configured to listen to a specific port and respond to certain
-          URIs. It circumvents Cross Origin Resource Sharing (CORS) restrictions
-          by attaching the “Access-Control-Allow-Origin” header to it’s
-          responses.
-        </p>
+        <div className="nodejs-wrapper">
+          <h3>NodeJS</h3>
+          <p>
+            Using a Node server allows me to run a portion of the website outside
+            of the browser environment. This enables functionality that would
+            otherwise be restricted by the browser but allows me to maintain the
+            same level of security by controlling the precise level of access to
+            the server’s resources.
+          </p>
+          <p>
+            I have used the <a href="https://expressjs.com/" target="_blank"
+            rel="noopener noreferrer">Express</a> API for routing client requests,
+            it is configured to listen to a specific port and respond to certain
+            URIs. It circumvents Cross Origin Resource Sharing (CORS) restrictions
+            by attaching the “Access-Control-Allow-Origin” header to it’s
+            responses.
+          </p>
 
           <div className="nodejs-text-vid-wrapper">
-            <section className="nodejs-text right-pad">
+            <section className="nodejs-text">
               <p>
                 <code className="language-js">getJpegs()</code> is one of the services
                 provided by the Node server. When the browser makes an XHR “GET”
@@ -702,22 +699,24 @@ switch (button) {
               </p>
             </section>
 
-            <section className="nodejs-video fade-in right-pad">
-              <h3>Node Server</h3>
-              <video
-                className="embedded-video"
-                poster="./resources/icons/play-circle-fill.svg"
-                preload="none"
-                controls
-                disablePictureInPicture
-                controlsList="nodownload"
-              >
-              <source
-                src="./resources/video/node-server.mp4"
-                type="video/mp4"
-              />
-                There was a problem finding the video source
-              </video>
+            <section className="nodejs-video fade-in">
+              <div className="node-video-inner-container">
+                <h3>Node Server</h3>
+                <video
+                  className="embedded-video"
+                  poster="./resources/icons/play-circle-fill.svg"
+                  preload="none"
+                  controls
+                  disablePictureInPicture
+                  controlsList="nodownload"
+                >
+                <source
+                  src="./resources/video/node-server.mp4"
+                  type="video/mp4"
+                />
+                  There was a problem finding the video source
+                </video>
+              </div>
 
               <br />
               <br />
@@ -725,7 +724,7 @@ switch (button) {
           </div>
         </div>
 
-        <div className="nodejs-code-container section-container">
+        <div className="nodejs-code-container code-container section-container">
 
           <section className="nodejs-code">
             <h3>Client side</h3>
@@ -778,58 +777,58 @@ return await fetch(apiUrl + 'getjpegs')                   // Make XHR request to
         </div>
       </div>
 
-      <section className="deployment right-pad">
-      <h3>Bundlers, trans-compilers and other build tools</h3>
+      <section className="deployment">
+        <h3>Bundlers, trans-compilers and other build tools</h3>
 
-      <p>
-        <cite>Create-React-App</cite> is a React bootstrapping utility. It
-        installs and configures Webpack and Babel amongst other tools, ready
-        to be used in a React project. It stores its configuration settings
-        in the package.json file created by NPM and will bundle, minify and
-        optimise your code when you build your app for
-        production. <a href="https://create-react-app.dev/" target="_blank"
-        rel="noopener noreferrer">Create-React-App</a> also configures the
-        browser to refresh upon changes to the code in the project
-        directory. <a href="https://nodemon.io/" target="_blank"
-        rel="noopener noreferrer">Nodemon</a> is another tool that I have used
-        to monitor for changes. In this case it monitors my server code and
-        relaunches my Node server when anything is changed.
-      </p>
+        <p>
+          <cite>Create-React-App</cite> is a React bootstrapping utility. It
+          installs and configures Webpack and Babel amongst other tools, ready
+          to be used in a React project. It stores its configuration settings
+          in the package.json file created by NPM and will bundle, minify and
+          optimise your code when you build your app for
+          production. <a href="https://create-react-app.dev/" target="_blank"
+          rel="noopener noreferrer">Create-React-App</a> also configures the
+          browser to refresh upon changes to the code in the project
+          directory. <a href="https://nodemon.io/" target="_blank"
+          rel="noopener noreferrer">Nodemon</a> is another tool that I have used
+          to monitor for changes. In this case it monitors my server code and
+          relaunches my Node server when anything is changed.
+        </p>
 
-      <br />
+        <br />
 
-      <h3>Deployment</h3>
-      <p>
-        To deploy React Gallery with an Apache server I had to take a number
-        of steps:
-      </p>
-      <ul>
-      <li>
-        I configured a .htaccess file to instruct Apache to redirect
-        everything in the URL after React Gallery’s root directory over to
-        index.html. This ensures that React Router can intercept the URL
-        changes and serve up the corresponding React components.
-      </li>
-      <br />
-      <li>
-        I created a parameter in package.json: <code className="language-js">
-        "homepage": "/dan/react_gallery"</code> which is used by NPM during the
-        production build process to insure that the build points to the correct
-        subdirectory. It can then be referenced in the app using the
-        environment variable <code className="language-js">
-        process.env.PUBLIC_URL</code>.
-      </li>
-      <br />
-      <li>
-        Using the terminal command “screen” I can run my Node server with a
-        Bash script in a detached session. This ensures that it continues
-        to run after I close the terminal.
-      </li>
-      </ul>
+        <h3>Deployment</h3>
+        <p>
+          To deploy React Gallery with an Apache server I had to take a number
+          of steps:
+        </p>
+        <ul>
+        <li>
+          I configured a .htaccess file to instruct Apache to redirect
+          everything in the URL after React Gallery’s root directory over to
+          index.html. This ensures that React Router can intercept the URL
+          changes and serve up the corresponding React components.
+        </li>
+        <br />
+        <li>
+          I created a parameter in package.json: <code className="language-js">
+          "homepage": "/dan/react_gallery"</code> which is used by NPM during the
+          production build process to insure that the build points to the correct
+          subdirectory. It can then be referenced in the app using the
+          environment variable <code className="language-js">
+          process.env.PUBLIC_URL</code>.
+        </li>
+        <br />
+        <li>
+          Using the terminal command “screen” I can run my Node server with a
+          Bash script in a detached session. This ensures that it continues
+          to run after I close the terminal.
+        </li>
+        </ul>
 
       </section>
 
-      <br className="clear" />
+      <br className="clear"/>
     </div>
   )
 }
