@@ -1,24 +1,36 @@
+const getPortraits = (pegs) => {                              // Function to make array of all portrait images
+  let ports = [];                                             // Declare empty array
+  pegs.forEach(item => {                                      // Iterate through jpegs
+    if (item.res.width < item.res.height) ports.push(item);   // If the width is smaller than the height add it to portraits
+  })
+  return ports;                                               // Return the array of portraits
+}
+
+const getLandscapes = (pegs) => {                             // Function to make array of all landscape images
+  let lands = [];                                             // Declare empty array
+  pegs.forEach(item => {                                      // Iterate through jpegs
+    if (item.res.width >= item.res.height) lands.push(item);  // If the width is larger than or the same as the height add it to landscapes
+  })
+  return lands;                                               // Return the array of landscapes
+}
+
+
+/*                                                                            **
+** resequenceJpegs is a simple pattern sequencer that will resequence an      **
+** array of images so that the arrangement of landscape and portrait images   **
+** falls in a symetrical pattern. It attempts to place a portrait at the      **
+** beginning and the end of every even numbered row so that the images lie    **
+** offset to one and other like a brick wall. if there are any portraits left **
+** it will then distribute them two at a time amongst the odd numbered rows.  **
+** If there are any left after that it will go over the even numbered rows    **
+** again and so on. The sequencer has every pattern mapped out barring a      **
+** couple mentionned in the notes.                                            **
+**                                                                            */
 export const resequenceJpegs = (jpegs) => {
 
   let newSequence = [];
   let gridWidth = 12;
   if (window.matchMedia("(max-width: 800px)").matches) gridWidth = 6;     // Set the gridWidth according to the viewport width
-
-  const getPortraits = (pegs) => {                              // Function to make array of all portrait images
-    let ports = [];                                             // Declare empty array
-    pegs.forEach(item => {                                      // Iterate through jpegs
-      if (item.res.width < item.res.height) ports.push(item);   // If the width is smaller than the height add it to portraits
-    })
-    return ports;                                               // Return the array of portraits
-  }
-
-  const getLandscapes = (pegs) => {                             // Function to make array of all landscape images
-    let lands = [];                                             // Declare empty array
-    pegs.forEach(item => {                                      // Iterate through jpegs
-      if (item.res.width >= item.res.height) lands.push(item);  // If the width is larger than or the same as the height add it to landscapes
-    })
-    return lands;                                               // Return the array of landscapes
-  }
 
   const portraits = getPortraits(jpegs)
   const landscapes = getLandscapes(jpegs)
@@ -137,4 +149,49 @@ export const resequenceJpegs = (jpegs) => {
 
   console.log('Array resequenced!!! num of items = ', newSequence.length)
   return newSequence;
+}
+
+
+
+
+/*                                                                            **
+** resequenceDelete resequences the images when one is deleted so that there  **
+** are minimum changes on the screen. It will swap the deleted image over     **
+** with either a landscape or portrait at the end of the list rather than     **
+** allowing all thumbs after the deleted to be reshuffled.                    **
+**                                                                            */
+export const resequenceDelete = (jpegs, index, orientation = 'l') => {
+
+  const lastLandIndex = () => {                             // Returns index number of the last landscape image in the array.
+    for (let i = (jpegs.length -1); i >= 0; i--) {          // starts at end of jpegs array, counst backwards until it finds
+      if (jpegs[i].res.width >= jpegs[i].res.height) {      // a landscape image. Square images are to be considered landscape.
+        return i;                                           // Return the loop counter i.
+      }
+    }
+  }
+
+  const lastPortIndex = () => {                             // Returns index number of the last portrait image in the array.
+    for (let i = (jpegs.length -1); i >= 0; i--) {          // starts at end of jpegs array, counst backwards until it finds
+      if (jpegs[i].res.width < jpegs[i].res.height) {       // a portrait image.
+        return i;                                           // Return the loop counter i.
+      }
+    }
+  }
+
+  if (orientation.charAt(0) === 'l' || orientation.charAt(0) === 'L') {       // If orientation is landscape
+    if (index === lastLandIndex()) jpegs.splice(index, 1)                     // if last landscape in the array just remove it
+    else jpegs.splice(index, 1, jpegs.splice(lastLandIndex(), 1)[0]);         // otherwise remove it and swap it for the last landscape in the array
+  }
+
+  if (orientation.charAt(0) === 'p' || orientation.charAt(0) === 'P') {       // If orientation is portrait
+    if (index === lastPortIndex()) jpegs.splice(index, 1);                    // if last portrait in the array just remove it
+    else jpegs.splice(index, 1, jpegs.splice(lastPortIndex(), 1)[0]);         // Otherwise delete and swap for the last portrait in the array
+
+    if (getPortraits(jpegs).length % 2) {                                     // If there is an odd number of portraits left in the array
+      jpegs.push(jpegs.splice(lastPortIndex(), 1)[0])                         // move the last portrait to the end of the array
+    }                                                                         // This avoids having and empty cell at the end of a row with
+  }                                                                           // only one portrait
+
+  return jpegs;                                                               // Return the new sequence
+
 }

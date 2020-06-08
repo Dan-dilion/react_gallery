@@ -1,12 +1,11 @@
 import React from "react";
 
 import { Thumbnail } from './Thumbnail.js';
-import { resequenceJpegs } from '../utils/utils.js'
 
 import '../css/Gallery.css';
 
 export const Basket = (props) => {
-
+console.log(props.getBasket)
 // fullBasket() will iterate through each item in 'jpegs' and return the
 // thumbnail JSX
 	const fullBasket = (jpegs) => {
@@ -28,12 +27,11 @@ export const Basket = (props) => {
 
 
 	let imageComponent = (jpegs) => {
-		if (jpegs.length >= 1) {              // If the basket is not empty
-			return fullBasket(jpegs);           // return the fullBasket() method
-		}
-		else {                                // otherwise the basket must be empty
-			return emptyBasket(jpegs);          // so return the emptyBasket() message
-		}
+		return (
+      (jpegs.length >= 1)         // If the basket is not empty
+        ? fullBasket(jpegs)       // return the fullBasket() method
+		    : emptyBasket(jpegs)      // otherwise return the emptyBasket() message
+    )
 	}
 
 // This is the main basket element. It calls imageComponent() and passes it
@@ -41,7 +39,9 @@ export const Basket = (props) => {
 // fullBasket() method or emptyBasket().
 	return(
 		<div id="phcontainer">
-			{imageComponent(resequenceJpegs(props.getBasket))}
+			{
+        imageComponent(props.getBasket)
+      }
 		</div>
 	);
 }

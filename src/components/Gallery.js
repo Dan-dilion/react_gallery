@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Thumbnail } from './Thumbnail.js';
-import { resequenceJpegs } from '../utils/utils.js'
+import { resequenceJpegs } from '../utils/sequencer.js'
 
 import '../css/Gallery.css';
 
