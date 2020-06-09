@@ -26,7 +26,7 @@
   text-decoration: none;
   background-color: #0000;
   z-index: 2;                /* Display on top                                */
-  background-size: contain;  /* Dont stretch background image to fit element  */
+  background-size: contain;  /* Don't stretch background image to fit element */
   background-repeat: no-repeat;
   cursor: pointer;           /* Pointer cursor to indicate clickable element  */
   width: 33%;
@@ -78,7 +78,7 @@
   transition: opacity, 500ms;   /* Animate transitions (2seconds)             */
 }
 
-.no-highlight:hover {           /* Used for when next and prev are dissabled  */
+.no-highlight:hover {           /* Used for when next and prev are disabled   */
   opacity: 0.1;
 }
 

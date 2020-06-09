@@ -48,7 +48,7 @@ app.get('/api/getjpegs', (request, response) => {                 // Will respon
   waitJpegs(imgDir)
 })
 
-// Listen for "GET" request to /api/zipjpegs - initate the zipJpegs function and return zipfile in readstream
+// Listen for "GET" request to /api/zipjpegs - initiate the zipJpegs function and return zipfile in readstream
 app.get('/api/zipjpegs', (request, response) => {                 // Will respond to "GET" request at specified URI
   response.attachment('downloaded-images.zip');                   // Set response type
 

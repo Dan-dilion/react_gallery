@@ -17,7 +17,7 @@ const zipFile = (path.join('./src/images', 'downloaded-images.zip'))
 const readdir = (dir) => {                                 // I have wrapped the readdir method in a promise
   return new Promise((resolve, reject) => {                // I can use the await and the .then methods later
     fs.readdir(dir, (error, files) => {
-      error ? reject(error) : resolve(files);              // Ternary opperator, reject promise with error
+      error ? reject(error) : resolve(files);              // Ternary operator, reject promise with error
     });                                                    // If rejected bypass .then collect with .catch
   });                                                      // or resolve promise with list of files
 }                                                          // Pass result on to .then
@@ -108,13 +108,13 @@ async function processImages(jpegs, size) {                // Receives an array 
             quality: 80                                    // Set compression quality
           })
           .resize(width, height, {                         // Run resize method, if only one dimension is specified
-            fit: 'inside',                                 // rezize will respect aspect ratio
-            withoutEnlargement: true,                      // if the image is smaller than rezize, do not enlarge
+            fit: 'inside',                                 // resize will respect aspect ratio
+            withoutEnlargement: true,                      // if the image is smaller than resize, do not enlarge
           })
           .toFile(resizeFileName)                          // Save new image to file
         })
         .catch(error => {                                  // Catch the reject promise object from sharp
-          console.log('Resizeing ERROR: ', error.message)  // Log error to console
+          console.log('Resizing ERROR: ', error.message)  // Log error to console
           throw new Error(error.message)                   // Throw error
         })
       }

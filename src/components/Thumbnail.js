@@ -8,7 +8,7 @@ export const Thumbnail = (props, jpegItem, i) => {
 
 
 // addButton() – props.selectedPage is added to the classNames so that CSS can
-// target the buttons in basket view seperately from buttons in gallery view.
+// target the buttons in basket view separately from buttons in gallery view.
 // onClick the button calls the 'ADD_BASKET' action.
 	const addButton = (jpegItem) => {
 		return(
@@ -20,7 +20,7 @@ export const Thumbnail = (props, jpegItem, i) => {
 	}
 
 // removeButton() - props.selectedPage is added to the classNames so that CSS
-// can target the buttons in basket view seperately from buttons in gallery
+// can target the buttons in basket view separately from buttons in gallery
 // view. onClick the button calls the 'REMOVE_BASKET' action.
 	const removeButton = (jpegItem) => {
 		return(

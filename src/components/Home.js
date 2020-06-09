@@ -167,11 +167,11 @@ export const Home = (props) => {
 {
 `.navbar-items {
   position: relative;                            /* establishes a new flow context to anchor the   */
-  line-height: 1.3em;                            /* absolute positioned ::after psudo element.     */
+  line-height: 1.3em;                            /* absolute positioned ::after pseudo element.    */
   height: 1em;                                   /* Also restrict the height of the element to 1em */
 }
 
-.navbar-items::after {                           /* Creates a psudo element after the navbar-items */
+.navbar-items::after {                           /* Creates a pseudo element after the navbar-items*/
   content: '';                                   /* elements. Absolute positioning allows the use  */
   position: absolute;                            /* of left & bottom and anchors element to its    */
   bottom: 0;                                     /* closest ancestor with relative positioning.    */
@@ -187,8 +187,8 @@ export const Home = (props) => {
   transition-timing-function: ease-in-out;
 }
 
-.navbar-items:hover::after {                     /* On hover ajust the position and the width   */
-  left: 10%;                                     /* of the psuedo element (making them visible) */
+.navbar-items:hover::after {                     /* On hover adjust the position and the width   */
+  left: 10%;                                     /* of the pseudo element (making them visible) */
   width: 80%;                                    /* the transition will be animated because of  */
 }                                                /* the transition effects                      */
 
@@ -435,7 +435,7 @@ switch (button) {
   // Each time through the loop it either adds two portraits to the even rows or two to the odd rows
   // If there is not enough portraits left for a whole pass they are added to leftoverPorts variable
 
-    if (portraits.lenghth < predictedNumOfRows) evenPorts = 2;          // if there not enough portraits for offset rows
+    if (portraits.length < predictedNumOfRows) evenPorts = 2;           // if there not enough portraits for offset rows
     else {                                                              // only use the portraits for the offset rows
       let i = portraits.length;
       do {

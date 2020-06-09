@@ -93,7 +93,7 @@ class App extends React.Component {
 {/*
 * Route -- Home screen
 * Force exact match so route not triggered for all URLs beginning with '/'.
-* If no route default to homescreen
+* If no route default to home screen
 */}
   						<Route
   							exact path={"/"}

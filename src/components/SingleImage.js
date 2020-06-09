@@ -10,7 +10,7 @@ export const SingleImage = (props) => {
   if (!props.getJpegs.length) props.refreshJpegs()    // If you arrived here from a link props.getJpegs will be blank so call refresh()
 
   let jpegsArray = props.getJpegs;                                              // jpegsArray to point to the Redux store jpegs
-  if (props.selectedPage === 'basket') jpegsArray = props.getBasket             // If you arived here from the basket jpegsArray will be the basket
+  if (props.selectedPage === 'basket') jpegsArray = props.getBasket             // If you arrived here from the basket jpegsArray will be the basket
 
   const urlFilename = () => {                                                   // Get filename from URL:
     let pathNames = window.location.pathname.split('/')                         // Split path at '/' and make all segments into an array

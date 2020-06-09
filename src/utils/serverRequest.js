@@ -13,7 +13,7 @@ export const getJpegs = async () => {                       // Export method.
 
   .then( async responseData => {                                  // Pass in the response from previous .then statement.
     let newJpegs = [];                                            // Declare an empty array.
-    await Promise.all(responseData.map( (file, i) => {            // Process every itteration of the response data concurrently.
+    await Promise.all(responseData.map( (file, i) => {            // Process every iteration of the response data concurrently.
       return new Promise((resolve, reject) => {                   // Each iteration returns a promise.
         const img = new Image()                                   // Create new image object.
         img.addEventListener('load', () => {                      // When the image has loaded,

@@ -51,16 +51,16 @@
   font-size: calc(2vw);
   list-style-type: none;    /* Clear ul styling                                */
   position: relative;       /* Establishes a new flow context to anchor the    */
-  line-height: 1.3em;       /* absolute positioned ::after psuedo element.     */
+  line-height: 1.3em;       /* absolute positioned ::after pseudo element.     */
   height: 1em;              /* Also restricts the height of the element to 1em */
 }
 
 /* Animated underline effect */
-.navbar-items::after {      /* Creates a psuedo element after the navbar-items */
+.navbar-items::after {      /* Creates a pseudo element after the navbar-items */
   content: '';              /* elements. Absolute positioning allows the use   */
   position: absolute;       /* of left & bottom and anchors element to its     */
   bottom: 0;                /* closest ancestor with relative positioning.     */
-  left: 50%;                /* The psuedo element is positioned in the middle  */
+  left: 50%;                /* The pseudo element is positioned in the middle  */
   width: 0;                 /* at the bottom with a solid border and 0 width.  */
   height: 0.2em;            /* Element is not yet visible!                     */
   border-bottom: 0.15em solid #fed;
@@ -73,8 +73,8 @@
   transition-timing-function: ease-in-out;
 }
 
-.navbar-items:hover::after {/* On hover ajust the position and the width       */
-  left: 10%;                /* of the psuedo element (making them visible)     */
+.navbar-items:hover::after {/* On hover adjust the position and the width      */
+  left: 10%;                /* of the pseudo element (making them visible)     */
   width: 80%;               /* the transition will be animated because of      */
 }                           /* the transition effects                          */
 

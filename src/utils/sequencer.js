@@ -16,15 +16,15 @@ const getLandscapes = (pegs) => {                             // Function to mak
 
 
 /*                                                                            **
-** resequenceJpegs is a simple pattern sequencer that will resequence an      **
+** resequenceJpegs is a simple pattern sequencer that will re-sequence an      **
 ** array of images so that the arrangement of landscape and portrait images   **
-** falls in a symetrical pattern. It attempts to place a portrait at the      **
+** falls in a symmetrical pattern. It attempts to place a portrait at the      **
 ** beginning and the end of every even numbered row so that the images lie    **
 ** offset to one and other like a brick wall. if there are any portraits left **
 ** it will then distribute them two at a time amongst the odd numbered rows.  **
 ** If there are any left after that it will go over the even numbered rows    **
 ** again and so on. The sequencer has every pattern mapped out barring a      **
-** couple mentionned in the notes.                                            **
+** couple mentioned in the notes.                                            **
 **                                                                            */
 export const resequenceJpegs = (jpegs) => {
 
@@ -80,17 +80,17 @@ export const resequenceJpegs = (jpegs) => {
     }                                                     // patterns available until the value is within range
 
 /*                    **
-**  Row Sequencer     **
+**  Row Constructor   **
 **                    */
 
-// The Image Dropper will iterate through each character in the pattern and drop a portrait for "1" characters and a landscape for "0" characters.
+// The Row Constructor will iterate through each character in the pattern and drop a portrait for "1" characters and a landscape for "0" characters.
 // It is written in such a way that if there are none of the desired images left it will just drop the other type.
 // This way it is always better to over prescribe the portraits (round numbers up) if there is a discrepancy because it can always compensate.
 
     [...pattern[patternSelector -= 1]].forEach(item => {                                   // Convert the pattern into an array and begin iterating through its characters
       if (parseInt(item) && portraits.length > 0) newSequence.push(portraits.shift())      // If item is a 1 and there are landscapes left push landscape
       else if (landscapes.length > 0) newSequence.push(landscapes.shift())                 // Otherwise if there are any portraits left push portrait
-      else if (portraits.length > 0) newSequence.push(portraits.shift())                   // Otherwise if there are any landscapes left push lanscape
+      else if (portraits.length > 0) newSequence.push(portraits.shift())                   // Otherwise if there are any landscapes left push landscape
     });
   }
 
@@ -155,7 +155,7 @@ export const resequenceJpegs = (jpegs) => {
 
 
 /*                                                                            **
-** resequenceDelete resequences the images when one is deleted so that there  **
+** resequenceDelete re-sequences the images when one is deleted so that there  **
 ** are minimum changes on the screen. It will swap the deleted image over     **
 ** with either a landscape or portrait at the end of the list rather than     **
 ** allowing all thumbs after the deleted to be reshuffled.                    **
@@ -163,7 +163,7 @@ export const resequenceJpegs = (jpegs) => {
 export const resequenceDelete = (jpegs, index, orientation = 'l') => {
 
   const lastLandIndex = () => {                             // Returns index number of the last landscape image in the array.
-    for (let i = (jpegs.length -1); i >= 0; i--) {          // starts at end of jpegs array, counst backwards until it finds
+    for (let i = (jpegs.length -1); i >= 0; i--) {          // starts at end of jpegs array, counts backwards until it finds
       if (jpegs[i].res.width >= jpegs[i].res.height) {      // a landscape image. Square images are to be considered landscape.
         return i;                                           // Return the loop counter i.
       }
@@ -171,7 +171,7 @@ export const resequenceDelete = (jpegs, index, orientation = 'l') => {
   }
 
   const lastPortIndex = () => {                             // Returns index number of the last portrait image in the array.
-    for (let i = (jpegs.length -1); i >= 0; i--) {          // starts at end of jpegs array, counst backwards until it finds
+    for (let i = (jpegs.length -1); i >= 0; i--) {          // starts at end of jpegs array, counts backwards until it finds
       if (jpegs[i].res.width < jpegs[i].res.height) {       // a portrait image.
         return i;                                           // Return the loop counter i.
       }
