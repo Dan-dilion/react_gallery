@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 
 import { Slider } from './Slider.js';
 
@@ -34,6 +34,43 @@ export const SingleImage = (props) => {
 		next.index ++;                                                              // Set the index
 	}
 
+  /*                                                                          **
+  ** This next section establishes an event listener on the document object   **
+  ** listening for the "onkeydown" event. It specifically reacts to three     **
+  ** buttons: left arrow, right arrow and escape used to navigate left, right **
+  ** and exit.                                                                **
+  **                                                                          */
+  const history = useHistory();   // invoke useHistory hook for switching URL
+
+  const nextFunc = () => {                      // Switch to next image
+    if (currentJpegItem.index < jpegsArray.length - 1) // if not last image
+      history.push('./' + next.jpegItem.file)   // Push new URL to history hook
+  }
+
+  const prevFunc = () => {                      // Switch to prev image
+    if (currentJpegItem.index > 0)              // if not first image
+      history.push('./' + prev.jpegItem.file)   // Push new URL to history hook
+  }
+
+  const exitFunc = () => {                      // Exit single view
+    history.push(                               // push to history hook
+      props.selectedPage === 'gallery'          // if selectedPage in not either
+      || props.selectedPage ==='basket'         // 'gallery' or 'basket' default
+      ? '/' + props.selectedPage                // to 'gallery' otherwise append
+      : '/gallery'                              // selectedPage to URL
+    )
+    document.onkeydown = null                   // on exit disable eventListener
+  }
+
+  document.onkeydown = event => {               // Attach listener to the document object
+    console.log('key pressed!!! KeyCode: ', event.keyCode);
+    console.log('History: ', history);
+    if (event.keyCode === 39) nextFunc();       // 39 = right arrow
+    if (event.keyCode === 37) prevFunc();       // 37 = left arrow
+    if (event.keyCode === 27) exitFunc();       // 27 = escape
+    event.preventDefault();                     // prevent the default action for the pressed keys (window scrolling)
+  }
+
 // exitButton() - A simple React link to either the gallery or the basket depending on which one is selected
   const exitButton = () => {
     return(<Link className="exit-button top-buttons" to={ '/' + props.selectedPage } />)
@@ -66,8 +103,8 @@ export const SingleImage = (props) => {
 // addRemoveButtonDispenser() – chooses which of the four remove button variants to use or returns addButton()
   const addRemoveButtonDispenser = (currentItem) => {
 
-// removeGallery() - if viewing the gallery remove button will just
-// remove image from basket
+    // removeGallery() - if viewing the gallery remove button will just
+    // remove image from basket
     const removeGallery = (currentItem) => {
       return(
         <button
@@ -81,8 +118,8 @@ export const SingleImage = (props) => {
       );
     }
 
-// lastInBasket() - If last image in basket link back to
-// basket view after image is removed
+    // lastInBasket() - If last image in basket link back to
+    // basket view after image is removed
     const removeLastInBasket = (currentItem) => {
       return(<Link
         className="top-buttons remove-button"
@@ -95,7 +132,7 @@ export const SingleImage = (props) => {
       />);
     }
 
-// If at the beginning of the basket slide to next after image is removed
+    // If at the beginning of the basket slide to next after image is removed
     const removeBeginningOfBasket = (currentItem) => {
       return(!props.isFetching ?
         <Link
@@ -111,7 +148,7 @@ export const SingleImage = (props) => {
       );
     }
 
-// If in the middle of the basket array slide to previous after image is removed
+    // If in the middle of the basket array slide to previous after image is removed
     const removeFromBasket = (currentItem) => {
       return(<Link
         className="top-buttons remove-button"
@@ -124,7 +161,7 @@ export const SingleImage = (props) => {
       />);
     }
 
-// addButton() - calls the addBasket() Redux action and passes in the current image
+    // addButton() - calls the addBasket() Redux action and passes in the current image
   	const addButton = (currentItem) => {
   		return(
   			<button
@@ -167,7 +204,6 @@ export const SingleImage = (props) => {
           { prevButton() }
           { nextButton() }
         </div>
-
 		</div> : <div><h2>Loading Images...</h2></div>
 	)
 }
