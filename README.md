@@ -1,8 +1,6 @@
 # React Gallery
 
-Greetings,
-
-Welcome to React Gallery.
+Greetings, Welcome to React Gallery.
 
 Please find a deployed version of this project
 [here](http://www.waxworlds.org/dan/react_gallery/)
