@@ -16,15 +16,15 @@ const getLandscapes = (pegs) => {                             // Function to mak
 
 
 /*                                                                            **
-** resequenceJpegs is a simple pattern sequencer that will re-sequence an      **
+** resequenceJpegs is a simple pattern sequencer that will re-sequence an     **
 ** array of images so that the arrangement of landscape and portrait images   **
-** falls in a symmetrical pattern. It attempts to place a portrait at the      **
+** falls in a symmetrical pattern. It attempts to place a portrait at the     **
 ** beginning and the end of every even numbered row so that the images lie    **
 ** offset to one and other like a brick wall. if there are any portraits left **
 ** it will then distribute them two at a time amongst the odd numbered rows.  **
 ** If there are any left after that it will go over the even numbered rows    **
 ** again and so on. The sequencer has every pattern mapped out barring a      **
-** couple mentioned in the notes.                                            **
+** couple mentioned in the notes.                                             **
 **                                                                            */
 export const resequenceJpegs = (jpegs) => {
 
@@ -155,7 +155,7 @@ export const resequenceJpegs = (jpegs) => {
 
 
 /*                                                                            **
-** resequenceDelete re-sequences the images when one is deleted so that there  **
+** resequenceDelete re-sequences the images when one is deleted so that there **
 ** are minimum changes on the screen. It will swap the deleted image over     **
 ** with either a landscape or portrait at the end of the list rather than     **
 ** allowing all thumbs after the deleted to be reshuffled.                    **
