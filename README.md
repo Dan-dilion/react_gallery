@@ -11,29 +11,29 @@ Below is a summary of the technologies used in this project:
   ###Back End
     -NodeJS
     -NPM
-        --Express router
-        --Archiver
-        --Sharp
+        -Express router
+        -Archiver
+        -Sharp
     -AJAX/XHR
     -Bundlers, trans-compilers and other build tools
-        --Create-React-App
-        --Webpack
-        --Babel
-        --Nodemon
+        -Create-React-App
+        -Webpack
+        -Babel
+        -Nodemon
     -Deployment
-        --Apache Web Server
-        --SSH & SCP
-        --Bash Scripts
+        -Apache Web Server
+        -SSH & SCP
+        -Bash Scripts
 
 
   ###Front End
     -Javascript
     -Frameworks & APIs
-        --React
-        --React-Spring
-        --Redux
-            ---Redux-Logger
-            ---Redux-Thunk
+        -React
+        -React-Spring
+        -Redux
+            -Redux-Logger
+            -Redux-Thunk
     -HTML
     -CSS
 
