@@ -2,7 +2,7 @@
 
 Greetings, Welcome to React Gallery.
 
-### Please find a deployed version of this project [here](http://www.waxworlds.org/dan/react_gallery/)
+### [Click here](http://www.waxworlds.org/dan/react_gallery/) to see project
 
 Below is a summary of the technologies used in this project:
 ### Back End
