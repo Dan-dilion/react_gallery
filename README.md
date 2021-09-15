@@ -8,34 +8,34 @@ Please find a deployed version of this project
 [here](http://www.waxworlds.org/dan/react_gallery/)
 
 Below is a summary of the technologies used in this project:
-  ###Back End
-    -NodeJS
-    -NPM
-        -Express router
-        -Archiver
-        -Sharp
-    -AJAX/XHR
-    -Bundlers, trans-compilers and other build tools
-        -Create-React-App
-        -Webpack
-        -Babel
-        -Nodemon
-    -Deployment
-        -Apache Web Server
-        -SSH & SCP
-        -Bash Scripts
+### Back End
+    - NodeJS
+    - NPM
+        - Express router
+        - Archiver
+        - Sharp
+    - AJAX/XHR
+    - Bundlers, trans-compilers and other build tools
+        - Create-React-App
+        - Webpack
+        - Babel
+        - Nodemon
+    - Deployment
+        - Apache Web Server
+        - SSH & SCP
+        - Bash Scripts
 
 
-  ###Front End
-    -Javascript
-    -Frameworks & APIs
-        -React
-        -React-Spring
-        -Redux
-            -Redux-Logger
-            -Redux-Thunk
-    -HTML
-    -CSS
+###Front End
+    - Javascript
+    - Frameworks & APIs
+        - React
+        - React-Spring
+        - Redux
+            - Redux-Logger
+            - Redux-Thunk
+    - HTML
+    - CSS
 
 # To download and run this project:
   1. Clone master branch of GitHub repository to local folder
