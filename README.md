@@ -26,7 +26,7 @@ Below is a summary of the technologies used in this project:
         - Bash Scripts
 
 
-###Front End
+### Front End
     - Javascript
     - Frameworks & APIs
         - React
