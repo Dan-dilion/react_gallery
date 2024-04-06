@@ -38,11 +38,11 @@ app.get('/api/getjpegs', (request, response) => {                 // Will respon
       response.set({                                              // Send the server response
         'Content-Type' : 'application/json',			                // Declare content type JSON
       });
-      data = JSON.stringify(jpegs);						                    // Stringify jpegs array
+      const data = JSON.stringify(jpegs);						              // Stringify jpegs array
       console.log('SERVER: returning ' + jpegs.length + ' jpegs');
       response.send(data);									                      // Send stringified jpegs array in server response
     } catch(err) {                                                // If there was an error
-      returnError(err);									                          // Send the error in the response
+      return Error(err);									                        // Send the error in the response
     }
   }
   waitJpegs(imgDir)
