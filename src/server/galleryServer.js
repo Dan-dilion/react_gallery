@@ -13,6 +13,8 @@ const {
   zipJpegs
 } = require('./fileServices.js');
 
+const LISTENING_PORT = 8986;
+
 let app = express();                                              // Instantiate express object
 
 
@@ -61,5 +63,5 @@ app.get('/api/zipjpegs', (request, response) => {                 // Will respon
   } else response.sendStatus(204);                                // If no files in URI respond with status 204
 })                                                                // (successful but no content)
 
-app.listen(8987);                                                 // Server to listen to specified port
+app.listen(LISTENING_PORT);                                                 // Server to listen to specified port
 console.log("server initialised - port: 8987\n");
