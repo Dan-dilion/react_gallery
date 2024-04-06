@@ -51,5 +51,8 @@ The project should be opened up automatically in your default browser
      change the `homepage` value to `/subdirectory/react_gallery`
   3. Run the following command:
      `npm run build`
-  4. Finally copy the contents of the newly created `build` directory to your
+  4. Copy the contents of the newly created `build` directory to your
      deployment directory on your server
+  5. Next you need to set up a `.htaccess` file to suit your servers security requirements ([see Apache2 documentation](https://httpd.apache.org/docs/2.4/howto/htaccess.html)).
+  6. Finally copy the server directory (`src/server`) on to the gallery folder and run with `node server/galleryServer.js`. If you want to leave it running you will want to run it in a detached process from your terminal
+
